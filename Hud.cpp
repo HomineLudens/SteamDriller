@@ -19,7 +19,7 @@ using UI = Pokitto::UI;
 extern SteamCookie steamCookie;
 
 Hud::Hud() {
-    puzzleState = PuzzleState::Hide;
+    puzzleState = PuzzleState::None;
 }
 
 void Hud::Update(const Level & level, int ms) {
@@ -28,8 +28,15 @@ void Hud::Update(const Level & level, int ms) {
     msgToShow = level.GetMessageToShow();
     auto msgLenght = 0;
 
+    if (puzzleState != PuzzleState::None) {
+        UI::setCursor(0, 0);
+        UI::printText("Press Down to exit");
+        if (PB::pressed(BTN_DOWN))
+            puzzleState = PuzzleState::None;
+    } 
+
     switch (puzzleState) {
-        case PuzzleState::Hide:
+        case PuzzleState::None:
             if (msgToShow != 0 && PB::pressed(BTN_UP)) {
                 if (Messages[msgToShow].rfind("High:", 0) == 0)
                     puzzleState = PuzzleState::ShowPex;
@@ -65,7 +72,7 @@ void Hud::Update(const Level & level, int ms) {
     }
 
     if (msgToShow == -1) {
-        puzzleState = PuzzleState::Hide;
+        puzzleState = PuzzleState::None;
         charDisplayed = 0;
     }
 
@@ -137,12 +144,12 @@ void Hud::Draw(const Player & player,
                 i++;
             }
         }
-        
-        UI::setCursor(5,3);
+
+        UI::setCursor(5, 3);
         UI::printText(Messages[msgToShow].c_str());
     }
 
-    if (puzzleState == PuzzleState::Hide) {
+    if (puzzleState == PuzzleState::None) {
         //
         UI::mapColor(0, 0);
         UI::mapColor(1, 0);

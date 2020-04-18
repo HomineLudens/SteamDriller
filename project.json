@@ -2751,6 +2751,12 @@
 		},
 		"\\SteamDriller.eeprom": {
 			"sdcard": false
+		},
+		"\\State.h": {
+			"sdcard": false
+		},
+		"\\StateIntro.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

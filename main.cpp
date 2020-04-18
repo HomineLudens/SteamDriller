@@ -79,7 +79,7 @@ int main() {
             initGame();
         }
 
-        //Save best
+        //Save best score
         if (player.life < 1) {
             auto depth = player.pos.y.getInteger() + level.GetDepth();
             if (depth > steamCookie.maxDepth) {
@@ -88,18 +88,13 @@ int main() {
             }
         }
 
-        if (PB::upBtn() && PB::pressed(BTN_C)) {
-            lights.lightLevel += 16;
-        }
-        if (PB::downBtn() && PB::pressed(BTN_C)) {
-            lights.lightLevel -= 16;
-        }
-
         //----UPDATE
-        camera.Update(player, msElapsed);
-        lights.Update(camera ,player, level, msElapsed);
-        player.Update(camera, level, msElapsed);
-        level.Update(camera, player, msElapsed);
+        if (hud.puzzleState == Hud::PuzzleState::None) {
+            camera.Update(player, msElapsed);
+            lights.Update(camera, player, level, msElapsed);
+            player.Update(camera, level, msElapsed);
+            level.Update(camera, player, msElapsed);
+        }
         hud.Update(level, msElapsed);
 
         //----DRAW 

@@ -26,7 +26,7 @@ class Hud {
 
     public:
         public: enum class PuzzleState {
-            Hide,
+            None,
             ShowPex,
             ShowMsg,
             ShowVisio
