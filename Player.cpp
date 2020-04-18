@@ -190,10 +190,16 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
         speed.y = 0;
         bullets = MAX_SHOOTS; //recharge bullets when on floor
     }
+    
+    //Ceiling
+    if (lvl.IsSolid(pos, 0, -2)) {
+        pos.y = oldY;
+        speed.y = 0;
+    }
 
     //Wall collision
     pos.x += speed.x;
-    if (lvl.IsSolid(pos) || lvl.IsSolid(pos,0,-1) || lvl.IsSolid(pos,0,-2)) {
+    if (lvl.IsSolid(pos) || lvl.IsSolid(pos, 0, -1) || lvl.IsSolid(pos, 0, -2)) {
         pos.x = oldX;
         //Break walls
         if (speed.x < -BREAK_SPEED || speed.x > BREAK_SPEED) {
