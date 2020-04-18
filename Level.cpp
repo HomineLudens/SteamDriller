@@ -20,7 +20,7 @@ void Level::Init(const Point & posStart) {
     //--------------------------------------------------------------------
     //--- Initial stuff
     AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger(), Item::ItemType::Logo, true); //Logo
-    
+
     AddItem(posStart.x.getInteger() - 40, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true);
     AddItem(posStart.x.getInteger() - 140, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true);
     AddItem(posStart.x.getInteger() + 120, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true, false, true);
@@ -60,11 +60,11 @@ void Level::Init(const Point & posStart) {
     }
 
     //Init proc generator
-    pg.minX = (posStart.x.getInteger() / TILE_WIDTH) - 15;
-    pg.maxX = (posStart.x.getInteger() / TILE_WIDTH) + 15;
+    pg.minX = (posStart.x.getInteger() / TILE_WIDTH) - 20;
+    pg.maxX = (posStart.x.getInteger() / TILE_WIDTH) + 20;
     pg.x1 = (posStart.x.getInteger() / TILE_WIDTH) + 1;
     pg.x2 = (posStart.x.getInteger() / TILE_WIDTH) + 9;
-    pg.minLen = 8; 
+    pg.minLen = 8;
     pg.maxLen = 18;
 
     //-------
@@ -103,7 +103,7 @@ void Level::RandomizeLine(int r) {
         lvlData[2 + (r * COLUMNS) + c] = TileType::RockInside;
 
 
-    //Change distance beetween walls
+    //Change well walls position
     if (random(100) > 60) {
         int newX = pg.x1 + random(-1, 2);
         if (newX < pg.minX)
@@ -161,7 +161,8 @@ void Level::RandomizeLine(int r) {
         int roomStartX = random(2, COLUMNS - 2 - roomWidth);
         for (int yr = 0; yr < roomHeight; yr++) {
             for (int xr = roomStartX; xr < roomWidth; xr++) {
-                lvlData[2 + ((r - yr) * COLUMNS) + xr] = TileType::BackgroundUndergroundRoom; //>>>
+                //Clear room
+                lvlData[2 + ((r - yr) * COLUMNS) + xr] = TileType::BackgroundUndergroundRoom; //
             }
             ReshapeRow(r - yr);
         }
@@ -169,6 +170,23 @@ void Level::RandomizeLine(int r) {
         auto xi = (roomStartX + (roomWidth / 2)) * TILE_WIDTH;
         auto yi = (r - (roomHeight / 2)) * TILE_HEIGHT;
         AddItemAnim(xi, yi, ItemAnim::ItemAnimType::Ruby);
+    }
+
+    //Move well walls
+    if (depth > 2000 && random(100) > 80) {
+        int oldX1 = pg.x1;
+        int newX1 = random(pg.minX, pg.maxX);
+        pg.x1 = newX1;
+        pg.x2 = pg.x1 + random(pg.minLen, pg.maxLen);
+        int xStartDig = oldX1 < newX1 ? oldX1 : newX1;
+        //Dig a tunnel to the new well
+        for (int yr = 0; yr < 3; yr++) {
+            for (int xr = xStartDig; xr < pg.x2; xr++) {
+                //Clear room
+                lvlData[2 + ((r - yr) * COLUMNS) + xr] = TileType::BackgroundUndergroundRoom; //
+            }
+            ReshapeRow(r - yr);
+        }
     }
 }
 
