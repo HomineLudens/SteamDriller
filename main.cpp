@@ -56,7 +56,22 @@ int main() {
     UI::setTilesetImage(steamtasui); //UI::setTilesetImage(puits::UltimateUtopia::tileSet);
 
     //Music init
-    PS::playMusicStream("music/steamdri.raw", 0);
+    steamCookie.track++;
+    steamCookie.track = steamCookie.track % 3;
+    steamCookie.saveCookie();
+    switch (steamCookie.track) {
+        case 0:
+            PS::playMusicStream("music/steamd1.raw", 0);
+            break;
+        case 1:
+            PS::playMusicStream("music/steamd2.raw", 0);
+            break;
+        case 2:
+            PS::playMusicStream("music/steamd3.raw", 0);
+            break;
+    }
+
+
 
     initGame();
 

@@ -2757,6 +2757,18 @@
 		},
 		"\\StateIntro.h": {
 			"sdcard": false
+		},
+		"\\music\\steamd2.raw": {
+			"sdcard": false
+		},
+		"\\music\\steamd1.raw": {
+			"sdcard": false
+		},
+		"\\music\\steamd20.raw": {
+			"sdcard": false
+		},
+		"\\music\\steamd3.raw": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

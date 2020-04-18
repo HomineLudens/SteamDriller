@@ -11,5 +11,6 @@ class SteamCookie: public Pokitto::Cookie {
     };
     int msgRead = 1;
     int maxDepth = 0;
+    int track = 1;
    
 };
