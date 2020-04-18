@@ -11,14 +11,12 @@ class Camera {
     Point speed;
     Point shakeDir;
     Point shakePower;
+    Point offset;
     int msFlash=0;
 
     public:
         Point pos;
     Point target;
-
-    int offsetX = 0;
-    int offsetY = 0;
 
     Camera(const Point & pos = Point(0, 0));
     void Init(const Point & pos);
