@@ -30,8 +30,8 @@ void Hud::Update(const Level & level, int ms) {
 
     if (puzzleState != PuzzleState::None) {
         UI::setCursor(0, 0);
-        UI::printText("Press Down to exit");
-        if (PB::pressed(BTN_DOWN))
+        UI::printText("Press A to exit");
+        if (PB::pressed(BTN_A))
             puzzleState = PuzzleState::None;
     } 
 
