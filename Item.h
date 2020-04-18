@@ -22,12 +22,12 @@ class Item: public Entity {
     bool alive;
     bool fixed;
     bool collectable;
-    bool flipped=false;
+    bool mirrored = false;
 
-    int16_t msgIndex=-1;
+    int16_t msgIndex = -1;
 
     Item();
-    Item(int x, int y, ItemType itemType, bool fixed = false, bool collectable = true, int16_t msgIndex = -1);
+    Item(int x, int y, ItemType itemType, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1);
 
     Rect GetHitBox();
     void Update(int ms, Level & lvl, Player & player);

@@ -13,7 +13,7 @@ Item::Item() {
     alive = false;
 }
 
-Item::Item(int x, int y, ItemType itemType, bool fixed, bool collectable, int16_t msgIndex) {
+Item::Item(int x, int y, ItemType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex) {
     this->pos.x = x;
     this->pos.y = y;
     this->speed.x = 0;
@@ -21,6 +21,7 @@ Item::Item(int x, int y, ItemType itemType, bool fixed, bool collectable, int16_
     this->itemType = itemType;
     this->fixed = fixed;
     this->collectable = collectable;
+    this->mirrored = mirrored;
     this->alive = true;
     this->msgIndex = msgIndex;
 
@@ -92,16 +93,16 @@ void Item::Draw(const Camera & cam) {
 
     int xs = cam.ToScreenX(pos) - (sprite[0] / 2);
     int ys = cam.ToScreenY(pos) - sprite[1];
-    PD::drawSprite(xs, ys, sprite, false, flipped);
+    PD::drawSprite(xs, ys, sprite, false, mirrored);
 
     //Dirty trick to not waste memory
     if (itemType == ItemType::RobotUnactivatedRow) {
-        if (flipped) {
+        if (mirrored) {
             for (int i = 10; i > 0; i--)
-                PD::drawSprite(xs + (10 * 10) - (i * 10), ys, sprite, false, flipped);
+                PD::drawSprite(xs + (10 * 10) - (i * 10), ys, sprite, false, mirrored);
         } else {
             for (int i = 10; i > 0; i--)
-                PD::drawSprite(xs - (10 * 10) + (i * 10), ys, sprite, false, flipped);
+                PD::drawSprite(xs - (10 * 10) + (i * 10), ys, sprite, false, mirrored);
         }
 
     }

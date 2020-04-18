@@ -20,41 +20,29 @@ void Level::Init(const Point & posStart) {
     //--------------------------------------------------------------------
     //--- Initial stuff
     AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger(), Item::ItemType::Logo, true); //Logo
-    //Robots unactive
-    int itemIndex = -1;
-    // for (int i = 0; i < 16; i++) {
-    //     itemIndex = AddItem(posStart.x.getInteger() - (i * 8), posStart.y.getInteger(), Item::ItemType::RobotUnactivated, true);
-    //     //Flipped
-    //     itemIndex = AddItem(posStart.x.getInteger() + (i * 8) + 80, posStart.y.getInteger(), Item::ItemType::RobotUnactivated, true);
-    //     items[itemIndex].flipped = true;
-    // }
+    //Conveyors Robots unactive
+    AddItem(posStart.x.getInteger() - 40, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true);
+    AddItem(posStart.x.getInteger() - 140, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true);
+    AddItem(posStart.x.getInteger() + 120, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true, true);
+    AddItem(posStart.x.getInteger() + 220, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true, true);
 
-    itemIndex = AddItem(posStart.x.getInteger() - 40, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true);
-    itemIndex = AddItem(posStart.x.getInteger() - 140, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true);
-    itemIndex = AddItem(posStart.x.getInteger() + 120, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true);
-    items[itemIndex].flipped = true;
-    itemIndex = AddItem(posStart.x.getInteger() + 220, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true);
-    items[itemIndex].flipped = true;
-
-    itemIndex = AddItem(posStart.x.getInteger(), posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
-    itemIndex = AddItem(posStart.x.getInteger() - 100, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
-    itemIndex = AddItem(posStart.x.getInteger() + 80, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
-    items[itemIndex].flipped = true;
-    itemIndex = AddItem(posStart.x.getInteger() + 180, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
-    items[itemIndex].flipped = true;
+    AddItem(posStart.x.getInteger(), posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
+    AddItem(posStart.x.getInteger() - 100, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
+    AddItem(posStart.x.getInteger() + 80, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, true);
+    AddItem(posStart.x.getInteger() + 180, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, true);
 
     //AddItem(160, 60, Item::ItemType::Ruby);
     AddItemAnim(posStart.x.getInteger() - 20, 20, ItemAnim::ItemAnimType::Ruby);
     AddItemAnim(posStart.x.getInteger() - 30, 40, ItemAnim::ItemAnimType::Ruby);
     AddItemAnim(posStart.x.getInteger() - 40, 60, ItemAnim::ItemAnimType::Ruby);
 
-    AddItemAnim(posStart.x.getInteger() - 50, 40, ItemAnim::ItemAnimType::Chip, false, false, 1);
-    AddItemAnim(posStart.x.getInteger() + 10, 40, ItemAnim::ItemAnimType::ChipRed, false, false, random(11, 15));
+    AddItemAnim(posStart.x.getInteger() - 50, 40, ItemAnim::ItemAnimType::Chip, false, false, false, 1);
+    AddItemAnim(posStart.x.getInteger() + 10, 40, ItemAnim::ItemAnimType::ChipRed, false, false, false, random(11, 15));
 
-    AddItemAnim(posStart.x.getInteger() + 100, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, 7);
-    AddItemAnim(posStart.x.getInteger() + 140, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, 5);
-    AddItemAnim(posStart.x.getInteger() + 180, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, 6);
-    AddItemAnim(posStart.x.getInteger() + 220, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, 8);
+    AddItemAnim(posStart.x.getInteger() + 100, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 7);
+    AddItemAnim(posStart.x.getInteger() + 140, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 5);
+    AddItemAnim(posStart.x.getInteger() + 180, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 6);
+    AddItemAnim(posStart.x.getInteger() + 220, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 8);
 
     //
     // AddEnemy(posStart.x.getInteger()+30, 40, Enemy::EnemyType::PurpleSentinelHorizontal);
@@ -302,20 +290,20 @@ void Level::AddDebris(const Point & pos, int count) {
     }
 }
 
-int Level::AddItem(int x, int y, Item::ItemType itemType, bool fixed, bool collectable) {
+int Level::AddItem(int x, int y, Item::ItemType itemType, bool fixed, bool collectable, bool mirrored) {
     for (int i = 0; i < items.size(); i++) {
         if (!items[i].IsAlive()) {
-            items[i] = Item(x, y, itemType, fixed, collectable);
+            items[i] = Item(x, y, itemType, fixed, collectable, mirrored);
             return i;
         }
     }
     return -1;
 }
 
-int Level::AddItemAnim(int x, int y, ItemAnim::ItemAnimType itemType, bool fixed, bool collectable, int16_t msgIndex) {
+int Level::AddItemAnim(int x, int y, ItemAnim::ItemAnimType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex) {
     for (int i = 0; i < itemsAnim.size(); i++) {
         if (!itemsAnim[i].IsAlive()) {
-            itemsAnim[i] = ItemAnim(x, y, itemType, fixed, collectable, msgIndex);
+            itemsAnim[i] = ItemAnim(x, y, itemType, fixed, collectable, mirrored, msgIndex);
             return i;
         }
     }

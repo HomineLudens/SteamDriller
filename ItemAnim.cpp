@@ -7,11 +7,12 @@
 
 using PD = Pokitto::Display;
 
-ItemAnim::ItemAnim(int x, int y, ItemAnimType itemType, bool fixed, bool collectable, int16_t msgIndex) {
+ItemAnim::ItemAnim(int x, int y, ItemAnimType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex) {
     Item::pos.x = x;
     Item::pos.y = y;
     Item::fixed = fixed;
     Item::collectable = collectable;
+    Item::mirrored = mirrored;
     Item::alive = true;
     this->itemType = itemType;
     Item::msgIndex = msgIndex;

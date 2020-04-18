@@ -117,8 +117,8 @@ class Level {
         const Point & speed,
             const Point & gravity, Particle::ParticleType particleType, int msLife = 500);
     void AddDebris(const Point & pos, int count);
-    int AddItem(int x, int y, Item::ItemType itemType, bool fixed = false, bool collectable = true);
-    int AddItemAnim(int x, int y, ItemAnim::ItemAnimType itemType, bool fixed = false, bool collectable = true, int16_t msgIndex = -1);
+    int AddItem(int x, int y, Item::ItemType itemType, bool fixed = false, bool collectable = true, bool mirrored = false);
+    int AddItemAnim(int x, int y, ItemAnim::ItemAnimType itemType, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1);
     int AddEnemy(int x, int y, Enemy::EnemyType enemyType);
     void ShiftStuff(int x, int y);
 

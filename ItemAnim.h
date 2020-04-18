@@ -23,7 +23,7 @@ class ItemAnim: public Item {
 
     public:
 
-        ItemAnim(int x = 0, int y = 0, ItemAnimType itemType = ItemAnimType::None, bool fixed = false, bool collectable = true, int16_t msgIndex = -1);
+        ItemAnim(int x = 0, int y = 0, ItemAnimType itemType = ItemAnimType::None, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1);
     Rect GetHitBox();
     void Draw(const Camera & cam);
 
