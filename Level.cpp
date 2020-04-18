@@ -23,13 +23,13 @@ void Level::Init(const Point & posStart) {
     //Conveyors Robots unactive
     AddItem(posStart.x.getInteger() - 40, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true);
     AddItem(posStart.x.getInteger() - 140, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true);
-    AddItem(posStart.x.getInteger() + 120, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true, true);
-    AddItem(posStart.x.getInteger() + 220, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true, true);
+    AddItem(posStart.x.getInteger() + 120, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true, false, true);
+    AddItem(posStart.x.getInteger() + 220, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true, false, true);
 
     AddItem(posStart.x.getInteger(), posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
     AddItem(posStart.x.getInteger() - 100, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
-    AddItem(posStart.x.getInteger() + 80, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, true);
-    AddItem(posStart.x.getInteger() + 180, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, true);
+    AddItem(posStart.x.getInteger() + 80, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
+    AddItem(posStart.x.getInteger() + 180, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
 
     //AddItem(160, 60, Item::ItemType::Ruby);
     AddItemAnim(posStart.x.getInteger() - 20, 20, ItemAnim::ItemAnimType::Ruby);
@@ -217,7 +217,7 @@ void Level::DestroyTile(const Point & pos, int offX, int offY) {
             SetTileId(pos, TileType::BackgroundUnderground, offX, offY);
         AddDebris(pos, 15);
         if (random(100) > 95)
-            AddItem(pos.x.getInteger(), pos.y.getInteger(), Item::ItemType::Bones, false, false);
+            AddItem(pos.x.getInteger(), pos.y.getInteger(), Item::ItemType::Bones, false, false, random(100) > 50);
         //-------------------
         //Reshape
         if (tLeft == TileType::RockInside)
