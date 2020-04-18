@@ -44,6 +44,7 @@ class Player {
 
     int msLifeLoss;
     int msIdle;
+    int msJump;
     int msFloating;
     int msSmokeEmit;
 

@@ -35,6 +35,7 @@ void Player::ChangeState(State newState) {
 void Player::Update(Camera & camera, Level & lvl, int ms) {
     //Add elapsed time
     msState += ms;
+    msJump += ms;
     msSmokeEmit -= ms;
     msLifeLoss -= ms;
     //Save old position in case of collision
@@ -144,20 +145,24 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
             speed.x += 0.8;
         }
         //Jump then shot down
-        if (PB::pressed(BTN_A)) {
-            if (onFloor) {
-                msFloating = 0;
-                speed.y -= 6;
-            } else {
-                if (bullets > 0) {
-                    pos.y -= 2;
-                    speed.y = -0.5;
-                    msFloating = PC::getTime() + 500;
-                    bullets--;
-                    lvl.AddBullet(pos, Point(0, 1), Bullet::BulletType::SteamVertical, 1500); // add bullet
-                }
+        if (onFloor) {
+            if (PB::aBtn()) {
+                speed.y -= 3;
+                msJump = 0;
+            }
+        } else {
+            if (PB::aBtn() && msJump < 100) {
+                speed.y -= 0.8;
+            }
+            if (PB::pressed(BTN_A) && bullets > 0) {
+                pos.y -= 2;
+                speed.y = -0.5;
+                msFloating = PC::getTime() + 500;
+                bullets--;
+                lvl.AddBullet(pos, Point(0, 1), Bullet::BulletType::SteamVertical, 1500); // add bullet
             }
         }
+
         //Slash
         if (PB::pressed(BTN_B)) {
             speed.y = 0;
@@ -190,7 +195,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
         speed.y = 0;
         bullets = MAX_SHOOTS; //recharge bullets when on floor
     }
-    
+
     //Ceiling
     if (lvl.IsSolid(pos, 0, -2)) {
         pos.y = oldY;
