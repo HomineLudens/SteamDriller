@@ -20,7 +20,7 @@ void Level::Init(const Point & posStart) {
     //--------------------------------------------------------------------
     //--- Initial stuff
     AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger(), Item::ItemType::Logo, true); //Logo
-    //Conveyors Robots unactive
+    
     AddItem(posStart.x.getInteger() - 40, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true);
     AddItem(posStart.x.getInteger() - 140, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true);
     AddItem(posStart.x.getInteger() + 120, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true, false, true);
@@ -31,14 +31,12 @@ void Level::Init(const Point & posStart) {
     AddItem(posStart.x.getInteger() + 80, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
     AddItem(posStart.x.getInteger() + 180, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
 
-    //AddItem(160, 60, Item::ItemType::Ruby);
     AddItemAnim(posStart.x.getInteger() - 20, 20, ItemAnim::ItemAnimType::Ruby);
     AddItemAnim(posStart.x.getInteger() - 30, 40, ItemAnim::ItemAnimType::Ruby);
     AddItemAnim(posStart.x.getInteger() - 40, 60, ItemAnim::ItemAnimType::Ruby);
 
     AddItemAnim(posStart.x.getInteger() - 50, 40, ItemAnim::ItemAnimType::Chip, false, false, false, 1);
     AddItemAnim(posStart.x.getInteger() + 10, 40, ItemAnim::ItemAnimType::ChipRed, false, false, false, random(11, 15));
-
     AddItemAnim(posStart.x.getInteger() + 100, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 7);
     AddItemAnim(posStart.x.getInteger() + 140, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 5);
     AddItemAnim(posStart.x.getInteger() + 180, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 6);
@@ -48,7 +46,6 @@ void Level::Init(const Point & posStart) {
     // AddEnemy(posStart.x.getInteger()+30, 40, Enemy::EnemyType::PurpleSentinelHorizontal);
     // AddEnemy(posStart.x.getInteger()+40, 40, Enemy::EnemyType::Spider);
     // AddEnemy(posStart.x.getInteger()+50, 40, Enemy::EnemyType::Worm);
-
     //--------------------------------------------------------------------
 
     depth = 0;
@@ -67,9 +64,8 @@ void Level::Init(const Point & posStart) {
     pg.maxX = (posStart.x.getInteger() / TILE_WIDTH) + 15;
     pg.x1 = (posStart.x.getInteger() / TILE_WIDTH) + 1;
     pg.x2 = (posStart.x.getInteger() / TILE_WIDTH) + 9;
-    pg.minLen = 8; //COLUMNS / 3;
-    pg.maxLen = 18; // COLUMNS / 2;
-
+    pg.minLen = 8; 
+    pg.maxLen = 18;
 
     //-------
     int r = 0;
