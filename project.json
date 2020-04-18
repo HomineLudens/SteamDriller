@@ -2769,6 +2769,9 @@
 		},
 		"\\music\\steamd3.raw": {
 			"sdcard": false
+		},
+		"\\music\\credits.txt": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {
