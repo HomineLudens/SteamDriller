@@ -5,12 +5,18 @@
 
 void Lights::Update(Camera & camera, Player & player, Level & level, int ms) {
     msLight -= ms;
+    msLightBoost -= ms;
+
+    if (player.life > player.lifePrev) {
+        msLightBoost = 250;
+    }
+
     if (msLight < 0) {
         pos.x = camera.ToScreenX(player.pos);
         pos.y = camera.ToScreenY(player.pos) - 10;
         lightDir = player.facing == Player::Facing::Right ? 1 : -1;
 
-        if (player.state != Player::State::Offline && player.state != Player::State::Activating) {
+        if (msLightBoost < 0 && player.state != Player::State::Offline && player.state != Player::State::Activating) {
             lightLevel = 36500 - ((100 - player.life) * 350) + (random(-8192, 8192) / 10);
         } else {
             lightLevel = 1000000;

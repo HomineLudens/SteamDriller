@@ -39,7 +39,8 @@ class Player {
     Point speed;
     int bullets;
 
-    int life;
+    int8_t life;
+    int8_t lifePrev;
     bool onFloor;
 
     int msLifeLoss;

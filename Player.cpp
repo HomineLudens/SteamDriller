@@ -242,6 +242,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     }
 
     //--------------------------------
+    lifePrev = life;
     stateFirstCycle = false;
     //--------------------------------
 }

@@ -397,7 +397,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
             //Check collision with map
             if (IsSolid(b.pos)) {
                 if (b.speed.x != 0 || b.speed.y != 0) {
-                    b.Kill(); //Kill bullet only if it's moving (allow laser to burn on place)
+                    b.Kill(); //Kill bullet only if it's moving (allow laser to burn in place)
                 }
                 if (b.bulletType != Bullet::SteamVertical) {
                     DestroyTile(b.pos);
@@ -422,7 +422,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                     if (Rect::Collide(player.GetHitBox(), b.GetHitBox())) {
                         player.Damage(20);
                         if (b.speed.x != 0 || b.speed.y != 0) {
-                            b.Kill(); //Kill bullet only if it's moving (allow laser to burn on place)
+                            b.Kill(); //Kill bullet only if it's moving (allow laser to burn in place)
                         }
                     }
                 }
