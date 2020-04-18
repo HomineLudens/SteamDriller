@@ -2772,6 +2772,18 @@
 		},
 		"\\music\\credits.txt": {
 			"sdcard": false
+		},
+		"\\sfx\\sfx_chip.wav": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_pickup.wav": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_explosion.wav": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_pickup.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

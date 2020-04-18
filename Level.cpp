@@ -1,4 +1,5 @@
 #include "Level.h"
+#include "sfx/sfx_pickup.h"
 
 extern SteamCookie steamCookie;
 
@@ -231,7 +232,7 @@ void Level::DestroyTile(const Point & pos, int offX, int offY) {
             SetTileId(pos, TileType::BackgroundUnderground, offX, offY);
         AddDebris(pos, 15);
         if (random(100) > 95)
-            AddItem(pos.x.getInteger(), pos.y.getInteger(), Item::ItemType::Bones, false, false, random(100) > 50);
+            AddItem(pos.x.getInteger(), pos.y.getInteger(), Item::ItemType::Bones, false, false, true);
         //-------------------
         //Reshape
         if (tLeft == TileType::RockInside)
@@ -462,6 +463,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         if (i.IsAlive() && Rect::Collide(player.GetHitBox(), i.GetHitBox())) {
             if (i.IsCollectable()) {
                 i.Kill();
+                Pokitto::Sound::playSFX(sfx_pickup, sizeof(sfx_pickup));
             }
         }
     }
@@ -476,6 +478,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
             if (i.IsCollectable()) {
                 player.Heal(10);
                 i.Kill();
+                Pokitto::Sound::playSFX(sfx_pickup, sizeof(sfx_pickup));
             }
         }
     }
