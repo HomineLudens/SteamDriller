@@ -193,7 +193,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
 
     //Wall collision
     pos.x += speed.x;
-    if (lvl.IsSolid(pos)) {
+    if (lvl.IsSolid(pos) || lvl.IsSolid(pos,0,-1) || lvl.IsSolid(pos,0,-2)) {
         pos.x = oldX;
         //Break walls
         if (speed.x < -BREAK_SPEED || speed.x > BREAK_SPEED) {
