@@ -1,0 +1,109 @@
+{ "frames": [
+   {
+    "filename": "SteamDriller_Worm_Anim 0.ase",
+    "frame": { "x": 0, "y": 0, "w": 16, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 6 },
+    "sourceSize": { "w": 16, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Worm_Anim 1.ase",
+    "frame": { "x": 16, "y": 0, "w": 16, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 6 },
+    "sourceSize": { "w": 16, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Worm_Anim 2.ase",
+    "frame": { "x": 32, "y": 0, "w": 16, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 6 },
+    "sourceSize": { "w": 16, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Worm_Anim 3.ase",
+    "frame": { "x": 48, "y": 0, "w": 16, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 6 },
+    "sourceSize": { "w": 16, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Worm_Anim 4.ase",
+    "frame": { "x": 64, "y": 0, "w": 16, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 6 },
+    "sourceSize": { "w": 16, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Worm_Anim 5.ase",
+    "frame": { "x": 80, "y": 0, "w": 16, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 6 },
+    "sourceSize": { "w": 16, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Worm_Anim 6.ase",
+    "frame": { "x": 96, "y": 0, "w": 16, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 6 },
+    "sourceSize": { "w": 16, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Worm_Anim 7.ase",
+    "frame": { "x": 112, "y": 0, "w": 16, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 6 },
+    "sourceSize": { "w": 16, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Worm_Anim 8.ase",
+    "frame": { "x": 128, "y": 0, "w": 16, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 6 },
+    "sourceSize": { "w": 16, "h": 6 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Worm_Anim 9.ase",
+    "frame": { "x": 144, "y": 0, "w": 16, "h": 6 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 16, "h": 6 },
+    "sourceSize": { "w": 16, "h": 6 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.1.6-dev",
+  "image": "SteamDriller_Worm_Anim.png",
+  "format": "RGBA8888",
+  "size": { "w": 160, "h": 6 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "Idle", "from": 0, "to": 0, "direction": "forward" },
+   { "name": "Move", "from": 1, "to": 8, "direction": "forward" },
+   { "name": "Attack", "from": 9, "to": 9, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+  ]
+ }
+}

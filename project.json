@@ -1,0 +1,2759 @@
+{
+	"lastBuffer": "main.cpp",
+	"PNGFlags": {
+		"ALL": [
+			"palette=${projectPath}/palette/SteamPalette8.h",
+			"bpp=8"
+		]
+	},
+	"libs": {
+		"Pokitto": [
+			{
+				"recurse": "${appPath}/PokittoLib/Pokitto",
+				"ignore": "POKITTO_SIM|POKITTO_XTERNALS|Documentation|examples?|Physics|(?:.*_SIM.*)|main.cpp"
+			}
+		]
+	},
+	"SFlags": {
+		"Pokitto": [
+			"-I${projectPath}",
+			"-mcpu=cortex-m0plus",
+			"-mthumb"
+		]
+	},
+	"CPPFlags": {
+		"DEBUG": [
+			"-Og",
+			"-g3",
+			"-ggdb"
+		],
+		"RELEASE": [
+			"-O3"
+		],
+		"Pokitto": [
+			"-D_OSCT=2",
+			"-I${projectPath}",
+			"-DPOKITTO",
+			"-fno-rtti",
+			"-Wno-pointer-arith",
+			"-c",
+			"-fno-exceptions",
+			"-fno-builtin",
+			"-ffunction-sections",
+			"-fdata-sections",
+			"-funsigned-char",
+			"-MMD",
+			"-fno-delete-null-pointer-checks",
+			"-fomit-frame-pointer",
+			"-mcpu=cortex-m0plus",
+			"-mthumb",
+			"-Wno-psabi",
+			"-Wno-conversion-null",
+			"-Wno-narrowing",
+			"-Wno-write-strings",
+			"-DTARGET_LPC11U68",
+			"-D__MBED__=1",
+			"-DDEVICE_I2CSLAVE=1",
+			"-DTARGET_LIKE_MBED",
+			"-DTARGET_NXP",
+			"-D__MBED_CMSIS_RTOS_CM",
+			"-DDEVICE_RTC=1",
+			"-DTOOLCHAIN_object",
+			"-D__CMSIS_RTOS",
+			"-DTOOLCHAIN_GCC",
+			"-DTARGET_CORTEX_M",
+			"-DTARGET_M0P",
+			"-DTARGET_UVISOR_UNSUPPORTED",
+			"-DDEVICE_SERIAL=1",
+			"-DDEVICE_INTERRUPTIN=1",
+			"-DTARGET_LPCTarget",
+			"-DTARGET_CORTEX",
+			"-DDEVICE_I2C=1",
+			"-D__CORTEX_M0PLUS",
+			"-DTARGET_FF_ARDUINO",
+			"-DTARGET_RELEASE",
+			"-DMBED_BUILD_TIMESTAMP=1526394586.66",
+			"-DARM_MATH_CM0PLUS",
+			"-DTARGET_LPC11U6X",
+			"-DDEVICE_SLEEP=1",
+			"-DTOOLCHAIN_GCC_ARM",
+			"-DDEVICE_SPI=1",
+			"-DDEVICE_ANALOGIN=1",
+			"-DDEVICE_PWMOUT=1",
+			"-DTARGET_LIKE_CORTEX_M0"
+		],
+		"Desktop": [
+			"-I${projectPath}",
+			"-DDESKTOP",
+			"-fno-rtti",
+			"-Wno-pointer-arith",
+			"-c",
+			"-fno-exceptions",
+			"-fno-builtin",
+			"-ffunction-sections",
+			"-fdata-sections",
+			"-funsigned-char",
+			"-MMD",
+			"-fno-delete-null-pointer-checks"
+		],
+		"ALL": [
+			"-std=c++17"
+		]
+	},
+	"CFlags": {
+		"DEBUG": [
+			"-Og",
+			"-g3",
+			"-ggdb"
+		],
+		"RELEASE": [
+			"-O3"
+		],
+		"Pokitto": [
+			"-D_OSC=2",
+			"-I${projectPath}",
+			"-DPOKITTO",
+			"-Wno-pointer-arith",
+			"-c",
+			"-fno-exceptions",
+			"-fno-builtin",
+			"-ffunction-sections",
+			"-fdata-sections",
+			"-funsigned-char",
+			"-MMD",
+			"-fno-delete-null-pointer-checks",
+			"-fomit-frame-pointer",
+			"-mcpu=cortex-m0plus",
+			"-mthumb",
+			"-Wno-psabi",
+			"-Wwrite-strings",
+			"-DTARGET_LPC11U68",
+			"-D__MBED__=1",
+			"-DDEVICE_I2CSLAVE=1",
+			"-DTARGET_LIKE_MBED",
+			"-DTARGET_NXP",
+			"-D__MBED_CMSIS_RTOS_CM",
+			"-DDEVICE_RTC=1",
+			"-DTOOLCHAIN_object",
+			"-D__CMSIS_RTOS",
+			"-DTOOLCHAIN_GCC",
+			"-DTARGET_CORTEX_M",
+			"-DTARGET_M0P",
+			"-DTARGET_UVISOR_UNSUPPORTED",
+			"-DDEVICE_SERIAL=1",
+			"-DDEVICE_INTERRUPTIN=1",
+			"-DTARGET_LPCTarget",
+			"-DTARGET_CORTEX",
+			"-DDEVICE_I2C=1",
+			"-D__CORTEX_M0PLUS",
+			"-DTARGET_FF_ARDUINO",
+			"-DTARGET_RELEASE",
+			"-DMBED_BUILD_TIMESTAMP=1526394586.66",
+			"-DARM_MATH_CM0PLUS",
+			"-DTARGET_LPC11U6X",
+			"-DDEVICE_SLEEP=1",
+			"-DTOOLCHAIN_GCC_ARM",
+			"-DDEVICE_SPI=1",
+			"-DDEVICE_ANALOGIN=1",
+			"-DDEVICE_PWMOUT=1",
+			"-DTARGET_LIKE_CORTEX_M0"
+		],
+		"Desktop": [
+			"-I${projectPath}",
+			"-DDESKTOP",
+			"-fno-rtti",
+			"-Wno-pointer-arith",
+			"-c",
+			"-fno-exceptions",
+			"-fno-builtin",
+			"-ffunction-sections",
+			"-fdata-sections",
+			"-funsigned-char",
+			"-MMD",
+			"-fno-delete-null-pointer-checks"
+		],
+		"ALL": []
+	},
+	"GDBFlags": {
+		"Pokitto": [
+			"${projectPath}/${projectName}.elf"
+		]
+	},
+	"emuFlags": {
+		"Pokitto": [
+			"${projectPath}/${projectName}.bin"
+		]
+	},
+	"ELF2BINFlags": {
+		"Pokitto": [
+			"-O",
+			"binary",
+			"${projectPath}/${projectName}.elf",
+			"${projectPath}/${projectName}.bin"
+		]
+	},
+	"LDFlags": {
+		"RELEASE": [
+			"-O3"
+		],
+		"DEBUG": [
+			"-Og",
+			"-g3",
+			"-ggdb"
+		],
+		"Pokitto": [
+			"-Wl,--gc-sections",
+			"-Wl,-n",
+			"--specs=nano.specs",
+			"-mcpu=cortex-m0plus",
+			"-mthumb",
+			"-Wl,--undefined=g_pfnVectors",
+			"-Wl,--undefined=boot",
+			"-T",
+			"${appPath}/PokittoLib/Pokitto/mbed-pokitto/targets/cmsis/TARGET_NXP/TARGET_LPC11U6X/TOOLCHAIN_GCC_ARM/TARGET_LPC11U68/LPC11U68.ld",
+			"--output",
+			"${projectPath}/${projectName}.elf",
+			"$objectFiles",
+			"-Wl,--start-group",
+			"-lstdc++",
+			"-lsupc++",
+			"-lm",
+			"-lc",
+			"-lgcc",
+			"-lnosys",
+			"-Wl,--end-group"
+		]
+	},
+	"target": "Pokitto",
+	"pipelines": {
+		"Pokitto": [
+			"img-to-c",
+			"compile-cpp",
+			"compile-ld",
+			"compile-bin",
+			"make-img"
+		],
+		"Desktop": [
+			"compile-cpp",
+			"compile-ld",
+			"compile-bin"
+		]
+	},
+	"meta": {
+		"": {},
+		"\\main.cpp": {
+			"sdcard": false
+		},
+		"\\maps.h": {
+			"sdcard": false
+		},
+		"\\My_settings.h": {
+			"sdcard": false
+		},
+		"\\project.json": {
+			"sdcard": false
+		},
+		"\\maps": {
+			"sdcard": false
+		},
+		"\\Smile.h": {
+			"sdcard": false
+		},
+		"\\Smile.png": {
+			"sdcard": false
+		},
+		"\\scripts": {
+			"sdcard": false
+		},
+		"\\maps\\gardenPath.tmx": {
+			"sdcard": false
+		},
+		"\\maps\\basictiles_2.png": {
+			"sdcard": false
+		},
+		"\\maps\\magecity_1.png": {
+			"sdcard": false
+		},
+		"\\scripts\\TilemapConverter.js": {
+			"sdcard": false
+		},
+		"\\maps\\basictiles_2.h": {
+			"sdcard": false
+		},
+		"\\maps\\magecity_1.h": {
+			"sdcard": false
+		},
+		"\\TilemapProject.elf": {
+			"sdcard": false
+		},
+		"\\TilemapProject.bin": {
+			"sdcard": false
+		},
+		"\\maps\\AA.tmx": {
+			"sdcard": false
+		},
+		"\\maps\\AA": {
+			"sdcard": false
+		},
+		"\\maps\\AA\\Door.png": {
+			"sdcard": false
+		},
+		"\\maps\\AA\\Hero.png": {
+			"sdcard": false
+		},
+		"\\maps\\AA\\sprite_0.png": {
+			"sdcard": false
+		},
+		"\\maps\\AA\\sprite_1.png": {
+			"sdcard": false
+		},
+		"\\maps\\AA\\sprite_2.png": {
+			"sdcard": false
+		},
+		"\\maps\\AA\\sprite_3.png": {
+			"sdcard": false
+		},
+		"\\maps\\AA\\Door.h": {
+			"sdcard": false
+		},
+		"\\maps\\AA\\Hero.h": {
+			"sdcard": false
+		},
+		"\\maps\\AA\\sprite_1.h": {
+			"sdcard": false
+		},
+		"\\maps\\AA\\sprite_2.h": {
+			"sdcard": false
+		},
+		"\\maps\\AA\\sprite_3.h": {
+			"sdcard": false
+		},
+		"\\maps\\AA\\sprite_0.h": {
+			"sdcard": false
+		},
+		"\\maps\\gardenPath.tmx.p13748": {
+			"sdcard": false
+		},
+		"\\maps\\gardenPath.tmx.H13748": {
+			"sdcard": false
+		},
+		"\\maps\\gardenPath.tmx.q13748": {
+			"sdcard": false
+		},
+		"\\maps\\gardenPath.tmx.g13748": {
+			"sdcard": false
+		},
+		"\\maps\\gardenPath.tmx.h13748": {
+			"sdcard": false
+		},
+		"\\maps\\gardenPath.tmx.U13748": {
+			"sdcard": false
+		},
+		"\\maps\\gardenPath.tmx.m13748": {
+			"sdcard": false
+		},
+		"\\maps\\AA.tmx.e13748": {
+			"sdcard": false
+		},
+		"\\maps\\maps.zip": {
+			"sdcard": false
+		},
+		"\\maps\\AA\\sprite_3 - Copia.png": {
+			"sdcard": false
+		},
+		"\\maps\\AA\\4.png": {
+			"sdcard": false
+		},
+		"\\maps\\AA.tmx.E19908": {
+			"sdcard": false
+		},
+		"\\maps\\AA.tmx.K19908": {
+			"sdcard": false
+		},
+		"\\maps\\AA\\4.h": {
+			"sdcard": false
+		},
+		"\\maps\\AA.tmx.m19908": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.n26480": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx": {
+			"sdcard": false
+		},
+		"\\maps\\colored_transparent.png": {
+			"sdcard": false
+		},
+		"\\maps\\TileSet.png": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.e26480": {
+			"sdcard": false
+		},
+		"\\maps\\tileset_colored.tsx": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.z26480": {
+			"sdcard": false
+		},
+		"\\maps\\TileSet.h": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.o26480": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.B26480": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.i26480": {
+			"sdcard": false
+		},
+		"\\maps\\tiles.png": {
+			"sdcard": false
+		},
+		"\\maps\\TilesJawBreaker.png": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.N26480": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.r26480": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.M26480": {
+			"sdcard": false
+		},
+		"\\maps\\TilesJawBreaker.h": {
+			"sdcard": false
+		},
+		"\\assets": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Walk_Sword_Defence0_3.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Attack_Sword_Defence0_0.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Attack_Sword_Defence0_1.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Attack_Sword_Defence0_2.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Attack_Sword_Defence0_3.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Idle_Sword_Defence0_0.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Idle_Sword_Defence0_1.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Idle_Sword_Defence0_2.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Idle_Sword_Defence0_3.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Walk_Sword_Defence0_0.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Walk_Sword_Defence0_1.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Walk_Sword_Defence0_2.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Attack_0.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Attack_1.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Attack_Defence0_2.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Attack_2.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Attack_3.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Idle_0.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Idle_1.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Idle_2.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Idle_3.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Walk_0.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Walk_1.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Walk_2.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Walk_3.png": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Idle_1.h": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Idle_0.h": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Idle_3.h": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Attack_3.h": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Walk_0.h": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Walk_1.h": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Walk_2.h": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Walk_3.h": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Idle_2.h": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Attack_0.h": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Attack_1.h": {
+			"sdcard": false
+		},
+		"\\assets\\Player_Attack_2.h": {
+			"sdcard": false
+		},
+		"\\assets\\knight_blue_idle.gif": {
+			"sdcard": false
+		},
+		"\\assets\\knight_blue_idle_01.png": {
+			"sdcard": false
+		},
+		"\\assets\\knight_blue_idle_01.h": {
+			"sdcard": false
+		},
+		"\\scripts\\SpriteConverter.js": {
+			"sdcard": false
+		},
+		"\\TilemapProject2.elf": {
+			"sdcard": false
+		},
+		"\\TilemapProject2.bin": {
+			"sdcard": false
+		},
+		"\\assets\\knight_blue_idle_01 - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\Cursor.png": {
+			"sdcard": false
+		},
+		"\\assets\\curosor.png": {
+			"sdcard": false
+		},
+		"\\assets\\curosor.h": {
+			"sdcard": false
+		},
+		"\\assets\\cursor.png": {
+			"sdcard": false
+		},
+		"\\assets\\cursor.h": {
+			"sdcard": false
+		},
+		"\\TilemapProject2.bin.1.gif": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.H13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.q13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.g13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.h13624": {
+			"sdcard": false
+		},
+		"\\assets\\knight.png": {
+			"sdcard": false
+		},
+		"\\assets\\knight.h": {
+			"sdcard": false
+		},
+		"\\maps\\topdown.png": {
+			"sdcard": false
+		},
+		"\\maps\\TilesFantasy.png": {
+			"sdcard": false
+		},
+		"\\maps\\TilesFantasy.h": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.f13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.I13624": {
+			"sdcard": false
+		},
+		"\\assets\\troll_idle_01.png": {
+			"sdcard": false
+		},
+		"\\assets\\troll.png": {
+			"sdcard": false
+		},
+		"\\assets\\troll.h": {
+			"sdcard": false
+		},
+		"\\assets\\troll - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\door.png": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.x13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.F13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.m13624": {
+			"sdcard": false
+		},
+		"\\assets\\door_close.png": {
+			"sdcard": false
+		},
+		"\\assets\\door_close - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\door_open.png": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.V13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.L13624": {
+			"sdcard": false
+		},
+		"\\assets\\door_close.h": {
+			"sdcard": false
+		},
+		"\\assets\\door_open.h": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.i13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.W13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.w13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.K13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.X13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.d13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.Y13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.G13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.c13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.U13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.P13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.u13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.r13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.M13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.B13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.S13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.e13624": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.p14320": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.H14320": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.q14320": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.g14320": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.h14320": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.U14320": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.m14320": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.e14320": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.a14320": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.Y14320": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.l14320": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.N14320": {
+			"sdcard": false
+		},
+		"\\door.h": {
+			"sdcard": false
+		},
+		"\\Door.h": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.p19472": {
+			"sdcard": false
+		},
+		"\\Tools.h": {
+			"sdcard": false
+		},
+		"\\assets\\fov.png": {
+			"sdcard": false
+		},
+		"\\assets\\dither1.png": {
+			"sdcard": false
+		},
+		"\\assets\\dither1.h": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.p17468": {
+			"sdcard": false
+		},
+		"\\assets\\dither1 - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\dither16x16.png": {
+			"sdcard": false
+		},
+		"\\assets\\dither8x8.png": {
+			"sdcard": false
+		},
+		"\\assets\\dither16x16.h": {
+			"sdcard": false
+		},
+		"\\assets\\dither8x8.h": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.p19360": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.H19360": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.q19360": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.g19360": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.h19360": {
+			"sdcard": false
+		},
+		"\\maps\\bw_tiles.png": {
+			"sdcard": false
+		},
+		"\\maps\\TilesBw.png": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.p21636": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.H21636": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.q21636": {
+			"sdcard": false
+		},
+		"\\maps\\TilesBw.h": {
+			"sdcard": false
+		},
+		"\\SteamDrill.elf": {
+			"sdcard": false
+		},
+		"\\SteamDrill.bin": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.g21636": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.h21636": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.U21636": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.m21636": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.e21636": {
+			"sdcard": false
+		},
+		"\\assets\\RobotTest2.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\RobotTest2.png": {
+			"sdcard": false
+		},
+		"\\assets\\robot.png": {
+			"sdcard": false
+		},
+		"\\assets\\robot.h": {
+			"sdcard": false
+		},
+		"\\SteamDrill.bin.1.gif": {
+			"sdcard": false
+		},
+		"\\assets\\robot - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\robot2.png": {
+			"sdcard": false
+		},
+		"\\assets\\robot2.h": {
+			"sdcard": false
+		},
+		"\\assets\\robot3.png": {
+			"sdcard": false
+		},
+		"\\assets\\robot3.h": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.a21636": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.Y21636": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.l21636": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.N21636": {
+			"sdcard": false
+		},
+		"\\Player.h": {
+			"sdcard": false
+		},
+		"\\Entity.h": {
+			"sdcard": false
+		},
+		"\\Nuova cartella": {
+			"sdcard": false
+		},
+		"\\libs": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPoints.h": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPointsCommon.h": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPoints": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPoints\\Details.h": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPoints\\FixedPoints.h": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPoints\\SFixed.h": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPoints\\SFixedBase.h": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPoints\\SFixedFreeFunctions.h": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPoints\\SFixedMemberFunctions.h": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPoints\\UFixed.h": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPoints\\UFixedBase.h": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPoints\\UFixedFreeFunctions.h": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPoints\\UFixedMemberFunctions.h": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPoints\\Utils.h": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPointsCommon": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPointsCommon\\FixedPointsCommon.h": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPointsCommon\\SFixedCommon.h": {
+			"sdcard": false
+		},
+		"\\libs\\FixedPoints\\FixedPointsCommon\\UFixedCommon.h": {
+			"sdcard": false
+		},
+		"\\Camera.h": {
+			"sdcard": false
+		},
+		"\\Point.h": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.f21636": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.qHp792": {
+			"sdcard": false
+		},
+		"\\Level.h": {
+			"sdcard": false
+		},
+		"\\maps\\Room00.tmx.FeK792": {
+			"sdcard": false
+		},
+		"\\maps\\Room00.tmx": {
+			"sdcard": false
+		},
+		"\\maps\\Rooms.tmx.fLy792": {
+			"sdcard": false
+		},
+		"\\maps\\Rooms.tmx": {
+			"sdcard": false
+		},
+		"\\maps\\Rooms.tmx.ooH792": {
+			"sdcard": false
+		},
+		"\\maps\\Rooms.tmx.KpH792": {
+			"sdcard": false
+		},
+		"\\maps\\Room00.tmx.NMX792": {
+			"sdcard": false
+		},
+		"\\maps\\Room00.tmx.HNs792": {
+			"sdcard": false
+		},
+		"\\maps\\Room00.tmx.pRu792": {
+			"sdcard": false
+		},
+		"\\maps\\Room00.tmx.aKy792": {
+			"sdcard": false
+		},
+		"\\maps\\Room00.tmx.cFb792": {
+			"sdcard": false
+		},
+		"\\maps\\Room00.tmx.Dkv792": {
+			"sdcard": false
+		},
+		"\\maps\\Room00.tmx.ZeZ792": {
+			"sdcard": false
+		},
+		"\\maps\\Room00.tmx.iot792": {
+			"sdcard": false
+		},
+		"\\maps\\Room00.tmx.kud792": {
+			"sdcard": false
+		},
+		"\\maps\\Room00.tmx.EZg792": {
+			"sdcard": false
+		},
+		"\\Bullet.h": {
+			"sdcard": false
+		},
+		"\\assets\\dither8x8 - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\bullet.png": {
+			"sdcard": false
+		},
+		"\\assets\\bullet.h": {
+			"sdcard": false
+		},
+		"\\Hud.h": {
+			"sdcard": false
+		},
+		"\\jxrrj1ex.m0q~": {
+			"sdcard": false
+		},
+		"\\4oi2qo4r.kft~": {
+			"sdcard": false
+		},
+		"\\qe1tfnq3.fa3~": {
+			"sdcard": false
+		},
+		"\\xu4xjxwc.a3i~": {
+			"sdcard": false
+		},
+		"\\oqfknn5b.t0x~": {
+			"sdcard": false
+		},
+		"\\g50izc3b.e04~": {
+			"sdcard": false
+		},
+		"\\Particle.h": {
+			"sdcard": false
+		},
+		"\\assets\\bullet - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\debries.png": {
+			"sdcard": false
+		},
+		"\\assets\\debris.png": {
+			"sdcard": false
+		},
+		"\\assets\\debris.h": {
+			"sdcard": false
+		},
+		"\\assets\\dor.png": {
+			"sdcard": false
+		},
+		"\\assets\\dot.png": {
+			"sdcard": false
+		},
+		"\\assets\\dot.h": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.p29236": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.H29236": {
+			"sdcard": false
+		},
+		"\\assets\\debris - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\smoke.png": {
+			"sdcard": false
+		},
+		"\\assets\\smoke.h": {
+			"sdcard": false
+		},
+		"\\Enemy.h": {
+			"sdcard": false
+		},
+		"\\assets\\knight - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\slime.png": {
+			"sdcard": false
+		},
+		"\\assets\\slime.h": {
+			"sdcard": false
+		},
+		"\\_TODO.txt": {
+			"sdcard": false
+		},
+		"\\maps\\cavesofgallet_tiles.png": {
+			"sdcard": false
+		},
+		"\\maps\\inca_back.png": {
+			"sdcard": false
+		},
+		"\\maps\\TilesCaves.png": {
+			"sdcard": false
+		},
+		"\\maps\\monochrome.png": {
+			"sdcard": false
+		},
+		"\\maps\\TileN.png": {
+			"sdcard": false
+		},
+		"\\maps\\TileKenney.png": {
+			"sdcard": false
+		},
+		"\\maps\\TilesKenney.png": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.Ze1712": {
+			"sdcard": false
+		},
+		"\\maps\\TilesCaves.h": {
+			"sdcard": false
+		},
+		"\\maps\\Level1.tmx.ot1712": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_BackgroundUnderground.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_BackgroundUnderground.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RocksLeftEdge.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RocksLeftEdge.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RocksWallInside.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RocksWallInside.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_TopPlatform.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_TopPlatform.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_TopPlatformLeftEdge.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_TopPlatformLeftEdge.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_TopPlatformLeftEdge (1).png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_TopPlatformLeftEdge (1).png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_TopPlatformRightEdge.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_TopPlatformRightEdge.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RocksRightEdge.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RocksRightEdge.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDrillerWIPTiles.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDrillerWIPTiles.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDrillerWIPWithRobot.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDrillerWIPWithRobot.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RobotFacingLeft.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RobotFacingLeft.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDrillerWIPWithRobot_copy.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDrillerWIPWithRobot_copy.png": {
+			"sdcard": false
+		},
+		"\\assets\\Nuova cartella": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_BackgroundUnderground.png": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_TopPlatformRightEdge.png": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_TopPlatformLeftEdge.png": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_RocksRightEdge.png": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_TopPlatform.png": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_RocksWallInside.png": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_RocksLeftEdge.png": {
+			"sdcard": false
+		},
+		"\\TilesEnum.h": {
+			"sdcard": false
+		},
+		"\\TilesLoader.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDrillerWIPTiles.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDrillerWIPWithRobot.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RobotFacingLeft.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDrillerWIPWithRobot_copy.h": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_BackgroundUnderground.h": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_TopPlatformRightEdge.h": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_TopPlatformLeftEdge.h": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_TopPlatform.h": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_RocksRightEdge.h": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_RocksWallInside.h": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_RocksLeftEdge.h": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_BackgroundUnderground - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_None.png": {
+			"sdcard": false
+		},
+		"\\assets\\Tiles\\SteamDriller_None.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RobotFacingLeft - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RobotFacingRight.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RobotFacingRight.h": {
+			"sdcard": false
+		},
+		"\\TileType.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamClimbers_Sentinels.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Coal.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Crystal.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RobotFacingLeft_Anim.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Ruby.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_SteamGauge.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUnderground.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUnderground.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_None.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_None.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_RocksLeftEdge.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_RocksLeftEdge.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_RocksRightEdge.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_RocksRightEdge.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_RocksWallInside.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_RocksWallInside.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_TopPlatform.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_TopPlatform.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_TopPlatformLeftEdge.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_TopPlatformLeftEdge.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_TopPlatformRightEdge.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_TopPlatformRightEdge.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamClimbers_Sentinels.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Coal.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Ruby.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RobotFacingLeft_Anim.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Crystal.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_SteamGauge.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_Crystal.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_Coal.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_Coal.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_Crystal.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDrillerWIPWithRobot_copy_copy.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDrillerWIPWithRobot_copy_copy.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDrillerWIPWithRobot_copy_copy.h": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDrillerWIPWithRobot_copy_copy.png": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDrillerWIPTiles.png": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDrillerWIPWithRobot_copy.png": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDriller_NEW_Mockup.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDriller_NEW_Mockup.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_Ruby.png": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDriller_NEW_Mockup.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_Ruby.h": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDrillerWIPWithRobot_copy.h": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDrillerWIPTiles.h": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDrillerWIPWithRobot_copy_copy.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Logo.png": {
+			"sdcard": false
+		},
+		"\\Logo.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Logo.h": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDrillerWIPWithRobot.png": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDrillerWIPWithRobot.h": {
+			"sdcard": false
+		},
+		"\\Item.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_None - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_Unbreakable.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_Unbreakable.h": {
+			"sdcard": false
+		},
+		"\\assets\\sparks.png": {
+			"sdcard": false
+		},
+		"\\assets\\sparks.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RobotFacingLeft - Copia.h": {
+			"sdcard": false
+		},
+		"\\sprites": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeft_Anim.png": {
+			"sdcard": false
+		},
+		"\\assets\\sprites": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeft.gif.crdownload": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeft.gif": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeft.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeft.png": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_RobotFacingLeft.bin": {
+			"sdcard": false
+		},
+		"\\sprites.h": {
+			"sdcard": false
+		},
+		"\\sprites.cpp": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeft_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeft.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeft.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeftAnim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeftAnim.json": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_RobotFacingLeftAnim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeftAnim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeft.ase": {
+			"sdcard": false
+		},
+		"\\assets\\SteamClimbers_SentinelsDead.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Cassette.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Sign.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_UpArrow.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_GreenSentinels_Preview.gif": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_PurpleSentinels_Frames_copy.gif": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_Purple_Frames.gif": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeftAnim.bin": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDriller_NEW_Mockup_copy.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_UpArrow.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamClimbers_SentinelsDead.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Cassette.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Sign.h": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDriller_NEW_Mockup_copy.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUnderground - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundWithSkull.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundWithSkull.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_PurpleSentinels_Frames_copy.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_PurpleSentinels_Frames_copy.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_PurpleSentinels_Frames_copy.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_PurpleSentinels_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_PurpleSentinels_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_PurpleSentinels_Frames_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites/SteamClimbers_PurpleSentinels_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_PurpleSentinels_Frames_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_PurpleSentinels_Anim.bin": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDrillerWIPTopofTheGame.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDrillerWIPTopofTheGame.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Logo.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_DockStation.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_DockStation.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_FenceTileTop.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_FenceTileTop.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_DockStation.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_FenceTileTop.h": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDrillerWIPTopofTheGame.h": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDrillerTESTING.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDrillerTESTING.png": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDrillerTESTING.h": {
+			"sdcard": false
+		},
+		"\\Entity.cpp": {
+			"sdcard": false
+		},
+		"\\4lwnqyr3.0s5~": {
+			"sdcard": false
+		},
+		"\\Player.cpp": {
+			"sdcard": false
+		},
+		"\\Point.cpp": {
+			"sdcard": false
+		},
+		"\\Enemy.cpp": {
+			"sdcard": false
+		},
+		"\\gmmpldjf.frs~": {
+			"sdcard": false
+		},
+		"\\sfzak4ps.cbf~": {
+			"sdcard": false
+		},
+		"\\jac1hkmf.ehm~": {
+			"sdcard": false
+		},
+		"\\Bullet.cpp": {
+			"sdcard": false
+		},
+		"\\Particle.cpp": {
+			"sdcard": false
+		},
+		"\\Itemp.cpp": {
+			"sdcard": false
+		},
+		"\\Item.cpp": {
+			"sdcard": false
+		},
+		"\\Level.cpp": {
+			"sdcard": false
+		},
+		"\\Camera.cpp": {
+			"sdcard": false
+		},
+		"\\gh3j21pq.o5s~": {
+			"sdcard": false
+		},
+		"\\assets\\bulletSprite.png": {
+			"sdcard": false
+		},
+		"\\assets\\bulletSprite.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_CoveyorofRobot.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_CoveyorofRobot.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_CoveyorofRobotRightSide.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_CoveyorofRobotRightSide.png": {
+			"sdcard": false
+		},
+		"\\assets\\Memchip.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_CoveyorofRobotRightSide.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_CoveyorofRobot.h": {
+			"sdcard": false
+		},
+		"\\assets\\Memchip.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Unactivated_Robot.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Unactivated_Robot.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_CoveyorofEmpty.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_CoveyorofEmpty.png": {
+			"sdcard": false
+		},
+		"\\assets\\smoke.json": {
+			"sdcard": false
+		},
+		"\\assets\\smoke-sheet.png": {
+			"sdcard": false
+		},
+		"\\assets\\smoke-sheet.json": {
+			"sdcard": false
+		},
+		"\\assets\\smoking.png": {
+			"sdcard": false
+		},
+		"\\assets\\smoking.json": {
+			"sdcard": false
+		},
+		"\\sprites\\smoking.json": {
+			"sdcard": false
+		},
+		"\\sprites\\smoking.png": {
+			"sdcard": false
+		},
+		"\\sprites/smoking.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\smoking.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Unactivated_Robot.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_CoveyorofEmpty.h": {
+			"sdcard": false
+		},
+		"\\sprites\\smoking.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Explosions.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Explosions.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Explosions.png": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Explosions.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Explosions.h": {
+			"sdcard": false
+		},
+		"\\assets\\gravel.png": {
+			"sdcard": false
+		},
+		"\\assets\\gravel.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Smoke.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Smoke.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Smoke.json": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Smoke.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Smoke.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Explosions.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Smoke.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_PurpleSentinels_Anim.ase": {
+			"sdcard": false
+		},
+		"\\assets\\SteamClimbers_Purple_Frames.gif.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamClimbers_Purple_Frames.gif": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_PurpleSentinels_Anim - Copia.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_PurpleSentinels_Anim - CopiaBkp.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_PurpleSentinels_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_PurpleSentinels_Anim - WithLaser.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_Laser_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_Laser_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_Laser_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeft_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Smoke_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Explosions_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Explosions_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Explosions_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Smoke_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Smoke_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeft_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites/SteamClimbers_Laser_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Explosions_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Smoke_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_RobotFacingLeft_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_Laser_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Explosions_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Smoke_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_PurpleSentinels_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_PurpleSentinels_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_PurpleSentinels_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Laser_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Laser_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Laser_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Laser_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_PurpleSentinels_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_PurpleSentinels_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Laser_Anim.h": {
+			"sdcard": false
+		},
+		"\\Rect.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimbers_Laser_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Explosions_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Laser_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_PurpleSentinels_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotFacingLeft_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Smoke_Anim.bin": {
+			"sdcard": false
+		},
+		"\\assets\\palette565_miloslav.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\palette565_miloslav.png": {
+			"sdcard": false
+		},
+		"\\assets\\palette565_miloslav.h": {
+			"sdcard": false
+		},
+		"\\Palette": {
+			"sdcard": false
+		},
+		"\\Palette\\pal.h": {
+			"sdcard": false
+		},
+		"\\SteamDrill.eeprom": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimber_Boss.gif.crdownload": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimber_Boss.gif": {
+			"sdcard": false
+		},
+		"\\Rect.cpp": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotCrouch.gif.crdownload": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotCrouch.gif": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\Memchip.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Sign - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Slash.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimber_Boss_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimber_Boss_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimber_Boss_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Spider.gif.crdownload": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Spider.gif": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Worm.gif.crdownload": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Worm.gif": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Worm_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Worm_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Worm_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Spider_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Spider_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Spider_Anim.png": {
+			"sdcard": false
+		},
+		"\\assets\\slashes.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimber_Boss_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Spider_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Worm_Anim.h": {
+			"sdcard": false
+		},
+		"\\assets\\slashes.h": {
+			"sdcard": false
+		},
+		"\\sprites\\Memchip.h": {
+			"sdcard": false
+		},
+		"\\sprites/SteamClimber_Boss_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Chip_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Spider_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Worm_Anim.bin": {
+			"sdcard": false
+		},
+		"\\ChipMemory.h": {
+			"sdcard": false
+		},
+		"\\ChipMemory.cpp": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Items_Anim.ase": {
+			"sdcard": false
+		},
+		"\\ItemAnim.cpp": {
+			"sdcard": false
+		},
+		"\\ItemAnim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimber_Boss_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Spider_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Worm_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Crystal_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Crystal_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Crystal_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Ruby_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Ruby_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Ruby_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_CoalAnim.ase": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Crystal_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Ruby_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_CoalAnim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_CoalAnim.json": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_CoalAnim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Coal_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Coal_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Coal_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Coal_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Crystal_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Ruby_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Coal_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_CoalAnim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Coal_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Crystal_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Ruby_Anim.bin": {
+			"sdcard": false
+		},
+		"\\EnemySpider.h": {
+			"sdcard": false
+		},
+		"\\EnemyPurpleSentinel.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotDeactivated.png.crdownload": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotDeactivated.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotDeactivated.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotLeaning_Preview.gif.crdownload": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotLeaning_Preview.gif": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotLeaning.png.crdownload": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotLeaning.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_RobotLeaning.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Robot_Anim.bin": {
+			"sdcard": false
+		},
+		"\\BulletLaser.h": {
+			"sdcard": false
+		},
+		"\\BulletLaser.cpp": {
+			"sdcard": false
+		},
+		"\\assets\\bulletSprite - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\bulletLaserHorizontal.png": {
+			"sdcard": false
+		},
+		"\\assets\\bulletSteamVertical.png": {
+			"sdcard": false
+		},
+		"\\assets\\bulletSteamVertical.h": {
+			"sdcard": false
+		},
+		"\\assets\\bulletLaserHorizontal.h": {
+			"sdcard": false
+		},
+		"\\sprites\\Smoke0.gif.crdownload": {
+			"sdcard": false
+		},
+		"\\sprites\\Smoke0.gif": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim.bin": {
+			"sdcard": false
+		},
+		"\\Palette\\SteamPalette.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimber_Smoke_Wheels.gif": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimber_Smoke_Wheels_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimber_Smoke_Wheels_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimber_Smoke_Wheels_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites/SteamClimber_Smoke_Wheels_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimber_Smoke_Wheels_Anim.h": {
+			"sdcard": false
+		},
+		"\\Messages.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamClimber_Smoke_Wheels_Anim.bin": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundWithSkull2.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundWithSkull2.h": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDriller_NEW_Mockup_copy_copy.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDriller_NEW_Mockup_copy_copy.png": {
+			"sdcard": false
+		},
+		"\\assets\\Mockups\\SteamDriller_NEW_Mockup_copy_copy.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Bones.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_skulls_BGItem.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_skulls_BGItem.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Bones.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundRoom.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundRoom.h": {
+			"sdcard": false
+		},
+		"\\music": {
+			"sdcard": true
+		},
+		"\\music\\SteamDriller_moodycavern.wav": {
+			"sdcard": false
+		},
+		"\\sfx": {
+			"sdcard": false
+		},
+		"\\music\\SteamDriller_moodycavern.raw": {
+			"sdcard": false
+		},
+		"\\mmm.beep": {
+			"sdcard": false
+		},
+		"\\music\\SteamDriller_moodycavern.h": {
+			"sdcard": false
+		},
+		"\\beep.beep": {
+			"sdcard": false
+		},
+		"\\assets\\pico-8-16X16.png.png": {
+			"sdcard": false
+		},
+		"\\assets\\pico-8-16X16.png.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_alternate_fenceBGTexture.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_alternate_fenceBGTexture.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_alternate_fenceBGTexture.h": {
+			"sdcard": false
+		},
+		"\\Palette\\SteamPalette - Copia.h": {
+			"sdcard": false
+		},
+		"\\Palette\\SteamPalette8.h": {
+			"sdcard": false
+		},
+		"\\Palette\\SteamPalette256.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_EliteMechaSpider_Preview.gif.crdownload": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_EliteMechaSpider_Preview.gif": {
+			"sdcard": false
+		},
+		"\\Lights.h": {
+			"sdcard": false
+		},
+		"\\Lights.cpp": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_RocksWallInside - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_RocksWallBottomEdge.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_RocksWallBottomEdge.h": {
+			"sdcard": false
+		},
+		"\\palette": {
+			"sdcard": false
+		},
+		"\\palette\\SteamPalette256.h": {
+			"sdcard": false
+		},
+		"\\palette\\SteamPalette8.h": {
+			"sdcard": false
+		},
+		"\\Hud.cpp": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Pex_Header.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_PEX.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_PEX.h": {
+			"sdcard": false
+		},
+		"\\SteamCookie.h": {
+			"sdcard": false
+		},
+		"\\music\\SteamDriller_Track.raw": {
+			"sdcard": false
+		},
+		"\\music\\SteamD.raw": {
+			"sdcard": false
+		},
+		"\\music\\SteamD0.raw": {
+			"sdcard": false
+		},
+		"\\music\\Steamdri.raw": {
+			"sdcard": false
+		},
+		"\\music\\steamdri.raw": {
+			"sdcard": false
+		},
+		"\\music\\steamdri0.raw": {
+			"sdcard": false
+		},
+		"\\assets\\TASUI": {
+			"sdcard": false
+		},
+		"\\assets\\TASUI\\UI.png": {
+			"sdcard": false
+		},
+		"\\assets\\TASUI\\UI.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\tasui.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\tasui.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\steamtasui.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\steamtasui.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\steamtasuifix.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\stemui.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\UltimateUtopiaTileSet_copy (2).png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\steamtasuiMod.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\steamtasuiMod.h": {
+			"sdcard": false
+		},
+		"\\assets\\pico-8-16X16..h": {
+			"sdcard": false
+		},
+		"\\assets\\pico-8-16X16.png": {
+			"sdcard": false
+		},
+		"\\sprites\\RedMemchip.png": {
+			"sdcard": false
+		},
+		"\\sprites\\RedMemchip.h": {
+			"sdcard": false
+		},
+		"\\assets\\pico-8-16X16.h": {
+			"sdcard": false
+		},
+		"\\Mockups": {
+			"sdcard": false
+		},
+		"\\mockups": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDrillerTESTING.h": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDrillerWIPTiles.h": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDrillerTESTING.png": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDrillerWIPTiles.png": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDrillerWIPTopofTheGame.h": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDrillerWIPTopofTheGame.png": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDrillerWIPWithRobot.png": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDrillerWIPWithRobot.h": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDrillerWIPWithRobot_copy.h": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDrillerWIPWithRobot_copy_copy.h": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDrillerWIPWithRobot_copy.png": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDrillerWIPWithRobot_copy_copy.png": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_NEW_Mockup.h": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_NEW_Mockup.png": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_NEW_Mockup_copy.h": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_NEW_Mockup_copy_copy.png": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_NEW_Mockup_copy.png": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_NEW_Mockup_copy_copy.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Red_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Red_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Red_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Chip_Red_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Red_Anim.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Conveyor.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Conveyor.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Red_Anim.bin": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic\\SteamDriller_Daughter.png": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic\\SteamDriller_Daughter.json": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic\\SteamDriller_Daughter-sheet.png": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic\\SteamDriller_Daughter.h": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic\\SteamDriller_Daughter-sheet.h": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic\\Puz11.png": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic\\Puz00.png": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic\\Puz01.png": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic\\Puz10.png": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic\\She.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Red_Anim - Copia.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Yellow_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Red_Anim - Copia.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Yellow_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Black_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Black_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Black_Anim-sheet.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Black_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Chip_Black_Anim.bin": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic\\Puz11.h": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic\\Puz00.h": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic\\Puz01.h": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic\\Puz10.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Black_Anim.h": {
+			"sdcard": false
+		},
+		"\\assets\\puzzlePic\\She.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Black_Anim-sheet.h": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Black_Anim.bin": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio\\Puz00.png": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio\\Puz01.h": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio\\Puz00.h": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio\\Puz01.png": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio\\Puz10.h": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio\\Puz10.png": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio\\She.h": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio\\Puz11.h": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio\\She.png": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio\\Puz11.png": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio\\SteamDriller_Daughter-sheet.h": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio\\SteamDriller_Daughter.json": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio\\SteamDriller_Daughter-sheet.png": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio\\SteamDriller_Daughter.h": {
+			"sdcard": false
+		},
+		"\\assets\\puzzleVisio\\SteamDriller_Daughter.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Purple_Anim-sheet.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Black_Anim - Copia.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Purple_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Purple_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Chip_Purple_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Purple_Anim-sheet.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Purple_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Chip_Purple_Anim.bin": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Pause.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Pause.png": {
+			"sdcard": false
+		},
+		"\\mockups\\animations": {
+			"sdcard": false
+		},
+		"\\palette\\pico-8-16X16.png": {
+			"sdcard": false
+		},
+		"\\mockups\\animations\\SteamClimbers_GreenSentinels_Preview.gif": {
+			"sdcard": false
+		},
+		"\\mockups\\animations\\SteamClimbers_Purple_Frames.gif": {
+			"sdcard": false
+		},
+		"\\mockups\\animations\\SteamClimber_Smoke_Wheels.gif": {
+			"sdcard": false
+		},
+		"\\mockups\\animations\\SteamClimber_Boss.gif": {
+			"sdcard": false
+		},
+		"\\mockups\\animations\\SteamDriller_EliteMechaSpider_Preview.gif": {
+			"sdcard": false
+		},
+		"\\mockups\\animations\\SteamDriller_RobotLeaning_Preview.gif": {
+			"sdcard": false
+		},
+		"\\mockups\\animations\\SteamDriller_RobotCrouch.gif": {
+			"sdcard": false
+		},
+		"\\mockups\\animations\\SteamDriller_Worm.gif": {
+			"sdcard": false
+		},
+		"\\mockups\\animations\\SteamDriller_Spider.gif": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Pause.h": {
+			"sdcard": false
+		},
+		"\\palette\\pico-8-16X16.h": {
+			"sdcard": false
+		},
+		"\\LICENSE": {
+			"sdcard": false
+		},
+		"\\README.md": {
+			"sdcard": false
+		},
+		"\\SteamDriller.elf": {
+			"sdcard": false
+		},
+		"\\SteamDriller.bin": {
+			"sdcard": false
+		},
+		"\\SteamDriller.eeprom": {
+			"sdcard": false
+		}
+	},
+	"BUILDFlags": {
+		"Pokitto": {}
+	}
+}

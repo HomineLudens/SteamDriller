@@ -1,0 +1,16 @@
+__asm__(".global steamClimber_Boss_Anim\nsteamClimber_Boss_Anim:\n.incbin \"sprites/SteamClimber_Boss_Anim.bin\"");
+__asm__(".global steamClimber_Smoke_Wheels_Anim\nsteamClimber_Smoke_Wheels_Anim:\n.incbin \"sprites/SteamClimber_Smoke_Wheels_Anim.bin\"");
+__asm__(".global steamDriller_Chip_Anim\nsteamDriller_Chip_Anim:\n.incbin \"sprites/SteamDriller_Chip_Anim.bin\"");
+__asm__(".global steamDriller_Chip_Black_Anim\nsteamDriller_Chip_Black_Anim:\n.incbin \"sprites/SteamDriller_Chip_Black_Anim.bin\"");
+__asm__(".global steamDriller_Chip_Purple_Anim\nsteamDriller_Chip_Purple_Anim:\n.incbin \"sprites/SteamDriller_Chip_Purple_Anim.bin\"");
+__asm__(".global steamDriller_Chip_Red_Anim\nsteamDriller_Chip_Red_Anim:\n.incbin \"sprites/SteamDriller_Chip_Red_Anim.bin\"");
+__asm__(".global steamDriller_Coal_Anim\nsteamDriller_Coal_Anim:\n.incbin \"sprites/SteamDriller_Coal_Anim.bin\"");
+__asm__(".global steamDriller_Crystal_Anim\nsteamDriller_Crystal_Anim:\n.incbin \"sprites/SteamDriller_Crystal_Anim.bin\"");
+__asm__(".global steamDriller_Explosions_Anim\nsteamDriller_Explosions_Anim:\n.incbin \"sprites/SteamDriller_Explosions_Anim.bin\"");
+__asm__(".global steamDriller_Laser_Anim\nsteamDriller_Laser_Anim:\n.incbin \"sprites/SteamDriller_Laser_Anim.bin\"");
+__asm__(".global steamDriller_PurpleSentinels_Anim\nsteamDriller_PurpleSentinels_Anim:\n.incbin \"sprites/SteamDriller_PurpleSentinels_Anim.bin\"");
+__asm__(".global steamDriller_Robot_Anim\nsteamDriller_Robot_Anim:\n.incbin \"sprites/SteamDriller_Robot_Anim.bin\"");
+__asm__(".global steamDriller_Ruby_Anim\nsteamDriller_Ruby_Anim:\n.incbin \"sprites/SteamDriller_Ruby_Anim.bin\"");
+__asm__(".global steamDriller_Smoke_Anim\nsteamDriller_Smoke_Anim:\n.incbin \"sprites/SteamDriller_Smoke_Anim.bin\"");
+__asm__(".global steamDriller_Spider_Anim\nsteamDriller_Spider_Anim:\n.incbin \"sprites/SteamDriller_Spider_Anim.bin\"");
+__asm__(".global steamDriller_Worm_Anim\nsteamDriller_Worm_Anim:\n.incbin \"sprites/SteamDriller_Worm_Anim.bin\"");

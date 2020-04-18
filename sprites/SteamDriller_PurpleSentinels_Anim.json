@@ -1,0 +1,145 @@
+{ "frames": [
+   {
+    "filename": "SteamDriller_PurpleSentinels_Anim 0.ase",
+    "frame": { "x": 0, "y": 0, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 8 },
+    "sourceSize": { "w": 10, "h": 8 },
+    "duration": 200
+   },
+   {
+    "filename": "SteamDriller_PurpleSentinels_Anim 1.ase",
+    "frame": { "x": 10, "y": 0, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 8 },
+    "sourceSize": { "w": 10, "h": 8 },
+    "duration": 200
+   },
+   {
+    "filename": "SteamDriller_PurpleSentinels_Anim 2.ase",
+    "frame": { "x": 20, "y": 0, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 8 },
+    "sourceSize": { "w": 10, "h": 8 },
+    "duration": 200
+   },
+   {
+    "filename": "SteamDriller_PurpleSentinels_Anim 3.ase",
+    "frame": { "x": 30, "y": 0, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 8 },
+    "sourceSize": { "w": 10, "h": 8 },
+    "duration": 200
+   },
+   {
+    "filename": "SteamDriller_PurpleSentinels_Anim 4.ase",
+    "frame": { "x": 40, "y": 0, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 8 },
+    "sourceSize": { "w": 10, "h": 8 },
+    "duration": 200
+   },
+   {
+    "filename": "SteamDriller_PurpleSentinels_Anim 5.ase",
+    "frame": { "x": 50, "y": 0, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 8 },
+    "sourceSize": { "w": 10, "h": 8 },
+    "duration": 200
+   },
+   {
+    "filename": "SteamDriller_PurpleSentinels_Anim 6.ase",
+    "frame": { "x": 60, "y": 0, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 8 },
+    "sourceSize": { "w": 10, "h": 8 },
+    "duration": 200
+   },
+   {
+    "filename": "SteamDriller_PurpleSentinels_Anim 7.ase",
+    "frame": { "x": 70, "y": 0, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 8 },
+    "sourceSize": { "w": 10, "h": 8 },
+    "duration": 200
+   },
+   {
+    "filename": "SteamDriller_PurpleSentinels_Anim 8.ase",
+    "frame": { "x": 80, "y": 0, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 8 },
+    "sourceSize": { "w": 10, "h": 8 },
+    "duration": 200
+   },
+   {
+    "filename": "SteamDriller_PurpleSentinels_Anim 9.ase",
+    "frame": { "x": 90, "y": 0, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 8 },
+    "sourceSize": { "w": 10, "h": 8 },
+    "duration": 200
+   },
+   {
+    "filename": "SteamDriller_PurpleSentinels_Anim 10.ase",
+    "frame": { "x": 100, "y": 0, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 8 },
+    "sourceSize": { "w": 10, "h": 8 },
+    "duration": 200
+   },
+   {
+    "filename": "SteamDriller_PurpleSentinels_Anim 11.ase",
+    "frame": { "x": 110, "y": 0, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 8 },
+    "sourceSize": { "w": 10, "h": 8 },
+    "duration": 200
+   },
+   {
+    "filename": "SteamDriller_PurpleSentinels_Anim 12.ase",
+    "frame": { "x": 120, "y": 0, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 8 },
+    "sourceSize": { "w": 10, "h": 8 },
+    "duration": 200
+   },
+   {
+    "filename": "SteamDriller_PurpleSentinels_Anim 13.ase",
+    "frame": { "x": 130, "y": 0, "w": 10, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 8 },
+    "sourceSize": { "w": 10, "h": 8 },
+    "duration": 200
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.1.6-dev",
+  "image": "SteamDriller_PurpleSentinels_Anim.png",
+  "format": "RGBA8888",
+  "size": { "w": 140, "h": 8 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "Idle", "from": 0, "to": 5, "direction": "forward" },
+   { "name": "Move", "from": 6, "to": 10, "direction": "forward" },
+   { "name": "Attack", "from": 11, "to": 13, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+  ]
+ }
+}
