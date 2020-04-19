@@ -43,6 +43,7 @@ class Player {
     int8_t lifePrev;
     bool onFloor;
 
+    int msOnFloor;
     int msLifeLoss;
     int msIdle;
     int msJump;

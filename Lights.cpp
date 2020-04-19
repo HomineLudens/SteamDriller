@@ -22,13 +22,14 @@ void Lights::Update(Camera & camera, Player & player, Level & level, int ms) {
             lightLevel = 1000000;
         }
 
-        CalcLight();
+        CalcLight(level);
         msLight += 100;
     }
 }
 
-void Lights::CalcLight() {
+void Lights::CalcLight(Level & level) {
 
+    //Player spotlight
     for (int x = 0; x < 55; x++) {
         int dx = (x * 2) - pos.x.getInteger();
         int dx2 = dx * dx;
@@ -41,6 +42,11 @@ void Lights::CalcLight() {
             auto dark = 256 - (light * 16);
             Lights::lightMap[x][y] = dark;
         }
+    }
+
+    //
+    for (auto & e: level.enemies) {
+
     }
 }
 

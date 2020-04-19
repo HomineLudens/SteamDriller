@@ -39,6 +39,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     //Add elapsed time
     msState += ms;
     msJump += ms;
+    msOnFloor -= ms;
     msSmokeEmit -= ms;
     msLifeLoss -= ms;
     msFloating -= ms;
@@ -150,8 +151,8 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
             speed.x += 0.8;
         }
         //Jump then shot down
-        if (onFloor) {
-            if (PB::aBtn()) {
+        if (msOnFloor>0) {
+            if (PB::pressed(BTN_A)) {
                 speed.y -= 4;
                 msJump = 0;
                 Pokitto::Sound::playSFX(sfx_steam, sizeof(sfx_steam));
@@ -161,8 +162,8 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
                 speed.y -= 0.8;
             }
             if (PB::pressed(BTN_A) && bullets > 0) {
-                pos.y -= 2;
-                speed.y = -0.5;
+                pos.y -= 3;
+                speed.y = -1.0;
                 msFloating = 250;
                 bullets--;
                 lvl.AddBullet(pos, Point(0, 1), Bullet::BulletType::SteamVertical, 1500); // add bullet
@@ -198,6 +199,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     pos.y += speed.y;
     onFloor = lvl.IsSolid(pos);
     if (onFloor) {
+        msOnFloor = 80;
         pos.y = oldY;
         speed.y = 0;
         bullets = MAX_SHOOTS; //recharge bullets when on floor

@@ -467,7 +467,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     //MANAGE ITEM COLLISION
     for (auto & i: items) {
         if (i.IsAlive() && Rect::Collide(player.GetHitBox(), i.GetHitBox())) {
-            if (i.IsCollectable() && life > 0) {
+            if (i.IsCollectable() && player.life > 0) {
                 i.Kill();
                 Pokitto::Sound::playSFX(sfx_pickup, sizeof(sfx_pickup));
             }
@@ -481,7 +481,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
             if (i.msgIndex != -1) {
                 msgToShow = i.msgIndex;
             }
-            if (i.IsCollectable() && life > 0) {
+            if (i.IsCollectable() && player.life > 0) {
                 player.Heal(10);
                 i.Kill();
                 Pokitto::Sound::playSFX(sfx_pickup, sizeof(sfx_pickup));

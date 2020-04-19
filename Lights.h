@@ -18,7 +18,7 @@ class Lights {
     static inline std::uint8_t lightMap[55][44];
 
     void Update(Camera & camera, Player & player, Level & level, int ms);
-    void CalcLight();
+    void CalcLight(Level & level);
     void static ShadeFiller(std::uint8_t * line, std::uint32_t y, bool skip);
 
 };
