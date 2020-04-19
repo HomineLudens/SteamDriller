@@ -2784,6 +2784,48 @@
 		},
 		"\\sfx\\sfx_pickup.h": {
 			"sdcard": false
+		},
+		"\\sfx\\sfx_explosion.h": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_chip.h": {
+			"sdcard": false
+		},
+		"\\sfx\\crash.wav": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_laser_long.wav": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_buzz.wav": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_laser.wav": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_fall.wav": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_poweron.wav": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_buzz.h": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_laser_long.h": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_poweron.h": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_steam.wav": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_steam.h": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_fall.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

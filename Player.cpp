@@ -1,6 +1,9 @@
 #include "Player.h"
 #include "assets/dot.h"
 #include <math.h>
+#include "sfx/sfx_poweron.h"
+#include "sfx/sfx_fall.h"
+#include "sfx/sfx_steam.h"
 
 using PD = Pokitto::Display;
 using PB = Pokitto::Buttons;
@@ -48,6 +51,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
             if (PB::pressed(BTN_UP) || PB::pressed(BTN_DOWN) || PB::pressed(BTN_LEFT) || PB::pressed(BTN_RIGHT) || PB::pressed(BTN_A) || PB::pressed(BTN_B)) {
                 sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
                 ChangeState(State::Activating);
+                Pokitto::Sound::playSFX(sfx_poweron, sizeof(sfx_poweron));
             }
             break;
         case State::Activating:
@@ -149,6 +153,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
             if (PB::aBtn()) {
                 speed.y -= 3;
                 msJump = 0;
+                 Pokitto::Sound::playSFX(sfx_steam, sizeof(sfx_steam));
             }
         } else {
             if (PB::aBtn() && msJump < 100) {
@@ -160,6 +165,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
                 msFloating = PC::getTime() + 500;
                 bullets--;
                 lvl.AddBullet(pos, Point(0, 1), Bullet::BulletType::SteamVertical, 1500); // add bullet
+                Pokitto::Sound::playSFX(sfx_steam, sizeof(sfx_steam));
             }
         }
 

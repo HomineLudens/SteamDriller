@@ -1,5 +1,6 @@
 #include "Level.h"
 #include "sfx/sfx_pickup.h"
+#include "sfx/sfx_explosion.h"
 
 extern SteamCookie steamCookie;
 
@@ -241,7 +242,10 @@ void Level::DestroyTile(const Point & pos, int offX, int offY) {
             SetTileId(pos, TileType::RockEdgeRight, offX + 1, offY);
         if (tOver == TileType::RockInside)
             SetTileId(pos, TileType::RockEdgeBottom, offX, offY - 1);
-
+        //--------
+        
+        Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
+        setOSC(&osc1,1,5,1,1,1,60,254,6,5,244,6,-300,-2,12,1,0);
     }
 }
 

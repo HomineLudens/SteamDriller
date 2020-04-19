@@ -58,6 +58,7 @@ int main() {
     //Music init
     steamCookie.track++;
     steamCookie.track = steamCookie.track % 3;
+    steamCookie.track = 2;
     steamCookie.saveCookie();
     switch (steamCookie.track) {
         case 0:
@@ -72,7 +73,7 @@ int main() {
     }
 
 
-
+    //---
     initGame();
 
     while (PC::isRunning()) {
@@ -92,6 +93,13 @@ int main() {
         if (PB::pressed(BTN_C) && PB::downBtn()) {
             initGame();
         }
+
+
+        if (hud.puzzleState == Hud::PuzzleState::None)
+            PS::playMusicStream();
+        else
+            PS::pauseMusicStream();
+
 
         //Save best score
         if (player.life < 1) {
