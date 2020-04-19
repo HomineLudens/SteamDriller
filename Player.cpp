@@ -41,6 +41,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     msJump += ms;
     msSmokeEmit -= ms;
     msLifeLoss -= ms;
+    msFloating -= ms;
     //Save old position in case of collision
     auto oldX = pos.x;
     auto oldY = pos.y;
@@ -151,9 +152,9 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
         //Jump then shot down
         if (onFloor) {
             if (PB::aBtn()) {
-                speed.y -= 3.5;
+                speed.y -= 4;
                 msJump = 0;
-                 Pokitto::Sound::playSFX(sfx_steam, sizeof(sfx_steam));
+                Pokitto::Sound::playSFX(sfx_steam, sizeof(sfx_steam));
             }
         } else {
             if (PB::aBtn() && msJump < 100) {
@@ -162,7 +163,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
             if (PB::pressed(BTN_A) && bullets > 0) {
                 pos.y -= 2;
                 speed.y = -0.5;
-                msFloating = PC::getTime() + 250;
+                msFloating = 250;
                 bullets--;
                 lvl.AddBullet(pos, Point(0, 1), Bullet::BulletType::SteamVertical, 1500); // add bullet
                 Pokitto::Sound::playSFX(sfx_steam, sizeof(sfx_steam));
@@ -183,13 +184,13 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
 
     //Apply gravity force, but less while floating, not when offline
     if (state != State::Offline && state != State::Activating) {
-        if (PC::getTime() > msFloating)
-            speed.y += 0.4; //gravity
-        else
+        if (msFloating > 0)
             speed.y += 0.1;
+        else
+            speed.y += 0.45; //gravity
     }
     //Cap falling speed    
-    if (speed.y > 5) speed.y = 5;
+    if (speed.y > 6.5) speed.y = 6.5;
     //Lateral friction
     speed.x *= 0.85; //friction
 

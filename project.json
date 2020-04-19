@@ -2826,6 +2826,9 @@
 		},
 		"\\sfx\\sfx_fall.h": {
 			"sdcard": false
+		},
+		"\\sfx\\sfx_laser.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

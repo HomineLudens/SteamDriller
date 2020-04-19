@@ -57,10 +57,10 @@ void Camera::Update(const Player & player, int ms) {
     auto dy = (target.y - pos.y - offset.y) * speed.y;
 
     //Clamp camera speed
-    if (dy > 5)
-        dy = 5;
-    if (dy < -5)
-        dy = -5;
+    if (dy > 16)
+        dy = 16;
+    if (dy < -16)
+        dy = -16;
 
     pos.x += dx;
     pos.y += dy;

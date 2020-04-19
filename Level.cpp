@@ -231,7 +231,7 @@ void Level::DestroyTile(const Point & pos, int offX, int offY) {
         auto tOver = GetTileId(pos, offX, offY - 1);
         if (tOn != TileType::None)
             SetTileId(pos, TileType::BackgroundUnderground, offX, offY);
-        AddDebris(pos, 15);
+        AddDebris(pos, 5);
         if (random(100) > 95)
             AddItem(pos.x.getInteger(), pos.y.getInteger(), Item::ItemType::Bones, false, false, true);
         //-------------------
@@ -243,9 +243,8 @@ void Level::DestroyTile(const Point & pos, int offX, int offY) {
         if (tOver == TileType::RockInside)
             SetTileId(pos, TileType::RockEdgeBottom, offX, offY - 1);
         //--------
-        
+
         Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
-        setOSC(&osc1,1,5,1,1,1,60,254,6,5,244,6,-300,-2,12,1,0);
     }
 }
 
@@ -434,6 +433,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                             AddParticle(e.pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
                             e.Kill();
                             b.Kill();
+                            Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
                         }
                     }
                 } else {
@@ -442,6 +442,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                         player.Damage(20);
                         if (b.speed.x != 0 || b.speed.y != 0) {
                             b.Kill(); //Kill bullet only if it's moving (allow laser to burn in place)
+                            Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
                         }
                     }
                 }
@@ -454,6 +455,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         if (e.IsAlive() && Rect::Collide(player.GetHitBox(), e.GetHitBox())) {
             AddParticle(e.pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
             e.Kill();
+            Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
             //--
             player.speed.y += random(-3, -6);
             player.Damage(20);
@@ -465,7 +467,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     //MANAGE ITEM COLLISION
     for (auto & i: items) {
         if (i.IsAlive() && Rect::Collide(player.GetHitBox(), i.GetHitBox())) {
-            if (i.IsCollectable()) {
+            if (i.IsCollectable() && life > 0) {
                 i.Kill();
                 Pokitto::Sound::playSFX(sfx_pickup, sizeof(sfx_pickup));
             }
@@ -479,7 +481,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
             if (i.msgIndex != -1) {
                 msgToShow = i.msgIndex;
             }
-            if (i.IsCollectable()) {
+            if (i.IsCollectable() && life > 0) {
                 player.Heal(10);
                 i.Kill();
                 Pokitto::Sound::playSFX(sfx_pickup, sizeof(sfx_pickup));
