@@ -1,6 +1,7 @@
 #include "Enemy.h"
 #include "Level.h"
 #include "Player.h"
+#include "sfx/sfx_laser.h"
 
 using PD = Pokitto::Display;
 using PC = Pokitto::Core;
@@ -175,6 +176,7 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                         Bullet::BulletType::LaserHorizontal, eAI.msAttackDuration);
                     i++;
                 }
+                Pokitto::Sound::playSFX(sfx_laser, sizeof(sfx_laser));
             }
 
             //End of attack
