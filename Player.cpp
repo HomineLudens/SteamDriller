@@ -151,7 +151,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
             speed.x += 0.8;
         }
         //Jump then shot down
-        if (msOnFloor>0) {
+        if (msOnFloor > 0) {
             if (PB::pressed(BTN_A)) {
                 speed.y -= 4;
                 msJump = 0;
@@ -238,7 +238,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     }
 
     //Power loss
-    if (msLifeLoss < 0) {
+    if (msLifeLoss < 0 && state != State::Offline) {
         Damage(1);
         msLifeLoss = 1000;
     }
