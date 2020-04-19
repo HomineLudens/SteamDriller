@@ -5,11 +5,11 @@
 
 void Lights::Update(Camera & camera, Player & player, Level & level, int ms) {
     msLight -= ms;
-    msLightBoost -= ms;
 
-    if (player.life > player.lifePrev) {
-        msLightBoost = 500;
-    }
+    // msLightBoost -= ms;
+    // if (player.life > player.lifePrev) {
+    //     msLightBoost = 500;
+    // }
 
     if (msLight < 0) {
         pos.x = camera.ToScreenX(player.pos);
