@@ -6,8 +6,8 @@ class SteamCookie: public Pokitto::Cookie {
 
     public: char initials[3] = {
         'A',
-        'B',
-        'C'
+        'A',
+        'A'
     };
     int msgRead = 1;
     int maxDepth = 0;
