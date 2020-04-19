@@ -106,7 +106,7 @@ void Level::RandomizeLine(int r) {
 
 
     //Change well walls position
-    if (random(100) > 60) {
+    if (random(100) > 90) {
         int newX = pg.x1 + random(-1, 2);
         if (newX < pg.minX)
             newX = pg.minX;
@@ -117,7 +117,7 @@ void Level::RandomizeLine(int r) {
     }
 
     //Platform
-    if (random(100) > 80) {
+    if (random(100) > 90) {
         int bLen = random(2, 5);
         int bx1 = random(pg.x1 + 1, pg.x2 - bLen - 1);
         int xb = bx1;
@@ -458,7 +458,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
             player.speed.y += random(-3, -6);
             player.Damage(20);
             camera.Shake(4);
-            camera.Flash(8);
+            camera.Flash(20);
         }
     }
     //-------------------
