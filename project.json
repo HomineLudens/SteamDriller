@@ -2829,6 +2829,18 @@
 		},
 		"\\sfx\\sfx_laser.h": {
 			"sdcard": false
+		},
+		"\\SteamDriller.bin.1.gif": {
+			"sdcard": false
+		},
+		"\\SteamDriller.bin.2.gif": {
+			"sdcard": false
+		},
+		"\\SteamDriller.bin.3.gif": {
+			"sdcard": false
+		},
+		"\\SteamDriller.bin.10.gif": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

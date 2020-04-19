@@ -22,12 +22,13 @@ void Lights::Update(Camera & camera, Player & player, Level & level, int ms) {
             lightLevel = 1000000;
         }
 
-        CalcLight(level);
+        CalcLight(camera, level);
+        //--
         msLight += 100;
     }
 }
 
-void Lights::CalcLight(Level & level) {
+void Lights::CalcLight(Camera & cam, Level & level) {
 
     //Player spotlight
     for (int x = 0; x < 55; x++) {
@@ -37,17 +38,29 @@ void Lights::CalcLight(Level & level) {
             int dy = (y * 2) - pos.y.getInteger();
             int dy2 = dy * dy;
             int dist2 = std::max(1, (dx2 + dy2));
-
             int light = std::max(1, std::min(15, lightLevel / dist2));
             auto dark = 256 - (light * 16);
             Lights::lightMap[x][y] = dark;
         }
     }
 
-    //
-    for (auto & e: level.enemies) {
+    // //
+    // for (auto & e: level.itemsAnim) {
+    //     if (e.IsAlive()) {
+    //         auto hb = e.GetHitBox();
+    //         int eX = (cam.ToScreenX(e.pos) - hb.w.getInteger() / 2) / 2;
+    //         int eY = (cam.ToScreenY(e.pos) - hb.h.getInteger() / 2) / 2;
 
-    }
+    //         if (eX > 2 && eX < 55 - 2 && eY > 2 && eY < 44 - 2) {
+
+    //             for (int x = -2; x < 4; x++) {
+    //                 for (int y = -2; y < 4; y++) {
+    //                     Lights::lightMap[eX + x][eY + y] = 0;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 void Lights::ShadeFiller(std::uint8_t * line, std::uint32_t y, bool skip) {
