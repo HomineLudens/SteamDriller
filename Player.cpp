@@ -151,7 +151,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
         //Jump then shot down
         if (onFloor) {
             if (PB::aBtn()) {
-                speed.y -= 3;
+                speed.y -= 3.5;
                 msJump = 0;
                  Pokitto::Sound::playSFX(sfx_steam, sizeof(sfx_steam));
             }
@@ -162,7 +162,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
             if (PB::pressed(BTN_A) && bullets > 0) {
                 pos.y -= 2;
                 speed.y = -0.5;
-                msFloating = PC::getTime() + 500;
+                msFloating = PC::getTime() + 250;
                 bullets--;
                 lvl.AddBullet(pos, Point(0, 1), Bullet::BulletType::SteamVertical, 1500); // add bullet
                 Pokitto::Sound::playSFX(sfx_steam, sizeof(sfx_steam));

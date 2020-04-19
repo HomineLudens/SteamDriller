@@ -8,7 +8,7 @@ void Lights::Update(Camera & camera, Player & player, Level & level, int ms) {
     msLightBoost -= ms;
 
     if (player.life > player.lifePrev) {
-        msLightBoost = 250;
+        msLightBoost = 500;
     }
 
     if (msLight < 0) {
