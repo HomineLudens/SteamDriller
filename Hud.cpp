@@ -163,7 +163,7 @@ void Hud::Draw(const Player & player,
         UI::printInteger(player.life);
     }
 
-    UI::setCursor(5, 0);
-    UI::printText("Track:");
-    UI::printInteger(steamCookie.track);
+    // UI::setCursor(5, 0);
+    // UI::printText("Track:");
+    // UI::printInteger(steamCookie.track);
 }
