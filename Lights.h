@@ -9,7 +9,7 @@ class Lights {
 
     private:
         int msLight;
-        int msLightBoost;
+        int msLightBoost = 0;
     public:
         int lightLevel = 8196;
     Point pos;
