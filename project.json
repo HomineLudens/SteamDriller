@@ -2841,6 +2841,9 @@
 		},
 		"\\SteamDriller.bin.10.gif": {
 			"sdcard": false
+		},
+		"\\music\\steamd4.raw": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

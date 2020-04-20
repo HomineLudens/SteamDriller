@@ -56,21 +56,22 @@ int main() {
     UI::setTilesetImage(steamtasui); //UI::setTilesetImage(puits::UltimateUtopia::tileSet);
 
     //Music init
-    steamCookie.track++;
-    steamCookie.track = steamCookie.track % 3;
-    steamCookie.track = 2;
-    steamCookie.saveCookie();
-    switch (steamCookie.track) {
-        case 0:
-            PS::playMusicStream("music/steamd1.raw", 0);
-            break;
-        case 1:
-            PS::playMusicStream("music/steamd2.raw", 0);
-            break;
-        case 2:
-            PS::playMusicStream("music/steamd3.raw", 0);
-            break;
-    }
+    // steamCookie.track++;
+    // steamCookie.track = steamCookie.track % 3;
+    // steamCookie.track = 2;
+    // steamCookie.saveCookie();
+    // switch (steamCookie.track) {
+    //     case 0:
+    //         PS::playMusicStream("music/steamd1.raw", 0);
+    //         break;
+    //     case 1:
+    //         PS::playMusicStream("music/steamd2.raw", 0);
+    //         break;
+    //     case 2:
+    //         PS::playMusicStream("music/steamd3.raw", 0);
+    //         break;
+    // }
+    PS::playMusicStream("music/steamd4.raw", 0);
 
 
     //---
