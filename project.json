@@ -2865,6 +2865,15 @@
 		},
 		"\\music\\steamd5.raw": {
 			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Conveyor_Flat.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Conveyor_Flat.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Conveyor_Flat.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

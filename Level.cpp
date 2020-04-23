@@ -23,10 +23,13 @@ void Level::Init(const Point & posStart) {
     //--- Initial stuff
     AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger(), Item::ItemType::Logo, true); //Logo
 
-    AddItem(posStart.x.getInteger() - 40, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true);
-    AddItem(posStart.x.getInteger() - 140, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true);
-    AddItem(posStart.x.getInteger() + 120, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true, false, true);
-    AddItem(posStart.x.getInteger() + 220, posStart.y.getInteger() - 22, Item::ItemType::Conveyor, true, false, true);
+    AddItem(posStart.x.getInteger() - 35 + 6, posStart.y.getInteger() - 24, Item::ItemType::Conveyor, true);
+    AddItem(posStart.x.getInteger() - 110 + 6, posStart.y.getInteger() - 24, Item::ItemType::Conveyor, true);
+    AddItem(posStart.x.getInteger() - 185 + 6, posStart.y.getInteger() - 24, Item::ItemType::Conveyor, true);
+
+    AddItem(posStart.x.getInteger() + 115 - 6, posStart.y.getInteger() - 24, Item::ItemType::Conveyor, true, false, true);
+    AddItem(posStart.x.getInteger() + 190 - 6, posStart.y.getInteger() - 24, Item::ItemType::Conveyor, true, false, true);
+    AddItem(posStart.x.getInteger() + 265 - 6, posStart.y.getInteger() - 24, Item::ItemType::Conveyor, true, false, true);
 
     AddItem(posStart.x.getInteger(), posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
     AddItem(posStart.x.getInteger() - 100, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
@@ -38,7 +41,7 @@ void Level::Init(const Point & posStart) {
     // AddItemAnim(posStart.x.getInteger() - 40, 60, ItemAnim::ItemAnimType::Ruby);
 
     // AddItemAnim(posStart.x.getInteger() - 50, 40, ItemAnim::ItemAnimType::Chip, false, false, false, 1);
-    // AddItemAnim(posStart.x.getInteger() + 10, 40, ItemAnim::ItemAnimType::ChipRed, false, false, false, random(11, 15));
+    AddItemAnim(posStart.x.getInteger() - 10, 40, ItemAnim::ItemAnimType::ChipRed, false, false, false, random(11, 15));
     // AddItemAnim(posStart.x.getInteger() + 100, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 7);
     // AddItemAnim(posStart.x.getInteger() + 140, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 5);
     // AddItemAnim(posStart.x.getInteger() + 180, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 6);

@@ -48,7 +48,7 @@ Rect ItemAnim::GetHitBox() {
 
 void ItemAnim::Draw(const Camera & cam) {
     if (msgIndex != -1) {
-        sprIcon.draw(cam.ToScreenX(pos) - (sprIcon.getFrameWidth() / 2), cam.ToScreenY(pos) - 30);
+        sprIcon.draw(cam.ToScreenX(pos) - (sprIcon.getFrameWidth() / 2), cam.ToScreenY(pos) - 40);
     }
     spr.draw(cam.ToScreenX(pos) - (spr.getFrameWidth() / 2), cam.ToScreenY(pos) - spr.getFrameHeight());
 }
