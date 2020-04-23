@@ -2874,6 +2874,15 @@
 		},
 		"\\assets\\SteamDriller_Conveyor_Flat.h": {
 			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_Mockup.png.crdownload": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_Mockup.png": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_Mockup.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

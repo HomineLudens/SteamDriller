@@ -41,7 +41,7 @@ void Level::Init(const Point & posStart) {
     // AddItemAnim(posStart.x.getInteger() - 40, 60, ItemAnim::ItemAnimType::Ruby);
 
     // AddItemAnim(posStart.x.getInteger() - 50, 40, ItemAnim::ItemAnimType::Chip, false, false, false, 1);
-    AddItemAnim(posStart.x.getInteger() - 10, 40, ItemAnim::ItemAnimType::ChipRed, false, false, false, random(11, 15));
+    AddItemAnim(posStart.x.getInteger() - 30, 40, ItemAnim::ItemAnimType::ChipRed, false, false, false, random(11, 15));
     // AddItemAnim(posStart.x.getInteger() + 100, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 7);
     // AddItemAnim(posStart.x.getInteger() + 140, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 5);
     // AddItemAnim(posStart.x.getInteger() + 180, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 6);
@@ -500,8 +500,8 @@ void Level::Draw(Camera & cam, Player & player) {
     //Draw all entities
     drawAll(bullets, cam);
     drawAll(enemies, cam);
-    player.Draw(cam);
     drawAll(items, cam);
+    player.Draw(cam);
     drawAll(itemsAnim, cam);
     drawAll(particles, cam);
 }
