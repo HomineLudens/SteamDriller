@@ -43,6 +43,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     msSmokeEmit -= ms;
     msLifeLoss -= ms;
     msFloating -= ms;
+    msInvulnerability -= ms;
     //Save old position in case of collision
     auto oldX = pos.x;
     auto oldY = pos.y;
@@ -267,9 +268,12 @@ void Player::Heal(int heal) {
 };
 
 void Player::Damage(int damage) {
-    life -= damage;
-    if (life < 0)
-        life = 0;
+    if (msInvulnerability < 1) {
+        msInvulnerability = 500;
+        life -= damage;
+        if (life < 0)
+            life = 0;
+    }
 };
 
 void Player::Draw(const Camera & cam) {

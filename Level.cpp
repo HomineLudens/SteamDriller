@@ -454,7 +454,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     for (auto & e: enemies) {
         if (e.IsAlive() && Rect::Collide(player.GetHitBox(), e.GetHitBox())) {
             AddParticle(e.pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
-            e.Kill();
+            //e.Kill();
             Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
             //--
             player.speed.y += random(-3, -6);

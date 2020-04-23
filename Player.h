@@ -49,6 +49,7 @@ class Player {
     int msJump;
     int msFloating;
     int msSmokeEmit;
+    int msInvulnerability;
 
     enum struct Facing {
         Right,
