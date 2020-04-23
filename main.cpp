@@ -122,8 +122,7 @@ int main() {
         hud.Update(level, msElapsed);
 
         //----DRAW 
-        level.Draw(camera);
-        player.Draw(camera);
+        level.Draw(camera, player);
         hud.Draw(player, level);
         camera.Draw();
     }

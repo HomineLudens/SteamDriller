@@ -122,5 +122,5 @@ class Level {
     void ShiftStuff(int x, int y);
 
     void Update(Camera & camera, Player & player, int ms);
-    void Draw(const Camera & cam);
+    void Draw( Camera & cam,  Player & player);
 };

@@ -65,7 +65,7 @@ class Player {
     Rect GetHitBox();
     void ChangeState(State newState);
     void Update(Camera & camera, Level & lvl, int ms);
-    void Draw(const Camera & cam);
+    void Draw(Camera & cam);
     void Heal(int heal);
     void Damage(int damage);
     void Kill();

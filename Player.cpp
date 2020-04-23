@@ -276,7 +276,7 @@ void Player::Damage(int damage) {
     }
 };
 
-void Player::Draw(const Camera & cam) {
+void Player::Draw(Camera & cam) {
     sprPlayer.draw(cam.ToScreenX(pos) - (sprPlayer.getFrameWidth() / 2), cam.ToScreenY(pos) - sprPlayer.getFrameHeight(), false, facing == Facing::Right, 0);
     if (onFloor && (state == State::Leaning || state == State::Lean)) {
         if (facing == Facing::Right)

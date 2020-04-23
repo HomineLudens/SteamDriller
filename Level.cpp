@@ -31,8 +31,8 @@ void Level::Init(const Point & posStart) {
     AddItem(posStart.x.getInteger() + 190 - 6, posStart.y.getInteger() - 24, Item::ItemType::Conveyor, true, false, true);
     AddItem(posStart.x.getInteger() + 265 - 6, posStart.y.getInteger() - 24, Item::ItemType::Conveyor, true, false, true);
 
-    AddItem(posStart.x.getInteger(), posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
-    AddItem(posStart.x.getInteger() - 100, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
+    AddItem(posStart.x.getInteger() - 10, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
+    AddItem(posStart.x.getInteger() - 110, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
     AddItem(posStart.x.getInteger() + 80, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
     AddItem(posStart.x.getInteger() + 180, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
 
@@ -494,13 +494,14 @@ void Level::Update(Camera & camera, Player & player, int ms) {
 
 }
 
-void Level::Draw(const Camera & cam) {
+void Level::Draw(Camera & cam, Player & player) {
     tilemap.draw(cam.ToScreenX(pos), cam.ToScreenY(pos));
 
     //Draw all entities
-    drawAll(items, cam);
-    drawAll(itemsAnim, cam);
     drawAll(bullets, cam);
     drawAll(enemies, cam);
+    player.Draw(cam);
+    drawAll(items, cam);
+    drawAll(itemsAnim, cam);
     drawAll(particles, cam);
 }
