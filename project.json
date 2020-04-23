@@ -2844,6 +2844,24 @@
 		},
 		"\\music\\steamd4.raw": {
 			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Up_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Up_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Up_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Up_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Up_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Up_Anim.bin": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

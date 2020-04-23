@@ -9,16 +9,20 @@ class ItemAnim: public Item {
     private:
 
         Sprite spr;
-    public: enum class ItemAnimType {
-        None,
-        Ruby,
-        Crystal,
-        Coal,
-        Chip,
-        ChipRed,
-        ChipBlack,
-        ChipPurple
-    };
+    Sprite sprIcon;
+
+    public:
+
+        enum class ItemAnimType {
+            None,
+            Ruby,
+            Crystal,
+            Coal,
+            Chip,
+            ChipRed,
+            ChipBlack,
+            ChipPurple
+        };
     ItemAnimType itemType;
 
     public:

@@ -13,4 +13,5 @@ __asm__(".global steamDriller_Robot_Anim\nsteamDriller_Robot_Anim:\n.incbin \"sp
 __asm__(".global steamDriller_Ruby_Anim\nsteamDriller_Ruby_Anim:\n.incbin \"sprites/SteamDriller_Ruby_Anim.bin\"");
 __asm__(".global steamDriller_Smoke_Anim\nsteamDriller_Smoke_Anim:\n.incbin \"sprites/SteamDriller_Smoke_Anim.bin\"");
 __asm__(".global steamDriller_Spider_Anim\nsteamDriller_Spider_Anim:\n.incbin \"sprites/SteamDriller_Spider_Anim.bin\"");
+__asm__(".global steamDriller_Up_Anim\nsteamDriller_Up_Anim:\n.incbin \"sprites/SteamDriller_Up_Anim.bin\"");
 __asm__(".global steamDriller_Worm_Anim\nsteamDriller_Worm_Anim:\n.incbin \"sprites/SteamDriller_Worm_Anim.bin\"");

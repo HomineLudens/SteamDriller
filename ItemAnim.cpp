@@ -3,8 +3,6 @@
 #include <Pokitto.h>
 #include "Level.h"
 
-#include "assets/SteamDriller_UpArrow.h"
-
 using PD = Pokitto::Display;
 
 ItemAnim::ItemAnim(int x, int y, ItemAnimType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex) {
@@ -40,6 +38,8 @@ ItemAnim::ItemAnim(int x, int y, ItemAnimType itemType, bool fixed, bool collect
             spr.play(steamDriller_Chip_Purple_Anim, SteamDriller_Chip_Purple_Anim::Animation::Idle);
             break;
     }
+    
+    sprIcon.play(steamDriller_Up_Anim, SteamDriller_Up_Anim::Animation::Idle);
 }
 
 Rect ItemAnim::GetHitBox() {
@@ -48,7 +48,7 @@ Rect ItemAnim::GetHitBox() {
 
 void ItemAnim::Draw(const Camera & cam) {
     if (msgIndex != -1) {
-        PD::drawSprite(cam.ToScreenX(pos) - (SteamDriller_UpArrow[0] / 2), cam.ToScreenY(pos) - 30, SteamDriller_UpArrow);
+        sprIcon.draw(cam.ToScreenX(pos) - (sprIcon.getFrameWidth() / 2), cam.ToScreenY(pos) - 30);
     }
     spr.draw(cam.ToScreenX(pos) - (spr.getFrameWidth() / 2), cam.ToScreenY(pos) - spr.getFrameHeight());
 }
