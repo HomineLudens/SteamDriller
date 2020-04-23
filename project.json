@@ -2862,6 +2862,9 @@
 		},
 		"\\sprites\\SteamDriller_Up_Anim.bin": {
 			"sdcard": false
+		},
+		"\\music\\steamd5.raw": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

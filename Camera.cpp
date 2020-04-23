@@ -26,26 +26,31 @@ void Camera::Flash(int flashDuration) {
 
 void Camera::Update(const Player & player, int ms) {
 
-    if (msFlash > 0){
+    if (msFlash > 0) {
         msFlash -= ms;
     }
     //When Offline don't look at player and move slower   
     if (player.state == Player::State::Offline || player.state == Player::State::Activating) {
-        speed.x = 0.2;
+        speed.x = 0.02;
         speed.y = 0.04;
+        offset.y = 0;
     } else {
         target = player.pos;
         speed.x = 0.2;
         speed.y = 0.08;
+
+        //
+        //When over surface use a different offset fo camera
+        if (player.pos.y < 100)
+            offset.y = 20;
+        if (player.pos.y > 100)
+            offset.y = 0;
+        //Look down when crunch
+        if (player.state == Player::State::Crouch)
+            offset.y = -60;
+
     }
-    //When over surface use a different offset fo camera
-    if (player.pos.y < 100)
-        offset.y = 20;
-    if (player.pos.y > 100)
-        offset.y = 0;
-    //Look down when crunch
-    if (player.state == Player::State::Crouch)
-        offset.y = -60;
+
 
     //Shake
     shakeDir.x = random(-1, 2);

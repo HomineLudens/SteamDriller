@@ -33,16 +33,16 @@ void Level::Init(const Point & posStart) {
     AddItem(posStart.x.getInteger() + 80, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
     AddItem(posStart.x.getInteger() + 180, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
 
-    AddItemAnim(posStart.x.getInteger() - 20, 20, ItemAnim::ItemAnimType::Ruby);
-    AddItemAnim(posStart.x.getInteger() - 30, 40, ItemAnim::ItemAnimType::Ruby);
-    AddItemAnim(posStart.x.getInteger() - 40, 60, ItemAnim::ItemAnimType::Ruby);
+    // AddItemAnim(posStart.x.getInteger() - 20, 20, ItemAnim::ItemAnimType::Ruby);
+    // AddItemAnim(posStart.x.getInteger() - 30, 40, ItemAnim::ItemAnimType::Ruby);
+    // AddItemAnim(posStart.x.getInteger() - 40, 60, ItemAnim::ItemAnimType::Ruby);
 
-    AddItemAnim(posStart.x.getInteger() - 50, 40, ItemAnim::ItemAnimType::Chip, false, false, false, 1);
-    AddItemAnim(posStart.x.getInteger() + 10, 40, ItemAnim::ItemAnimType::ChipRed, false, false, false, random(11, 15));
-    AddItemAnim(posStart.x.getInteger() + 100, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 7);
-    AddItemAnim(posStart.x.getInteger() + 140, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 5);
-    AddItemAnim(posStart.x.getInteger() + 180, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 6);
-    AddItemAnim(posStart.x.getInteger() + 220, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 8);
+    // AddItemAnim(posStart.x.getInteger() - 50, 40, ItemAnim::ItemAnimType::Chip, false, false, false, 1);
+    // AddItemAnim(posStart.x.getInteger() + 10, 40, ItemAnim::ItemAnimType::ChipRed, false, false, false, random(11, 15));
+    // AddItemAnim(posStart.x.getInteger() + 100, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 7);
+    // AddItemAnim(posStart.x.getInteger() + 140, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 5);
+    // AddItemAnim(posStart.x.getInteger() + 180, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 6);
+    // AddItemAnim(posStart.x.getInteger() + 220, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 8);
 
     //
     // AddEnemy(posStart.x.getInteger()+30, 40, Enemy::EnemyType::PurpleSentinelHorizontal);
