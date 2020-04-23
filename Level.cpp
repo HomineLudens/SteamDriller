@@ -481,6 +481,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     msgToShow = -1;
     for (auto & i: itemsAnim) {
         if (i.IsAlive() && Rect::Collide(player.GetHitBox(), i.GetHitBox())) {
+            i.activated = true;
             if (i.msgIndex != -1) {
                 msgToShow = i.msgIndex;
             }
@@ -489,6 +490,8 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                 i.Kill();
                 Pokitto::Sound::playSFX(sfx_pickup, sizeof(sfx_pickup));
             }
+        }else{
+            i.activated = false;
         }
     }
 

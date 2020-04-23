@@ -22,7 +22,8 @@ class Item: public Entity {
     bool alive;
     bool fixed;
     bool collectable;
-    bool mirrored = false;
+    bool mirrored;
+    bool activated;
 
     int16_t msgIndex = -1;
 

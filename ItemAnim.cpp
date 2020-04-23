@@ -6,12 +6,12 @@
 using PD = Pokitto::Display;
 
 ItemAnim::ItemAnim(int x, int y, ItemAnimType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex) {
+    Item::alive = true;
     Item::pos.x = x;
     Item::pos.y = y;
     Item::fixed = fixed;
     Item::collectable = collectable;
     Item::mirrored = mirrored;
-    Item::alive = true;
     this->itemType = itemType;
     Item::msgIndex = msgIndex;
 
@@ -47,8 +47,8 @@ Rect ItemAnim::GetHitBox() {
 }
 
 void ItemAnim::Draw(const Camera & cam) {
-    if (msgIndex != -1) {
-        sprIcon.draw(cam.ToScreenX(pos) - (sprIcon.getFrameWidth() / 2), cam.ToScreenY(pos) - 40);
+    if (activated && msgIndex != -1) {
+        sprIcon.draw(cam.ToScreenX(pos) - (sprIcon.getFrameWidth() / 2), cam.ToScreenY(pos) - 25);
     }
     spr.draw(cam.ToScreenX(pos) - (spr.getFrameWidth() / 2), cam.ToScreenY(pos) - spr.getFrameHeight());
 }
