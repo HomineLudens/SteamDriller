@@ -31,7 +31,7 @@ int msTotal;
 SteamCookie steamCookie;
 
 void initGame() {
-    auto startPoint = Point((level.COLUMNS * level.TILE_WIDTH) / 2 - 100, 60);
+    auto startPoint = Point((level.COLUMNS * level.TILE_WIDTH) / 2 - 100, 0);
     player.Init(startPoint);
     camera.Init(Point(startPoint.x + 40, startPoint.y - 20));
     //camera.pos.y += 100;

@@ -35,13 +35,12 @@ void Level::Init(const Point & posStart) {
     AddItem(posStart.x.getInteger() - 110, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
     AddItem(posStart.x.getInteger() + 80, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
     AddItem(posStart.x.getInteger() + 180, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
+    
+    AddItem(posStart.x.getInteger() - 20, posStart.y.getInteger(), Item::ItemType::Fance);
 
-    // AddItemAnim(posStart.x.getInteger() - 20, 20, ItemAnim::ItemAnimType::Ruby);
-    // AddItemAnim(posStart.x.getInteger() - 30, 40, ItemAnim::ItemAnimType::Ruby);
-    // AddItemAnim(posStart.x.getInteger() - 40, 60, ItemAnim::ItemAnimType::Ruby);
 
     // AddItemAnim(posStart.x.getInteger() - 50, 40, ItemAnim::ItemAnimType::Chip, false, false, false, 1);
-    AddItemAnim(posStart.x.getInteger() - 30, 40, ItemAnim::ItemAnimType::ChipRed, false, false, false, random(11, 15));
+    AddItemAnim(posStart.x.getInteger() - 30, posStart.y.getInteger(), ItemAnim::ItemAnimType::ChipRed, false, false, false, random(11, 15));
     // AddItemAnim(posStart.x.getInteger() + 100, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 7);
     // AddItemAnim(posStart.x.getInteger() + 140, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 5);
     // AddItemAnim(posStart.x.getInteger() + 180, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 6);
@@ -77,7 +76,7 @@ void Level::Init(const Point & posStart) {
     int c = 0;
 
     //start floor
-    r = 10;
+    r = 3;
     for (c = 0; c <= pg.x1; c++)
         lvlData[2 + (r * COLUMNS) + c] = TileType::TopCenter;
     lvlData[2 + (r * COLUMNS) + c] = TileType::TopLeft;

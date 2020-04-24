@@ -13,7 +13,8 @@ class Item: public Entity {
         RobotUnactivated,
         Bones,
         RobotUnactivatedRow,
-        Conveyor
+        Conveyor,
+        Fance
     };
 
     Point pos;

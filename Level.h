@@ -94,7 +94,7 @@ class Level {
     array < Bullet, 20 > bullets;
     array < Particle, 100 > particles;
     array < Enemy, 10 > enemies;
-    array < Item, 10 > items;
+    array < Item, 20 > items;
     array < ItemAnim, 10 > itemsAnim;
 
     Level();
