@@ -17,8 +17,7 @@ Enemy::Enemy(int x, int y, EnemyType enemyType) {
     this->state = State::Idle;
 
     auto eAI = GetAI();
-    this->speed.x = (random(100) > 50) ? eAI.speedX : -eAI.speedX;
-    this->speed.y = (random(100) > 50) ? eAI.speedY : -eAI.speedY;
+    this->facing = (random(100) > 50) ? Facing::Right : Facing::Left;
     this->life = eAI.life;
 
     ChangeAnimation(AnimationType::Idle);
@@ -27,7 +26,6 @@ Enemy::Enemy(int x, int y, EnemyType enemyType) {
 void Enemy::ChangeState(State newState) {
     this->state = newState;
     msState = 0;
-    stateFirstCycle = true;
 }
 
 Rect Enemy::GetHitBox() {
@@ -38,7 +36,7 @@ Enemy::EnemyAI Enemy::GetAI() {
     EnemyAI eAI;
     switch (enemyType) {
         case EnemyType::PurpleSentinelHorizontal:
-            eAI.life = 1;
+            eAI.life = 20;
             eAI.speedX = 0.5;
             eAI.speedY = 0;
             eAI.senseDistance = 50;
@@ -53,10 +51,10 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = false;
             break;
         case EnemyType::Spider:
-            eAI.life = 1;
-            eAI.speedX = 1.5;
+            eAI.life = 20;
+            eAI.speedX = 1.2;
             eAI.speedY = 0;
-            eAI.senseDistance = 100;
+            eAI.senseDistance = 200;
             eAI.viewDistance = 30;
             eAI.msWakeUp = 500;
             eAI.msAttackDuration = 250;
@@ -68,7 +66,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = false;
             break;
         case EnemyType::SpiderMecha:
-            eAI.life = 1;
+            eAI.life = 100;
             eAI.speedX = 0.2;
             eAI.speedY = 0;
             eAI.senseDistance = 100;
@@ -83,7 +81,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = false;
             break;
         case EnemyType::Worm:
-            eAI.life = 1;
+            eAI.life = 5;
             eAI.speedX = 0.25;
             eAI.speedY = 0;
             eAI.senseDistance = 100;
@@ -169,71 +167,71 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
         auto eAI = GetAI();
 
         auto onSight = (player.pos.y > pos.y - 20) &&
-            (player.pos.y < pos.y + 40) &&
-            ((facing == Facing::Right && player.pos.x > pos.x) ||
-                (facing == Facing::Left && player.pos.x < pos.x));
+            (player.pos.y < pos.y + 20) &&
+            ((facing == Facing::Right && (pos.x < player.pos.x)) || (facing == Facing::Left && (pos.x > player.pos.x)));
 
-        //Trigger on sight near player
-        if (state == State::Idle && (onSight || distanceToPlayer < eAI.senseDistance)) {
-            ChangeAnimation(AnimationType::Move);
-            ChangeState(State::Patrolling);
-        }
 
-        //Trigger attach
-        if (state == State::Patrolling && onSight && distanceToPlayer < eAI.viewDistance) {
-            ChangeAnimation(AnimationType::Attack);
-            ChangeState(State::Aiming);
-        }
+        switch (state) {
 
-        if (state == State::Aiming) {
-            if (msState > eAI.msWakeUp) {
-                ChangeState(State::Firing);
-            }
-        }
-
-        //
-        if (state == State::Firing) {
-            if (stateFirstCycle) {
-                int dir = (facing == Facing::Right ? 1 : -1);
-                int i = 1;
-                //TODO:Count to the wall, 
-                //Put as much as bullets of laser needs
-                while (!lvl.IsSolid(Point(pos.x, pos.y - (spr.getFrameHeight() / 2)), dir * (i - 1), 0) && i < lvl.COLUMNS) {
-                    auto offX = ((dir * i) * lvl.TILE_WIDTH);
-                    lvl.AddBullet(Point(pos.x + offX, pos.y - (spr.getFrameHeight() / 2)), Point(dir, 0),
-                        Bullet::BulletType::LaserHorizontal, eAI.msAttackDuration);
-                    i++;
+            case State::Idle:
+                //Trigger patrolling on sight near player
+                if ((onSight || distanceToPlayer < eAI.senseDistance)) {
+                    if (pos.x < player.pos.x) {
+                        speed.x = eAI.speedX;
+                    } else {
+                        speed.x = -eAI.speedX;
+                    }
+                    ChangeAnimation(AnimationType::Move);
+                    ChangeState(State::Patrolling);
                 }
-                Pokitto::Sound::playSFX(sfx_laser, sizeof(sfx_laser));
-            }
+                break;
+            case State::Patrolling:
+                //Trigger aiming
+                if (state == State::Patrolling && onSight && distanceToPlayer < eAI.viewDistance) {
+                    speed.x = 0;
+                    ChangeAnimation(AnimationType::Attack);
+                    ChangeState(State::Aiming);
+                }
+                break;
+            case State::Aiming:
+                if (msState > eAI.msWakeUp) {
+                    ChangeState(State::Firing);
 
-            //End of attack
-            if (msState > eAI.msAttackDuration) {
-                ChangeAnimation(AnimationType::Idle);
-                ChangeState(State::CoolDown);
-            }
+                    //Fire bullets
+                    int dir = (facing == Facing::Right ? 1 : -1);
+                    int i = 1;
+                    //Put as much as bullets of laser needs
+                    while (!lvl.IsSolid(Point(pos.x, pos.y - (spr.getFrameHeight() / 2)), dir * (i - 1), 0) && i < lvl.COLUMNS) {
+                        auto offX = ((dir * i) * lvl.TILE_WIDTH);
+                        lvl.AddBullet(Point(pos.x + offX, pos.y - (spr.getFrameHeight() / 2)), Point(dir, 0), Bullet::BulletType::LaserHorizontal, eAI.msAttackDuration);
+                        i++;
+                    }
+                    Pokitto::Sound::playSFX(sfx_laser, sizeof(sfx_laser));
+                }
+                break;
+            case State::Firing:
+                //End of attack
+                if (msState > eAI.msAttackDuration) {
+                    ChangeAnimation(AnimationType::Idle);
+                    ChangeState(State::CoolDown);
+                }
+                break;
+            case State::CoolDown:
+                if (msState > eAI.msCoolDown) {
+                    ChangeState(State::Patrolling);
+                }
+                break;
         }
-        //
-        if (state == State::CoolDown) {
-            if (msState > eAI.msCoolDown) {
-                ChangeState(State::Patrolling);
-            }
-        }
-
-        if (state != State::Idle && state != State::Aiming && state != State::Firing && state != State::CoolDown) {
-            //move by speed
-            pos.x += speed.x;
-            pos.y += speed.y;
-        }
-
 
         Point posPrec;
         posPrec.x = pos.x;
         posPrec.y = pos.y;
+        pos.x += speed.x;
+        pos.y += speed.y;
         //Gravity
         if (eAI.gravityAffected) {
             speed.y += 0.1;
-            pos.y += speed.y;
+            //pos.y += speed.y;
             if (lvl.IsSolid(pos)) {
                 speed.y = 0;
                 pos.y = posPrec.y;
@@ -241,22 +239,26 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
         }
 
         //On hitting wall reverse speed
-        if ((speed.x > 0 && lvl.IsSolid(pos, 1, -1)) || (speed.x < 0 && lvl.IsSolid(pos, -1, -1))) {
+        if ((speed.x > 0 && lvl.IsSolid(pos, 1, 0)) || (speed.x < 0 && lvl.IsSolid(pos, -1, 0))) {
             speed.x = -speed.x;
-            speed.y = -speed.y * 0.8;
         }
-
-        //Facing
-        if (speed.x > 0.001)
+        //Facing on speed
+        if (speed.x > 0)
             facing = Facing::Right;
-        if (speed.x < 0.001)
+        if (speed.x < 0)
             facing = Facing::Left;
     }
-    stateFirstCycle = false;
+
 }
 
 bool Enemy::IsAlive() {
     return life > 0;
+}
+
+void Enemy::Damage(int damage) {
+    life -= damage;
+    if (life < 0)
+        life = 0;
 }
 
 void Enemy::Kill() {

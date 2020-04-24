@@ -66,7 +66,6 @@ class Enemy: public Entity {
     Sprite spr;
     State state;
     int msState;
-    bool stateFirstCycle = true;
 
     Enemy();
     Enemy(int x, int y, EnemyType enemyType);
@@ -75,6 +74,7 @@ class Enemy: public Entity {
     void Update(int ms, Level & lvl, Player & player);
     bool IsAlive();
 
+    void Damage(int damage);
     void Kill();
     void Draw(const Camera & cam);
 

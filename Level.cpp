@@ -36,11 +36,13 @@ void Level::Init(const Point & posStart) {
     AddItem(posStart.x.getInteger() + 80, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
     AddItem(posStart.x.getInteger() + 180, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
 
-    AddItem(posStart.x.getInteger() - 20, posStart.y.getInteger(), Item::ItemType::Fance);
+    for (int i = 0; i < 10; i++) {
+        AddItem(posStart.x.getInteger() - 80 - (i * TILE_WIDTH), posStart.y.getInteger() + 24, Item::ItemType::Fance, true, false);
+    }
 
 
     // AddItemAnim(posStart.x.getInteger() - 50, 40, ItemAnim::ItemAnimType::Chip, false, false, false, 1);
-    AddItemAnim(posStart.x.getInteger() - 30, posStart.y.getInteger(), ItemAnim::ItemAnimType::ChipRed, false, false, false, random(11, 15));
+    AddItemAnim(posStart.x.getInteger() - 50, posStart.y.getInteger(), ItemAnim::ItemAnimType::ChipRed, false, false, false, random(11, 15));
     // AddItemAnim(posStart.x.getInteger() + 100, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 7);
     // AddItemAnim(posStart.x.getInteger() + 140, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 5);
     // AddItemAnim(posStart.x.getInteger() + 180, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 6);
@@ -48,9 +50,9 @@ void Level::Init(const Point & posStart) {
 
     //
     // AddEnemy(posStart.x.getInteger()+30, 40, Enemy::EnemyType::PurpleSentinelHorizontal);
-    // AddEnemy(posStart.x.getInteger()+40, 40, Enemy::EnemyType::Spider);
+    AddEnemy(posStart.x.getInteger() - 40, 20, Enemy::EnemyType::PurpleSentinelHorizontal);
     // AddEnemy(posStart.x.getInteger()+50, 40, Enemy::EnemyType::Worm);
-    AddEnemy(posStart.x.getInteger()+40, 40, Enemy::EnemyType::SpiderMecha);
+    AddEnemy(posStart.x.getInteger() + 40, 40, Enemy::EnemyType::SpiderMecha);
     //--------------------------------------------------------------------
 
     depth = 0;
@@ -139,9 +141,9 @@ void Level::RandomizeLine(int r) {
     }
 
     //Enemy
-    if (depth > -1 && random(100) > 90) {
+    if (depth > 0 && random(100) > 90) {
         int ex = random(pg.x1 + 2, pg.x2 - 2) * TILE_WIDTH;
-        int ey = (r) * TILE_HEIGHT;
+        int ey = (r - 1) * TILE_HEIGHT;
         auto pEnemy = Point(ex, ey);
         if (!IsSolid(pEnemy) && !IsSolid(pEnemy, 0, -1) && !IsSolid(pEnemy, 1, 0) && !IsSolid(pEnemy, 0, 1)) {
             auto rnd = random(4);
@@ -437,7 +439,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                     for (auto & e: enemies) {
                         if (e.IsAlive() && Rect::Collide(e.GetHitBox(), b.GetHitBox())) {
                             AddParticle(e.pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
-                            e.Kill();
+                            e.Damage(10);
                             b.Kill();
                             Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
                         }
@@ -463,7 +465,9 @@ void Level::Update(Camera & camera, Player & player, int ms) {
             //e.Kill();
             Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
             //--
-            player.speed.y += random(-3, -6);
+            e.Damage(5);
+            
+            player.speed.y += random(-2, -4);
             player.Damage(20);
             camera.Shake(4);
             camera.Flash(20);
@@ -504,9 +508,9 @@ void Level::Draw(Camera & cam, Player & player) {
     tilemap.draw(cam.ToScreenX(pos), cam.ToScreenY(pos));
 
     //Draw all entities
-    drawAll(bullets, cam);
-    drawAll(enemies, cam);
     drawAll(items, cam);
+    drawAll(enemies, cam);
+    drawAll(bullets, cam);
     player.Draw(cam);
     drawAll(itemsAnim, cam);
     drawAll(particles, cam);
