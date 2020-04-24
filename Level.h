@@ -91,10 +91,10 @@ class Level {
     constexpr static int SHIFT_VAL = 16; //tiles when shift start
     uint8_t lvlData[2 + (COLUMNS * ROWS)];
 
-    array < Bullet, 20 > bullets;
+    array < Bullet, 15 > bullets;
     array < Particle, 100 > particles;
     array < Enemy, 10 > enemies;
-    array < Item, 20 > items;
+    array < Item, 30 > items;
     array < ItemAnim, 10 > itemsAnim;
 
     Level();
