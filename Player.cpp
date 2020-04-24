@@ -17,6 +17,8 @@ Player::Player(const Point & pos) {
 void Player::Init(const Point & pos) {
     this->pos.x = pos.x;
     this->pos.y = pos.y;
+    this->speed.x = 0;
+    this->speed.y = 0;
     bullets = 0;
     life = 100;
     facing = Facing::Right;
