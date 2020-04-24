@@ -69,7 +69,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             break;
         case EnemyType::SpiderMecha:
             eAI.life = 1;
-            eAI.speedX = 0.5;
+            eAI.speedX = 0.2;
             eAI.speedY = 0;
             eAI.senseDistance = 100;
             eAI.viewDistance = 30;
@@ -78,7 +78,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.msCoolDown = 500;
             eAI.gravityAffected = true;
             eAI.climber = false;
-            eAI.jumper = true;
+            eAI.jumper = false;
             eAI.shootHorizontal = true;
             eAI.shootVertical = false;
             break;
