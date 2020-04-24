@@ -237,21 +237,21 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                 pos.y = posPrec.y;
             }
         }
-        
-        //On stucked kill
-        if(lvl.IsSolid(pos, 1, 0) && lvl.IsSolid(pos, -1, 0)){
-            Kill();
-        }
 
         //On hitting wall reverse speed
         if ((speed.x > 0 && lvl.IsSolid(pos, 1, 0)) || (speed.x < 0 && lvl.IsSolid(pos, -1, 0))) {
             speed.x = -speed.x;
         }
-        //Facing on speed
+        //Facing based on speed
         if (speed.x > 0)
             facing = Facing::Right;
         if (speed.x < 0)
             facing = Facing::Left;
+
+        //On stucked inside walls kill
+        if (lvl.IsSolid(pos, 1, 0) && lvl.IsSolid(pos, -1, 0)) {
+            Kill(); //Suicide
+        }
     }
 
 }
