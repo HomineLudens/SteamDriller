@@ -45,10 +45,11 @@ void Camera::Update(const Player & player, int ms) {
             offset.y = 20;
         if (player.pos.y > 100)
             offset.y = 0;
-        //Look down when crunch
+        //Look down when crunch or falling
         if (player.state == Player::State::Crouch)
             offset.y = -60;
-
+        if (player.speed.y > 2 )
+            offset.y = player.speed.y*(-16);
     }
 
 
@@ -62,10 +63,10 @@ void Camera::Update(const Player & player, int ms) {
     auto dy = (target.y - pos.y - offset.y) * speed.y;
 
     //Clamp camera speed
-    if (dy > 16)
-        dy = 16;
-    if (dy < -16)
-        dy = -16;
+    if (dy > 8) //move down max speed
+        dy = 8;
+    if (dy < -6) //move up max speed
+        dy = -6;
 
     pos.x += dx;
     pos.y += dy;
