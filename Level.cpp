@@ -493,7 +493,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                 msgToShow = i.msgIndex;
             }
             if (i.IsCollectable() && player.life > 0) {
-                player.Heal(10);
+                player.Heal(20);
                 i.Kill();
                 Pokitto::Sound::playSFX(sfx_pickup, sizeof(sfx_pickup));
             }
