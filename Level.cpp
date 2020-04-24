@@ -35,7 +35,7 @@ void Level::Init(const Point & posStart) {
     AddItem(posStart.x.getInteger() - 110, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true);
     AddItem(posStart.x.getInteger() + 80, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
     AddItem(posStart.x.getInteger() + 180, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
-    
+
     AddItem(posStart.x.getInteger() - 20, posStart.y.getInteger(), Item::ItemType::Fance);
 
 
@@ -143,7 +143,7 @@ void Level::RandomizeLine(int r) {
         int ey = (r) * TILE_HEIGHT;
         auto pEnemy = Point(ex, ey);
         if (!IsSolid(pEnemy) && !IsSolid(pEnemy, 0, -1) && !IsSolid(pEnemy, 1, 0) && !IsSolid(pEnemy, 0, 1)) {
-            auto rnd = random(3);
+            auto rnd = random(4);
             switch (rnd) {
                 case 0:
                     AddEnemy(ex, ey, Enemy::EnemyType::PurpleSentinelHorizontal);
@@ -152,6 +152,9 @@ void Level::RandomizeLine(int r) {
                     AddEnemy(ex, ey, Enemy::EnemyType::Spider);
                     break;
                 case 2:
+                    AddEnemy(ex, ey, Enemy::EnemyType::SpiderMecha);
+                    break;
+                case 3:
                     AddEnemy(ex, ey, Enemy::EnemyType::Worm);
                     break;
             }
@@ -489,7 +492,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                 i.Kill();
                 Pokitto::Sound::playSFX(sfx_pickup, sizeof(sfx_pickup));
             }
-        }else{
+        } else {
             i.activated = false;
         }
     }

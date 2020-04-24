@@ -2883,6 +2883,24 @@
 		},
 		"\\mockups\\SteamDriller_Mockup.h": {
 			"sdcard": false
+		},
+		"\\mockups\\animations\\SteamDriller_EliteMechaSpider_Preview.gif.crdownload": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_EliteMechaSpider.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_EliteMechaSpider.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_EliteMechaSpider.png": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_EliteMechaSpider.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_EliteMechaSpider.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

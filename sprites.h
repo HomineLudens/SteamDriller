@@ -146,6 +146,15 @@ public:
 	};
 };
 
+class SteamDriller_EliteMechaSpider {
+public:
+    enum Animation : std::uint16_t {
+		Idle = 0,
+		Move = 7,
+		Attack = 16
+	};
+};
+
 class SteamDriller_Explosions_Anim {
 public:
     enum Animation : std::uint16_t {
@@ -234,6 +243,7 @@ extern const SteamDriller_Chip_Purple_Anim steamDriller_Chip_Purple_Anim;
 extern const SteamDriller_Chip_Red_Anim steamDriller_Chip_Red_Anim;
 extern const SteamDriller_Coal_Anim steamDriller_Coal_Anim;
 extern const SteamDriller_Crystal_Anim steamDriller_Crystal_Anim;
+extern const SteamDriller_EliteMechaSpider steamDriller_EliteMechaSpider;
 extern const SteamDriller_Explosions_Anim steamDriller_Explosions_Anim;
 extern const SteamDriller_Laser_Anim steamDriller_Laser_Anim;
 extern const SteamDriller_PurpleSentinels_Anim steamDriller_PurpleSentinels_Anim;

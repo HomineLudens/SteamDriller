@@ -53,7 +53,8 @@ class Enemy: public Entity {
         PurpleSentinelHorizontal,
         PurpleSentinelVertical,
         Spider,
-        Worm
+        SpiderMecha,
+        Worm,
     };
 
 

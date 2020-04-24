@@ -67,6 +67,21 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootHorizontal = true;
             eAI.shootVertical = false;
             break;
+        case EnemyType::SpiderMecha:
+            eAI.life = 1;
+            eAI.speedX = 0.5;
+            eAI.speedY = 0;
+            eAI.senseDistance = 100;
+            eAI.viewDistance = 30;
+            eAI.msWakeUp = 500;
+            eAI.msAttackDuration = 250;
+            eAI.msCoolDown = 500;
+            eAI.gravityAffected = true;
+            eAI.climber = false;
+            eAI.jumper = true;
+            eAI.shootHorizontal = true;
+            eAI.shootVertical = false;
+            break;
         case EnemyType::Worm:
             eAI.life = 1;
             eAI.speedX = 0.25;
@@ -112,6 +127,19 @@ void Enemy::ChangeAnimation(Enemy::AnimationType animation) {
                     break;
                 case AnimationType::Attack:
                     spr.play(steamDriller_Spider_Anim, SteamDriller_Spider_Anim::Animation::Attack);
+                    break;
+            }
+            break;
+        case EnemyType::SpiderMecha:
+            switch (animation) {
+                case AnimationType::Idle:
+                    spr.play(steamDriller_EliteMechaSpider, SteamDriller_EliteMechaSpider::Animation::Idle);
+                    break;
+                case AnimationType::Move:
+                    spr.play(steamDriller_EliteMechaSpider, SteamDriller_EliteMechaSpider::Animation::Move);
+                    break;
+                case AnimationType::Attack:
+                    spr.play(steamDriller_EliteMechaSpider, SteamDriller_EliteMechaSpider::Animation::Attack);
                     break;
             }
             break;
