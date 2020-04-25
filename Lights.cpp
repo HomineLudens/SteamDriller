@@ -26,6 +26,13 @@ void Lights::Update(Camera & camera, Player & player, Level & level, int ms) {
         //--
         msLight += 100;
     }
+    
+    //Fixed light
+    for(int x=50;x<55;x++){
+        for(int y=6;y<20;y++){
+            Lights::lightMap[x][y] = 0;
+        }
+    }
 }
 
 void Lights::CalcLight(Camera & cam, Level & level) {
