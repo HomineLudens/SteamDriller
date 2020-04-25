@@ -189,12 +189,12 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     //Apply gravity force, but less while floating, not when offline
     if (state != State::Offline && state != State::Activating) {
         if (msFloating > 0)
-            speed.y += 0.1;
+            speed.y += GRAVITY_FLOATING;
         else
-            speed.y += 0.45; //gravity
+            speed.y += GRAVITY; //gravity
     }
     //Cap falling speed    
-    if (speed.y > 6.5) speed.y = 6.5;
+    if (speed.y > MAX_FALLING_SPEED) speed.y = MAX_FALLING_SPEED;
     //Lateral friction
     speed.x *= 0.85; //friction
 
@@ -202,10 +202,17 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     pos.y += speed.y;
     onFloor = lvl.IsSolid(pos);
     if (onFloor) {
+        if(speed.y==MAX_FALLING_SPEED)
+        {
+            Damage(35);
+            camera.Shake(4);
+            lvl.AddParticle(pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
+        }
         msOnFloor = 80;
         pos.y = oldY;
         speed.y = 0;
         bullets = MAX_SHOOTS; //recharge bullets when on floor
+        
     }
 
     //Ceiling
