@@ -40,7 +40,6 @@ void Level::Init(const Point & posStart) {
         AddItem(posStart.x.getInteger() - 80 - (i * TILE_WIDTH), posStart.y.getInteger() + 24, Item::ItemType::Fance, true, false);
     }
 
-
     // AddItemAnim(posStart.x.getInteger() - 50, 40, ItemAnim::ItemAnimType::Chip, false, false, false, 1);
     AddItemAnim(posStart.x.getInteger() - 50, posStart.y.getInteger(), ItemAnim::ItemAnimType::ChipRed, false, false, false, random(11, 15));
     // AddItemAnim(posStart.x.getInteger() + 100, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 7);
@@ -50,9 +49,9 @@ void Level::Init(const Point & posStart) {
 
     //
     // AddEnemy(posStart.x.getInteger()+30, 40, Enemy::EnemyType::PurpleSentinelHorizontal);
-    AddEnemy(posStart.x.getInteger() - 40, 20, Enemy::EnemyType::PurpleSentinelHorizontal);
+    //AddEnemy(posStart.x.getInteger() - 40, 20, Enemy::EnemyType::PurpleSentinelHorizontal);
     // AddEnemy(posStart.x.getInteger()+50, 40, Enemy::EnemyType::Worm);
-    AddEnemy(posStart.x.getInteger() + 40, 40, Enemy::EnemyType::SpiderMecha);
+    //AddEnemy(posStart.x.getInteger() + 40, 40, Enemy::EnemyType::SpiderMecha);
     //--------------------------------------------------------------------
 
     depth = 0;
@@ -143,7 +142,7 @@ void Level::RandomizeLine(int r) {
     //Enemy
     if (depth > 0 && random(100) > 90) {
         int ex = random(pg.x1 + 2, pg.x2 - 2) * TILE_WIDTH;
-        int ey = (r - 1) * TILE_HEIGHT;
+        int ey = (r) * TILE_HEIGHT;
         auto pEnemy = Point(ex, ey);
         if (!IsSolid(pEnemy) && !IsSolid(pEnemy, 0, -1) && !IsSolid(pEnemy, 1, 0) && !IsSolid(pEnemy, 0, 1)) {
             auto rnd = random(4);
@@ -193,7 +192,7 @@ void Level::RandomizeLine(int r) {
         for (int yr = 0; yr < 3; yr++) {
             for (int xr = xStartDig; xr < pg.x2; xr++) {
                 //Clear room
-                lvlData[2 + ((r - yr) * COLUMNS) + xr] = TileType::BackgroundUndergroundRoom; //
+                lvlData[2 + ((r - yr) * COLUMNS) + xr] = TileType::BackgroundUnderground; //
             }
             ReshapeRow(r - yr);
         }
@@ -447,6 +446,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                 } else {
                     //All other bullets are from enemy to player
                     if (Rect::Collide(player.GetHitBox(), b.GetHitBox())) {
+                        AddParticle(player.pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
                         player.Damage(20);
                         if (b.speed.x != 0 || b.speed.y != 0) {
                             b.Kill(); //Kill bullet only if it's moving (allow laser to burn in place)
@@ -466,7 +466,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
             Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
             //--
             e.Damage(5);
-
+            
             player.speed.y += random(-2, -4);
             player.Damage(20);
             camera.Shake(4);

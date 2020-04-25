@@ -4,6 +4,7 @@
 #include "assets/tiles/SteamDriller_None.h"
 #include "assets/tiles/SteamDriller_BackgroundUnderground.h"
 #include "assets/tiles/SteamDriller_BackgroundUndergroundRoom.h"
+#include "assets/tiles/SteamDriller_BackgroundUndergroundBoss.h"
 #include "assets/tiles/SteamDriller_RocksWallInside.h"
 #include "assets/tiles/SteamDriller_RocksLeftEdge.h"
 #include "assets/tiles/SteamDriller_RocksRightEdge.h"
@@ -21,6 +22,7 @@ class TilesLoader {
 
             tilemap->setTile(TileType::BackgroundUnderground, SteamDriller_BackgroundUnderground);
             tilemap->setTile(TileType::BackgroundUndergroundRoom, SteamDriller_BackgroundUndergroundRoom);
+            tilemap->setTile(TileType::BackgroundUndergroundBoss, SteamDriller_BackgroundUndergroundBoss);
 
             tilemap->setTile(TileType::RockInside, SteamDriller_RocksWallInside);
             tilemap->setTile(TileType::RockEdgeRight, SteamDriller_RocksRightEdge);

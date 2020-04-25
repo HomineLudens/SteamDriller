@@ -2901,6 +2901,24 @@
 		},
 		"\\sprites\\SteamDriller_EliteMechaSpider.h": {
 			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_EliteMechaSpider.bin": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundRoom - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundBoss.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundBoss.h": {
+			"sdcard": false
+		},
+		"\\SteamDriller.bin.1.png": {
+			"sdcard": false
+		},
+		"\\SteamDriller.bin.1.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {
