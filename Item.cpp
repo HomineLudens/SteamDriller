@@ -9,6 +9,7 @@
 #include "assets/SteamDriller_FenceTileTop.h"     
 
 using PD = Pokitto::Display;
+
 Item::Item() {
     flags.set(FlagsType::alive, true);
 }
