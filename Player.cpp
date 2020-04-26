@@ -202,8 +202,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     pos.y += speed.y;
     onFloor = lvl.IsSolid(pos);
     if (onFloor) {
-        if(speed.y==MAX_FALLING_SPEED)
-        {
+        if (speed.y == MAX_FALLING_SPEED) {
             Damage(35);
             camera.Shake(4);
             lvl.AddParticle(pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
@@ -212,7 +211,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
         pos.y = oldY;
         speed.y = 0;
         bullets = MAX_SHOOTS; //recharge bullets when on floor
-        
+
     }
 
     //Ceiling
@@ -233,10 +232,11 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
                 lvl.DestroyTile(pos, x, -1);
                 lvl.DestroyTile(pos, x, 0);
             }
+            //Stop falling
+            speed.y = 0;
         }
-
         //Reflection coeficent
-        speed.x = -(speed.x * REFLECTION_COEFICENT);
+        speed.x = -(speed.x * BAUNCE_COEFICENT);
     }
 
     //Smoke emitter

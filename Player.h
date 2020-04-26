@@ -19,7 +19,7 @@ class Player {
     constexpr static float LEAN_SPEED = 2;
     constexpr static float LEAN_SPEED_MAX = 6;
     constexpr static float BREAK_SPEED = 4;
-    constexpr static float REFLECTION_COEFICENT = 0.4;
+    constexpr static float BAUNCE_COEFICENT = 0.1;
     constexpr static float MAX_FALLING_SPEED = 6.5;
     constexpr static float GRAVITY = 0.45;
     constexpr static float GRAVITY_FLOATING = 0.1;
