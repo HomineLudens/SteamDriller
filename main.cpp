@@ -40,6 +40,15 @@ void initGame() {
     msTotal = 0;
 }
 
+extern "C" {
+    void _pvHeapStart();
+}
+
+void freeRam() {
+    constexpr auto bytesUsed = reinterpret_cast < uintptr_t > (_pvHeapStart) - 0x10000000;
+    printf("Total RAM: %d bytes used (%d%%) - %d bytes free\n", bytesUsed, bytesUsed * 100 / 0x8000, 0x8000 - bytesUsed);
+}
+
 int main() {
     steamCookie.begin("STEAMDRI", steamCookie); //initialize cookie 
 
@@ -94,6 +103,9 @@ int main() {
         }
         if (PB::pressed(BTN_C) && PB::downBtn()) {
             initGame();
+        }
+        if (PB::pressed(BTN_C)) {
+            freeRam();
         }
 
 
