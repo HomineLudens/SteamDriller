@@ -1,30 +1,39 @@
 #pragma once
 #include "Entity.h"
+#include <bitset>
 
 class Level;
 
 class Item: public Entity {
 
-    private: const uint8_t * sprite;
+    private:
 
-    public: enum class ItemType {
-        None,
-        Logo,
-        RobotUnactivated,
-        Bones,
-        RobotUnactivatedRow,
-        Conveyor,
-        Fance
-    };
+        enum FlagsType {
+            alive,
+            fixed,
+            collectable,
+            mirrored,
+            activated
+        };
+    const uint8_t * sprite;
+
+    public:
+
+        enum class ItemType {
+            None,
+            Logo,
+            RobotUnactivated,
+            Bones,
+            RobotUnactivatedRow,
+            Conveyor,
+            Fance
+        };
 
     Point pos;
     Point speed;
     ItemType itemType;
-    bool alive;
-    bool fixed;
-    bool collectable;
-    bool mirrored;
-    bool activated;
+
+    std::bitset < 8 > flags;
 
     int16_t msgIndex = -1;
 
@@ -36,7 +45,11 @@ class Item: public Entity {
     bool IsAlive();
     bool IsCollectable();
     bool IsFixed();
+    bool IsActivated();
+    
     void Kill();
+    void Activate();
+    void Deactivate();
     void Draw(const Camera & cam);
 
 };

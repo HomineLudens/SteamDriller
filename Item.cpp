@@ -6,24 +6,27 @@
 #include "assets/SteamDriller_Unactivated_Robot.h"
 #include "assets/SteamDriller_Bones.h"
 #include "assets/SteamDriller_Conveyor_Flat.h"        
-#include "assets/SteamDriller_FenceTileTop.h"      
-
+#include "assets/SteamDriller_FenceTileTop.h"     
 
 using PD = Pokitto::Display;
 Item::Item() {
-    alive = false;
+    flags.set(FlagsType::alive, true);
 }
 
 Item::Item(int x, int y, ItemType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex) {
+
+    this->itemType = itemType;
     this->pos.x = x;
     this->pos.y = y;
     this->speed.x = 0;
     this->speed.y = 0;
-    this->itemType = itemType;
-    this->fixed = fixed;
-    this->collectable = collectable;
-    this->mirrored = mirrored;
-    this->alive = true;
+
+    flags.set(FlagsType::alive, true);
+    flags.set(FlagsType::fixed, fixed);
+    flags.set(FlagsType::collectable, collectable);
+    flags.set(FlagsType::mirrored, mirrored);
+    flags.set(FlagsType::activated, false);
+
     this->msgIndex = msgIndex;
 
     switch (itemType) {
@@ -55,7 +58,7 @@ Rect Item::GetHitBox() {
 
 void Item::Update(int ms, Level & lvl, Player & player) {
 
-    if (!fixed) {
+    if (!flags[FlagsType::fixed]) {
         auto xPrec = pos.x;
         auto yPrec = pos.y;
 
@@ -78,35 +81,47 @@ void Item::Update(int ms, Level & lvl, Player & player) {
 }
 
 bool Item::IsAlive() {
-    return alive;
+    return flags[FlagsType::alive];
 }
 
 bool Item::IsFixed() {
-    return fixed;
+    return flags[FlagsType::fixed];
 }
 
 bool Item::IsCollectable() {
-    return collectable;
+    return flags[FlagsType::collectable];
+}
+
+bool Item::IsActivated() {
+    return flags[FlagsType::activated];
 }
 
 void Item::Kill() {
-    alive = false;
+    flags.reset(FlagsType::alive);
+}
+
+void Item::Activate() {
+    flags.set(FlagsType::activated);
+}
+
+void Item::Deactivate() {
+    flags.reset(FlagsType::activated);
 }
 
 void Item::Draw(const Camera & cam) {
 
     int xs = cam.ToScreenX(pos) - (sprite[0] / 2);
     int ys = cam.ToScreenY(pos) - sprite[1];
-    PD::drawSprite(xs, ys, sprite, false, mirrored);
+    PD::drawSprite(xs, ys, sprite, false, flags[FlagsType::mirrored]);
 
     //Dirty trick to not waste memory
     if (itemType == ItemType::RobotUnactivatedRow) {
-        if (mirrored) {
+        if (flags[FlagsType::mirrored]) {
             for (int i = 10; i > 0; i--)
-                PD::drawSprite(xs + (10 * 10) - (i * 10), ys, sprite, false, mirrored);
+                PD::drawSprite(xs + (10 * 10) - (i * 10), ys, sprite, false, true);
         } else {
             for (int i = 10; i > 0; i--)
-                PD::drawSprite(xs - (10 * 10) + (i * 10), ys, sprite, false, mirrored);
+                PD::drawSprite(xs - (10 * 10) + (i * 10), ys, sprite, false, false);
         }
 
     }

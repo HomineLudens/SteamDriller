@@ -86,15 +86,15 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
             }
             break;
         case State::Crouching:
+            //Full Crouch
+            if (sprPlayer.frame == (sprPlayer.getAnimationFrameCount() - 1)) {
+                sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Crouch);
+                ChangeState(State::Crouch);
+            }
             //Rising
             if (!PB::downBtn()) {
                 sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
                 ChangeState(State::Idle);
-            }
-            //Full crounh
-            if (sprPlayer.frame == (sprPlayer.getAnimationFrameCount() - 1)) {
-                sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Crouch);
-                ChangeState(State::Crouch);
             }
             break;
         case State::Crouch:
@@ -203,9 +203,9 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     onFloor = lvl.IsSolid(pos);
     if (onFloor) {
         if (speed.y == MAX_FALLING_SPEED) {
-            Damage(35);
+            Damage(35); //Falling damage
             camera.Shake(4);
-            lvl.AddParticle(pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
+            lvl.AddParticle(Point(pos.x, pos.y-15), Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
         }
         msOnFloor = 80;
         pos.y = oldY;

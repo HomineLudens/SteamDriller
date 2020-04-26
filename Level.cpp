@@ -40,12 +40,12 @@ void Level::Init(const Point & posStart) {
         AddItem(posStart.x.getInteger() - 80 - (i * TILE_WIDTH), posStart.y.getInteger() + 24, Item::ItemType::Fance, true, false);
     }
 
-    // AddItemAnim(posStart.x.getInteger() - 50, 40, ItemAnim::ItemAnimType::Chip, false, false, false, 1);
-    AddItemAnim(posStart.x.getInteger() - 50, posStart.y.getInteger(), ItemAnim::ItemAnimType::ChipRed, false, false, false, random(11, 15));
-    // AddItemAnim(posStart.x.getInteger() + 100, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 7);
-    // AddItemAnim(posStart.x.getInteger() + 140, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 5);
-    // AddItemAnim(posStart.x.getInteger() + 180, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 6);
-    // AddItemAnim(posStart.x.getInteger() + 220, 40, ItemAnim::ItemAnimType::ChipPurple, false, false, false, 8);
+    // AddItemAnim(posStart.x.getInteger() - 50, 40, ItemAnim::ItemType::Chip, false, false, false, 1);
+    AddItemAnim(posStart.x.getInteger() - 50, posStart.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, random(11, 15));
+    // AddItemAnim(posStart.x.getInteger() + 100, 40, ItemAnim::ItemType::ChipPurple, false, false, false, 7);
+    // AddItemAnim(posStart.x.getInteger() + 140, 40, ItemAnim::ItemType::ChipPurple, false, false, false, 5);
+    // AddItemAnim(posStart.x.getInteger() + 180, 40, ItemAnim::ItemType::ChipPurple, false, false, false, 6);
+    // AddItemAnim(posStart.x.getInteger() + 220, 40, ItemAnim::ItemType::ChipPurple, false, false, false, 8);
 
     //
     // AddEnemy(posStart.x.getInteger()+30, 40, Enemy::EnemyType::PurpleSentinelHorizontal);
@@ -136,7 +136,7 @@ void Level::RandomizeLine(int r) {
     if (random(100) > 80) {
         int ix = 0;
         ix = random(2, COLUMNS - 2);
-        AddItemAnim(ix * TILE_WIDTH, r * TILE_HEIGHT, (ItemAnim::ItemAnimType) random(0, 4));
+        AddItemAnim(ix * TILE_WIDTH, r * TILE_HEIGHT, (ItemAnim::ItemType) random(0, 4));
     }
 
     //Enemy
@@ -178,7 +178,7 @@ void Level::RandomizeLine(int r) {
 
         auto xi = (roomStartX + (roomWidth / 2)) * TILE_WIDTH;
         auto yi = (r - (roomHeight / 2)) * TILE_HEIGHT;
-        AddItemAnim(xi, yi, ItemAnim::ItemAnimType::Ruby);
+        AddItemAnim(xi, yi, ItemAnim::ItemType::Ruby);
     }
 
     //Move well walls
@@ -325,7 +325,7 @@ int Level::AddItem(int x, int y, Item::ItemType itemType, bool fixed, bool colle
     return -1;
 }
 
-int Level::AddItemAnim(int x, int y, ItemAnim::ItemAnimType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex) {
+int Level::AddItemAnim(int x, int y, ItemAnim::ItemType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex) {
     for (int i = 0; i < itemsAnim.size(); i++) {
         if (!itemsAnim[i].IsAlive()) {
             itemsAnim[i] = ItemAnim(x, y, itemType, fixed, collectable, mirrored, msgIndex);
@@ -488,7 +488,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     msgToShow = -1;
     for (auto & i: itemsAnim) {
         if (i.IsAlive() && Rect::Collide(player.GetHitBox(), i.GetHitBox())) {
-            i.activated = true;
+            i.Activate();
             if (i.msgIndex != -1) {
                 msgToShow = i.msgIndex;
             }
@@ -498,7 +498,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                 Pokitto::Sound::playSFX(sfx_pickup, sizeof(sfx_pickup));
             }
         } else {
-            i.activated = false;
+            i.Deactivate();
         }
     }
 

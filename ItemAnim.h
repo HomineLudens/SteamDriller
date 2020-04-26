@@ -13,7 +13,7 @@ class ItemAnim: public Item {
 
     public:
 
-        enum class ItemAnimType {
+        enum class ItemType {
             None,
             Ruby,
             Crystal,
@@ -23,11 +23,11 @@ class ItemAnim: public Item {
             ChipBlack,
             ChipPurple
         };
-    ItemAnimType itemType;
+    ItemType itemType;
 
     public:
 
-        ItemAnim(int x = 0, int y = 0, ItemAnimType itemType = ItemAnimType::None, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1);
+        ItemAnim(int x = 0, int y = 0, ItemType itemType = ItemType::None, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1);
     Rect GetHitBox();
     void Draw(const Camera & cam);
 
