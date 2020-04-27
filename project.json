@@ -2919,6 +2919,42 @@
 		},
 		"\\SteamDriller.bin.1.h": {
 			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Unactivated_Robot_old.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Robot_Anim_revised_Yellow.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Robot_Anim_revised_Yellow.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim_old.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim.png.crdownload": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim_revised_Yellow.png.crdownload": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim_revised_Yellow.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim_old.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Unactivated_Robot_old.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim_revised_Yellow.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim_New_2.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim_New_2.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {
