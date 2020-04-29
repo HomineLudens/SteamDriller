@@ -74,12 +74,12 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.viewDistance = 80;
             eAI.msWakeUp = 500;
             eAI.msAttackDuration = 250;
-            eAI.msCoolDown = 250;
+            eAI.msCoolDown = 100;
             eAI.gravityAffected = true;
             eAI.climber = false;
             eAI.jumper = false;
             eAI.shootHorizontal = true;
-            eAI.shootVertical = false;
+            eAI.shootVertical = true;
             break;
         case EnemyType::Worm:
             eAI.life = 5;
@@ -220,8 +220,11 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                     }
 
                     if (enemyType == EnemyType::SpiderMecha) {
-                        lvl.AddBullet(Point(pos.x, pos.y - (spr.getFrameHeight() / 2)), Point(1, 1),
-                            Bullet::BulletType::Plasma, eAI.msAttackDuration);
+                        auto dx = (player.pos.x - pos.x) / 50.0;
+                        auto dy = (player.pos.y - pos.y) / 50.0;
+
+                        lvl.AddBullet(Point(pos.x, pos.y - (spr.getFrameHeight() / 2)), Point(dx, dy),
+                            Bullet::BulletType::Plasma, eAI.msAttackDuration * 10);
                         Pokitto::Sound::playSFX(sfx_laser, sizeof(sfx_laser));
                     }
                 }
