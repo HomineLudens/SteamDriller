@@ -51,7 +51,7 @@ void Level::Init(const Point & posStart) {
     // AddEnemy(posStart.x.getInteger()+30, 40, Enemy::EnemyType::PurpleSentinelHorizontal);
     //AddEnemy(posStart.x.getInteger() - 40, 20, Enemy::EnemyType::PurpleSentinelHorizontal);
     // AddEnemy(posStart.x.getInteger()+50, 40, Enemy::EnemyType::Worm);
-    //AddEnemy(posStart.x.getInteger() + 40, 40, Enemy::EnemyType::SpiderMecha);
+    AddEnemy(posStart.x.getInteger() - 80, 0, Enemy::EnemyType::SpiderMecha);
     //--------------------------------------------------------------------
 
     depth = 0;
@@ -151,12 +151,15 @@ void Level::RandomizeLine(int r) {
                     AddEnemy(ex, ey, Enemy::EnemyType::PurpleSentinelHorizontal);
                     break;
                 case 1:
-                    AddEnemy(ex, ey, Enemy::EnemyType::Spider);
+                    AddEnemy(ex, ey, Enemy::EnemyType::PurpleSentinelVertical);
                     break;
                 case 2:
-                    AddEnemy(ex, ey, Enemy::EnemyType::SpiderMecha);
+                    AddEnemy(ex, ey, Enemy::EnemyType::Spider);
                     break;
                 case 3:
+                    AddEnemy(ex, ey, Enemy::EnemyType::SpiderMecha);
+                    break;
+                case 4:
                     AddEnemy(ex, ey, Enemy::EnemyType::Worm);
                     break;
             }
@@ -466,7 +469,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
             Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
             //--
             e.Damage(5);
-            
+
             player.speed.y += random(-2, -4);
             player.Damage(20);
             camera.Shake(4);

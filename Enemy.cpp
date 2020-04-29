@@ -36,9 +36,10 @@ Enemy::EnemyAI Enemy::GetAI() {
     EnemyAI eAI;
     switch (enemyType) {
         case EnemyType::PurpleSentinelHorizontal:
+        case EnemyType::PurpleSentinelVertical:
             eAI.life = 20;
-            eAI.speedX = 0.5;
-            eAI.speedY = 0;
+            eAI.speedX = (enemyType == EnemyType::PurpleSentinelHorizontal) ? 0.5 : 0;
+            eAI.speedY = (enemyType == EnemyType::PurpleSentinelVertical) ? 0.5 : 0;
             eAI.senseDistance = 50;
             eAI.viewDistance = 50;
             eAI.msWakeUp = 500;
@@ -47,8 +48,8 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.gravityAffected = false;
             eAI.climber = false;
             eAI.jumper = false;
-            eAI.shootHorizontal = true;
-            eAI.shootVertical = false;
+            eAI.shootHorizontal = (enemyType == EnemyType::PurpleSentinelHorizontal);
+            eAI.shootVertical = (enemyType == EnemyType::PurpleSentinelVertical);
             break;
         case EnemyType::Spider:
             eAI.life = 20;
@@ -70,10 +71,10 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.speedX = 0.2;
             eAI.speedY = 0;
             eAI.senseDistance = 100;
-            eAI.viewDistance = 30;
+            eAI.viewDistance = 80;
             eAI.msWakeUp = 500;
             eAI.msAttackDuration = 250;
-            eAI.msCoolDown = 500;
+            eAI.msCoolDown = 250;
             eAI.gravityAffected = true;
             eAI.climber = false;
             eAI.jumper = false;
@@ -181,6 +182,11 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                     } else {
                         speed.x = -eAI.speedX;
                     }
+                    if (pos.y < player.pos.y) {
+                        speed.y = eAI.speedY;
+                    } else {
+                        speed.y = -eAI.speedY;
+                    }
                     ChangeAnimation(AnimationType::Move);
                     ChangeState(State::Patrolling);
                 }
@@ -194,20 +200,32 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                 }
                 break;
             case State::Aiming:
+
                 if (msState > eAI.msWakeUp) {
                     ChangeState(State::Firing);
 
-                    //Fire bullets
-                    int dir = (facing == Facing::Right ? 1 : -1);
-                    int i = 1;
-                    //Put as much as bullets of laser needs
-                    while (!lvl.IsSolid(Point(pos.x, pos.y - (spr.getFrameHeight() / 2)), dir * (i - 1), 0) && i < lvl.COLUMNS) {
-                        auto offX = ((dir * i) * lvl.TILE_WIDTH);
-                        lvl.AddBullet(Point(pos.x + offX, pos.y - (spr.getFrameHeight() / 2)), Point(dir, 0), Bullet::BulletType::LaserHorizontal, eAI.msAttackDuration);
-                        i++;
+                    if (enemyType == EnemyType::PurpleSentinelHorizontal || enemyType == EnemyType::PurpleSentinelVertical) {
+                        //Fire bullets
+                        auto bulletType = (enemyType == EnemyType::PurpleSentinelHorizontal) ? Bullet::BulletType::LaserHorizontal : Bullet::BulletType::LaserVertical;
+                        int dir = (facing == Facing::Right ? 1 : -1);
+                        int i = 1;
+                        //Put as much as bullets of laser needs
+                        while (!lvl.IsSolid(Point(pos.x, pos.y - (spr.getFrameHeight() / 2)), dir * (i - 1), 0) && i < lvl.COLUMNS) {
+                            auto offX = ((dir * i) * lvl.TILE_WIDTH);
+                            lvl.AddBullet(Point(pos.x + offX, pos.y - (spr.getFrameHeight() / 2)), Point(dir, 0),
+                                bulletType, eAI.msAttackDuration);
+                            i++;
+                        }
+                        Pokitto::Sound::playSFX(sfx_laser, sizeof(sfx_laser));
                     }
-                    Pokitto::Sound::playSFX(sfx_laser, sizeof(sfx_laser));
+
+                    if (enemyType == EnemyType::SpiderMecha) {
+                        lvl.AddBullet(Point(pos.x, pos.y - (spr.getFrameHeight() / 2)), Point(1, 1),
+                            Bullet::BulletType::Plasma, eAI.msAttackDuration);
+                        Pokitto::Sound::playSFX(sfx_laser, sizeof(sfx_laser));
+                    }
                 }
+
                 break;
             case State::Firing:
                 //End of attack

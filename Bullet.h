@@ -12,6 +12,7 @@ class Bullet: public Entity {
             SteamVertical, //The only player bullet
             LaserHorizontal,
             LaserVertical,
+            Plasma
         };
     BulletType bulletType;
 

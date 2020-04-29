@@ -2955,6 +2955,18 @@
 		},
 		"\\sprites\\SteamDriller_Robot_Anim_New_2.h": {
 			"sdcard": false
+		},
+		"\\assets\\bulletLaserHorizontal - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\bulletLaserBall.png": {
+			"sdcard": false
+		},
+		"\\assets\\bulletPlasma.png": {
+			"sdcard": false
+		},
+		"\\assets\\bulletPlasma.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {
