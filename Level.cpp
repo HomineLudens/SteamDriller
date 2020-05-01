@@ -50,7 +50,7 @@ void Level::Init(const Point & posStart) {
     // AddEnemy(posStart.x.getInteger()+30, 40, Enemy::EnemyType::PurpleSentinelHorizontal);
     //AddEnemy(posStart.x.getInteger() - 40, 20, Enemy::EnemyType::PurpleSentinelHorizontal);
     // AddEnemy(posStart.x.getInteger()+50, 40, Enemy::EnemyType::Worm);
-    AddEnemy(posStart.x.getInteger() - 80, 0, Enemy::EnemyType::SpiderMecha);
+    //AddEnemy(posStart.x.getInteger() - 80, 0, Enemy::EnemyType::SpiderMecha);
     //--------------------------------------------------------------------
 
     depth = 0;
@@ -145,7 +145,7 @@ void Level::RandomizeLine(int r) {
         int ey = (r) * TILE_HEIGHT;
         auto pEnemy = Point(ex, ey);
         if (!IsSolid(pEnemy) && !IsSolid(pEnemy, 0, -1) && !IsSolid(pEnemy, 1, 0) && !IsSolid(pEnemy, 0, 1)) {
-            auto rnd = random(4);
+            auto rnd = random(3);
             switch (rnd) {
                 case 0:
                     AddEnemy(ex, ey, Enemy::EnemyType::PurpleSentinelHorizontal);
@@ -157,10 +157,10 @@ void Level::RandomizeLine(int r) {
                     AddEnemy(ex, ey, Enemy::EnemyType::Spider);
                     break;
                 case 3:
-                    AddEnemy(ex, ey, Enemy::EnemyType::SpiderMecha);
+                    AddEnemy(ex, ey, Enemy::EnemyType::Worm);
                     break;
                 case 4:
-                    AddEnemy(ex, ey, Enemy::EnemyType::Worm);
+                    AddEnemy(ex, ey, Enemy::EnemyType::SpiderMecha);
                     break;
             }
         }
@@ -398,10 +398,10 @@ void Level::CreateBossZone() {
     int bossZoneHeight = 12;
 
     //Some tiles before
-    int i = 20;
+    int i = 10;
     while (i > 0) {
         int xr = random(2, COLUMNS - 2);
-        int yr = random(bossZoneHeight, bossZoneHeight * 3);
+        int yr = random(bossZoneHeight, bossZoneHeight * 2);
         if (lvlData[2 + (yr * COLUMNS) + xr] == TilesLoader::TileType::BackgroundUnderground) {
             lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss;
             i--;
@@ -422,7 +422,7 @@ void Level::CreateBossZone() {
     }
 
     //Boss
-    AddEnemy(random(10 * TILE_WIDTH, (COLUMNS - 10) * TILE_WIDTH), depthBossZoneEnd - 30, Enemy::EnemyType::SpiderMecha);
+    AddEnemy(random(100) > 50 ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH, depthBossZoneEnd - 30, Enemy::EnemyType::SpiderMecha);
     printf("BOOS ZONE BEGIN:%i END:%i\r\n", depthBossZoneBegin, depthBossZoneEnd);
 }
 
@@ -448,7 +448,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
 
 
     //Prepare Boss Zone
-    if (player.pos.y > 100 && !bossZoneActivated) {
+    if (player.pos.y > 300 && !bossZoneActivated) {
         bossZoneActivated = true;
         CreateBossZone();
 
