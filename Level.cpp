@@ -439,7 +439,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                 if (b.bulletType == Bullet::SteamVertical) {
                     for (auto & e: enemies) {
                         if (e.IsAlive() && Rect::Collide(e.GetHitBox(), b.GetHitBox())) {
-                            AddParticle(e.pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
+                            AddParticle(b.pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
                             e.Damage(10);
                             b.Kill();
                             Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
@@ -448,7 +448,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                 } else {
                     //All other bullets are from enemy to player
                     if (Rect::Collide(player.GetHitBox(), b.GetHitBox())) {
-                        AddParticle(player.pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
+                        AddParticle(b.pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
                         player.Damage(20);
                         if (b.speed.x != 0 || b.speed.y != 0) {
                             b.Kill(); //Kill bullet only if it's moving (allow laser to burn in place)
