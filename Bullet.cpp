@@ -30,8 +30,8 @@ Bullet::Bullet(const Point & pos,
             spriteBullet = bulletLaserHorizontal;
             break;
         case Bullet::Plasma:
-            this->speed.x = direction.x; //laser is steady
-            this->speed.y = direction.y; //laser is steady
+            this->speed.x = direction.x; 
+            this->speed.y = direction.y;
             this->msLife = msLife;
             spriteBullet = bulletPlasma;
             break;

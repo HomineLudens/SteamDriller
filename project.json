@@ -110,7 +110,7 @@
 			"-O3"
 		],
 		"Pokitto": [
-			"-D_OSC=2",
+			"-D_OSCT=2",
 			"-I${projectPath}",
 			"-DPOKITTO",
 			"-Wno-pointer-arith",

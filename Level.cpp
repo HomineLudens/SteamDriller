@@ -4,7 +4,6 @@
 
 extern SteamCookie steamCookie;
 
-
 Level::Level() {
     Init(Point(0, 0));
     tilemap.set(lvlData[0], lvlData[1], lvlData + 2);
