@@ -50,6 +50,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.jumper = false;
             eAI.shootHorizontal = (enemyType == EnemyType::PurpleSentinelHorizontal);
             eAI.shootVertical = (enemyType == EnemyType::PurpleSentinelVertical);
+            eAI.shootAndFire = false;
             break;
         case EnemyType::Spider:
             eAI.life = 20;
@@ -65,6 +66,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.jumper = true;
             eAI.shootHorizontal = true;
             eAI.shootVertical = false;
+            eAI.shootAndFire = false;
             break;
         case EnemyType::SpiderMecha:
             eAI.life = 100;
@@ -80,6 +82,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.jumper = false;
             eAI.shootHorizontal = true;
             eAI.shootVertical = true;
+            eAI.shootAndFire = true;
             break;
         case EnemyType::Worm:
             eAI.life = 5;
@@ -95,6 +98,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.jumper = false;
             eAI.shootHorizontal = false;
             eAI.shootVertical = false;
+            eAI.shootAndFire = false;
             break;
     }
     return eAI;
@@ -159,17 +163,16 @@ void Enemy::ChangeAnimation(Enemy::AnimationType animation) {
 }
 
 void Enemy::MoveTowardPlayer(const Point & playerPos, float speedX, float speedY) {
-    if (pos.x < playerPos.x) {
-        speed.x = speedX;
-    } else {
+    if (pos.x > playerPos.x) {
         speed.x = -speedX;
+    } else {
+        speed.x = speedX;
     }
     if (pos.y < playerPos.y) {
         speed.y = speedY;
     } else {
         speed.y = -speedY;
     }
-
 }
 
 void Enemy::Update(int ms, Level & lvl, Player & player) {
@@ -181,38 +184,39 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
         auto distanceToPlayer = pos.Distance(player.pos);
         auto eAI = GetAI();
 
-        auto onSight = (player.pos.y > pos.y - 20) &&
-            (player.pos.y < pos.y + 20) &&
+        auto onSight = (player.pos.y > pos.y - 30) &&
+            (player.pos.y < pos.y + 30) &&
             ((facing == Facing::Right && (pos.x < player.pos.x)) || (facing == Facing::Left && (pos.x > player.pos.x)));
-
 
         switch (state) {
 
             case State::Idle:
                 //Trigger patrolling on sight near player
                 if ((onSight && distanceToPlayer < eAI.viewDistance || distanceToPlayer < eAI.senseDistance)) {
-
                     MoveTowardPlayer(player.pos, eAI.speedX, eAI.speedY);
                     ChangeAnimation(AnimationType::Move);
                     ChangeState(State::Patrolling);
                 }
                 break;
             case State::Patrolling:
-                //Sense
-
                 //Trigger aiming
                 if (onSight && distanceToPlayer < eAI.viewDistance || distanceToPlayer < eAI.senseDistance) {
-
-                    speed.x = 0;
-
                     MoveTowardPlayer(player.pos, eAI.speedX, eAI.speedY);
-                    ChangeAnimation(AnimationType::Attack);
+                    if (!eAI.shootAndFire) {
+                        ChangeAnimation(AnimationType::Attack);
+                    }
                     ChangeState(State::Aiming);
                 }
                 break;
             case State::Aiming:
-
+                //Stop
+                if (!eAI.shootAndFire) {
+                    speed.x = 0;
+                    speed.y = 0;
+                }
+                //--
                 if (msState > eAI.msWakeUp) {
+
                     ChangeState(State::Firing);
 
                     if (enemyType == EnemyType::PurpleSentinelHorizontal || enemyType == EnemyType::PurpleSentinelVertical) {
@@ -244,7 +248,9 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
             case State::Firing:
                 //End of attack
                 if (msState > eAI.msAttackDuration) {
-                    ChangeAnimation(AnimationType::Idle);
+                    if (!eAI.shootAndFire) {
+                        ChangeAnimation(AnimationType::Idle);
+                    }
                     ChangeState(State::CoolDown);
                 }
                 break;
@@ -255,11 +261,13 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                 break;
         }
 
+        //-----------------
         Point posPrec;
         posPrec.x = pos.x;
         posPrec.y = pos.y;
         pos.x += speed.x;
         pos.y += speed.y;
+
         //Gravity
         if (eAI.gravityAffected) {
             speed.y += 0.1;
@@ -268,16 +276,22 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                 speed.y = 0;
                 pos.y = posPrec.y;
             }
+        } else {
+            //On hitting floor and ceil reverse speed
+            if ((speed.y > 0 && lvl.IsSolid(pos, 0, 1)) || (speed.y < 0 && lvl.IsSolid(pos, 0, -1))) {
+                speed.y = -speed.y;
+            }
         }
 
-        //On hitting wall reverse speed
+        //On hitting wall reverse X speed
         if ((speed.x > 0 && lvl.IsSolid(pos, 1, 0)) || (speed.x < 0 && lvl.IsSolid(pos, -1, 0))) {
             speed.x = -speed.x;
         }
+
         //Facing based on speed
-        if (speed.x > 0)
+        if (speed.x > 0.1)
             facing = Facing::Right;
-        if (speed.x < 0)
+        if (speed.x < -0.1)
             facing = Facing::Left;
 
         //On stucked inside walls kill

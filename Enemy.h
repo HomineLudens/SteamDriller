@@ -42,6 +42,7 @@ class Enemy: public Entity {
         bool jumper;
         bool shootHorizontal;
         bool shootVertical;
+        bool shootAndFire;
     }
     EnemyAI;
     EnemyAI GetAI();

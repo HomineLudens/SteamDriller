@@ -42,8 +42,8 @@ class Player {
     Point speed;
     int8_t bullets;
 
-    int8_t life;
-    int8_t lifePrev;
+    int life;
+    int lifePrev;
     bool onFloor;
     int depthJumpBegin;
 

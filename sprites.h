@@ -150,8 +150,8 @@ class SteamDriller_EliteMechaSpider {
 public:
     enum Animation : std::uint16_t {
 		Idle = 0,
-		Move = 7,
-		Attack = 16
+		Move = 11,
+		Attack = 22
 	};
 };
 
