@@ -48,6 +48,7 @@ class Enemy: public Entity {
 
     void ChangeState(State newState);
     void ChangeAnimation(AnimationType animation);
+    void MoveTowardPlayer(const Point & playerPos, float speedX, float speedY);
 
     public: enum EnemyType {
         PurpleSentinelHorizontal,

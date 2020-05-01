@@ -192,7 +192,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
         if (msFloating > 0)
             speed.y += GRAVITY_FLOATING;
         else
-            speed.y += GRAVITY; //gravity
+            speed.y += GRAVITY;
     }
     //Cap falling speed    
     if (speed.y > MAX_FALLING_SPEED) speed.y = MAX_FALLING_SPEED;

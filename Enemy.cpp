@@ -158,6 +158,20 @@ void Enemy::ChangeAnimation(Enemy::AnimationType animation) {
     }
 }
 
+void Enemy::MoveTowardPlayer(const Point & playerPos, float speedX, float speedY) {
+    if (pos.x < playerPos.x) {
+        speed.x = speedX;
+    } else {
+        speed.x = -speedX;
+    }
+    if (pos.y < playerPos.y) {
+        speed.y = speedY;
+    } else {
+        speed.y = -speedY;
+    }
+
+}
+
 void Enemy::Update(int ms, Level & lvl, Player & player) {
     if (life > 0) {
         //Add elapsed time
@@ -176,25 +190,22 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
 
             case State::Idle:
                 //Trigger patrolling on sight near player
-                if ((onSight || distanceToPlayer < eAI.senseDistance)) {
-                    if (pos.x < player.pos.x) {
-                        speed.x = eAI.speedX;
-                    } else {
-                        speed.x = -eAI.speedX;
-                    }
-                    if (pos.y < player.pos.y) {
-                        speed.y = eAI.speedY;
-                    } else {
-                        speed.y = -eAI.speedY;
-                    }
+                if ((onSight && distanceToPlayer < eAI.viewDistance || distanceToPlayer < eAI.senseDistance)) {
+
+                    MoveTowardPlayer(player.pos, eAI.speedX, eAI.speedY);
                     ChangeAnimation(AnimationType::Move);
                     ChangeState(State::Patrolling);
                 }
                 break;
             case State::Patrolling:
+                //Sense
+
                 //Trigger aiming
-                if (state == State::Patrolling && onSight && distanceToPlayer < eAI.viewDistance) {
+                if (onSight && distanceToPlayer < eAI.viewDistance || distanceToPlayer < eAI.senseDistance) {
+
                     speed.x = 0;
+
+                    MoveTowardPlayer(player.pos, eAI.speedX, eAI.speedY);
                     ChangeAnimation(AnimationType::Attack);
                     ChangeState(State::Aiming);
                 }
