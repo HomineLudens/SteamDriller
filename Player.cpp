@@ -203,7 +203,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     onFloor = lvl.IsSolid(pos);
     if (onFloor) {
         auto fallHeight = lvl.GetDepth() - depthJumpStart;
-        if (fallHeight > 100) {
+        if (fallHeight > FALL_DAMAGE_HEIGHT) {
             Damage(35); //Falling damage
             camera.Shake(4);
             lvl.AddParticle(Point(pos.x, pos.y - 15), Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);

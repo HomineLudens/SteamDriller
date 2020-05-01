@@ -23,6 +23,7 @@ class Player {
     constexpr static float MAX_FALLING_SPEED = 6.5;
     constexpr static float GRAVITY = 0.45;
     constexpr static float GRAVITY_FLOATING = 0.1;
+    constexpr static float FALL_DAMAGE_HEIGHT = 100;
 
     enum struct State {
         Offline,
