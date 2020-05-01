@@ -205,12 +205,10 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     if (onFloor) {
         auto fallHeight = (lvl.GetDepth() + pos.y.getInteger()) - depthJumpBegin;
         if (fallHeight > FALL_DAMAGE_HEIGHT) {
-            printf("FALL DAMAGE: life from:%i", life);
             Damage(35); //Falling damage
-            printf(" to:%i \r\n", life);
-
             camera.Shake(4);
-            lvl.AddParticle(Point(pos.x, pos.y - 15), Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
+            lvl.AddParticle(Point(pos.x, pos.y - 5), Point(0.3, -0.2), Point(0, 0), Particle::ParticleType::Explosion, 600);
+            lvl.AddParticle(Point(pos.x, pos.y - 5), Point(-0.3, -0.2), Point(0, 0), Particle::ParticleType::Explosion, 600);
         }
         msOnFloor = 80;
         pos.y = oldY;
