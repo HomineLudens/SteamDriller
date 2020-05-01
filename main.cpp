@@ -27,8 +27,35 @@ Lights lights;
 Hud hud;
 int msLast;
 int msTotal;
+int track;
 
 SteamCookie steamCookie;
+
+extern "C" {
+    void _pvHeapStart();
+}
+
+void freeRam() {
+    constexpr auto bytesUsed = reinterpret_cast < uintptr_t > (_pvHeapStart) - 0x10000000;
+    printf("Total RAM: %d bytes used (%d%%) - %d bytes free\n", bytesUsed, bytesUsed * 100 / 0x8000, 0x8000 - bytesUsed);
+}
+
+void setTrack(int t) {
+    if (track != t) {
+        switch (t) {
+            case 1:
+                PS::playMusicStream("music/steamd1.raw", 0);
+                break;
+            case 2:
+                PS::playMusicStream("music/steamd2.raw", 0);
+                break;
+            case 5:
+                PS::playMusicStream("music/steamd5.raw", 0);
+                break;
+        }
+    }
+    track = t;
+}
 
 void initGame() {
     auto startPoint = Point((level.COLUMNS * level.TILE_WIDTH) / 2 - 100, 0);
@@ -38,15 +65,8 @@ void initGame() {
     camera.pos.x -= 150;
     level.Init(startPoint);
     msTotal = 0;
-}
 
-extern "C" {
-    void _pvHeapStart();
-}
-
-void freeRam() {
-    constexpr auto bytesUsed = reinterpret_cast < uintptr_t > (_pvHeapStart) - 0x10000000;
-    printf("Total RAM: %d bytes used (%d%%) - %d bytes free\n", bytesUsed, bytesUsed * 100 / 0x8000, 0x8000 - bytesUsed);
+    setTrack(5);
 }
 
 int main() {
@@ -64,25 +84,6 @@ int main() {
 
     PD::lineFillers[3] = UI::LineFiller;
     UI::setTilesetImage(steamtasui); //UI::setTilesetImage(puits::UltimateUtopia::tileSet);
-
-    //Music init
-    // steamCookie.track++;
-    // steamCookie.track = steamCookie.track % 3;
-    // steamCookie.track = 2;
-    // steamCookie.saveCookie();
-    // switch (steamCookie.track) {
-    //     case 0:
-    //         PS::playMusicStream("music/steamd1.raw", 0);
-    //         break;
-    //     case 1:
-    //         PS::playMusicStream("music/steamd2.raw", 0);
-    //         break;
-    //     case 2:
-    //         PS::playMusicStream("music/steamd3.raw", 0);
-    //         break;
-    // }
-    PS::playMusicStream("music/steamd5.raw", 0);
-
 
     //---
     initGame();
@@ -108,7 +109,13 @@ int main() {
             freeRam();
         }
 
-
+        //Music managment
+        if (player.onBossZone) {
+            setTrack(2);
+        } else {
+            setTrack(5);
+        }
+        //
         if (hud.puzzleState == Hud::PuzzleState::None)
             PS::playMusicStream();
         else

@@ -29,22 +29,26 @@ void Camera::Update(const Player & player, int ms) {
     if (msFlash > 0) {
         msFlash -= ms;
     }
-    //When Offline don't look at player and move slower   
+
     if (player.state == Player::State::Offline || player.state == Player::State::Activating) {
+        //When Offline don't look at player and move slower 
         speed.x = 0.02;
         speed.y = 0.04;
         offset.y = 0;
     } else {
+        //When playing camera settings
         target = player.pos;
         speed.x = 0.2;
         speed.y = 0.08;
 
         //
-        //When over surface use a different offset fo camera
+        //When over surface or boss Zone use a different offset fo camera
         if (player.pos.y < 100)
             offset.y = 20;
         if (player.pos.y > 100)
             offset.y = 0;
+        if (player.onBossZone)
+            offset.y = 40;
         //Look down when crunch 
         if (player.state == Player::State::Crouch)
             offset.y = -60;
@@ -52,7 +56,6 @@ void Camera::Update(const Player & player, int ms) {
         if (player.speed.y > 1)
             offset.y = player.speed.y * (-15);
     }
-
 
     //Shake
     shakeDir.x = random(-1, 2);

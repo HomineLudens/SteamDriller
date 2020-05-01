@@ -68,20 +68,25 @@ class Level {
     Point pos;
     int depth = 0;
     int msgToShow = -1;
+    
+    bool bossZoneActivated=false;
+    int depthBossZoneBegin;
+    int depthBossZoneEnd;
 
     typedef struct {
-        int minX;
-        int maxX;
-        int minLen; //min Lenght hole
-        int maxLen; //max Lenght hole
-        int x1; //start hole
-        int x2; //end hole
+        int16_t minX;
+        int16_t maxX;
+        int16_t minLen; //min Lenght hole
+        int16_t maxLen; //max Lenght hole
+        int16_t x1; //start hole
+        int16_t x2; //end hole
     }
     Procgen;
     Procgen pg;
 
     void RandomizeLine(int row);
     void ReshapeRow(int row);
+    void CreateBossZone();
 
     public:
         constexpr static int COLUMNS = 64;
@@ -96,6 +101,7 @@ class Level {
     array < Enemy, 10 > enemies;
     array < Item, 30 > items;
     array < ItemAnim, 10 > itemsAnim;
+
 
     Level();
 

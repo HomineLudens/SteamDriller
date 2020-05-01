@@ -36,7 +36,7 @@ void Level::Init(const Point & posStart) {
     AddItem(posStart.x.getInteger() + 180, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
 
     for (int i = 0; i < 10; i++) {
-        AddItem(posStart.x.getInteger() - 80 - (i * TILE_WIDTH), posStart.y.getInteger() + 24, Item::ItemType::Fance, true, false);
+        AddItem(posStart.x.getInteger() - 80 - (i * TILE_WIDTH), posStart.y.getInteger() + 24, Item::ItemType::Fance, false, false);
     }
 
     // AddItemAnim(posStart.x.getInteger() - 50, 40, ItemAnim::ItemType::Chip, false, false, false, 1);
@@ -54,13 +54,14 @@ void Level::Init(const Point & posStart) {
     //--------------------------------------------------------------------
 
     depth = 0;
+    bossZoneActivated = false;
 
     //--Clear level tilemap
     lvlData[0] = COLUMNS;
     lvlData[1] = ROWS;
     for (int c = 0; c < COLUMNS; c++) {
         for (int r = 0; r < ROWS; r++) {
-            lvlData[2 + (r * COLUMNS) + c] = TileType::None;
+            lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::None;
         }
     }
 
@@ -79,12 +80,12 @@ void Level::Init(const Point & posStart) {
     //start floor
     r = 3;
     for (c = 0; c <= pg.x1; c++)
-        lvlData[2 + (r * COLUMNS) + c] = TileType::TopCenter;
-    lvlData[2 + (r * COLUMNS) + c] = TileType::TopLeft;
+        lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::TopCenter;
+    lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::TopLeft;
 
-    lvlData[2 + (r * COLUMNS) + pg.x2] = TileType::TopRight;
+    lvlData[2 + (r * COLUMNS) + pg.x2] = TilesLoader::TileType::TopRight;
     for (c = pg.x2 + 1; c < COLUMNS; c++)
-        lvlData[2 + (r * COLUMNS) + c] = TileType::TopCenter;
+        lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::TopCenter;
 
     //Move one ROWS after the other
     for (r++; r < ROWS; r++) {
@@ -96,16 +97,16 @@ void Level::RandomizeLine(int r) {
     //Clear line
     int c = 0;
     for (c = 0; c < COLUMNS; c++)
-        lvlData[2 + (r * COLUMNS) + c] = TileType::BackgroundUnderground; //Clear with background
+        lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::BackgroundUnderground; //Clear with background
 
     //Walls
     for (c = 0; c <= pg.x1; c++)
-        lvlData[2 + (r * COLUMNS) + c] = TileType::RockInside;
-    lvlData[2 + (r * COLUMNS) + c] = TileType::RockEdgeLeft;
+        lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::RockInside;
+    lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::RockEdgeLeft;
 
-    lvlData[2 + (r * COLUMNS) + pg.x2] = TileType::RockEdgeRight;
+    lvlData[2 + (r * COLUMNS) + pg.x2] = TilesLoader::TileType::RockEdgeRight;
     for (c = pg.x2 + 1; c < COLUMNS; c++)
-        lvlData[2 + (r * COLUMNS) + c] = TileType::RockInside;
+        lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::RockInside;
 
 
     //Change well walls position
@@ -124,11 +125,11 @@ void Level::RandomizeLine(int r) {
         int bLen = random(2, 5);
         int bx1 = random(pg.x1 + 1, pg.x2 - bLen - 1);
         int xb = bx1;
-        lvlData[2 + (r * COLUMNS) + xb] = TileType::TopRight;
+        lvlData[2 + (r * COLUMNS) + xb] = TilesLoader::TileType::TopRight;
         for (xb = xb + 1; xb < bx1 + bLen; xb++) {
-            lvlData[2 + (r * COLUMNS) + xb] = TileType::TopCenter;
+            lvlData[2 + (r * COLUMNS) + xb] = TilesLoader::TileType::TopCenter;
         }
-        lvlData[2 + (r * COLUMNS) + xb] = TileType::TopLeft;
+        lvlData[2 + (r * COLUMNS) + xb] = TilesLoader::TileType::TopLeft;
     }
 
     //Item
@@ -165,40 +166,41 @@ void Level::RandomizeLine(int r) {
         }
     }
 
-    //Make a room
-    if (depth > 30 && random(100) > 50) {
-        int roomHeight = random(4, 8);
-        int roomWidth = random(6, 20);
-        int roomStartX = random(2, COLUMNS - 2 - roomWidth);
-        for (int yr = 0; yr < roomHeight; yr++) {
-            for (int xr = roomStartX; xr < roomWidth; xr++) {
-                //Clear room
-                lvlData[2 + ((r - yr) * COLUMNS) + xr] = TileType::BackgroundUndergroundRoom; //
-            }
-            ReshapeRow(r - yr);
-        }
 
-        auto xi = (roomStartX + (roomWidth / 2)) * TILE_WIDTH;
-        auto yi = (r - (roomHeight / 2)) * TILE_HEIGHT;
-        AddItemAnim(xi, yi, ItemAnim::ItemType::Ruby);
-    }
+    // //Make a room
+    // if (depth > 30 && random(100) > 50) {
+    //     int roomHeight = random(4, 8);
+    //     int roomWidth = random(6, 20);
+    //     int roomStartX = random(2, COLUMNS - 2 - roomWidth);
+    //     for (int yr = 0; yr < roomHeight; yr++) {
+    //         for (int xr = roomStartX; xr < roomWidth; xr++) {
+    //             //Clear room
+    //             lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader:: TileType::BackgroundUndergroundRoom; //
+    //         }
+    //         ReshapeRow(r - yr);
+    //     }
 
-    //Move well walls
-    if (depth > 2000 && random(100) > 80) {
-        int oldX1 = pg.x1;
-        int newX1 = random(pg.minX, pg.maxX);
-        pg.x1 = newX1;
-        pg.x2 = pg.x1 + random(pg.minLen, pg.maxLen);
-        int xStartDig = oldX1 < newX1 ? oldX1 : newX1;
-        //Dig a tunnel to the new well
-        for (int yr = 0; yr < 3; yr++) {
-            for (int xr = xStartDig; xr < pg.x2; xr++) {
-                //Clear room
-                lvlData[2 + ((r - yr) * COLUMNS) + xr] = TileType::BackgroundUnderground; //
-            }
-            ReshapeRow(r - yr);
-        }
-    }
+    //     auto xi = (roomStartX + (roomWidth / 2)) * TILE_WIDTH;
+    //     auto yi = (r - (roomHeight / 2)) * TILE_HEIGHT;
+    //     AddItemAnim(xi, yi, ItemAnim::ItemType::Ruby);
+    // }
+
+    // //Move well walls
+    // if (depth > 2000 && random(100) > 80) {
+    //     int oldX1 = pg.x1;
+    //     int newX1 = random(pg.minX, pg.maxX);
+    //     pg.x1 = newX1;
+    //     pg.x2 = pg.x1 + random(pg.minLen, pg.maxLen);
+    //     int xStartDig = oldX1 < newX1 ? oldX1 : newX1;
+    //     //Dig a tunnel to the new well
+    //     for (int yr = 0; yr < 3; yr++) {
+    //         for (int xr = xStartDig; xr < pg.x2; xr++) {
+    //             //Clear room
+    //             lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader:: TileType::BackgroundUnderground; //
+    //         }
+    //         ReshapeRow(r - yr);
+    //     }
+    // }
 }
 
 int Level::GetTileId(const Point & pos, int offX, int offY) {
@@ -218,18 +220,19 @@ void Level::SetTileId(const Point & pos, int id, int offX, int offY) {
 
 bool Level::IsSolid(const Point & pos, int offX, int offY) {
     auto tile = GetTileId(pos, offX, offY);
-    return !(tile == TileType::None ||
-        tile == TileType::BackgroundUnderground ||
-        tile == TileType::BackgroundUndergroundRoom);
+    return !(tile == TilesLoader::TileType::None ||
+        tile == TilesLoader::TileType::BackgroundUnderground ||
+        tile == TilesLoader::TileType::BackgroundUndergroundRoom ||
+        tile == TilesLoader::TileType::BackgroundUndergroundBoss);
 }
 
 bool Level::IsShootable(const Point & pos, int offX, int offY) {
     auto tile = GetTileId(pos, offX, offY);
-    return tile == TileType::TopCenter || tile == TileType::TopLeft || tile == TileType::TopRight;
+    return tile == TilesLoader::TileType::TopCenter || tile == TilesLoader::TileType::TopLeft || tile == TilesLoader::TileType::TopRight;
 }
 
 bool Level::IsIndestructible(const Point & pos, int offX, int offY) {
-    return GetTileId(pos, offX, offY) == TileType::Unbreakable; // || !IsSolid(pos, offX, offY);
+    return GetTileId(pos, offX, offY) == TilesLoader::TileType::Unbreakable; // || !IsSolid(pos, offX, offY);
 }
 
 void Level::DestroyTile(const Point & pos, int offX, int offY) {
@@ -238,19 +241,19 @@ void Level::DestroyTile(const Point & pos, int offX, int offY) {
         auto tLeft = GetTileId(pos, offX + -1, offY);
         auto tRight = GetTileId(pos, offX + 1, offY);
         auto tOver = GetTileId(pos, offX, offY - 1);
-        if (tOn != TileType::None)
-            SetTileId(pos, TileType::BackgroundUnderground, offX, offY);
+        if (tOn != TilesLoader::TileType::None)
+            SetTileId(pos, TilesLoader::TileType::BackgroundUnderground, offX, offY);
         AddDebris(pos, 5);
         if (random(100) > 95)
             AddItem(pos.x.getInteger(), pos.y.getInteger(), Item::ItemType::Bones, false, false, true);
         //-------------------
         //Reshape
-        if (tLeft == TileType::RockInside)
-            SetTileId(pos, TileType::RockEdgeLeft, offX - 1, offY);
-        if (tRight == TileType::RockInside)
-            SetTileId(pos, TileType::RockEdgeRight, offX + 1, offY);
-        if (tOver == TileType::RockInside)
-            SetTileId(pos, TileType::RockEdgeBottom, offX, offY - 1);
+        if (tLeft == TilesLoader::TileType::RockInside)
+            SetTileId(pos, TilesLoader::TileType::RockEdgeLeft, offX - 1, offY);
+        if (tRight == TilesLoader::TileType::RockInside)
+            SetTileId(pos, TilesLoader::TileType::RockEdgeRight, offX + 1, offY);
+        if (tOver == TilesLoader::TileType::RockInside)
+            SetTileId(pos, TilesLoader::TileType::RockEdgeBottom, offX, offY - 1);
         //--------
 
         Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
@@ -263,18 +266,20 @@ void Level::ReshapeRow(int row) {
         auto tNext = lvlData[2 + (row * COLUMNS) + x + 1];
         auto tOver = lvlData[2 + ((row - 1) * COLUMNS) + x + 1];
 
-        if ((tOn == TileType::BackgroundUnderground || tOn == TileType::BackgroundUndergroundRoom) && tNext == TileType::RockInside) {
-            lvlData[2 + (row * COLUMNS) + x + 1] = TileType::RockEdgeRight; //change tile next
+        if ((tOn == TilesLoader::TileType::BackgroundUnderground || tOn == TilesLoader::TileType::BackgroundUndergroundRoom || tOn == TilesLoader::TileType::BackgroundUndergroundBoss) &&
+            tNext == TilesLoader::TileType::RockInside) {
+            lvlData[2 + (row * COLUMNS) + x + 1] = TilesLoader::TileType::RockEdgeRight; //change tile next
         }
 
-        if (tOn == TileType::RockInside && (tNext == TileType::BackgroundUnderground || tNext == TileType::BackgroundUndergroundRoom)) {
-            lvlData[2 + (row * COLUMNS) + x] = TileType::RockEdgeLeft; //change tile on
+        if (tOn == TilesLoader::TileType::RockInside &&
+            (tNext == TilesLoader::TileType::BackgroundUnderground || tNext == TilesLoader::TileType::BackgroundUndergroundRoom || tNext == TilesLoader::TileType::BackgroundUndergroundBoss)) {
+            lvlData[2 + (row * COLUMNS) + x] = TilesLoader::TileType::RockEdgeLeft; //change tile on
         }
 
-        if ((tOn == TileType::BackgroundUnderground || tOn == TileType::BackgroundUndergroundRoom) && tOver == TileType::RockInside) {
-            lvlData[2 + ((row - 1) * COLUMNS) + x] = TileType::RockEdgeBottom; //change tile on
+        if ((tOn == TilesLoader::TileType::BackgroundUnderground || tOn == TilesLoader::TileType::BackgroundUndergroundRoom || tOn == TilesLoader::TileType::BackgroundUndergroundBoss) &&
+            tOver == TilesLoader::TileType::RockInside) {
+            lvlData[2 + ((row - 1) * COLUMNS) + x] = TilesLoader::TileType::RockEdgeBottom; //change tile on
         }
-
     }
 }
 
@@ -373,13 +378,12 @@ void Level::ShiftStuff(int x, int y) {
             lvlData[2 + (r * COLUMNS) + 0] = t; //first cell
         }
     }
-
     //Shift level down and generate a new row
     if (y > 0) {
         memmove(lvlData + 2, lvlData + 2 + COLUMNS, (ROWS - 1) * COLUMNS);
-        depth += y;
         //Add new line on bottom
         RandomizeLine(ROWS - 1);
+        depth += y;
     }
 
     //Shift/Move stuff
@@ -388,6 +392,38 @@ void Level::ShiftStuff(int x, int y) {
     shiftAll(bullets, x, y);
     shiftAll(items, x, y);
     shiftAll(itemsAnim, x, y);
+}
+
+void Level::CreateBossZone() {
+    int bossZoneHeight = 12;
+
+    //Some tiles before
+    int i = 20;
+    while (i > 0) {
+        int xr = random(2, COLUMNS - 2);
+        int yr = random(bossZoneHeight, bossZoneHeight * 3);
+        if (lvlData[2 + (yr * COLUMNS) + xr] == TilesLoader::TileType::BackgroundUnderground) {
+            lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss;
+            i--;
+        }
+    }
+
+    //Room
+    for (int yr = 1; yr < bossZoneHeight; yr++) {
+        for (int xr = 0; xr < COLUMNS; xr++) {
+            if (yr == 1) {
+                depthBossZoneEnd = (ROWS - yr) * TILE_HEIGHT;
+                lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::UnbreakableFloor; //
+            } else {
+                depthBossZoneBegin = (ROWS - yr) * TILE_HEIGHT;
+                lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss; //
+            }
+        }
+    }
+
+    //Boss
+    AddEnemy(random(10 * TILE_WIDTH, (COLUMNS - 10) * TILE_WIDTH), depthBossZoneEnd - 30, Enemy::EnemyType::SpiderMecha);
+    printf("BOOS ZONE BEGIN:%i END:%i\r\n", depthBossZoneBegin, depthBossZoneEnd);
 }
 
 void Level::Update(Camera & camera, Player & player, int ms) {
@@ -409,6 +445,22 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         player.pos.y -= TILE_HEIGHT;
         camera.pos.y -= TILE_HEIGHT;
     }
+
+
+    //Prepare Boss Zone
+    if (player.pos.y > 100 && !bossZoneActivated) {
+        bossZoneActivated = true;
+        CreateBossZone();
+
+    }
+
+    //Sing player inside boss zone
+    player.onBossZone = ((depth + player.pos.y) > depthBossZoneBegin) && ((depth + player.pos.y) < depthBossZoneEnd);
+
+    // if (player.onFloor && player.onBossZone) {
+
+    // }
+
 
     //Update all stuff
     updateAll(particles, ms, * this, player);

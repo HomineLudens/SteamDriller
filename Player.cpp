@@ -25,6 +25,7 @@ void Player::Init(const Point & pos) {
     ChangeState(State::Offline);
     sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Offline);
     sprSmokeWheels.play(steamClimber_Smoke_Wheels_Anim, SteamClimber_Smoke_Wheels_Anim::Animation::Idle);
+    onBossZone = false;
 }
 
 Rect Player::GetHitBox() {
@@ -156,13 +157,13 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
         //Jump then shot down
         if (msOnFloor > 0) {
             if (PB::pressed(BTN_A)) {
-                speed.y -= 4;
+                speed.y -= 4.5;
                 msJump = 0;
                 Pokitto::Sound::playSFX(sfx_steam, sizeof(sfx_steam));
             }
         } else {
             if (PB::aBtn() && msJump < 100) {
-                speed.y -= 0.8;
+                speed.y -= 1.2;
             }
             if (PB::pressed(BTN_A) && bullets > 0) {
                 pos.y -= 3;
@@ -202,9 +203,12 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     pos.y += speed.y;
     onFloor = lvl.IsSolid(pos);
     if (onFloor) {
-        auto fallHeight = lvl.GetDepth() - depthJumpStart;
+        auto fallHeight = (lvl.GetDepth() + pos.y.getInteger()) - depthJumpBegin;
         if (fallHeight > FALL_DAMAGE_HEIGHT) {
+            printf("FALL DAMAGE: life from:%i", life);
             Damage(35); //Falling damage
+            printf(" to:%i \r\n", life);
+
             camera.Shake(4);
             lvl.AddParticle(Point(pos.x, pos.y - 15), Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
         }
@@ -214,9 +218,9 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
         bullets = MAX_SHOOTS; //recharge bullets when on floor
     }
 
-    //Save jump falling start
+    //Save jump falling start position
     if (speed.y < 0 || onFloor) {
-        depthJumpStart = lvl.GetDepth();
+        depthJumpBegin = lvl.GetDepth() + pos.y.getInteger();
     }
 
     //Ceiling
@@ -254,7 +258,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
 
     //Power loss
     if (msLifeLoss < 0 && state != State::Offline) {
-        Damage(1);
+        Damage(1, true);
         msLifeLoss = 1000;
     }
 
@@ -281,12 +285,13 @@ void Player::Heal(int heal) {
         life = 100;
 };
 
-void Player::Damage(int damage) {
-    if (msInvulnerability < 1) {
-        msInvulnerability = 500;
+void Player::Damage(int damage, bool force) {
+    if (msInvulnerability < 1 || force) {
         life -= damage;
         if (life < 0)
             life = 0;
+        if (!force)
+            msInvulnerability = 500;
     }
 };
 

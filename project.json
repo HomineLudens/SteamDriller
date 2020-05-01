@@ -2967,6 +2967,24 @@
 		},
 		"\\assets\\bulletPlasma.h": {
 			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_Unbreakable - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_UnbreakableFloor.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_UnbreakableFloor.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundBoss - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundBoss2.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundBoss2.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

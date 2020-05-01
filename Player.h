@@ -23,7 +23,7 @@ class Player {
     constexpr static float MAX_FALLING_SPEED = 6.5;
     constexpr static float GRAVITY = 0.45;
     constexpr static float GRAVITY_FLOATING = 0.1;
-    constexpr static float FALL_DAMAGE_HEIGHT = 100;
+    constexpr static float FALL_DAMAGE_HEIGHT = 80;
 
     enum struct State {
         Offline,
@@ -35,18 +35,20 @@ class Player {
         Lean,
         Dying,
         Death,
-
     };
     State state;
     Point pos;
 
     Point speed;
-    int bullets;
+    int8_t bullets;
 
     int8_t life;
     int8_t lifePrev;
     bool onFloor;
-    int depthJumpStart;
+    int depthJumpBegin;
+
+    bool onBossZone;
+    bool onBossZonePrev;
 
     int msOnFloor;
     int msLifeLoss;
@@ -72,7 +74,7 @@ class Player {
     void Update(Camera & camera, Level & lvl, int ms);
     void Draw(Camera & cam);
     void Heal(int heal);
-    void Damage(int damage);
+    void Damage(int damage, bool force = false);
     void Kill();
 
 };
