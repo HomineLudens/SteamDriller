@@ -16,10 +16,10 @@ void Lights::Update(Camera & camera, Player & player, Level & level, int ms) {
         pos.y = camera.ToScreenY(player.pos) - 10;
         lightDir = player.facing == Player::Facing::Right ? 1 : -1;
 
-        if (msLightBoost < 1 && player.state != Player::State::Offline && player.state != Player::State::Activating) {
+        if (!player.onBossZone && player.state != Player::State::Offline && player.state != Player::State::Activating) {
             lightLevel = 36500 - ((100 - player.life) * 350) + (random(-8192, 8192) / 10);
         } else {
-            lightLevel = 1000000;
+            lightLevel = 3000000;
         }
 
         CalcLight(camera, level);
