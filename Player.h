@@ -45,6 +45,7 @@ class Player {
     int8_t life;
     int8_t lifePrev;
     bool onFloor;
+    int depthJumpStart;
 
     int msOnFloor;
     int msLifeLoss;

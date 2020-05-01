@@ -202,16 +202,21 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     pos.y += speed.y;
     onFloor = lvl.IsSolid(pos);
     if (onFloor) {
-        if (speed.y == MAX_FALLING_SPEED) {
+        auto fallHeight = lvl.GetDepth() - depthJumpStart;
+        if (fallHeight > 100) {
             Damage(35); //Falling damage
             camera.Shake(4);
-            lvl.AddParticle(Point(pos.x, pos.y-15), Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
+            lvl.AddParticle(Point(pos.x, pos.y - 15), Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
         }
         msOnFloor = 80;
         pos.y = oldY;
         speed.y = 0;
         bullets = MAX_SHOOTS; //recharge bullets when on floor
+    }
 
+    //Save jump falling start
+    if (speed.y < 0 || onFloor) {
+        depthJumpStart = lvl.GetDepth();
     }
 
     //Ceiling
