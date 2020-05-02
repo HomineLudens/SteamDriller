@@ -53,7 +53,7 @@ void Camera::Update(const Player & player, int ms) {
         if (player.state == Player::State::Crouch)
             offset.y = -60;
         //or falling
-        if (player.speed.y > 1)
+        if (player.speed.y > 0)
             offset.y = player.speed.y * (-15);
     }
 

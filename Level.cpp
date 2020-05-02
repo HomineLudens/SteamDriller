@@ -50,7 +50,7 @@ void Level::Init(const Point & posStart) {
     // AddEnemy(posStart.x.getInteger()+30, 40, Enemy::EnemyType::PurpleSentinelHorizontal);
     //AddEnemy(posStart.x.getInteger() - 40, 20, Enemy::EnemyType::PurpleSentinelVertical);
     // AddEnemy(posStart.x.getInteger()+50, 40, Enemy::EnemyType::Worm);
-    AddEnemy(posStart.x.getInteger() - 80, 0, Enemy::EnemyType::SpiderMecha);
+    //AddEnemy(posStart.x.getInteger() - 80, 0, Enemy::EnemyType::SpiderMecha);
     //--------------------------------------------------------------------
 
     depth = 0;
@@ -167,40 +167,40 @@ void Level::RandomizeLine(int r) {
     }
 
 
-    // //Make a room
-    // if (depth > 30 && random(100) > 50) {
-    //     int roomHeight = random(4, 8);
-    //     int roomWidth = random(6, 20);
-    //     int roomStartX = random(2, COLUMNS - 2 - roomWidth);
-    //     for (int yr = 0; yr < roomHeight; yr++) {
-    //         for (int xr = roomStartX; xr < roomWidth; xr++) {
-    //             //Clear room
-    //             lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader:: TileType::BackgroundUndergroundRoom; //
-    //         }
-    //         ReshapeRow(r - yr);
-    //     }
+    //Make a room
+    if (depth > 30 && random(100) > 50) {
+        int roomHeight = random(4, 8);
+        int roomWidth = random(6, 20);
+        int roomStartX = random(2, COLUMNS - 2 - roomWidth);
+        for (int yr = 0; yr < roomHeight; yr++) {
+            for (int xr = roomStartX; xr < roomWidth; xr++) {
+                //Clear room
+                lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundRoom; //
+            }
+            ReshapeRow(r - yr);
+        }
 
-    //     auto xi = (roomStartX + (roomWidth / 2)) * TILE_WIDTH;
-    //     auto yi = (r - (roomHeight / 2)) * TILE_HEIGHT;
-    //     AddItemAnim(xi, yi, ItemAnim::ItemType::Ruby);
-    // }
+        auto xi = (roomStartX + (roomWidth / 2)) * TILE_WIDTH;
+        auto yi = (r - (roomHeight / 2)) * TILE_HEIGHT;
+        AddItemAnim(xi, yi, ItemAnim::ItemType::Ruby);
+    }
 
-    // //Move well walls
-    // if (depth > 2000 && random(100) > 80) {
-    //     int oldX1 = pg.x1;
-    //     int newX1 = random(pg.minX, pg.maxX);
-    //     pg.x1 = newX1;
-    //     pg.x2 = pg.x1 + random(pg.minLen, pg.maxLen);
-    //     int xStartDig = oldX1 < newX1 ? oldX1 : newX1;
-    //     //Dig a tunnel to the new well
-    //     for (int yr = 0; yr < 3; yr++) {
-    //         for (int xr = xStartDig; xr < pg.x2; xr++) {
-    //             //Clear room
-    //             lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader:: TileType::BackgroundUnderground; //
-    //         }
-    //         ReshapeRow(r - yr);
-    //     }
-    // }
+    //Move well walls
+    if (depth > 2000 && random(100) > 80) {
+        int oldX1 = pg.x1;
+        int newX1 = random(pg.minX, pg.maxX);
+        pg.x1 = newX1;
+        pg.x2 = pg.x1 + random(pg.minLen, pg.maxLen);
+        int xStartDig = oldX1 < newX1 ? oldX1 : newX1;
+        //Dig a tunnel to the new well
+        for (int yr = 0; yr < 3; yr++) {
+            for (int xr = xStartDig; xr < pg.x2; xr++) {
+                //Clear room
+                lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUnderground; //
+            }
+            ReshapeRow(r - yr);
+        }
+    }
 }
 
 int Level::GetTileId(const Point & pos, int offX, int offY) {
@@ -223,7 +223,8 @@ bool Level::IsSolid(const Point & pos, int offX, int offY) {
     return !(tile == TilesLoader::TileType::None ||
         tile == TilesLoader::TileType::BackgroundUnderground ||
         tile == TilesLoader::TileType::BackgroundUndergroundRoom ||
-        tile == TilesLoader::TileType::BackgroundUndergroundBoss);
+        tile == TilesLoader::TileType::BackgroundUndergroundBoss ||
+        tile == TilesLoader::TileType::BackgroundUndergroundBoss2);
 }
 
 bool Level::IsShootable(const Point & pos, int offX, int offY) {
@@ -266,18 +267,18 @@ void Level::ReshapeRow(int row) {
         auto tNext = lvlData[2 + (row * COLUMNS) + x + 1];
         auto tOver = lvlData[2 + ((row - 1) * COLUMNS) + x + 1];
 
-        if ((tOn == TilesLoader::TileType::BackgroundUnderground || tOn == TilesLoader::TileType::BackgroundUndergroundRoom || tOn == TilesLoader::TileType::BackgroundUndergroundBoss) &&
-            tNext == TilesLoader::TileType::RockInside) {
+        bool tOnNotSolid = !IsSolid(Point(x * TILE_WIDTH, row * TILE_HEIGHT));
+        bool tNextNotSolid = !IsSolid(Point(x * TILE_WIDTH, row * TILE_HEIGHT), 1, 0);
+
+        if (tOnNotSolid && tNext == TilesLoader::TileType::RockInside) {
             lvlData[2 + (row * COLUMNS) + x + 1] = TilesLoader::TileType::RockEdgeRight; //change tile next
         }
 
-        if (tOn == TilesLoader::TileType::RockInside &&
-            (tNext == TilesLoader::TileType::BackgroundUnderground || tNext == TilesLoader::TileType::BackgroundUndergroundRoom || tNext == TilesLoader::TileType::BackgroundUndergroundBoss)) {
+        if (tOn == TilesLoader::TileType::RockInside && tNextNotSolid) {
             lvlData[2 + (row * COLUMNS) + x] = TilesLoader::TileType::RockEdgeLeft; //change tile on
         }
 
-        if ((tOn == TilesLoader::TileType::BackgroundUnderground || tOn == TilesLoader::TileType::BackgroundUndergroundRoom || tOn == TilesLoader::TileType::BackgroundUndergroundBoss) &&
-            tOver == TilesLoader::TileType::RockInside) {
+        if (tOnNotSolid && tOver == TilesLoader::TileType::RockInside) {
             lvlData[2 + ((row - 1) * COLUMNS) + x] = TilesLoader::TileType::RockEdgeBottom; //change tile on
         }
     }
@@ -423,7 +424,6 @@ void Level::CreateBossZone() {
 
     //Boss
     AddEnemy(random(100) > 50 ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH, depthBossZoneEnd - 30, Enemy::EnemyType::SpiderMecha);
-    printf("BOOS ZONE BEGIN:%i END:%i\r\n", depthBossZoneBegin, depthBossZoneEnd);
 }
 
 void Level::Update(Camera & camera, Player & player, int ms) {
@@ -448,7 +448,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
 
 
     //Prepare Boss Zone
-    if (player.pos.y > 300 && !bossZoneActivated) {
+    if (player.pos.y > 1000 && !bossZoneActivated) {
         bossZoneActivated = true;
         CreateBossZone();
 
