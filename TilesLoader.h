@@ -1,8 +1,9 @@
 #include "assets/tiles/SteamDriller_None.h"
 #include "assets/tiles/SteamDriller_BackgroundUnderground.h"
 #include "assets/tiles/SteamDriller_BackgroundUndergroundRoom.h"
-#include "assets/tiles/SteamDriller_BackgroundUndergroundBoss.h"
+#include "assets/tiles/SteamDriller_BackgroundUndergroundBoss1.h"
 #include "assets/tiles/SteamDriller_BackgroundUndergroundBoss2.h"
+#include "assets/tiles/SteamDriller_BackgroundUndergroundBoss3.h"
 #include "assets/tiles/SteamDriller_RocksWallInside.h"
 #include "assets/tiles/SteamDriller_RocksLeftEdge.h"
 #include "assets/tiles/SteamDriller_RocksRightEdge.h"
@@ -17,12 +18,13 @@ class TilesLoader {
 
     public:
 
-         enum  TileType {
+        enum TileType {
             None = 0,
                 BackgroundUnderground,
                 BackgroundUndergroundRoom,
-                BackgroundUndergroundBoss,
+                BackgroundUndergroundBoss1,
                 BackgroundUndergroundBoss2,
+                BackgroundUndergroundBoss3,
                 RockInside,
                 RockEdgeRight,
                 RockEdgeLeft,
@@ -36,26 +38,43 @@ class TilesLoader {
 
 
 
-    static void SetTiles(Tilemap * tilemap) {
-        tilemap->setTile(TileType::None, SteamDriller_None);
+    static void SetTiles(Tilemap & tilemap, int anim) {
+        tilemap.setTile(TileType::None, SteamDriller_None);
 
-        tilemap->setTile(TileType::BackgroundUnderground, SteamDriller_BackgroundUnderground);
-        tilemap->setTile(TileType::BackgroundUndergroundRoom, SteamDriller_BackgroundUndergroundRoom);
-        tilemap->setTile(TileType::BackgroundUndergroundBoss, SteamDriller_BackgroundUndergroundBoss);
-        tilemap->setTile(TileType::BackgroundUndergroundBoss2, SteamDriller_BackgroundUndergroundBoss2);
+        tilemap.setTile(TileType::BackgroundUnderground, SteamDriller_BackgroundUnderground);
+        tilemap.setTile(TileType::BackgroundUndergroundRoom, SteamDriller_BackgroundUndergroundRoom);
 
-        tilemap->setTile(TileType::RockInside, SteamDriller_RocksWallInside);
-        tilemap->setTile(TileType::RockEdgeRight, SteamDriller_RocksRightEdge);
-        tilemap->setTile(TileType::RockEdgeLeft, SteamDriller_RocksLeftEdge);
-        tilemap->setTile(TileType::RockEdgeBottom, SteamDriller_RocksWallBottomEdge);
+        tilemap.setTile(TileType::RockInside, SteamDriller_RocksWallInside);
+        tilemap.setTile(TileType::RockEdgeRight, SteamDriller_RocksRightEdge);
+        tilemap.setTile(TileType::RockEdgeLeft, SteamDriller_RocksLeftEdge);
+        tilemap.setTile(TileType::RockEdgeBottom, SteamDriller_RocksWallBottomEdge);
 
 
-        tilemap->setTile(TileType::TopCenter, SteamDriller_TopPlatform);
-        tilemap->setTile(TileType::TopLeft, SteamDriller_TopPlatformLeftEdge);
-        tilemap->setTile(TileType::TopRight, SteamDriller_TopPlatformRightEdge);
+        tilemap.setTile(TileType::TopCenter, SteamDriller_TopPlatform);
+        tilemap.setTile(TileType::TopLeft, SteamDriller_TopPlatformLeftEdge);
+        tilemap.setTile(TileType::TopRight, SteamDriller_TopPlatformRightEdge);
 
-        tilemap->setTile(TileType::Unbreakable, SteamDriller_Unbreakable);
-        tilemap->setTile(TileType::UnbreakableFloor, SteamDriller_UnbreakableFloor);
+        tilemap.setTile(TileType::Unbreakable, SteamDriller_Unbreakable);
+        tilemap.setTile(TileType::UnbreakableFloor, SteamDriller_UnbreakableFloor);
+
+        switch (anim%3) {
+            case 0:
+                tilemap.setTile(TileType::BackgroundUndergroundBoss1, SteamDriller_BackgroundUndergroundBoss1);
+                tilemap.setTile(TileType::BackgroundUndergroundBoss2, SteamDriller_BackgroundUndergroundBoss2);
+                tilemap.setTile(TileType::BackgroundUndergroundBoss3, SteamDriller_BackgroundUndergroundBoss3);
+                break;
+            case 1:
+                tilemap.setTile(TileType::BackgroundUndergroundBoss1, SteamDriller_BackgroundUndergroundBoss3);
+                tilemap.setTile(TileType::BackgroundUndergroundBoss2, SteamDriller_BackgroundUndergroundBoss1);
+                tilemap.setTile(TileType::BackgroundUndergroundBoss3, SteamDriller_BackgroundUndergroundBoss2);
+                break;
+            case 2:
+                tilemap.setTile(TileType::BackgroundUndergroundBoss1, SteamDriller_BackgroundUndergroundBoss2);
+                tilemap.setTile(TileType::BackgroundUndergroundBoss2, SteamDriller_BackgroundUndergroundBoss3);
+                tilemap.setTile(TileType::BackgroundUndergroundBoss2, SteamDriller_BackgroundUndergroundBoss1);
+                break;
+        }
+
 
 
     }

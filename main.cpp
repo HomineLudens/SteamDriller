@@ -1,9 +1,8 @@
 #include <Pokitto.h>
 #include <tasui>
 #include "palette/SteamPalette256.h"
-#include <puits_UltimateUtopia.h>
 #include "assets/tiles/steamtasui.h" 
-#include <SDFileSystem.h>
+//#include <SDFileSystem.h>
 
 #include "SteamCookie.h"
 #include "Level.h"
@@ -98,6 +97,7 @@ int main() {
         msTotal += msElapsed;
         msLast = msNow;
 
+        //-------------------------------------------------
         ///TEST DEBUG
         if (PB::pressed(BTN_C) && player.life < 1) {
             initGame();
@@ -108,9 +108,10 @@ int main() {
         if (PB::pressed(BTN_C)) {
             freeRam();
         }
-        if (PB::cBtn()){
+        if (PB::cBtn()) {
             player.life = 100;
         }
+        //-------------------------------------------------
 
         //Music managment
         if (player.onBossZone) {
@@ -118,12 +119,11 @@ int main() {
         } else {
             setTrack(5);
         }
-        //
+        
         if (hud.puzzleState == Hud::PuzzleState::None)
             PS::playMusicStream();
         else
             PS::pauseMusicStream();
-
 
         //Save best score
         if (player.life < 1) {

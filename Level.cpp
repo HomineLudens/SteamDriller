@@ -7,7 +7,7 @@ extern SteamCookie steamCookie;
 Level::Level() {
     Init(Point(0, 0));
     tilemap.set(lvlData[0], lvlData[1], lvlData + 2);
-    TilesLoader::SetTiles( & tilemap);
+    TilesLoader::SetTiles(tilemap, animFrame);
 }
 
 void Level::Init(const Point & posStart) {
@@ -218,8 +218,9 @@ bool Level::IsSolid(const Point & pos, int offX, int offY) {
     return !(tile == TilesLoader::TileType::None ||
         tile == TilesLoader::TileType::BackgroundUnderground ||
         tile == TilesLoader::TileType::BackgroundUndergroundRoom ||
-        tile == TilesLoader::TileType::BackgroundUndergroundBoss ||
-        tile == TilesLoader::TileType::BackgroundUndergroundBoss2);
+        tile == TilesLoader::TileType::BackgroundUndergroundBoss1 ||
+        tile == TilesLoader::TileType::BackgroundUndergroundBoss2 ||
+        tile == TilesLoader::TileType::BackgroundUndergroundBoss3);
 }
 
 bool Level::IsShootable(const Point & pos, int offX, int offY) {
@@ -441,7 +442,7 @@ void Level::CreateBossZone() {
         int xr = random(2, COLUMNS - 2);
         int yr = random(bossZoneHeight, bossZoneHeight * 2);
         if (lvlData[2 + (yr * COLUMNS) + xr] == TilesLoader::TileType::BackgroundUnderground) {
-            lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss;
+            lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss1;
             i--;
         }
     }
@@ -454,20 +455,30 @@ void Level::CreateBossZone() {
                 lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::UnbreakableFloor; //
             } else {
                 depthBossZoneBegin = depth + ((ROWS - yr) * TILE_HEIGHT);
-                if (random(100) < 90)
-                    lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss; //
-                else
+
+                auto rnd = random(100);
+                lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss1; //
+                if (rnd > 60)
                     lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss2; //
+                if (rnd > 90)
+                    lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss3; //
             }
         }
     }
 
-    //Add boss
-    AddEnemy(random(100) > 50 ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH, depthBossZoneEnd - 30, Enemy::EnemyType::Boss);
-    //printf("NEW BOSS ZONE\r\n");
+    printf("NEW BOSS ZONE done\r\n");
 }
 
 void Level::Update(Camera & camera, Player & player, int ms) {
+
+    msAnim += ms;
+    if (msAnim > 150) {
+        ///------------
+        //Animated tiles
+        animFrame++;
+        TilesLoader::SetTiles(tilemap, animFrame);
+        msAnim = 0;
+    }
 
     if (player.pos.x > (COLUMNS - SHIFT_VAL) * TILE_WIDTH) {
         ShiftStuff(TILE_WIDTH, 0);
@@ -492,16 +503,24 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         bossZoneActivated = true;
         CreateBossZone();
     }
-    // //Finish boss Zone
-    // if (bossZoneActivated && (depth + player.pos.y) > depthBossZoneEnd + 100) {
-    //     printf("NEW ZONE\r\n");
-    //     bossZoneActivated = false;
-    //     depthBossZoneTrigger = (depth + player.pos.y.getInteger()) + 250;
-    // }
+
+    //End of boss Zone, make another
+    if (bossZoneActivated && (depth + player.pos.y) > depthBossZoneEnd + 100) {
+        printf("NEW ZONE need please\r\n");
+        bossZoneActivated = false;
+        bossActivated = false;
+        depthBossZoneTrigger = (depth + player.pos.y.getInteger()) + 1000;
+    }
 
     //Mark player inside boss zone
     player.onBossZone = ((depth + player.pos.y) > depthBossZoneBegin) && ((depth + player.pos.y) < depthBossZoneEnd);
-    // if (player.onFloor && player.onBossZone) {}
+    //---
+    if (player.onFloor && player.onBossZone && !bossActivated) {
+        //Add boss
+        bossActivated = true;
+        AddEnemy((player.pos.x / TILE_WIDTH) > (COLUMNS / 2) ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH, player.pos.y.getInteger() - 30, Enemy::EnemyType::Boss);
+        printf("BOSS ACTIVATED!\r\n");
+    }
 
     //Update all stuff
     updateAll(particles, ms, * this, player);
@@ -509,6 +528,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     updateAll(enemies, ms, * this, player);
     updateAll(items, ms, * this, player);
     updateAll(itemsAnim, ms, * this, player);
+
 
     //-------------------
     //MANAGE BULLETS

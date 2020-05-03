@@ -71,8 +71,12 @@ class Level {
     Point pos;
     int depth = 0;
     int16_t msgToShow = -1;
+    
+    int msAnim = 0;
+    int16_t animFrame = 0;
 
     bool bossZoneActivated = false;
+    bool bossActivated = false;
     int depthBossZoneTrigger;
     int depthBossZoneBegin;
     int depthBossZoneEnd;
@@ -90,22 +94,22 @@ class Level {
 
     void RandomizeLine(int row);
     void ReshapeRow(int row);
-    void CreateBossZone();
+    
 
     public:
+    void CreateBossZone();
         constexpr static int COLUMNS = 64;
     constexpr static int ROWS = 64;
     constexpr static int TILE_WIDTH = 8;
     constexpr static int TILE_HEIGHT = 8;
-    constexpr static int SHIFT_VAL = 16; //tiles when shift start
+    constexpr static int SHIFT_VAL = 20; //tiles when shift start
     uint8_t lvlData[2 + (COLUMNS * ROWS)];
 
-    array < Bullet, 15 > bullets;
-    array < Particle, 100 > particles;
-    array < Enemy, 10 > enemies;
-    array < Item, 30 > items;
-    array < ItemAnim, 10 > itemsAnim;
-
+    std::array < Bullet, 15 > bullets;
+    std::array < Particle, 100 > particles;
+    std::array < Enemy, 10 > enemies;
+    std::array < Item, 30 > items;
+    std::array < ItemAnim, 10 > itemsAnim;
 
     Level();
 

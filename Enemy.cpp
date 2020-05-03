@@ -67,7 +67,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.jumper = true;
             eAI.shootHorizontal = true;
             eAI.shootVertical = false;
-            eAI.shootAndFire = false;
+            eAI.shootAndFire = true;
             eAI.explodeOnDeathRange = 0;
             break;
         case EnemyType::SpiderMecha:
@@ -105,20 +105,20 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.explodeOnDeathRange = 0;
             break;
         case EnemyType::Boss:
-            eAI.life = 10;
-            eAI.speedX = 1.25;
+            eAI.life = 100;
+            eAI.speedX = 0.75;
             eAI.speedY = 0;
-            eAI.senseDistance = 100;
-            eAI.viewDistance = 150;
+            eAI.senseDistance = 50;
+            eAI.viewDistance = 80;
             eAI.msWakeUp = 100;
             eAI.msAttackDuration = 500;
-            eAI.msCoolDown = 500;
+            eAI.msCoolDown = 750;
             eAI.gravityAffected = true;
             eAI.climber = false;
             eAI.jumper = false;
             eAI.shootHorizontal = false;
             eAI.shootVertical = false;
-            eAI.shootAndFire = false;
+            eAI.shootAndFire = true;
             eAI.explodeOnDeathRange = 5;
             break;
     }
@@ -268,8 +268,10 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                     }
 
                     if (enemyType == EnemyType::SpiderMecha || enemyType == EnemyType::Boss) {
-                        auto dx = (player.pos.x - pos.x) / 50.0;
-                        auto dy = (player.pos.y - pos.y) / 50.0;
+
+
+                        auto dx = (player.pos.x - pos.x) / distanceToPlayer;
+                        auto dy = (player.pos.y - pos.y) / distanceToPlayer;
 
                         lvl.AddBullet(Point(pos.x, pos.y - (spr.getFrameHeight() / 2)), Point(dx, dy),
                             Bullet::BulletType::Plasma, eAI.msAttackDuration * 10);
@@ -354,17 +356,17 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
             for (int x = -eAI.explodeOnDeathRange; x < eAI.explodeOnDeathRange; x++) {
                 for (int y = -eAI.explodeOnDeathRange; y < eAI.explodeOnDeathRange; y++) {
                     lvl.DestroyTile(pos, x, y, true);
-                    
+
                     //Randomize explosion
-                    lvl.AddParticle(Point(pos.x + (x*lvl.TILE_WIDTH),pos.y + (y*lvl.TILE_HEIGHT)),
-                    Point(random(-10,10)/10.0, random(-10,10)/10.0),
-                    Point(0, 0), 
-                    Particle::ParticleType::Explosion,
-                    random(400,1000));
+                    lvl.AddParticle(Point(pos.x + (x * lvl.TILE_WIDTH), pos.y + (y * lvl.TILE_HEIGHT)),
+                        Point(random(-10, 10) / 10.0, random(-10, 10) / 10.0),
+                        Point(0, 0),
+                        Particle::ParticleType::Explosion,
+                        random(400, 1000));
                 }
             }
 
-           
+
         }
     }
 

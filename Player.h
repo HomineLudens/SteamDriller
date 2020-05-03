@@ -18,6 +18,7 @@ class Player {
         constexpr static int MAX_SHOOTS = 5;
     constexpr static float LEAN_SPEED = 2;
     constexpr static float LEAN_SPEED_MAX = 6;
+    constexpr static float MAX_SPEED_X = 10;
     constexpr static float BREAK_SPEED = 4;
     constexpr static float BAUNCE_COEFICENT = 0.1;
     constexpr static float MAX_FALLING_SPEED = 6.5;

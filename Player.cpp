@@ -198,6 +198,10 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     if (speed.y > MAX_FALLING_SPEED) speed.y = MAX_FALLING_SPEED;
     //Lateral friction
     speed.x *= 0.85; //friction
+    if (speed.x > MAX_SPEED_X)
+        speed.x = MAX_SPEED_X;
+    if (speed.x < -MAX_SPEED_X)
+        speed.x = -MAX_SPEED_X;
 
     //Floor collision
     pos.y += speed.y;
