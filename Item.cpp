@@ -59,7 +59,7 @@ Rect Item::GetHitBox() {
 
 void Item::Update(int ms, Level & lvl, Player & player) {
 
-    if (!flags[FlagsType::fixed]) {
+    if (flags[FlagsType::alive] && !flags[FlagsType::fixed]) {
         auto xPrec = pos.x;
         auto yPrec = pos.y;
 

@@ -51,6 +51,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootHorizontal = (enemyType == EnemyType::PurpleSentinelHorizontal);
             eAI.shootVertical = (enemyType == EnemyType::PurpleSentinelVertical);
             eAI.shootAndFire = false;
+            eAI.explodeOnDeathRange = 0;
             break;
         case EnemyType::Spider:
             eAI.life = 20;
@@ -67,6 +68,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootHorizontal = true;
             eAI.shootVertical = false;
             eAI.shootAndFire = false;
+            eAI.explodeOnDeathRange = 0;
             break;
         case EnemyType::SpiderMecha:
             eAI.life = 100;
@@ -83,6 +85,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootHorizontal = true;
             eAI.shootVertical = true;
             eAI.shootAndFire = true;
+            eAI.explodeOnDeathRange = 0;
             break;
         case EnemyType::Worm:
             eAI.life = 5;
@@ -99,6 +102,24 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootHorizontal = false;
             eAI.shootVertical = false;
             eAI.shootAndFire = false;
+            eAI.explodeOnDeathRange = 0;
+            break;
+        case EnemyType::Boss:
+            eAI.life = 10;
+            eAI.speedX = 1.25;
+            eAI.speedY = 0;
+            eAI.senseDistance = 100;
+            eAI.viewDistance = 150;
+            eAI.msWakeUp = 100;
+            eAI.msAttackDuration = 500;
+            eAI.msCoolDown = 500;
+            eAI.gravityAffected = true;
+            eAI.climber = false;
+            eAI.jumper = false;
+            eAI.shootHorizontal = false;
+            eAI.shootVertical = false;
+            eAI.shootAndFire = false;
+            eAI.explodeOnDeathRange = 5;
             break;
     }
     return eAI;
@@ -156,6 +177,19 @@ void Enemy::ChangeAnimation(Enemy::AnimationType animation) {
                     break;
                 case AnimationType::Attack:
                     spr.play(steamDriller_Worm_Anim, SteamDriller_Worm_Anim::Animation::Attack);
+                    break;
+            }
+            break;
+        case EnemyType::Boss:
+            switch (animation) {
+                case AnimationType::Idle:
+                    spr.play(steamDriller_Boss_Anim, SteamDriller_Boss_Anim::Animation::Idle);
+                    break;
+                case AnimationType::Move:
+                    spr.play(steamDriller_Boss_Anim, SteamDriller_Boss_Anim::Animation::Move);
+                    break;
+                case AnimationType::Attack:
+                    spr.play(steamDriller_Boss_Anim, SteamDriller_Boss_Anim::Animation::Attack);
                     break;
             }
             break;
@@ -221,25 +255,36 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
 
                     if (enemyType == EnemyType::PurpleSentinelHorizontal || enemyType == EnemyType::PurpleSentinelVertical) {
                         //Fire bullets
-                        auto bulletType = (enemyType == EnemyType::PurpleSentinelHorizontal) ? Bullet::BulletType::LaserHorizontal : Bullet::BulletType::LaserVertical;
                         int dir = (facing == Facing::Right ? 1 : -1);
                         int i = 1;
                         //Put as much as bullets of laser needs
                         while (!lvl.IsSolid(Point(pos.x, pos.y - (spr.getFrameHeight() / 2)), dir * (i - 1), 0) && i < lvl.COLUMNS) {
                             auto offX = ((dir * i) * lvl.TILE_WIDTH);
-                            lvl.AddBullet(Point(pos.x + offX, pos.y - (spr.getFrameHeight() / 2)), Point(dir, 0),
-                                bulletType, eAI.msAttackDuration);
+                            lvl.AddBullet(Point(pos.x + offX, pos.y - (spr.getFrameHeight() / 2)), Point(0, 0),
+                                Bullet::BulletType::LaserHorizontal, eAI.msAttackDuration);
                             i++;
                         }
                         Pokitto::Sound::playSFX(sfx_laser, sizeof(sfx_laser));
                     }
 
-                    if (enemyType == EnemyType::SpiderMecha) {
+                    if (enemyType == EnemyType::SpiderMecha || enemyType == EnemyType::Boss) {
                         auto dx = (player.pos.x - pos.x) / 50.0;
                         auto dy = (player.pos.y - pos.y) / 50.0;
 
                         lvl.AddBullet(Point(pos.x, pos.y - (spr.getFrameHeight() / 2)), Point(dx, dy),
                             Bullet::BulletType::Plasma, eAI.msAttackDuration * 10);
+                        Pokitto::Sound::playSFX(sfx_laser, sizeof(sfx_laser));
+                    }
+
+                    //Boss shoot even vertical
+                    if (enemyType == EnemyType::Boss) {
+                        int i = -1;
+                        while (!lvl.IsSolid(Point(pos.x, pos.y), i, 0) && i > -20) {
+                            auto offY = i * lvl.TILE_WIDTH;
+                            lvl.AddBullet(Point(pos.x, pos.y + offY - (spr.getFrameHeight() / 2)), Point(0, 0),
+                                Bullet::BulletType::LaserVertical, eAI.msAttackDuration);
+                            i--;
+                        }
                         Pokitto::Sound::playSFX(sfx_laser, sizeof(sfx_laser));
                     }
                 }
@@ -300,6 +345,31 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
         }
     }
 
+    //On DEATH Event
+    if (life == 0 && lifePrev > 0) {
+        auto eAI = GetAI();
+        if (eAI.explodeOnDeathRange > 0) {
+
+            lvl.DestroyTile(pos, 0, 0, true);
+            for (int x = -eAI.explodeOnDeathRange; x < eAI.explodeOnDeathRange; x++) {
+                for (int y = -eAI.explodeOnDeathRange; y < eAI.explodeOnDeathRange; y++) {
+                    lvl.DestroyTile(pos, x, y, true);
+                    
+                    //Randomize explosion
+                    lvl.AddParticle(Point(pos.x + (x*lvl.TILE_WIDTH),pos.y + (y*lvl.TILE_HEIGHT)),
+                    Point(random(-10,10)/10.0, random(-10,10)/10.0),
+                    Point(0, 0), 
+                    Particle::ParticleType::Explosion,
+                    random(400,1000));
+                }
+            }
+
+           
+        }
+    }
+
+    //
+    lifePrev = life;
 }
 
 bool Enemy::IsAlive() {

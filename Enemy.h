@@ -28,49 +28,53 @@ class Enemy: public Entity {
         Attack,
     };
 
+    void ChangeState(State newState);
+    void ChangeAnimation(AnimationType animation);
+    void MoveTowardPlayer(const Point & playerPos, float speedX, float speedY);
+
+    public: enum EnemyType {
+        Worm,
+        PurpleSentinelHorizontal,
+        PurpleSentinelVertical,
+        Spider,
+        SpiderMecha,
+        Boss
+    };
+
     typedef struct {
-        int life;
+        int16_t life;
         float speedX;
         float speedY;
-        int senseDistance;
-        int viewDistance;
-        int msWakeUp;
-        int msAttackDuration;
-        int msCoolDown;
+        int16_t senseDistance;
+        int16_t viewDistance;
+        int16_t msWakeUp;
+        int16_t msAttackDuration;
+        int16_t msCoolDown;
         bool gravityAffected;
         bool climber;
         bool jumper;
         bool shootHorizontal;
         bool shootVertical;
         bool shootAndFire;
+        int16_t explodeOnDeathRange;
     }
     EnemyAI;
-    EnemyAI GetAI();
-
-    void ChangeState(State newState);
-    void ChangeAnimation(AnimationType animation);
-    void MoveTowardPlayer(const Point & playerPos, float speedX, float speedY);
-
-    public: enum EnemyType {
-        PurpleSentinelHorizontal,
-        PurpleSentinelVertical,
-        Spider,
-        SpiderMecha,
-        Worm,
-    };
 
 
     Point pos;
     Point speed;
-    int life;
+    int16_t life;
+    int16_t lifePrev;
     Facing facing; //normally looks to the right
     EnemyType enemyType;
     Sprite spr;
     State state;
-    int msState;
+    int16_t msState;
 
     Enemy();
     Enemy(int x, int y, EnemyType enemyType);
+
+    EnemyAI GetAI();
 
     Rect GetHitBox();
     void Update(int ms, Level & lvl, Player & player);

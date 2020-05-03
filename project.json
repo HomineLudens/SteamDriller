@@ -2985,6 +2985,45 @@
 		},
 		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundBoss2.h": {
 			"sdcard": false
+		},
+		"\\sprites\\SteamClimber_Boss_Anim_Old.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Boss_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Boss_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Boss_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Boss_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Boss_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Smoke_Wheels_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Smoke_Wheels_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Smoke_Wheels_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Smoke_Wheels_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Smoke_Wheels_Anim.h": {
+			"sdcard": false
+		},
+		"\\assets\\bulletLaserVertical.png": {
+			"sdcard": false
+		},
+		"\\assets\\bulletLaserVertical.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

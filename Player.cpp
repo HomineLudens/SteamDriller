@@ -24,7 +24,7 @@ void Player::Init(const Point & pos) {
     facing = Facing::Right;
     ChangeState(State::Offline);
     sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Offline);
-    sprSmokeWheels.play(steamClimber_Smoke_Wheels_Anim, SteamClimber_Smoke_Wheels_Anim::Animation::Idle);
+    sprSmokeWheels.play(steamDriller_Smoke_Wheels_Anim, SteamDriller_Smoke_Wheels_Anim::Animation::Idle);
     onBossZone = false;
 }
 
@@ -205,10 +205,12 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     if (onFloor) {
         auto fallHeight = (lvl.GetDepth() + pos.y.getInteger()) - depthJumpBegin;
         if (fallHeight > FALL_DAMAGE_HEIGHT) {
-            Damage(35); //Falling damage
+            Damage(25); //Falling damage
             camera.Shake(4);
             lvl.AddParticle(Point(pos.x, pos.y - 5), Point(0.3, -0.2), Point(0, 0), Particle::ParticleType::Explosion, 600);
             lvl.AddParticle(Point(pos.x, pos.y - 5), Point(-0.3, -0.2), Point(0, 0), Particle::ParticleType::Explosion, 600);
+            lvl.AddParticle(Point(pos.x, pos.y), Point(0, -0.4), Point(0, 0), Particle::ParticleType::Explosion, 700);
+            //printf("FALL DAMAGE life=%i\r\n", life);
         }
         msOnFloor = 80;
         pos.y = oldY;
@@ -217,7 +219,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     }
 
     //Save jump falling start position
-    if (speed.y < 0 || onFloor) {
+    if (speed.y < 1 || onFloor) {
         depthJumpBegin = lvl.GetDepth() + pos.y.getInteger();
     }
 

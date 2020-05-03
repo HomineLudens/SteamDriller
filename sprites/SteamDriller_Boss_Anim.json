@@ -1,33 +1,33 @@
 { "frames": [
    {
-    "filename": "SteamClimber_Boss_Anim 0.ase",
+    "filename": "SteamDriller_Boss_Anim 0.ase",
     "frame": { "x": 0, "y": 0, "w": 40, "h": 18 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 18 },
     "sourceSize": { "w": 40, "h": 18 },
-    "duration": 100
+    "duration": 250
    },
    {
-    "filename": "SteamClimber_Boss_Anim 1.ase",
+    "filename": "SteamDriller_Boss_Anim 1.ase",
     "frame": { "x": 40, "y": 0, "w": 40, "h": 18 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 18 },
     "sourceSize": { "w": 40, "h": 18 },
-    "duration": 100
+    "duration": 150
    },
    {
-    "filename": "SteamClimber_Boss_Anim 2.ase",
+    "filename": "SteamDriller_Boss_Anim 2.ase",
     "frame": { "x": 80, "y": 0, "w": 40, "h": 18 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 18 },
     "sourceSize": { "w": 40, "h": 18 },
-    "duration": 100
+    "duration": 250
    },
    {
-    "filename": "SteamClimber_Boss_Anim 3.ase",
+    "filename": "SteamDriller_Boss_Anim 3.ase",
     "frame": { "x": 120, "y": 0, "w": 40, "h": 18 },
     "rotated": false,
     "trimmed": false,
@@ -36,7 +36,7 @@
     "duration": 100
    },
    {
-    "filename": "SteamClimber_Boss_Anim 4.ase",
+    "filename": "SteamDriller_Boss_Anim 4.ase",
     "frame": { "x": 160, "y": 0, "w": 40, "h": 18 },
     "rotated": false,
     "trimmed": false,
@@ -45,7 +45,7 @@
     "duration": 100
    },
    {
-    "filename": "SteamClimber_Boss_Anim 5.ase",
+    "filename": "SteamDriller_Boss_Anim 5.ase",
     "frame": { "x": 200, "y": 0, "w": 40, "h": 18 },
     "rotated": false,
     "trimmed": false,
@@ -54,7 +54,7 @@
     "duration": 100
    },
    {
-    "filename": "SteamClimber_Boss_Anim 6.ase",
+    "filename": "SteamDriller_Boss_Anim 6.ase",
     "frame": { "x": 240, "y": 0, "w": 40, "h": 18 },
     "rotated": false,
     "trimmed": false,
@@ -63,27 +63,53 @@
     "duration": 100
    },
    {
-    "filename": "SteamClimber_Boss_Anim 7.ase",
+    "filename": "SteamDriller_Boss_Anim 7.ase",
     "frame": { "x": 280, "y": 0, "w": 40, "h": 18 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 18 },
     "sourceSize": { "w": 40, "h": 18 },
     "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Boss_Anim 8.ase",
+    "frame": { "x": 320, "y": 0, "w": 40, "h": 18 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 18 },
+    "sourceSize": { "w": 40, "h": 18 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Boss_Anim 9.ase",
+    "frame": { "x": 360, "y": 0, "w": 40, "h": 18 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 18 },
+    "sourceSize": { "w": 40, "h": 18 },
+    "duration": 150
+   },
+   {
+    "filename": "SteamDriller_Boss_Anim 10.ase",
+    "frame": { "x": 400, "y": 0, "w": 40, "h": 18 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 18 },
+    "sourceSize": { "w": 40, "h": 18 },
+    "duration": 500
    }
  ],
  "meta": {
   "app": "http://www.aseprite.org/",
   "version": "1.1.6-dev",
-  "image": "SteamClimber_Boss_Anim.png",
+  "image": "SteamDriller_Boss_Anim.png",
   "format": "RGBA8888",
-  "size": { "w": 320, "h": 18 },
+  "size": { "w": 440, "h": 18 },
   "scale": "1",
   "frameTags": [
-   { "name": "Idle", "from": 0, "to": 0, "direction": "forward" },
-   { "name": "Opening", "from": 1, "to": 3, "direction": "forward" },
-   { "name": "Open", "from": 4, "to": 4, "direction": "forward" },
-   { "name": "Closing", "from": 5, "to": 7, "direction": "forward" }
+   { "name": "Idle", "from": 0, "to": 2, "direction": "forward" },
+   { "name": "Move", "from": 3, "to": 8, "direction": "forward" },
+   { "name": "Attack", "from": 9, "to": 10, "direction": "forward" }
   ],
   "layers": [
    { "name": "Layer", "opacity": 255, "blendMode": "normal" }

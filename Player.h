@@ -42,13 +42,12 @@ class Player {
     Point speed;
     int8_t bullets;
 
-    int life;
-    int lifePrev;
+    int8_t life;
+    int8_t lifePrev;
     bool onFloor;
     int depthJumpBegin;
 
     bool onBossZone;
-    bool onBossZonePrev;
 
     int msOnFloor;
     int msLifeLoss;

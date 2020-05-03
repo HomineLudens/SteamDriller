@@ -55,6 +55,7 @@ void Level::Init(const Point & posStart) {
 
     depth = 0;
     bossZoneActivated = false;
+    depthBossZoneTrigger = 100;
 
     //--Clear level tilemap
     lvlData[0] = COLUMNS;
@@ -166,41 +167,40 @@ void Level::RandomizeLine(int r) {
         }
     }
 
+    // //Make a random room
+    // if (depth > 30 && random(100) > 50) {
+    //     int roomHeight = random(4, 8);
+    //     int roomWidth = random(6, 20);
+    //     int roomStartX = random(2, COLUMNS - 2 - roomWidth);
+    //     for (int yr = 0; yr < roomHeight; yr++) {
+    //         for (int xr = roomStartX; xr < roomWidth; xr++) {
+    //             //Clear room
+    //             lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundRoom; //
+    //         }
+    //         ReshapeRow(r - yr);
+    //     }
 
-    //Make a room
-    if (depth > 30 && random(100) > 50) {
-        int roomHeight = random(4, 8);
-        int roomWidth = random(6, 20);
-        int roomStartX = random(2, COLUMNS - 2 - roomWidth);
-        for (int yr = 0; yr < roomHeight; yr++) {
-            for (int xr = roomStartX; xr < roomWidth; xr++) {
-                //Clear room
-                lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundRoom; //
-            }
-            ReshapeRow(r - yr);
-        }
+    //     auto xi = (roomStartX + (roomWidth / 2)) * TILE_WIDTH;
+    //     auto yi = (r - (roomHeight / 2)) * TILE_HEIGHT;
+    //     AddItemAnim(xi, yi, ItemAnim::ItemType::Ruby);
+    // }
 
-        auto xi = (roomStartX + (roomWidth / 2)) * TILE_WIDTH;
-        auto yi = (r - (roomHeight / 2)) * TILE_HEIGHT;
-        AddItemAnim(xi, yi, ItemAnim::ItemType::Ruby);
-    }
-
-    //Move well walls
-    if (depth > 2000 && random(100) > 80) {
-        int oldX1 = pg.x1;
-        int newX1 = random(pg.minX, pg.maxX);
-        pg.x1 = newX1;
-        pg.x2 = pg.x1 + random(pg.minLen, pg.maxLen);
-        int xStartDig = oldX1 < newX1 ? oldX1 : newX1;
-        //Dig a tunnel to the new well
-        for (int yr = 0; yr < 3; yr++) {
-            for (int xr = xStartDig; xr < pg.x2; xr++) {
-                //Clear room
-                lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUnderground; //
-            }
-            ReshapeRow(r - yr);
-        }
-    }
+    // //Move main well walls
+    // if (depth > 2000 && random(100) > 80) {
+    //     int oldX1 = pg.x1;
+    //     int newX1 = random(pg.minX, pg.maxX);
+    //     pg.x1 = newX1;
+    //     pg.x2 = pg.x1 + random(pg.minLen, pg.maxLen);
+    //     int xStartDig = oldX1 < newX1 ? oldX1 : newX1;
+    //     //Dig a tunnel to the new well
+    //     for (int yr = 0; yr < 3; yr++) {
+    //         for (int xr = xStartDig; xr < pg.x2; xr++) {
+    //             //Clear room
+    //             lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUnderground; //
+    //         }
+    //         ReshapeRow(r - yr);
+    //     }
+    // }
 }
 
 int Level::GetTileId(const Point & pos, int offX, int offY) {
@@ -232,12 +232,12 @@ bool Level::IsShootable(const Point & pos, int offX, int offY) {
     return tile == TilesLoader::TileType::TopCenter || tile == TilesLoader::TileType::TopLeft || tile == TilesLoader::TileType::TopRight;
 }
 
-bool Level::IsIndestructible(const Point & pos, int offX, int offY) {
-    return GetTileId(pos, offX, offY) == TilesLoader::TileType::Unbreakable; // || !IsSolid(pos, offX, offY);
+bool Level::IsDestructible(const Point & pos, int offX, int offY) {
+    return GetTileId(pos, offX, offY) != TilesLoader::TileType::Unbreakable;
 }
 
-void Level::DestroyTile(const Point & pos, int offX, int offY) {
-    if (!IsIndestructible(pos, offX, offY)) {
+void Level::DestroyTile(const Point & pos, int offX, int offY, bool force) {
+    if (force || IsDestructible(pos, offX, offY)) {
         auto tOn = GetTileId(pos, offX, offY);
         auto tLeft = GetTileId(pos, offX + -1, offY);
         auto tRight = GetTileId(pos, offX + 1, offY);
@@ -256,7 +256,6 @@ void Level::DestroyTile(const Point & pos, int offX, int offY) {
         if (tOver == TilesLoader::TileType::RockInside)
             SetTileId(pos, TilesLoader::TileType::RockEdgeBottom, offX, offY - 1);
         //--------
-
         Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
     }
 }
@@ -284,26 +283,35 @@ void Level::ReshapeRow(int row) {
     }
 }
 
-void Level::AddBullet(const Point & pos,
+int Level::AddBullet(const Point & pos,
     const Point & speed, Bullet::BulletType bulletType, int msLife) {
     for (int i = 0; i < bullets.size(); i++) {
         if (!bullets[i].IsAlive()) {
             bullets[i] = Bullet(pos, speed, bulletType, msLife);
-            return;
+            return i;
         }
     }
+    return -1;
 }
 
-void Level::AddParticle(const Point & pos,
+int Level::AddParticle(const Point & pos,
     const Point & speed,
         const Point & gravity, Particle::ParticleType particleType, int msLife) {
+
+    //loop index
+    lastParticleId++;
+    if (lastParticleId > particles.size() - 1)
+        lastParticleId = 0;
+
+    //Try find a free slot or use last one++
     for (int i = 0; i < particles.size(); i++) {
         if (!particles[i].IsAlive()) {
-            particles[i] = Particle(pos, speed, particleType, gravity);
-            particles[i].msLife = msLife;
+            lastParticleId = i;
             break;
         }
     }
+    particles[lastParticleId] = Particle(pos, speed, particleType, gravity, msLife);
+    return lastParticleId;
 }
 
 void Level::AddDebris(const Point & pos, int count) {
@@ -344,13 +352,21 @@ int Level::AddItemAnim(int x, int y, ItemAnim::ItemType itemType, bool fixed, bo
 }
 
 int Level::AddEnemy(int x, int y, Enemy::EnemyType enemyType) {
+
+    //loop index
+    lastEnemyId++;
+    if (lastEnemyId > enemies.size() - 1)
+        lastEnemyId = 0;
+
+    //Try find a free slot or use last one++
     for (int i = 0; i < enemies.size(); i++) {
         if (!enemies[i].IsAlive()) {
-            enemies[i] = Enemy(x, y, enemyType);
-            return i;
+            lastEnemyId = i;
+            break;
         }
     }
-    return -1;
+    enemies[lastEnemyId] = Enemy(x, y, enemyType);
+    return lastEnemyId;
 }
 
 int Level::GetDepth() const {
@@ -413,17 +429,20 @@ void Level::CreateBossZone() {
     for (int yr = 1; yr < bossZoneHeight; yr++) {
         for (int xr = 0; xr < COLUMNS; xr++) {
             if (yr == 1) {
-                depthBossZoneEnd = (ROWS - yr) * TILE_HEIGHT;
+                depthBossZoneEnd = depth + ((ROWS - yr) * TILE_HEIGHT);
                 lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::UnbreakableFloor; //
             } else {
-                depthBossZoneBegin = (ROWS - yr) * TILE_HEIGHT;
-                lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss; //
+                depthBossZoneBegin = depth + ((ROWS - yr) * TILE_HEIGHT);
+                if (random(100) < 90)
+                    lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss; //
+                else
+                    lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss2; //
             }
         }
     }
 
-    //Boss
-    AddEnemy(random(100) > 50 ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH, depthBossZoneEnd - 30, Enemy::EnemyType::SpiderMecha);
+    //Add boss
+    AddEnemy(random(100) > 50 ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH, depthBossZoneEnd - 30, Enemy::EnemyType::Boss);
 }
 
 void Level::Update(Camera & camera, Player & player, int ms) {
@@ -446,21 +465,21 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         camera.pos.y -= TILE_HEIGHT;
     }
 
-
     //Prepare Boss Zone
-    if (player.pos.y > 1000 && !bossZoneActivated) {
+    if ((depth + player.pos.y) > depthBossZoneTrigger && !bossZoneActivated) {
         bossZoneActivated = true;
         CreateBossZone();
-
+    }
+    //Finish boss Zone
+    if (bossZoneActivated && (depth + player.pos.y) > depthBossZoneEnd + 100) {
+        printf("NEW ZONE\r\n");
+        bossZoneActivated = false;
+        depthBossZoneTrigger = (depth + player.pos.y.getInteger()) + 250;
     }
 
-    //Sing player inside boss zone
+    //Mark player inside boss zone
     player.onBossZone = ((depth + player.pos.y) > depthBossZoneBegin) && ((depth + player.pos.y) < depthBossZoneEnd);
-
-    // if (player.onFloor && player.onBossZone) {
-
-    // }
-
+    // if (player.onFloor && player.onBossZone) {}
 
     //Update all stuff
     updateAll(particles, ms, * this, player);
@@ -516,11 +535,10 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     for (auto & e: enemies) {
         if (e.IsAlive() && player.life > 0 && Rect::Collide(player.GetHitBox(), e.GetHitBox())) {
             AddParticle(e.pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
-            //e.Kill();
             Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
-            //--
+            //---
             e.Damage(5);
-
+            //---
             player.speed.y += random(-2, -4);
             player.Damage(20);
             camera.Shake(4);

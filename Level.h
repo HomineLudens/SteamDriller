@@ -21,8 +21,7 @@ class Level {
         template < typename F >
         void updateAll(F & arr, int ms, Level & lvl, Player & player) {
             for (auto & e: arr) {
-                if (e.IsAlive())
-                    e.Update(ms, lvl, player);
+                e.Update(ms, lvl, player);
             }
         }
 
@@ -64,12 +63,17 @@ class Level {
             }
         }
 
+
+    int16_t lastParticleId;
+    int16_t lastEnemyId;
+
     Tilemap tilemap;
     Point pos;
     int depth = 0;
-    int msgToShow = -1;
-    
-    bool bossZoneActivated=false;
+    int16_t msgToShow = -1;
+
+    bool bossZoneActivated = false;
+    int depthBossZoneTrigger;
     int depthBossZoneBegin;
     int depthBossZoneEnd;
 
@@ -113,20 +117,21 @@ class Level {
 
     bool IsSolid(const Point & pos, int offX = 0, int offY = 0);
     bool IsShootable(const Point & pos, int offX = 0, int offY = 0);
-    bool IsIndestructible(const Point & pos, int offX = 0, int offY = 0);
+    bool IsDestructible(const Point & pos, int offX = 0, int offY = 0);
 
-    void DestroyTile(const Point & pos, int offX = 0, int offY = 0);
-    void AddBullet(const Point & pos,
+    void DestroyTile(const Point & pos, int offX = 0, int offY = 0, bool force = false);
+    void AddDebris(const Point & pos, int count);
+    int AddBullet(const Point & pos,
         const Point & speed, Bullet::BulletType bulletType, int msLife = 500);
-    void AddParticle(const Point & pos,
+    int AddParticle(const Point & pos,
         const Point & speed,
             const Point & gravity, Particle::ParticleType particleType, int msLife = 500);
-    void AddDebris(const Point & pos, int count);
+
     int AddItem(int x, int y, Item::ItemType itemType, bool fixed = false, bool collectable = true, bool mirrored = false);
     int AddItemAnim(int x, int y, ItemAnim::ItemType itemType, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1);
     int AddEnemy(int x, int y, Enemy::EnemyType enemyType);
     void ShiftStuff(int x, int y);
 
     void Update(Camera & camera, Player & player, int ms);
-    void Draw( Camera & cam,  Player & player);
+    void Draw(Camera & cam, Player & player);
 };

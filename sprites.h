@@ -87,20 +87,12 @@ public:
     }
 };
 
-class SteamClimber_Boss_Anim {
+class SteamDriller_Boss_Anim {
 public:
     enum Animation : std::uint16_t {
 		Idle = 0,
-		Opening = 3,
-		Open = 10,
-		Closing = 13
-	};
-};
-
-class SteamClimber_Smoke_Wheels_Anim {
-public:
-    enum Animation : std::uint16_t {
-		Idle = 0
+		Move = 7,
+		Attack = 20
 	};
 };
 
@@ -207,6 +199,13 @@ public:
 	};
 };
 
+class SteamDriller_Smoke_Wheels_Anim {
+public:
+    enum Animation : std::uint16_t {
+		Idle = 0
+	};
+};
+
 class SteamDriller_Spider_Anim {
 public:
     enum Animation : std::uint16_t {
@@ -235,8 +234,7 @@ public:
 
 // https://stackoverflow.com/a/19591902
 extern "C" {
-extern const SteamClimber_Boss_Anim steamClimber_Boss_Anim;
-extern const SteamClimber_Smoke_Wheels_Anim steamClimber_Smoke_Wheels_Anim;
+extern const SteamDriller_Boss_Anim steamDriller_Boss_Anim;
 extern const SteamDriller_Chip_Anim steamDriller_Chip_Anim;
 extern const SteamDriller_Chip_Black_Anim steamDriller_Chip_Black_Anim;
 extern const SteamDriller_Chip_Purple_Anim steamDriller_Chip_Purple_Anim;
@@ -250,6 +248,7 @@ extern const SteamDriller_PurpleSentinels_Anim steamDriller_PurpleSentinels_Anim
 extern const SteamDriller_Robot_Anim steamDriller_Robot_Anim;
 extern const SteamDriller_Ruby_Anim steamDriller_Ruby_Anim;
 extern const SteamDriller_Smoke_Anim steamDriller_Smoke_Anim;
+extern const SteamDriller_Smoke_Wheels_Anim steamDriller_Smoke_Wheels_Anim;
 extern const SteamDriller_Spider_Anim steamDriller_Spider_Anim;
 extern const SteamDriller_Up_Anim steamDriller_Up_Anim;
 extern const SteamDriller_Worm_Anim steamDriller_Worm_Anim;

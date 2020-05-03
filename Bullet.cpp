@@ -2,6 +2,7 @@
 #include <Pokitto.h>
 #include "assets/bulletSteamVertical.h"
 #include "assets/bulletLaserHorizontal.h"
+#include "assets/bulletLaserVertical.h"
 #include "assets/bulletPlasma.h"
 #include "assets/dot.h"
 
@@ -29,8 +30,14 @@ Bullet::Bullet(const Point & pos,
             this->msLife = msLife;
             spriteBullet = bulletLaserHorizontal;
             break;
+        case Bullet::LaserVertical:
+            this->speed.x = 0; //laser is steady
+            this->speed.y = 0; //laser is steady
+            this->msLife = msLife;
+            spriteBullet = bulletLaserVertical;
+            break;
         case Bullet::Plasma:
-            this->speed.x = direction.x; 
+            this->speed.x = direction.x;
             this->speed.y = direction.y;
             this->msLife = msLife;
             spriteBullet = bulletPlasma;

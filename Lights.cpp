@@ -19,7 +19,7 @@ void Lights::Update(Camera & camera, Player & player, Level & level, int ms) {
         if (!player.onBossZone && player.state != Player::State::Offline && player.state != Player::State::Activating) {
             lightLevel = 36500 - ((100 - player.life) * 350) + (random(-8192, 8192) / 10);
         } else {
-            lightLevel = 3000000;
+            lightLevel = 365000;
         }
 
         CalcLight(camera, level);

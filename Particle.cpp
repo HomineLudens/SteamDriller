@@ -11,9 +11,7 @@ Particle::Particle() {
     particleType = ParticleType::Debris;
 }
 
-Particle::Particle(const Point & pos,
-    const Point & speed, ParticleType particleType,
-        const Point & gravity, int msLife) {
+Particle::Particle(const Point & pos,const Point & speed, ParticleType particleType,const Point & gravity, int msLife) {
     this->pos.x = pos.x;
     this->pos.y = pos.y;
     this->speed.x = speed.x;
