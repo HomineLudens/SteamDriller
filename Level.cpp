@@ -169,7 +169,7 @@ void Level::RandomizeLine(int r) {
     }
 
     //Make a random room
-    if (depth > 30 && random(100) > 90) {
+    if (depth > 300 && random(100) > 90) {
         int roomWidth = random(6, 20);
         int roomHeight = random(6, 10);
 
@@ -184,19 +184,17 @@ void Level::RandomizeLine(int r) {
         auto xi = (roomStartX + (roomWidth / 2)) * TILE_WIDTH;
         auto yi = (r - (roomHeight / 2)) * TILE_HEIGHT;
         AddItemAnim(xi, yi, ItemAnim::ItemType::Ruby);
-
-        //
-        printf("NEW ROOM\r\n");
+        //printf("NEW ROOM\r\n");
     }
 
     //Move main well walls
-    if (depth > 100 && random(100) > 80) {
+    if (depth > 1000 && random(100) > 90) {
         int count = random(1, 10);
         int dir = random(100) > 50 ? TILE_WIDTH : -TILE_WIDTH;
-        for (int r = 0; r < count; r++)
+        for (int r = 0; r < count; r++) {
             ShiftMapGenerator(dir);
-        //
-        printf("WELL MOVED\r\n");
+        }
+        //printf("WELL MOVED\r\n");
     }
 }
 
@@ -421,7 +419,7 @@ void Level::ShiftMapGenerator(int x) {
             pg.x1 = pg.x2 - random(6, 10);
         }
     }
-    
+
     if (x < 0) {
         pg.x1++;
         pg.x2++;
@@ -431,8 +429,7 @@ void Level::ShiftMapGenerator(int x) {
         }
     }
 
-    printf("PG.X1=%i PG.X2=%i\r\n", pg.x1, pg.x2);
-
+    //printf("PG.X1=%i PG.X2=%i\r\n", pg.x1, pg.x2);
 }
 
 void Level::CreateBossZone() {
@@ -467,9 +464,7 @@ void Level::CreateBossZone() {
 
     //Add boss
     AddEnemy(random(100) > 50 ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH, depthBossZoneEnd - 30, Enemy::EnemyType::Boss);
-
-    //
-    printf("NEW BOSS ZONE\r\n");
+    //printf("NEW BOSS ZONE\r\n");
 }
 
 void Level::Update(Camera & camera, Player & player, int ms) {
