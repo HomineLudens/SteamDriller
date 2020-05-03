@@ -95,6 +95,7 @@ void Level::Init(const Point & posStart) {
 }
 
 void Level::RandomizeLine(int r) {
+
     //Clear line
     int c = 0;
     for (c = 0; c < COLUMNS; c++)
@@ -167,40 +168,36 @@ void Level::RandomizeLine(int r) {
         }
     }
 
-    // //Make a random room
-    // if (depth > 30 && random(100) > 50) {
-    //     int roomHeight = random(4, 8);
-    //     int roomWidth = random(6, 20);
-    //     int roomStartX = random(2, COLUMNS - 2 - roomWidth);
-    //     for (int yr = 0; yr < roomHeight; yr++) {
-    //         for (int xr = roomStartX; xr < roomWidth; xr++) {
-    //             //Clear room
-    //             lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundRoom; //
-    //         }
-    //         ReshapeRow(r - yr);
-    //     }
+    //Make a random room
+    if (depth > 30 && random(100) > 90) {
+        int roomWidth = random(6, 20);
+        int roomHeight = random(6, 10);
 
-    //     auto xi = (roomStartX + (roomWidth / 2)) * TILE_WIDTH;
-    //     auto yi = (r - (roomHeight / 2)) * TILE_HEIGHT;
-    //     AddItemAnim(xi, yi, ItemAnim::ItemType::Ruby);
-    // }
+        int roomStartX = random(2, COLUMNS - 2 - roomWidth);
+        for (int yr = 0; yr < roomHeight; yr++) {
+            for (int xr = roomStartX; xr < roomWidth; xr++) {
+                lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundRoom; //Clear room
+            }
+            ReshapeRow(r - yr);
+        }
 
-    // //Move main well walls
-    // if (depth > 2000 && random(100) > 80) {
-    //     int oldX1 = pg.x1;
-    //     int newX1 = random(pg.minX, pg.maxX);
-    //     pg.x1 = newX1;
-    //     pg.x2 = pg.x1 + random(pg.minLen, pg.maxLen);
-    //     int xStartDig = oldX1 < newX1 ? oldX1 : newX1;
-    //     //Dig a tunnel to the new well
-    //     for (int yr = 0; yr < 3; yr++) {
-    //         for (int xr = xStartDig; xr < pg.x2; xr++) {
-    //             //Clear room
-    //             lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUnderground; //
-    //         }
-    //         ReshapeRow(r - yr);
-    //     }
-    // }
+        auto xi = (roomStartX + (roomWidth / 2)) * TILE_WIDTH;
+        auto yi = (r - (roomHeight / 2)) * TILE_HEIGHT;
+        AddItemAnim(xi, yi, ItemAnim::ItemType::Ruby);
+
+        //
+        printf("NEW ROOM\r\n");
+    }
+
+    //Move main well walls
+    if (depth > 100 && random(100) > 80) {
+        int count = random(1, 10);
+        int dir = random(100) > 50 ? TILE_WIDTH : -TILE_WIDTH;
+        for (int r = 0; r < count; r++)
+            ShiftMapGenerator(dir);
+        //
+        printf("WELL MOVED\r\n");
+    }
 }
 
 int Level::GetTileId(const Point & pos, int offX, int offY) {
@@ -378,21 +375,22 @@ int Level::GetMessageToShow() const {
 }
 
 void Level::ShiftStuff(int x, int y) {
-
     //Shift level left
     if (x > 0) {
         for (int r = 0; r < ROWS; r++) {
-            auto t = lvlData[2 + (r * COLUMNS) + 0]; //first cell
-            memmove(lvlData + 2 + (r * COLUMNS) + 0, lvlData + 2 + (r * COLUMNS) + 1, COLUMNS - 1); //dest,src,count
-            lvlData[2 + (r * COLUMNS) + (COLUMNS - 1)] = t; //last cell
+            auto c0 = 2 + (r * COLUMNS);
+            auto t = lvlData[c0]; //first cell
+            memmove(lvlData + c0, lvlData + c0 + 1, COLUMNS - 1); //dest,src,count //shift left
+            lvlData[c0 + (COLUMNS - 1)] = t; //last cell
         }
     }
     //Shift level right
     if (x < 0) {
         for (int r = 0; r < ROWS; r++) {
-            auto t = lvlData[2 + (r * COLUMNS) + (COLUMNS - 1)]; //last cell
-            memmove(lvlData + 2 + (r * COLUMNS) + 1, lvlData + 2 + (r * COLUMNS) + 0, COLUMNS - 1); //dest,src,count
-            lvlData[2 + (r * COLUMNS) + 0] = t; //first cell
+            auto c0 = 2 + (r * COLUMNS);
+            auto t = lvlData[c0 + (COLUMNS - 1)]; //last cell
+            memmove(lvlData + c0 + 1, lvlData + c0, COLUMNS - 1); //dest,src,count //shift right
+            lvlData[c0] = t; //first cell
         }
     }
     //Shift level down and generate a new row
@@ -403,6 +401,8 @@ void Level::ShiftStuff(int x, int y) {
         depth += y;
     }
 
+    ShiftMapGenerator(x);
+
     //Shift/Move stuff
     shiftAll(enemies, x, y);
     shiftAll(particles, x, y);
@@ -411,10 +411,34 @@ void Level::ShiftStuff(int x, int y) {
     shiftAll(itemsAnim, x, y);
 }
 
+void Level::ShiftMapGenerator(int x) {
+    //Shift move map generator
+    if (x > 0) {
+        pg.x1--;
+        pg.x2--;
+        if (pg.x1 < 0) {
+            pg.x2 = COLUMNS - 1;
+            pg.x1 = pg.x2 - random(6, 10);
+        }
+    }
+    
+    if (x < 0) {
+        pg.x1++;
+        pg.x2++;
+        if (pg.x2 >= COLUMNS) {
+            pg.x1 = 0;
+            pg.x2 = random(6, 10);
+        }
+    }
+
+    printf("PG.X1=%i PG.X2=%i\r\n", pg.x1, pg.x2);
+
+}
+
 void Level::CreateBossZone() {
     int bossZoneHeight = 12;
 
-    //Some tiles before
+    //Some tiles before put boss background
     int i = 10;
     while (i > 0) {
         int xr = random(2, COLUMNS - 2);
@@ -443,6 +467,9 @@ void Level::CreateBossZone() {
 
     //Add boss
     AddEnemy(random(100) > 50 ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH, depthBossZoneEnd - 30, Enemy::EnemyType::Boss);
+
+    //
+    printf("NEW BOSS ZONE\r\n");
 }
 
 void Level::Update(Camera & camera, Player & player, int ms) {
@@ -470,12 +497,12 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         bossZoneActivated = true;
         CreateBossZone();
     }
-    //Finish boss Zone
-    if (bossZoneActivated && (depth + player.pos.y) > depthBossZoneEnd + 100) {
-        printf("NEW ZONE\r\n");
-        bossZoneActivated = false;
-        depthBossZoneTrigger = (depth + player.pos.y.getInteger()) + 250;
-    }
+    // //Finish boss Zone
+    // if (bossZoneActivated && (depth + player.pos.y) > depthBossZoneEnd + 100) {
+    //     printf("NEW ZONE\r\n");
+    //     bossZoneActivated = false;
+    //     depthBossZoneTrigger = (depth + player.pos.y.getInteger()) + 250;
+    // }
 
     //Mark player inside boss zone
     player.onBossZone = ((depth + player.pos.y) > depthBossZoneBegin) && ((depth + player.pos.y) < depthBossZoneEnd);

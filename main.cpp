@@ -108,6 +108,9 @@ int main() {
         if (PB::pressed(BTN_C)) {
             freeRam();
         }
+        if (PB::cBtn()){
+            player.life = 100;
+        }
 
         //Music managment
         if (player.onBossZone) {

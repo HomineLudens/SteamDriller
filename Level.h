@@ -51,7 +51,7 @@ class Level {
                 //Circular world
                 if (e.pos.x < 0)
                     e.pos.x += modulo;
-                if (e.pos.x > modulo)
+                if (e.pos.x >= modulo)
                     e.pos.x -= modulo;
             }
         }
@@ -131,6 +131,7 @@ class Level {
     int AddItemAnim(int x, int y, ItemAnim::ItemType itemType, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1);
     int AddEnemy(int x, int y, Enemy::EnemyType enemyType);
     void ShiftStuff(int x, int y);
+    void ShiftMapGenerator(int x);
 
     void Update(Camera & camera, Player & player, int ms);
     void Draw(Camera & cam, Player & player);
