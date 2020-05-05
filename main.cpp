@@ -2,7 +2,6 @@
 #include <tasui>
 #include "palette/SteamPalette256.h"
 #include "assets/tiles/steamtasui.h" 
-//#include <SDFileSystem.h>
 
 #include "SteamCookie.h"
 #include "Level.h"
@@ -59,7 +58,7 @@ void setTrack(int t) {
 void initGame() {
     auto startPoint = Point((level.COLUMNS * level.TILE_WIDTH) / 2 - 100, 0);
     player.Init(startPoint);
-    camera.Init(Point(startPoint.x + 40, startPoint.y - 20));
+    camera.Init(Point(startPoint.x + 40, startPoint.y - 10));
     //camera.pos.y += 100;
     camera.pos.x -= 150;
     level.Init(startPoint);
@@ -77,7 +76,7 @@ int main() {
     //Start game
     PC::begin();
     PD::loadRGBPalette(SteamPalette256);
-    PD::setFont(font3x5);
+    PD::setFont(fontTIC806x6);
 
     PD::lineFillers[2] = Lights::ShadeFiller;
 

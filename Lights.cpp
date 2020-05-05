@@ -28,8 +28,8 @@ void Lights::Update(Camera & camera, Player & player, Level & level, int ms) {
     }
     
     //Fixed light
-    for(int x=50;x<55;x++){
-        for(int y=6;y<20;y++){
+    for(int x=0;x<55;x++){
+        for(int y=0;y<5;y++){
             Lights::lightMap[x][y] = 0;
         }
     }

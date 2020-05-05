@@ -3,14 +3,16 @@
 #include "Messages.h"
 #include "Pokitto.h"
 #include "SteamCookie.h"
+#include "sprites.h"
 
-#include "assets/SteamDriller_SteamGauge.h"
+#include "assets/SteamDriller_HUD.h"
 #include "assets/SteamDriller_PEX.h"
 
 #include "assets/puzzleVisio/Puz00.h"
 #include "assets/puzzleVisio/Puz01.h"
 #include "assets/puzzleVisio/Puz10.h"
 #include "assets/puzzleVisio/Puz11.h"
+
 
 using PD = Pokitto::Display;
 using PB = Pokitto::Buttons;
@@ -20,6 +22,8 @@ extern SteamCookie steamCookie;
 
 Hud::Hud() {
     puzzleState = PuzzleState::None;
+    smallCog.play(steamDriller_SmallCog_Anim, SteamDriller_SmallCog_Anim::Animation::Idle);
+    bigCog.play(steamDriller_BigCog_Anim, SteamDriller_BigCog_Anim::Animation::Idle);
 }
 
 void Hud::Update(const Level & level, int ms) {
@@ -87,12 +91,6 @@ void Hud::Update(const Level & level, int ms) {
 void Hud::Draw(const Player & player,
     const Level & level) {
 
-    PD::drawSprite(xStartGauge, yStartGauge, SteamDriller_SteamGauge);
-    for (int i = 0; i < player.bullets; i++) {
-        PD::setColor(7);
-        PD::fillRect(xStartBullets, yStartBullets - (i * heightBullet), widthBullet, heightBullet);
-    }
-
     if (puzzleState == PuzzleState::ShowPex) {
         PD::drawSprite(40, 35, SteamDriller_PEX);
     }
@@ -149,17 +147,35 @@ void Hud::Draw(const Player & player,
     }
 
     if (puzzleState == PuzzleState::None) {
+
         //
         UI::mapColor(0, 0);
         UI::mapColor(1, 0);
         UI::mapColor(5, 0);
         //----UI
         UI::resetCursorBoundingBox();
-        UI::setCursor(0, 0);
-        UI::printInteger(player.pos.y.getInteger() + level.GetDepth());
 
-        UI::setCursor(15, 0);
-        UI::printInteger(player.life);
+        //HUD
+        PD::setColor(0);
+        PD::fillRect(0, 0, 110, 10);
+        smallCog.draw(42, 3);
+        smallCog.draw(58, 3);
+        bigCog.draw(0, 2);
+
+        //
+        PD::drawSprite(0, 0, SteamDriller_HUD);
+        //
+        PD::setColor(7);
+        PD::setCursor(53, 2);
+        PD::print(player.bullets); //bullets
+
+        //Depth
+        PD::setCursor(72, 1);
+        PD::printf("%05d",player.pos.y.getInteger() + level.GetDepth());
+        //
+        //UI::setCursor(15, 0);
+        PD::fillRect(14, 2, player.life *21 / 100, 3);  //@Vampirics 21 pixel? Why? Why not 20? Damn artists :P
+        //UI::printInteger(player.life);
     }
 
     // UI::setCursor(5, 0);

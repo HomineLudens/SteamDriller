@@ -3107,6 +3107,60 @@
 		},
 		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundBoss1.h": {
 			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_NewHUDv3.png.crdownload": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_NewHUDv3.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_NewHUDRevised.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_NewHUDRevised.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_BigCog_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_BigCog_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_BigCog_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_SmallCog_Anim..png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_SmallCog_Anim..ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_SmallCog_Anim..json": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_NewHUDRevised.h": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_NewHUDv3.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_BigCog_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_SmallCog_Anim..h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_HUD.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_HUD.h": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_BigCog_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_SmallCog_Anim.bin": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

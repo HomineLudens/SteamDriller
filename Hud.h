@@ -10,6 +10,9 @@ class Hud {
     static constexpr int yStartBullets = yStartGauge + 31;
     static constexpr int heightBullet = 4;
     static constexpr int widthBullet = 3;
+    
+    Sprite smallCog;
+    Sprite bigCog;
 
     int msDelayChar = 0;
     int charDisplayed = 0;

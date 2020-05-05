@@ -7,7 +7,7 @@ class Camera {
 
     private:
         constexpr static int screenCenterX = 55;
-    constexpr static int screenCenterY = 33;
+    constexpr static int screenCenterY = 40;
     Point speed;
     Point shakeDir;
     Point shakePower;
