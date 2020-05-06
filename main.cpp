@@ -29,6 +29,7 @@ int track;
 
 SteamCookie steamCookie;
 
+#ifdef POKITTO
 extern "C" {
     void _pvHeapStart();
 }
@@ -36,7 +37,9 @@ extern "C" {
 void freeRam() {
     constexpr auto bytesUsed = reinterpret_cast < uintptr_t > (_pvHeapStart) - 0x10000000;
     printf("Total RAM: %d bytes used (%d%%) - %d bytes free\n", bytesUsed, bytesUsed * 100 / 0x8000, 0x8000 - bytesUsed);
+
 }
+#endif
 
 void setTrack(int t) {
     if (track != t) {
@@ -70,7 +73,7 @@ void initGame() {
 int main() {
     steamCookie.begin("STEAMDRI", steamCookie); //initialize cookie 
 
-    srand(time(0)); //random init
+    //srand(time(0)); //random init
     //srand(steamCookie.initials[0] + steamCookie.initials[1] + steamCookie.initials[2]);
 
     //Start game
@@ -104,11 +107,12 @@ int main() {
         if (PB::pressed(BTN_C) && PB::downBtn()) {
             initGame();
         }
-        if (PB::pressed(BTN_C)) {
-            freeRam();
-        }
+
         if (PB::cBtn()) {
             player.life = 100;
+            #ifdef POKITTO
+            freeRam();
+            #endif
         }
         //-------------------------------------------------
 
@@ -118,7 +122,6 @@ int main() {
         } else {
             setTrack(5);
         }
-        
         if (hud.puzzleState == Hud::PuzzleState::None)
             PS::playMusicStream();
         else

@@ -50,12 +50,18 @@ void Hud::Update(const Level & level, int ms) {
             }
             break;
         case PuzzleState::ShowPex:
-            //TODO: resolve puzzle from PEX
-            //if (PB::pressed(BTN_UP)) { 
-            if ((in0.read() != 0 && inPrec[0] == 0) || (PB::upBtn() && PB::pressed(BTN_C))) {
-                steamCookie.msgRead++;
-                steamCookie.saveCookie();
-                puzzleState = PuzzleState::ShowMsg;
+            {
+                //TODO: resolve puzzle from PEX
+                bool skip = PB::upBtn() && PB::pressed(BTN_C);
+                bool solved = false;
+                #ifdef POKITTO
+                solved = in0.read() != 0 && inPrec[0] == 0;
+                #endif
+                if (solved || skip) {
+                    steamCookie.msgRead++;
+                    steamCookie.saveCookie();
+                    puzzleState = PuzzleState::ShowMsg;
+                }
             }
             break;
         case PuzzleState::ShowMsg:
@@ -79,6 +85,7 @@ void Hud::Update(const Level & level, int ms) {
         charDisplayed = 0;
     }
 
+    #ifdef POKITTO
     //--Save state of inputs
     inPrec[0] = in0.read();
     inPrec[1] = in1.read();
@@ -86,6 +93,7 @@ void Hud::Update(const Level & level, int ms) {
     inPrec[3] = in3.read();
     inPrec[4] = in4.read();
     inPrec[5] = in5.read();
+    #endif
 }
 
 void Hud::Draw(const Player & player,

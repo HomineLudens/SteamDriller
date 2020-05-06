@@ -10,7 +10,7 @@ class Hud {
     static constexpr int yStartBullets = yStartGauge + 31;
     static constexpr int heightBullet = 4;
     static constexpr int widthBullet = 3;
-    
+
     Sprite smallCog;
     Sprite bigCog;
 
@@ -18,12 +18,14 @@ class Hud {
     int charDisplayed = 0;
     int msgToShow = 0;
 
+    #ifdef POKITTO
     DigitalIn in0 = DigitalIn(EXT0);
     DigitalIn in1 = DigitalIn(EXT1);
     DigitalIn in2 = DigitalIn(EXT2);
     DigitalIn in3 = DigitalIn(EXT3);
     DigitalIn in4 = DigitalIn(EXT4);
     DigitalIn in5 = DigitalIn(EXT5);
+    #endif
 
     int inPrec[6];
 

@@ -281,7 +281,7 @@
 			"$objectFiles"
 		]
 	},
-	"target": "Pokitto",
+	"target": "windows",
 	"pipelines": {
 		"Pokitto": [
 			"img-to-c",
@@ -3199,6 +3199,12 @@
 			"sdcard": false
 		},
 		"\\assets\\star.h": {
+			"sdcard": false
+		},
+		"\\SteamDriller.exe": {
+			"sdcard": false
+		},
+		"\\EEP.ROM": {
 			"sdcard": false
 		}
 	},
