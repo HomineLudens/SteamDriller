@@ -41,9 +41,9 @@ void Hud::Update(const Level & level, int ms) {
     switch (puzzleState) {
         case PuzzleState::None:
             if (msgToShow != 0 && PB::pressed(BTN_UP)) {
-                if (strncmp(Messages[msgToShow], "High:", 5) == 1)
+                if (strncmp("High:", Messages[msgToShow], 5) == 0)
                     puzzleState = PuzzleState::ShowPex;
-                else if (strncmp(Messages[msgToShow], "Visio:", 5) == 1)
+                else if (strncmp(Messages[msgToShow], "Visio:", 5) == 0)
                     puzzleState = PuzzleState::ShowVisio;
                 else
                     puzzleState = PuzzleState::ShowMsg;
@@ -111,7 +111,7 @@ void Hud::Draw(const Player & player,
                 charMessages[charDisplayed] = 0;
                 UI::setCursor(0, 0);
                 UI::printText(charMessages);
-                if (strncmp(Messages[msgToShow], "High:", 5) == 1) {
+                if (strncmp("High:", Messages[msgToShow], 5) == 0) {
                     UI::printInteger(steamCookie.maxDepth);
                 }
             }
@@ -126,16 +126,16 @@ void Hud::Draw(const Player & player,
 
                 UI::drawBox(4, 4, 13, 13);
 
-                if (strncmp(Messages[msgToShow], "Visio:00", 5) == 1) {
+                if (strncmp(Messages[msgToShow], "Visio:00", 8) == 0) {
                     PuzXX = Puz00;
                 }
-                if (strncmp(Messages[msgToShow], "Visio:01", 5) == 1) {
+                if (strncmp(Messages[msgToShow], "Visio:01", 8) == 0) {
                     PuzXX = Puz01;
                 }
-                if (strncmp(Messages[msgToShow], "Visio:10", 5) == 1) {
+                if (strncmp(Messages[msgToShow], "Visio:10", 8) == 0) {
                     PuzXX = Puz10;
                 }
-                if (strncmp(Messages[msgToShow], "Visio:11", 5) == 1) {
+                if (strncmp(Messages[msgToShow], "Visio:11", 8) == 0) {
                     PuzXX = Puz11;
                 }
                 int i = 0;

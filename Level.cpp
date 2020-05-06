@@ -45,12 +45,12 @@ void Level::Init(const Point & posStart) {
         AddItem(posStart.x.getInteger() - 80 - (i * TILE_WIDTH), posStart.y.getInteger() + 24, Item::ItemType::Fance, false, false);
     }
 
-    // AddItemAnim(posStart.x.getInteger() - 50, 40, ItemAnim::ItemType::Chip, false, false, false, 1);
+    AddItemAnim(posStart.x.getInteger() - 80, -40, ItemAnim::ItemType::Chip, false, false, false, 1);
     AddItemAnim(posStart.x.getInteger() - 50, posStart.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, random(11, 15));
-    // AddItemAnim(posStart.x.getInteger() + 100, 40, ItemAnim::ItemType::ChipPurple, false, false, false, 7);
-    // AddItemAnim(posStart.x.getInteger() + 140, 40, ItemAnim::ItemType::ChipPurple, false, false, false, 5);
-    // AddItemAnim(posStart.x.getInteger() + 180, 40, ItemAnim::ItemType::ChipPurple, false, false, false, 6);
-    // AddItemAnim(posStart.x.getInteger() + 220, 40, ItemAnim::ItemType::ChipPurple, false, false, false, 8);
+    AddItemAnim(posStart.x.getInteger() + 100, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 7);
+    AddItemAnim(posStart.x.getInteger() + 140, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 5);
+    AddItemAnim(posStart.x.getInteger() + 180, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 6);
+    AddItemAnim(posStart.x.getInteger() + 220, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 8);
 
     //
     // AddEnemy(posStart.x.getInteger()+30, 40, Enemy::EnemyType::PurpleSentinelHorizontal);
@@ -473,7 +473,7 @@ void Level::CreateBossZone() {
     }
 
     //Enter zone
-    AddItem(COLUMNS * TILE_WIDTH / 2, (ROWS-bossZoneHeight) * TILE_HEIGHT, Item::ItemType::DockStation);
+    AddItem(COLUMNS * TILE_WIDTH / 2, (ROWS - bossZoneHeight) * TILE_HEIGHT, Item::ItemType::DockStation);
 
     printf("NEW BOSS ZONE done\r\n");
 }

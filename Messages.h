@@ -2,7 +2,7 @@
 
 inline const char* Messages[] {
     "EMPTY", //0
-    "High: ", //1
+    "High:", //1
     "", //2
     "", //3
     "", //4
