@@ -22,6 +22,12 @@ void Level::Init(const Point & posStart) {
     //--- Initial stuff
     AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger(), Item::ItemType::Logo, true); //Logo
 
+    for (int i = 0; i < 100; i++) {
+        int xStar = random(0, COLUMNS * TILE_WIDTH);
+        int yStar = random(-300, 0);
+        AddParticle(Point(xStar, yStar), Point(0, 0), Point(0, 0), Particle::ParticleType::Star, 32000);
+    }
+
     AddItem(posStart.x.getInteger() - 35 + 6, posStart.y.getInteger() - 24, Item::ItemType::Conveyor, true);
     AddItem(posStart.x.getInteger() - 110 + 6, posStart.y.getInteger() - 24, Item::ItemType::Conveyor, true);
     AddItem(posStart.x.getInteger() - 185 + 6, posStart.y.getInteger() - 24, Item::ItemType::Conveyor, true);
@@ -450,7 +456,7 @@ void Level::CreateBossZone() {
     //Room
     for (int yr = 1; yr < bossZoneHeight; yr++) {
         for (int xr = 0; xr < COLUMNS; xr++) {
-            if (yr == 1) {
+            if (yr == 1 || yr == bossZoneHeight - 1) {
                 depthBossZoneEnd = depth + ((ROWS - yr) * TILE_HEIGHT);
                 lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::UnbreakableFloor; //
             } else {
@@ -465,6 +471,9 @@ void Level::CreateBossZone() {
             }
         }
     }
+
+    //Enter zone
+    AddItem(COLUMNS * TILE_WIDTH / 2, (ROWS-bossZoneHeight) * TILE_HEIGHT, Item::ItemType::DockStation);
 
     printf("NEW BOSS ZONE done\r\n");
 }

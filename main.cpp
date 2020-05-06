@@ -58,8 +58,8 @@ void setTrack(int t) {
 void initGame() {
     auto startPoint = Point((level.COLUMNS * level.TILE_WIDTH) / 2 - 100, 0);
     player.Init(startPoint);
-    camera.Init(Point(startPoint.x + 40, startPoint.y - 10));
-    //camera.pos.y += 100;
+    camera.Init(Point(startPoint.x + 40, startPoint.y - 15));
+    camera.pos.y -= 100;
     camera.pos.x -= 150;
     level.Init(startPoint);
     msTotal = 0;

@@ -16,6 +16,7 @@ class Particle: public Entity {
             Sparks,
             Smoke,
             Explosion,
+            Star,
         };
 
     Point pos;

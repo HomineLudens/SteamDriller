@@ -1,6 +1,6 @@
 #pragma once
 
-inline const std::string Messages[] {
+inline const char* Messages[] {
     "EMPTY", //0
     "High: ", //1
     "", //2
@@ -22,15 +22,6 @@ inline const std::string Messages[] {
     "", //18
     "", //19
     "", //20
-    "", //21
-    "", //22
-    "", //23
-    "", //24
-    "", //25
-    "", //26
-    "", //27
-    "", //28
-    "", //29
-    "", //30
+
 };
 

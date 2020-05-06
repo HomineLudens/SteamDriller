@@ -41,9 +41,9 @@ void Hud::Update(const Level & level, int ms) {
     switch (puzzleState) {
         case PuzzleState::None:
             if (msgToShow != 0 && PB::pressed(BTN_UP)) {
-                if (Messages[msgToShow].rfind("High:", 0) == 0)
+                if (strncmp(Messages[msgToShow], "High:", 5) == 1)
                     puzzleState = PuzzleState::ShowPex;
-                else if (Messages[msgToShow].rfind("Visio:", 0) == 0)
+                else if (strncmp(Messages[msgToShow], "Visio:", 5) == 1)
                     puzzleState = PuzzleState::ShowVisio;
                 else
                     puzzleState = PuzzleState::ShowMsg;
@@ -60,7 +60,7 @@ void Hud::Update(const Level & level, int ms) {
             break;
         case PuzzleState::ShowMsg:
             //Show message one char after the other
-            msgLenght = Messages[msgToShow].length();
+            msgLenght = strlen(Messages[msgToShow]);
             if (msDelayChar < 0) {
                 charDisplayed++;
                 if (charDisplayed > msgLenght) {
@@ -91,94 +91,100 @@ void Hud::Update(const Level & level, int ms) {
 void Hud::Draw(const Player & player,
     const Level & level) {
 
-    if (puzzleState == PuzzleState::ShowPex) {
-        PD::drawSprite(40, 35, SteamDriller_PEX);
-    }
-    if (puzzleState == PuzzleState::ShowMsg) {
-        //
-        UI::mapColor(0, 0);
-        UI::mapColor(1, 16);
-        UI::mapColor(5, 16);
-        //
-        UI::setCursorBoundingBox(2, 12, 15, 12);
-        UI::drawBox(1, 11, 16, 13);
-        //text
-        char charMessages[charDisplayed + 1];
-        memcpy(charMessages, Messages[msgToShow].c_str(), charDisplayed);
-        UI::setCursor(0, 0);
-        UI::printText(charMessages);
-        if (Messages[msgToShow].rfind("High:", 0) == 0)
-            UI::printInteger(steamCookie.maxDepth);
-    }
-    if (puzzleState == PuzzleState::ShowVisio) {
-        const uint8_t * PuzXX;
-        UI::mapColor(0, 1);
-        UI::mapColor(1, 16);
-        UI::mapColor(5, 16);
+    switch (puzzleState) {
 
-        UI::drawBox(4, 4, 13, 13);
+        case PuzzleState::ShowPex:
+            PD::drawSprite(40, 35, SteamDriller_PEX);
+            break;
 
-        if (Messages[msgToShow].rfind("Visio:00", 0) == 0) {
-            PuzXX = Puz00;
-        }
-        if (Messages[msgToShow].rfind("Visio:01", 0) == 0) {
-            PuzXX = Puz01;
-        }
-        if (Messages[msgToShow].rfind("Visio:10", 0) == 0) {
-            PuzXX = Puz10;
-        }
-        if (Messages[msgToShow].rfind("Visio:11", 0) == 0) {
-            PuzXX = Puz11;
-        }
-        int i = 0;
-        for (int x = 0; x < PuzXX[0]; x++) {
-            for (int y = 0; y < PuzXX[1]; y++) {
-                if (PuzXX[2 + i] != 0) {
-                    UI::setCursor(5 + x, 5 + y);
-                    UI::setDelta(5 + x, 5 + y, 1);
-                    UI::setTile(5 + x, 5 + y, 22);
+        case PuzzleState::ShowMsg:
+            {
+                UI::mapColor(0, 0);
+                UI::mapColor(1, 16);
+                UI::mapColor(5, 16);
+                //
+                UI::setCursorBoundingBox(2, 12, 15, 12);
+                UI::drawBox(1, 11, 16, 13);
+                //text
+                char charMessages[charDisplayed + 1];
+                memcpy(charMessages, Messages[msgToShow], charDisplayed);
+                charMessages[charDisplayed] = 0;
+                UI::setCursor(0, 0);
+                UI::printText(charMessages);
+                if (strncmp(Messages[msgToShow], "High:", 5) == 1) {
+                    UI::printInteger(steamCookie.maxDepth);
                 }
-                i++;
             }
-        }
+            break;
 
-        UI::setCursor(5, 3);
-        UI::printText(Messages[msgToShow].c_str());
+        case PuzzleState::ShowVisio:
+            {
+                const uint8_t * PuzXX;
+                UI::mapColor(0, 1);
+                UI::mapColor(1, 16);
+                UI::mapColor(5, 16);
+
+                UI::drawBox(4, 4, 13, 13);
+
+                if (strncmp(Messages[msgToShow], "Visio:00", 5) == 1) {
+                    PuzXX = Puz00;
+                }
+                if (strncmp(Messages[msgToShow], "Visio:01", 5) == 1) {
+                    PuzXX = Puz01;
+                }
+                if (strncmp(Messages[msgToShow], "Visio:10", 5) == 1) {
+                    PuzXX = Puz10;
+                }
+                if (strncmp(Messages[msgToShow], "Visio:11", 5) == 1) {
+                    PuzXX = Puz11;
+                }
+                int i = 0;
+                for (int x = 0; x < PuzXX[0]; x++) {
+                    for (int y = 0; y < PuzXX[1]; y++) {
+                        if (PuzXX[2 + i] != 0) {
+                            UI::setCursor(5 + x, 5 + y);
+                            UI::setDelta(5 + x, 5 + y, 1);
+                            UI::setTile(5 + x, 5 + y, 22);
+                        }
+                        i++;
+                    }
+                }
+                UI::setCursor(5, 3);
+                UI::printText(Messages[msgToShow]);
+            }
+            break;
+
+        case PuzzleState::None:
+            {
+                //Colors
+                UI::mapColor(0, 0);
+                UI::mapColor(1, 0);
+                UI::mapColor(5, 0);
+
+                //----UI
+                UI::resetCursorBoundingBox();
+
+                //HUD
+                PD::setColor(0);
+                PD::fillRect(0, 0, 110, 10);
+                smallCog.draw(42, 3);
+                smallCog.draw(58, 3);
+                bigCog.draw(0, 2);
+
+                //
+                PD::drawSprite(0, 0, SteamDriller_HUD);
+                //
+                PD::setColor(7);
+                PD::setCursor(53, 2);
+                PD::print(player.bullets); //bullets
+
+                //Depth
+                PD::setCursor(72, 1);
+                PD::printf("%05d", player.pos.y.getInteger() + level.GetDepth());
+                //
+                //UI::setCursor(15, 0);
+                PD::fillRect(14, 2, player.life * 21 / 100, 3); //@Vampirics 21 pixel? Why? Why not 20? Damn artists :P
+            }
+            break;
     }
-
-    if (puzzleState == PuzzleState::None) {
-
-        //
-        UI::mapColor(0, 0);
-        UI::mapColor(1, 0);
-        UI::mapColor(5, 0);
-        //----UI
-        UI::resetCursorBoundingBox();
-
-        //HUD
-        PD::setColor(0);
-        PD::fillRect(0, 0, 110, 10);
-        smallCog.draw(42, 3);
-        smallCog.draw(58, 3);
-        bigCog.draw(0, 2);
-
-        //
-        PD::drawSprite(0, 0, SteamDriller_HUD);
-        //
-        PD::setColor(7);
-        PD::setCursor(53, 2);
-        PD::print(player.bullets); //bullets
-
-        //Depth
-        PD::setCursor(72, 1);
-        PD::printf("%05d",player.pos.y.getInteger() + level.GetDepth());
-        //
-        //UI::setCursor(15, 0);
-        PD::fillRect(14, 2, player.life *21 / 100, 3);  //@Vampirics 21 pixel? Why? Why not 20? Damn artists :P
-        //UI::printInteger(player.life);
-    }
-
-    // UI::setCursor(5, 0);
-    // UI::printText("Track:");
-    // UI::printInteger(steamCookie.track);
 }

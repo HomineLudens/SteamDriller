@@ -26,7 +26,8 @@ class Item: public Entity {
             Bones,
             RobotUnactivatedRow,
             Conveyor,
-            Fance
+            Fance,
+            DockStation
         };
 
     Point pos;

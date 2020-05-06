@@ -33,7 +33,7 @@ void Camera::Update(const Player & player, int ms) {
     if (player.state == Player::State::Offline || player.state == Player::State::Activating) {
         //When Offline don't look at player and move slower 
         speed.x = 0.02;
-        speed.y = 0.04;
+        speed.y = 0.01;
         offset.y = 0;
     } else {
         //When playing camera settings

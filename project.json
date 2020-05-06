@@ -3161,6 +3161,45 @@
 		},
 		"\\sprites/SteamDriller_SmallCog_Anim.bin": {
 			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_BigCog_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_SmallCog_Anim.bin": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_EvilAI.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_EvilAI.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Robot.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Robot.png": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_Dialogue_test.png.crdownload": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_Dialogue_test.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Robot.h": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_Dialogue_test.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_EvilAI.h": {
+			"sdcard": false
+		},
+		"\\assets\\star.png": {
+			"sdcard": false
+		},
+		"\\assets\\star.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

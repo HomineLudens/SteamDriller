@@ -7,6 +7,7 @@
 #include "assets/SteamDriller_Bones.h"
 #include "assets/SteamDriller_Conveyor_Flat.h"        
 #include "assets/SteamDriller_FenceTileTop.h"     
+#include "assets/SteamDriller_DockStation.h"    
 
 using PD = Pokitto::Display;
 
@@ -46,6 +47,9 @@ Item::Item(int x, int y, ItemType itemType, bool fixed, bool collectable, bool m
             break;
         case ItemType::Fance:
             sprite = SteamDriller_FenceTileTop;
+            break;
+        case ItemType::DockStation:
+            sprite = SteamDriller_DockStation;
             break;
     }
 }

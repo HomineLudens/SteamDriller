@@ -40,7 +40,7 @@ class Level {
                 e.pos.x -= dx;
                 e.pos.y -= dy;
                 //Kill when out of view top
-                if (e.pos.y < -30) {
+                if (e.pos.y < -500) {
                     e.Kill();
                 }
                 //Kill when out of view bottom
@@ -105,8 +105,8 @@ class Level {
     constexpr static int SHIFT_VAL = 20; //tiles when shift start
     uint8_t lvlData[2 + (COLUMNS * ROWS)];
 
-    std::array < Bullet, 15 > bullets;
-    std::array < Particle, 100 > particles;
+    std::array < Bullet, 20 > bullets;
+    std::array < Particle, 120 > particles;
     std::array < Enemy, 10 > enemies;
     std::array < Item, 30 > items;
     std::array < ItemAnim, 10 > itemsAnim;

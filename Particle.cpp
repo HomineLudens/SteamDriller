@@ -3,6 +3,7 @@
 #include "assets/debris.h"
 #include "assets/gravel.h"
 #include "assets/sparks.h"
+#include "assets/star.h"
 
 using PD = Pokitto::Display;
 
@@ -11,7 +12,9 @@ Particle::Particle() {
     particleType = ParticleType::Debris;
 }
 
-Particle::Particle(const Point & pos,const Point & speed, ParticleType particleType,const Point & gravity, int msLife) {
+Particle::Particle(const Point & pos,
+    const Point & speed, ParticleType particleType,
+        const Point & gravity, int msLife) {
     this->pos.x = pos.x;
     this->pos.y = pos.y;
     this->speed.x = speed.x;
@@ -36,6 +39,9 @@ Particle::Particle(const Point & pos,const Point & speed, ParticleType particleT
             break;
         case ParticleType::Explosion:
             sprParticle.play(steamDriller_Explosions_Anim, SteamDriller_Explosions_Anim::Animation::Idle);
+            break;
+        case ParticleType::Star:
+            sprite = star;
             break;
     }
 }
@@ -74,9 +80,4 @@ void Particle::Draw(const Camera & cam) {
         sprParticle.draw(cam.ToScreenX(pos) - (sprParticle.getFrameWidth() / 2),
             cam.ToScreenY(pos) - (sprParticle.getFrameHeight() / 2));
     }
-
-
-
-
-
 }
