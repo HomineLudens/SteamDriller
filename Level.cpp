@@ -85,7 +85,7 @@ void Level::Init(const Point & posStart) {
     int c = 0;
 
     //start floor
-    r = 3;
+    r = 2;
     for (c = 0; c <= pg.x1; c++)
         lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::TopCenter;
     lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::TopLeft;
