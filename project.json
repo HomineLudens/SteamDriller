@@ -281,7 +281,7 @@
 			"$objectFiles"
 		]
 	},
-	"target": "windows",
+	"target": "Pokitto",
 	"pipelines": {
 		"Pokitto": [
 			"img-to-c",

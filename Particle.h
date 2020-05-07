@@ -23,7 +23,7 @@ class Particle: public Entity {
     Point speed;
     Point gravity;
 
-    int16_t msLife;
+    uint8_t dsLife; //decimal seconds
     ParticleType particleType;
     Sprite sprParticle;
 
@@ -32,10 +32,10 @@ class Particle: public Entity {
     Particle(const Point & pos,
         const Point & speed, ParticleType particleType,
             const Point & gravity = Point(0, 0.5),
-                int msLife = 1000);
+                int dsLife = 1000);
 
     Rect GetHitBox();
-    void Update(int ms, Level & lvl, Player & player);
+    void Update(int ds, Level & lvl, Player & player);
     bool IsAlive();
     void Kill();
 

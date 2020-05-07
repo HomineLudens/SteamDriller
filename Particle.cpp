@@ -8,13 +8,13 @@
 using PD = Pokitto::Display;
 
 Particle::Particle() {
-    msLife = 0;
+    dsLife = 0;
     particleType = ParticleType::Debris;
 }
 
 Particle::Particle(const Point & pos,
     const Point & speed, ParticleType particleType,
-        const Point & gravity, int msLife) {
+        const Point & gravity, int dsLife) {
     this->pos.x = pos.x;
     this->pos.y = pos.y;
     this->speed.x = speed.x;
@@ -22,7 +22,7 @@ Particle::Particle(const Point & pos,
     this->gravity.x = gravity.x;
     this->gravity.y = gravity.y;
     this->particleType = particleType;
-    this->msLife = msLife;
+    this->dsLife = dsLife;
 
     switch (particleType) {
         case ParticleType::Debris:
@@ -51,23 +51,25 @@ Rect Particle::GetHitBox() {
     return Rect(pos.x, pos.y, 1, 1);
 }
 
-void Particle::Update(int ms,
+void Particle::Update(int ds,
     Level & lvl, Player & player) {
-    if (msLife > 0) {
+    if (dsLife > 0) {
         speed.x += gravity.x;
         speed.y += gravity.y;
         pos.x += speed.x;
         pos.y += speed.y;
-        msLife -= ms;
+
+        if (dsLife != 254)
+            dsLife -= ds;
     }
 }
 
 bool Particle::IsAlive() {
-    return msLife > 0;
+    return dsLife > 0;
 }
 
 void Particle::Kill() {
-    msLife = 0;
+    dsLife = 0;
 }
 
 void Particle::Draw(const Camera & cam) {

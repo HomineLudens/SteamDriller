@@ -25,7 +25,7 @@ void Level::Init(const Point & posStart) {
     for (int i = 0; i < 100; i++) {
         int xStar = random(0, COLUMNS * TILE_WIDTH);
         int yStar = random(-300, 0);
-        AddParticle(Point(xStar, yStar), Point(0, 0), Point(0, 0), Particle::ParticleType::Star, 32000);
+        AddParticle(Point(xStar, yStar), Point(0, 0), Point(0, 0), Particle::ParticleType::Star, 99999);
     }
 
     AddItem(posStart.x.getInteger() - 35 + 6, posStart.y.getInteger() - 24, Item::ItemType::Conveyor, true);
@@ -42,7 +42,7 @@ void Level::Init(const Point & posStart) {
     AddItem(posStart.x.getInteger() + 180, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
 
     for (int i = 0; i < 10; i++) {
-        AddItem(posStart.x.getInteger() - 80 - (i * TILE_WIDTH), posStart.y.getInteger() + 24, Item::ItemType::Fance, false, false);
+        AddItem(posStart.x.getInteger() - 80 - (i * TILE_WIDTH), posStart.y.getInteger() + 16, Item::ItemType::Fance, false, false);
     }
 
     AddItemAnim(posStart.x.getInteger() - 80, -40, ItemAnim::ItemType::Chip, false, false, false, 1);
@@ -312,7 +312,13 @@ int Level::AddParticle(const Point & pos,
             break;
         }
     }
-    particles[lastParticleId] = Particle(pos, speed, particleType, gravity, msLife);
+    
+    //Confert to decimal seconds and limit
+    auto dsLife = msLife / 100;
+    if (dsLife > 254)
+        dsLife = 254;
+    particles[lastParticleId] = Particle(pos, speed, particleType, gravity, dsLife);
+
     return lastParticleId;
 }
 
@@ -322,16 +328,11 @@ void Level::AddDebris(const Point & pos, int count) {
         auto yp = random(-40, 2);
         if (xp != 0 && yp != 0) {
             auto speed = Point(xp / 5.0, yp / 5.0);
-            for (int i = 0; i < particles.size(); i++) {
-                if (!particles[i].IsAlive()) {
-                    particles[i] = Particle(pos, speed, (Particle::ParticleType) random(0, 3));
-                    particles[i].msLife = 500;
-                    break;
-                }
-            }
+            AddParticle(pos, speed, Point(0, 0.5), (Particle::ParticleType) random(0, 3), 500 + random(-200, 200));
         }
     }
 }
+
 
 int Level::AddItem(int x, int y, Item::ItemType itemType, bool fixed, bool collectable, bool mirrored) {
     for (int i = 0; i < items.size(); i++) {
@@ -481,6 +482,8 @@ void Level::CreateBossZone() {
 void Level::Update(Camera & camera, Player & player, int ms) {
 
     msAnim += ms;
+    msDecimalTimer += ms;
+    //-------------------------
     if (msAnim > 150) {
         ///------------
         //Animated tiles
@@ -532,7 +535,12 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     }
 
     //Update all stuff
-    updateAll(particles, ms, * this, player);
+    if (msDecimalTimer > 100) {
+        msDecimalTimer -= 100;
+        updateAll(particles, 1, * this, player);
+    } else {
+        updateAll(particles, 0, * this, player);
+    }
     updateAll(bullets, ms, * this, player);
     updateAll(enemies, ms, * this, player);
     updateAll(items, ms, * this, player);
