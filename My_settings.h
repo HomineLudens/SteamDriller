@@ -13,7 +13,9 @@
 //File
 // Optional. Default is PokittoDisk (PFFS).
 // #define PROJ_SDFS_STREAMING
-// #define PROJ_FILE_STREAMING
+#ifdef POK_SIM
+#define PROJ_FILE_STREAMING
+#endif
 
 //Sounds
 #define PROJ_HIGH_RAM HIGH_RAM_MUSIC
