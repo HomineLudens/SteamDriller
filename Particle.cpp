@@ -26,6 +26,7 @@ void Particle::Init(const Point & pos,
     this->dsLife = dsLife;
 
     sprite = nullptr;
+    sprParticle.play(steamDriller_Explosions_Anim, SteamDriller_Explosions_Anim::Animation::Idle);
     switch (particleType) {
         case ParticleType::Empty:
             sprite = nullptr;
@@ -85,7 +86,8 @@ void Particle::Draw(const Camera & cam) {
     if (sprite != nullptr) {
         //Static
         PD::drawSprite(cam.ToScreenX(pos) - (sprite[0] / 2), cam.ToScreenY(pos) - (sprite[1] / 2), sprite);
-    } else {
+    }
+    else {
         //Animated
         sprParticle.draw(cam.ToScreenX(pos) - (sprParticle.getFrameWidth() / 2),
             cam.ToScreenY(pos) - (sprParticle.getFrameHeight() / 2));
