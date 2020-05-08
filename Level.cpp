@@ -312,8 +312,8 @@ int Level::AddParticle(const Point & pos,
             break;
         }
     }
-    
-    //Confert to decimal seconds and limit
+
+    //Convert to decimal seconds and limit
     auto dsLife = msLife / 100;
     if (dsLife > 254)
         dsLife = 254;
@@ -457,9 +457,12 @@ void Level::CreateBossZone() {
     //Room
     for (int yr = 1; yr < bossZoneHeight; yr++) {
         for (int xr = 0; xr < COLUMNS; xr++) {
-            if (yr == 1 || yr == bossZoneHeight - 1) {
+            if (yr == 1) {
                 depthBossZoneEnd = depth + ((ROWS - yr) * TILE_HEIGHT);
                 lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::UnbreakableFloor; //
+            } else if (yr == bossZoneHeight - 1) {
+                if (xr < 30 && xr > 36)
+                    lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::UnbreakableFloor; //
             } else {
                 depthBossZoneBegin = depth + ((ROWS - yr) * TILE_HEIGHT);
 
