@@ -29,7 +29,7 @@ class Particle: public Entity {
 
     Particle();
 
-    Particle(const Point & pos,
+    void init(const Point & pos,
         const Point & speed, ParticleType particleType,
             const Point & gravity = Point(0, 0.5),
                 int dsLife = 1000);

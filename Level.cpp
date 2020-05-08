@@ -317,7 +317,7 @@ int Level::AddParticle(const Point & pos,
     auto dsLife = msLife / 100;
     if (dsLife > 254)
         dsLife = 254;
-    particles[lastParticleId] = Particle(pos, speed, particleType, gravity, dsLife);
+    particles[lastParticleId].init(pos, speed, particleType, gravity, dsLife);
 
     return lastParticleId;
 }

@@ -12,7 +12,7 @@ Particle::Particle() {
     particleType = ParticleType::Debris;
 }
 
-Particle::Particle(const Point & pos,
+void Particle::init(const Point & pos,
     const Point & speed, ParticleType particleType,
         const Point & gravity, int dsLife) {
     this->pos.x = pos.x;
@@ -42,6 +42,9 @@ Particle::Particle(const Point & pos,
             break;
         case ParticleType::Star:
             sprite = star;
+            break;
+        default:
+            sprite = sparks;
             break;
     }
 }
