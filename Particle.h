@@ -32,7 +32,7 @@ class Particle: public Entity {
     void Init(const Point & pos,
         const Point & speed, ParticleType particleType,
             const Point & gravity = Point(0, 0.5),
-                int dsLife = 1000);
+                int dsLife = 10);
 
     Rect GetHitBox();
     void Update(int ds, Level & lvl, Player & player);

@@ -82,14 +82,11 @@ void Particle::Kill() {
 }
 
 void Particle::Draw(const Camera & cam) {
-
     if (sprite != nullptr) {
         //Static
         PD::drawSprite(cam.ToScreenX(pos) - (sprite[0] / 2), cam.ToScreenY(pos) - (sprite[1] / 2), sprite);
-    }
-    else {
+    } else {
         //Animated
-        sprParticle.draw(cam.ToScreenX(pos) - (sprParticle.getFrameWidth() / 2),
-            cam.ToScreenY(pos) - (sprParticle.getFrameHeight() / 2));
+        sprParticle.draw(cam.ToScreenX(pos) - (sprParticle.getFrameWidth() / 2), cam.ToScreenY(pos) - (sprParticle.getFrameHeight() / 2));
     }
 }

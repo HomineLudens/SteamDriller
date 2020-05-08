@@ -107,12 +107,13 @@ int main() {
         if (PB::pressed(BTN_C) && PB::downBtn()) {
             initGame();
         }
-
-        if (PB::cBtn()) {
-            player.life = 100;
+        if (PB::pressed(BTN_C)) {
             #ifdef POKITTO
             freeRam();
             #endif
+        }
+        if (PB::cBtn()) {
+            player.life = 100;
         }
         //-------------------------------------------------
 

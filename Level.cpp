@@ -61,6 +61,7 @@ void Level::Init(const Point & posStart) {
 
     depth = 0;
     bossZoneActivated = false;
+    bossActivated = false;
     depthBossZoneTrigger = 100;
 
     //--Clear level tilemap
@@ -328,7 +329,7 @@ void Level::AddDebris(const Point & pos, int count) {
         auto yp = random(-40, 2);
         if (xp != 0 && yp != 0) {
             auto speed = Point(xp / 5.0, yp / 5.0);
-            AddParticle(pos, speed, Point(0, 0.5), (Particle::ParticleType) random(0, 3), 500 + random(-200, 200));
+            AddParticle(pos, speed, Point(0, 0.5), (Particle::ParticleType) random(1, 3), 500 + random(-200, 200));
         }
     }
 }
@@ -521,10 +522,10 @@ void Level::Update(Camera & camera, Player & player, int ms) {
 
     //End of boss Zone, make another
     if (bossZoneActivated && (depth + player.pos.y) > depthBossZoneEnd + 100) {
-        printf("NEW ZONE need please\r\n");
         bossZoneActivated = false;
         bossActivated = false;
         depthBossZoneTrigger = (depth + player.pos.y.getInteger()) + 1000;
+        printf("NEW ZONE need please\r\n");
     }
 
     //Mark player inside boss zone
