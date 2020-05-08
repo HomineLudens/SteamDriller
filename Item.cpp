@@ -15,7 +15,7 @@ Item::Item() {
     flags.set(FlagsType::alive, false);
 }
 
-Item::Item(int x, int y, ItemType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex) {
+void Item::Init(int x, int y, ItemType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex) {
 
     this->itemType = itemType;
     this->pos.x = x;

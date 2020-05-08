@@ -337,7 +337,7 @@ void Level::AddDebris(const Point & pos, int count) {
 int Level::AddItem(int x, int y, Item::ItemType itemType, bool fixed, bool collectable, bool mirrored) {
     for (int i = 0; i < items.size(); i++) {
         if (!items[i].IsAlive()) {
-            items[i] = Item(x, y, itemType, fixed, collectable, mirrored);
+            items[i] = Init(x, y, itemType, fixed, collectable, mirrored);
             return i;
         }
     }

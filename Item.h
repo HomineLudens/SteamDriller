@@ -39,7 +39,7 @@ class Item: public Entity {
     int16_t msgIndex = -1;
 
     Item();
-    Item(int x, int y, ItemType itemType, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1);
+    void Init(int x, int y, ItemType itemType, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1);
 
     Rect GetHitBox();
     void Update(int ms, Level & lvl, Player & player);
