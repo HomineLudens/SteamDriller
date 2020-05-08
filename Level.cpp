@@ -368,7 +368,7 @@ int Level::AddEnemy(int x, int y, Enemy::EnemyType enemyType) {
             break;
         }
     }
-    enemies[lastEnemyId] = Enemy(x, y, enemyType);
+    enemies[lastEnemyId].Init(x, y, enemyType);
     return lastEnemyId;
 }
 

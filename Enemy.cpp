@@ -10,7 +10,7 @@ Enemy::Enemy() {
     life = 0;
 }
 
-Enemy::Enemy(int x, int y, EnemyType enemyType) {
+void Enemy::Init(int x, int y, EnemyType enemyType) {
     this->pos.x = x;
     this->pos.y = y;
     this->enemyType = enemyType;

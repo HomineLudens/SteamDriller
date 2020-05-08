@@ -72,7 +72,7 @@ class Enemy: public Entity {
     int16_t msState;
 
     Enemy();
-    Enemy(int x, int y, EnemyType enemyType);
+    void Init(int x, int y, EnemyType enemyType);
 
     EnemyAI GetAI();
 
