@@ -34,7 +34,8 @@ class Hud {
             None,
             ShowPex,
             ShowMsg,
-            ShowVisio
+            ShowVisio,
+            BossDialogue
         };
     PuzzleState puzzleState;
 

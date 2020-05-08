@@ -13,6 +13,9 @@
 #include "assets/puzzleVisio/Puz10.h"
 #include "assets/puzzleVisio/Puz11.h"
 
+#include "assets/SteamDriller_Portrait_Robot.h"
+#include "assets/SteamDriller_Portrait_EvilAI.h"
+
 
 using PD = Pokitto::Display;
 using PB = Pokitto::Buttons;
@@ -80,6 +83,9 @@ void Hud::Update(const Level & level, int ms) {
         case PuzzleState::ShowVisio:
             //Show Visio
             break;
+
+        case PuzzleState::BossDialogue:
+            break;
     }
 
     if (msgToShow == -1) {
@@ -102,6 +108,45 @@ void Hud::Draw(const Player & player,
     const Level & level) {
 
     switch (puzzleState) {
+
+        case PuzzleState::None:
+            {
+                //Colors
+                UI::mapColor(0, 0);
+                UI::mapColor(1, 0);
+                UI::mapColor(5, 0);
+
+                //----UI
+                UI::resetCursorBoundingBox();
+
+                //HUD
+                PD::setColor(0);
+                PD::fillRect(0, 0, 110, 10);
+                smallCog.draw(42, 3);
+                smallCog.draw(58, 3);
+                bigCog.draw(0, 2);
+
+                //
+                PD::drawSprite(0, 0, SteamDriller_HUD);
+                //
+                PD::setColor(7);
+                PD::setCursor(53, 2);
+                PD::print(player.bullets); //bullets
+
+                //Depth
+                PD::setCursor(72, 1);
+                #ifdef POK_SIM
+                char buffer[10];
+                snprintf(buffer, 10, "%05d", player.pos.y.getInteger() + level.GetDepth());
+                PD::print(buffer);
+                #else
+                PD::printf("%05d", player.pos.y.getInteger() + level.GetDepth());
+                #endif
+                //
+                //UI::setCursor(15, 0);
+                PD::fillRect(14, 2, player.life * 21 / 100, 3); //@Vampirics 21 pixel? Why? Why not 20? Damn artists :P
+            }
+            break;
 
         case PuzzleState::ShowPex:
             PD::drawSprite(40, 35, SteamDriller_PEX);
@@ -164,43 +209,11 @@ void Hud::Draw(const Player & player,
             }
             break;
 
-        case PuzzleState::None:
-            {
-                //Colors
-                UI::mapColor(0, 0);
-                UI::mapColor(1, 0);
-                UI::mapColor(5, 0);
+        case PuzzleState::BossDialogue:
 
-                //----UI
-                UI::resetCursorBoundingBox();
+            PD::drawSprite(0, 40, SteamDriller_Portrait_Robot);
+            PD::drawSprite(80, 60, SteamDriller_Portrait_Robot);
 
-                //HUD
-                PD::setColor(0);
-                PD::fillRect(0, 0, 110, 10);
-                smallCog.draw(42, 3);
-                smallCog.draw(58, 3);
-                bigCog.draw(0, 2);
-
-                //
-                PD::drawSprite(0, 0, SteamDriller_HUD);
-                //
-                PD::setColor(7);
-                PD::setCursor(53, 2);
-                PD::print(player.bullets); //bullets
-
-                //Depth
-                PD::setCursor(72, 1);
-                #ifdef POK_SIM
-                char buffer[10];
-                snprintf(buffer, 10, "%05d", player.pos.y.getInteger() + level.GetDepth());
-                PD::print(buffer);
-                #else
-                PD::printf("%05d", player.pos.y.getInteger() + level.GetDepth());
-                #endif
-                //
-                //UI::setCursor(15, 0);
-                PD::fillRect(14, 2, player.life * 21 / 100, 3); //@Vampirics 21 pixel? Why? Why not 20? Damn artists :P
-            }
             break;
     }
 }

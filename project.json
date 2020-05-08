@@ -3206,6 +3206,18 @@
 		},
 		"\\EEP.ROM": {
 			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_EvilAI.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_Robot.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_Robot.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_EvilAI.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {
