@@ -1,5 +1,6 @@
 #include "Particle.h"
 #include <Pokitto.h>
+#include "assets/dot.h"
 #include "assets/debris.h"
 #include "assets/gravel.h"
 #include "assets/sparks.h"
@@ -9,10 +10,10 @@ using PD = Pokitto::Display;
 
 Particle::Particle() {
     dsLife = 0;
-    particleType = ParticleType::Debris;
+    particleType = ParticleType::Empty;
 }
 
-void Particle::init(const Point & pos,
+void Particle::Init(const Point & pos,
     const Point & speed, ParticleType particleType,
         const Point & gravity, int dsLife) {
     this->pos.x = pos.x;
@@ -24,7 +25,11 @@ void Particle::init(const Point & pos,
     this->particleType = particleType;
     this->dsLife = dsLife;
 
+    sprite = nullptr;
     switch (particleType) {
+        case ParticleType::Empty:
+            sprite = nullptr;
+            break;
         case ParticleType::Debris:
             sprite = debris;
             break;
@@ -44,7 +49,7 @@ void Particle::init(const Point & pos,
             sprite = star;
             break;
         default:
-            sprite = sparks;
+            sprite = nullptr;
             break;
     }
 }
