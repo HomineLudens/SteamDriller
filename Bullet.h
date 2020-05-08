@@ -18,7 +18,7 @@ class Bullet: public Entity {
 
     Point pos;
     Point speed;
-    int msLife;
+    int16_t msLife;
 
     Bullet();
     void Init(const Point & pos,
