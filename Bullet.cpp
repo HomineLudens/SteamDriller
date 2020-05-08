@@ -12,7 +12,7 @@ Bullet::Bullet() {
     msLife = 0;
 }
 
-Bullet::Bullet(const Point & pos,
+void Bullet::Init(const Point & pos,
     const Point & direction, Bullet::BulletType bulletType, int msLife) {
 
     this->bulletType = bulletType;

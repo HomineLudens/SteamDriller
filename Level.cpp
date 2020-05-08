@@ -289,7 +289,7 @@ int Level::AddBullet(const Point & pos,
     const Point & speed, Bullet::BulletType bulletType, int msLife) {
     for (int i = 0; i < bullets.size(); i++) {
         if (!bullets[i].IsAlive()) {
-            bullets[i] = Bullet(pos, speed, bulletType, msLife);
+            bullets[i].Init(pos, speed, bulletType, msLife);
             return i;
         }
     }

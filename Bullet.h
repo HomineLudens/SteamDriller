@@ -21,7 +21,7 @@ class Bullet: public Entity {
     int msLife;
 
     Bullet();
-    Bullet(const Point & pos,
+    void Init(const Point & pos,
         const Point & speed, BulletType bulletType,int msLife=500);
 
     Rect GetHitBox();
