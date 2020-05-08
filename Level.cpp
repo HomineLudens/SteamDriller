@@ -17,6 +17,7 @@ void Level::Init(const Point & posStart) {
     killAll(itemsAnim);
     killAll(bullets);
     killAll(items);
+    killAll(particles);
 
     //--------------------------------------------------------------------
     //--- Initial stuff
@@ -105,8 +106,9 @@ void Level::RandomizeLine(int r) {
 
     //Clear line
     int c = 0;
-    for (c = 0; c < COLUMNS; c++)
+    for (c = 0; c < COLUMNS; c++) {
         lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::BackgroundUnderground; //Clear with background
+    }
 
     //Walls
     for (c = 0; c <= pg.x1; c++)
@@ -183,7 +185,8 @@ void Level::RandomizeLine(int r) {
         int roomStartX = random(2, COLUMNS - 2 - roomWidth);
         for (int yr = 0; yr < roomHeight; yr++) {
             for (int xr = roomStartX; xr < roomWidth; xr++) {
-                lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundRoom; //Clear room
+                if (lvlData[2 + ((r - yr) * COLUMNS) + xr] != TilesLoader::TileType::UnbreakableFloor)
+                    lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundRoom; //Clear room
             }
             ReshapeRow(r - yr);
         }
