@@ -5,6 +5,7 @@
 
 using PD = Pokitto::Display;
 
+ItemAnim::ItemAnim(): Item() {}
 
 void ItemAnim::Init(int x, int y, ItemType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex) {
 

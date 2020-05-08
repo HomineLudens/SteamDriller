@@ -24,8 +24,9 @@ class ItemAnim: public Item {
     ItemType itemType;
 
     public:
-        
-        void Init(int x = 0, int y = 0, ItemType itemType = ItemType::None, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1);
+
+        ItemAnim();
+    void Init(int x = 0, int y = 0, ItemType itemType = ItemType::None, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1);
     Rect GetHitBox();
     void Draw(const Camera & cam);
 
