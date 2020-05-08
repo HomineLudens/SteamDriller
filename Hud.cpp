@@ -40,7 +40,7 @@ void Hud::Update(const Level & level, int ms) {
 
     switch (puzzleState) {
         case PuzzleState::None:
-            if (msgToShow != 0 && PB::pressed(BTN_UP)) {
+            if (msgToShow != -1 && PB::pressed(BTN_UP)) {
                 if (strncmp("High:", Messages[msgToShow], 5) == 0)
                     puzzleState = PuzzleState::ShowPex;
                 else if (strncmp(Messages[msgToShow], "Visio:", 5) == 0)
@@ -66,7 +66,9 @@ void Hud::Update(const Level & level, int ms) {
             break;
         case PuzzleState::ShowMsg:
             //Show message one char after the other
-            msgLenght = strlen(Messages[msgToShow]);
+            if (msgToShow != -1) {
+                msgLenght = strlen(Messages[msgToShow]);
+            }
             if (msDelayChar < 0) {
                 charDisplayed++;
                 if (charDisplayed > msgLenght) {
