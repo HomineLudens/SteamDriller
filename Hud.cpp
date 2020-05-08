@@ -190,7 +190,13 @@ void Hud::Draw(const Player & player,
 
                 //Depth
                 PD::setCursor(72, 1);
+                #ifdef POK_SIM
+                char buffer[10];
+                snprintf(buffer, 10, "%05d", player.pos.y.getInteger() + level.GetDepth());
+                PD::print(buffer);
+                #else
                 PD::printf("%05d", player.pos.y.getInteger() + level.GetDepth());
+                #endif
                 //
                 //UI::setCursor(15, 0);
                 PD::fillRect(14, 2, player.life * 21 / 100, 3); //@Vampirics 21 pixel? Why? Why not 20? Damn artists :P
