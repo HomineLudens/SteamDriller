@@ -12,7 +12,7 @@
 using PD = Pokitto::Display;
 
 Item::Item() {
-    flags.set(FlagsType::alive, true);
+    flags.set(FlagsType::alive, false);
 }
 
 Item::Item(int x, int y, ItemType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex) {
