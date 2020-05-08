@@ -337,7 +337,7 @@ void Level::AddDebris(const Point & pos, int count) {
 int Level::AddItem(int x, int y, Item::ItemType itemType, bool fixed, bool collectable, bool mirrored) {
     for (int i = 0; i < items.size(); i++) {
         if (!items[i].IsAlive()) {
-            items[i] = Init(x, y, itemType, fixed, collectable, mirrored);
+            items[i].Init(x, y, itemType, fixed, collectable, mirrored);
             return i;
         }
     }
@@ -347,7 +347,7 @@ int Level::AddItem(int x, int y, Item::ItemType itemType, bool fixed, bool colle
 int Level::AddItemAnim(int x, int y, ItemAnim::ItemType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex) {
     for (int i = 0; i < itemsAnim.size(); i++) {
         if (!itemsAnim[i].IsAlive()) {
-            itemsAnim[i] = ItemAnim(x, y, itemType, fixed, collectable, mirrored, msgIndex);
+            itemsAnim[i].Init(x, y, itemType, fixed, collectable, mirrored, msgIndex);
             return i;
         }
     }
