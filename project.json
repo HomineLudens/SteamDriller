@@ -3251,6 +3251,42 @@
 		},
 		"\\assets\\SteamDriller_Portrait_EvilAI.png.crdownload": {
 			"sdcard": false
+		},
+		"\\assets\\SteamDriller_randomDecorForGrassyPlatform.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_randomDecorForGrassyPlatform.png": {
+			"sdcard": false
+		},
+		"\\assets\\TNT_detonator_3.png": {
+			"sdcard": false
+		},
+		"\\assets\\TNT_detonator_2.png": {
+			"sdcard": false
+		},
+		"\\assets\\TNT_detonator_1.png": {
+			"sdcard": false
+		},
+		"\\assets\\TNT_detonator_pos_1.png": {
+			"sdcard": false
+		},
+		"\\assets\\TNT_detonator_pos_2.png": {
+			"sdcard": false
+		},
+		"\\assets\\TNT_detonator_pos_3.png": {
+			"sdcard": false
+		},
+		"\\assets\\TNT_detonator_pos_1.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_randomDecorForGrassyPlatform.h": {
+			"sdcard": false
+		},
+		"\\assets\\TNT_detonator_pos_3.h": {
+			"sdcard": false
+		},
+		"\\assets\\TNT_detonator_pos_2.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

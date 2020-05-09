@@ -2,6 +2,7 @@
 #include "Point.h"
 
 class Player;
+class Hud;
 
 class Camera {
 
@@ -22,7 +23,7 @@ class Camera {
     void Init(const Point & pos);
     void Shake(int shakePower);
     void Flash(int flashDuration);
-    void Update(const Player & player, int ms);
+    void Update(const Player & player, const Hud & hud, int ms);
     void Draw();
     int ToScreenX(const Point & objPos) const;
     int ToScreenY(const Point & objPos) const;

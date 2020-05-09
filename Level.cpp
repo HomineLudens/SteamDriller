@@ -523,8 +523,9 @@ void Level::DestroyBossCeiling() {
             }
         }
     }
-    if (destroyed)
+    if (destroyed) {
         Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
+    }
 }
 
 void Level::Update(Camera & camera, Player & player, int ms) {
@@ -581,7 +582,11 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         bossActivated = true;
         msgToShowFirst = 20; //Robot
         msgToShowLast = 21; //Boss disalogue messages
-        AddEnemy((player.pos.x / TILE_WIDTH) > (COLUMNS / 2) ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH, player.pos.y.getInteger() - 30, Enemy::EnemyType::Boss);
+        auto xBoss = (player.pos.x / TILE_WIDTH) > (COLUMNS / 2) ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH;
+        auto yBoss = player.pos.y.getInteger() - 30;
+        AddEnemy(xBoss, yBoss, Enemy::EnemyType::Boss);
+        camera.target.x = xBoss;
+        camera.target.y = yBoss;
         printf("BOSS ACTIVATED!\r\n");
     }
 

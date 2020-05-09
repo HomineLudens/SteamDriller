@@ -1,5 +1,6 @@
 #include "Camera.h"
 #include "Player.h"
+#include "Hud.h"
 #include <algorithm>
 
 using PD = Pokitto::Display;
@@ -24,13 +25,15 @@ void Camera::Flash(int flashDuration) {
     msFlash = flashDuration;
 }
 
-void Camera::Update(const Player & player, int ms) {
+void Camera::Update(const Player & player,
+    const Hud & hud, int ms) {
 
     if (msFlash > 0) {
         msFlash -= ms;
     }
 
-    if (player.state == Player::State::Offline || player.state == Player::State::Activating) {
+    if (player.state == Player::State::Offline || player.state == Player::State::Activating ||
+        hud.puzzleState == Hud::PuzzleState::BossDialogue) {
         //When Offline don't look at player and move slower 
         speed.x = 0.02;
         speed.y = 0.01;

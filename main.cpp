@@ -141,7 +141,7 @@ int main() {
         //-------------------------------------------------
 
         //----UPDATE
-        camera.Update(player,  msElapsed);
+        camera.Update(player, hud,  msElapsed);
         if (hud.puzzleState == Hud::PuzzleState::None) {
             lights.Update(camera, player, level, msElapsed);
             player.Update(camera, level, msElapsed);
