@@ -20,8 +20,18 @@ inline const char* Messages[] {
     "", //16
     "", //17
     "", //18
-    "", //19
-    "AI: Welcome to your dooom! Operation TERMINATE", //20
+    "DestroyBossCeiling", //19
+    "> Hazard level 10", //20
+    "> Welcome to your dooom! Operation TERMINATE", //21
+    "", //22
+    "", //23
+    "", //24
+    "", //25
+    "", //26
+    "", //27
+    "", //28"
+    "", //29
+    "My brain tissue is burn!", //30
 
 };
 

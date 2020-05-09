@@ -6,6 +6,7 @@ __asm__(".global steamDriller_Chip_Purple_Anim\nsteamDriller_Chip_Purple_Anim:\n
 __asm__(".global steamDriller_Chip_Red_Anim\nsteamDriller_Chip_Red_Anim:\n.incbin \"sprites/SteamDriller_Chip_Red_Anim.bin\"");
 __asm__(".global steamDriller_Coal_Anim\nsteamDriller_Coal_Anim:\n.incbin \"sprites/SteamDriller_Coal_Anim.bin\"");
 __asm__(".global steamDriller_Crystal_Anim\nsteamDriller_Crystal_Anim:\n.incbin \"sprites/SteamDriller_Crystal_Anim.bin\"");
+__asm__(".global steamDriller_Dock_Anim\nsteamDriller_Dock_Anim:\n.incbin \"sprites/SteamDriller_Dock_Anim.bin\"");
 __asm__(".global steamDriller_EliteMechaSpider\nsteamDriller_EliteMechaSpider:\n.incbin \"sprites/SteamDriller_EliteMechaSpider.bin\"");
 __asm__(".global steamDriller_Explosions_Anim\nsteamDriller_Explosions_Anim:\n.incbin \"sprites/SteamDriller_Explosions_Anim.bin\"");
 __asm__(".global steamDriller_Laser_Anim\nsteamDriller_Laser_Anim:\n.incbin \"sprites/SteamDriller_Laser_Anim.bin\"");

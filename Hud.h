@@ -15,8 +15,10 @@ class Hud {
     Sprite bigCog;
 
     int msDelayChar = 0;
-    int charDisplayed = 0;
-    int msgToShow = 0;
+    int charDisplayedFirst = 0;
+    int charDisplayedLast = 0;
+    int msgToShowFirst = 0;
+    int msgToShowLast = 0;
     int msDelayExit = 0;
 
     #ifdef POKITTO

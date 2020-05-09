@@ -84,7 +84,7 @@ int main() {
     PD::lineFillers[2] = Lights::ShadeFiller;
 
     PD::lineFillers[3] = UI::LineFiller;
-    UI::setTilesetImage(steamtasui); 
+    UI::setTilesetImage(steamtasui);
 
     //---
     initGame();
@@ -123,13 +123,12 @@ int main() {
         } else {
             setTrack(5);
         }
-        
-        
-        ///
+
         if (hud.puzzleState == Hud::PuzzleState::None)
             PS::playMusicStream();
         else
             PS::pauseMusicStream();
+        //-------------------------------------------------
 
         //Save best score
         if (player.life < 1) {
@@ -139,6 +138,7 @@ int main() {
                 steamCookie.saveCookie();
             }
         }
+        //-------------------------------------------------
 
         //----UPDATE
         if (hud.puzzleState == Hud::PuzzleState::None) {

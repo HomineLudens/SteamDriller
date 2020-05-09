@@ -19,7 +19,8 @@ class ItemAnim: public Item {
             Chip,
             ChipRed,
             ChipBlack,
-            ChipPurple
+            ChipPurple,
+            DockStation
         };
     ItemType itemType;
 

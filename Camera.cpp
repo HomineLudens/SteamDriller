@@ -51,7 +51,7 @@ void Camera::Update(const Player & player, int ms) {
             offset.y = 40;
         //Look down when crunch 
         if (player.state == Player::State::Crouch)
-            offset.y = -60;
+            offset.y = -20;
         //or falling
         if (player.speed.y > 0)
             offset.y = player.speed.y * (-15);

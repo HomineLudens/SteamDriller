@@ -64,13 +64,16 @@ class Level {
         }
 
 
-    int16_t lastParticleId;
-    int16_t lastEnemyId;
+    uint8_t lastParticleId;
+    uint8_t lastEnemyId;
+    uint8_t lastItemId;
+    uint8_t lastAnimatedItemId;
 
     Tilemap tilemap;
     Point pos;
     int depth = 0;
-    int16_t msgToShow = -1;
+    int16_t msgToShowFirst = -1;
+    int16_t msgToShowLast = -1;
     
     int msAnim = 0;
     int16_t animFrame = 0;
@@ -119,7 +122,8 @@ class Level {
     int GetTileId(const Point & pos, int offX = 0, int offY = 0);
     void SetTileId(const Point & pos, int id, int offX = 0, int offY = 0);
     int GetDepth() const;
-    int GetMessageToShow() const;
+    int GetMessageToShowFirst() const;
+    int GetMessageToShowLast() const;
     void ClearMessageToShow();
 
     bool IsSolid(const Point & pos, int offX = 0, int offY = 0);
@@ -139,6 +143,8 @@ class Level {
     int AddEnemy(int x, int y, Enemy::EnemyType enemyType);
     void ShiftStuff(int x, int y);
     void ShiftMapGenerator(int x);
+    
+    void DestroyBossCeiling();
 
     void Update(Camera & camera, Player & player, int ms);
     void Draw(Camera & cam, Player & player);

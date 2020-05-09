@@ -12,7 +12,8 @@
 #include "assets/tiles/SteamDriller_TopPlatformLeftEdge.h"
 #include "assets/tiles/SteamDriller_TopPlatformRightEdge.h"
 #include "assets/tiles/SteamDriller_Unbreakable.h"
-#include "assets/tiles/SteamDriller_UnbreakableFloor.h"
+#include "assets/tiles/SteamDriller_UnbreakableFloor.h" 
+#include "assets/tiles/SteamDriller_UnbreakableCeiling.h"
 
 class TilesLoader {
 
@@ -34,8 +35,8 @@ class TilesLoader {
                 TopRight,
                 Unbreakable,
                 UnbreakableFloor,
+                UnbreakableCeiling,
         };
-
 
 
     static void SetTiles(Tilemap & tilemap, int anim) {
@@ -56,6 +57,7 @@ class TilesLoader {
 
         tilemap.setTile(TileType::Unbreakable, SteamDriller_Unbreakable);
         tilemap.setTile(TileType::UnbreakableFloor, SteamDriller_UnbreakableFloor);
+        tilemap.setTile(TileType::UnbreakableCeiling, SteamDriller_UnbreakableCeiling);
 
         switch (anim%3) {
             case 0:

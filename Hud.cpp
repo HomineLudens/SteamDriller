@@ -33,8 +33,10 @@ void Hud::Update(Level & level, int ms) {
     msDelayChar -= ms;
     msDelayExit += ms;
     //--------------
-    msgToShow = level.GetMessageToShow();
-    auto msgLenght = 0;
+    msgToShowFirst = level.GetMessageToShowFirst();
+    msgToShowLast = level.GetMessageToShowLast();
+    int msgLenghtFirst = 0;
+    int msgLenghtLast = 0;
 
     if (puzzleState != PuzzleState::None && msDelayExit > 250) {
         UI::setCursor(0, 0);
@@ -46,19 +48,25 @@ void Hud::Update(Level & level, int ms) {
 
     switch (puzzleState) {
         case PuzzleState::None:
-            if (msgToShow != -1) {
+            charDisplayedFirst = 0;
+            charDisplayedLast = 0;
+
+            if (msgToShowFirst != -1) {
                 if (PB::pressed(BTN_UP)) {
-                    if (strncmp("High:", Messages[msgToShow], 5) == 0) {
+                    if (strncmp("High:", Messages[msgToShowFirst], 5) == 0) {
                         puzzleState = PuzzleState::ShowPex;
-                    } else if (strncmp(Messages[msgToShow], "Visio:", 5) == 0) {
+                    } else if (strncmp(Messages[msgToShowFirst], "Visio:", 5) == 0) {
                         puzzleState = PuzzleState::ShowVisio;
+                    } else if (strncmp(Messages[msgToShowFirst], "DestroyBossCeiling", 1) == 0) {
+                        level.DestroyBossCeiling();
                     } else {
                         puzzleState = PuzzleState::ShowMsg;
                     }
                     msDelayExit = 0;
                 }
 
-                if (strncmp(Messages[msgToShow], "AI:", 3) == 0) {
+
+                if (strncmp(Messages[msgToShowFirst], ">", 1) == 0) {
                     puzzleState = PuzzleState::BossDialogue;
                     msDelayExit = 0;
                 }
@@ -92,16 +100,28 @@ void Hud::Update(Level & level, int ms) {
             break;
     }
 
-    if (msgToShow == -1) {
+
+    //-------------------------------------
+    if (msgToShowFirst == -1) {
         puzzleState = PuzzleState::None;
-        charDisplayed = 0;
+
     } else {
-        msgLenght = strlen(Messages[msgToShow]);
+        msgLenghtFirst = strlen(Messages[msgToShowFirst]);
         if (msDelayChar < 0) {
-            charDisplayed++;
-            if (charDisplayed > msgLenght) {
-                charDisplayed = msgLenght;
+            //------------------
+            charDisplayedFirst++;
+            if (charDisplayedFirst > msgLenghtFirst) {
+                charDisplayedFirst = msgLenghtFirst;
+            } else {
+                charDisplayedLast = 0;
             }
+            //------------------
+            charDisplayedLast++;
+            if (charDisplayedLast > charDisplayedLast) {
+                charDisplayedLast = charDisplayedLast;
+            }
+
+            //----
             msDelayChar = 50;
         }
     }
@@ -175,8 +195,8 @@ void Hud::Draw(const Player & player,
                 UI::setCursorBoundingBox(2, 12, 15, 12);
                 //text
                 UI::setCursor(0, 0);
-                UI::printText(Messages[msgToShow],charDisplayed);
-                if (strncmp("High:", Messages[msgToShow], 5) == 0) {
+                UI::printText(Messages[msgToShowFirst], charDisplayedFirst);
+                if (strncmp("High:", Messages[msgToShowFirst], 5) == 0) {
                     UI::printInteger(steamCookie.maxDepth);
                 }
             }
@@ -191,16 +211,16 @@ void Hud::Draw(const Player & player,
 
                 UI::drawBox(4, 4, 13, 13);
 
-                if (strncmp(Messages[msgToShow], "Visio:00", 8) == 0) {
+                if (strncmp(Messages[msgToShowFirst], "Visio:00", 8) == 0) {
                     PuzXX = Puz00;
                 }
-                if (strncmp(Messages[msgToShow], "Visio:01", 8) == 0) {
+                if (strncmp(Messages[msgToShowFirst], "Visio:01", 8) == 0) {
                     PuzXX = Puz01;
                 }
-                if (strncmp(Messages[msgToShow], "Visio:10", 8) == 0) {
+                if (strncmp(Messages[msgToShowFirst], "Visio:10", 8) == 0) {
                     PuzXX = Puz10;
                 }
-                if (strncmp(Messages[msgToShow], "Visio:11", 8) == 0) {
+                if (strncmp(Messages[msgToShowFirst], "Visio:11", 8) == 0) {
                     PuzXX = Puz11;
                 }
                 int i = 0;
@@ -215,7 +235,7 @@ void Hud::Draw(const Player & player,
                     }
                 }
                 UI::setCursor(5, 3);
-                UI::printText(Messages[msgToShow]);
+                UI::printText(Messages[msgToShowFirst]);
             }
             break;
 
@@ -234,7 +254,7 @@ void Hud::Draw(const Player & player,
             UI::drawBox(6, 2, 17, 6);
             UI::setCursorBoundingBox(7, 3, 16, 5);
             UI::setCursor(0, 0);
-            UI::printText(Messages[msgToShow], charDisplayed);
+            UI::printText(Messages[msgToShowFirst], charDisplayedFirst);
 
             PD::setColor(16); //Black
             PD::fillRect(80 - BORDER, 57 - BORDER, 24 + 2 * BORDER, 24 + 2 * BORDER);
@@ -242,7 +262,7 @@ void Hud::Draw(const Player & player,
             UI::drawBox(0, 9, 11, 13);
             UI::setCursorBoundingBox(1, 10, 10, 12);
             UI::setCursor(0, 0);
-            UI::printText(Messages[msgToShow], charDisplayed);
+            UI::printText(Messages[msgToShowLast], charDisplayedLast);
 
             break;
     }

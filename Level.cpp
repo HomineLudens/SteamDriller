@@ -156,7 +156,7 @@ void Level::RandomizeLine(int r) {
         int ey = (r) * TILE_HEIGHT;
         auto pEnemy = Point(ex, ey);
         if (!IsSolid(pEnemy) && !IsSolid(pEnemy, 0, -1) && !IsSolid(pEnemy, 1, 0) && !IsSolid(pEnemy, 0, 1)) {
-            auto rnd = random(3);
+            auto rnd = random(4);
             switch (rnd) {
                 case 0:
                     AddEnemy(ex, ey, Enemy::EnemyType::PurpleSentinelHorizontal);
@@ -185,7 +185,8 @@ void Level::RandomizeLine(int r) {
         int roomStartX = random(2, COLUMNS - 2 - roomWidth);
         for (int yr = 0; yr < roomHeight; yr++) {
             for (int xr = roomStartX; xr < roomWidth; xr++) {
-                if (lvlData[2 + ((r - yr) * COLUMNS) + xr] != TilesLoader::TileType::UnbreakableFloor)
+                auto idTile = lvlData[2 + ((r - yr) * COLUMNS) + xr];
+                if (idTile != TilesLoader::TileType::UnbreakableFloor && idTile != TilesLoader::TileType::UnbreakableCeiling)
                     lvlData[2 + ((r - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundRoom; //Clear room
             }
             ReshapeRow(r - yr);
@@ -336,27 +337,41 @@ void Level::AddDebris(const Point & pos, int count) {
 
 
 int Level::AddItem(int x, int y, Item::ItemType itemType, bool fixed, bool collectable, bool mirrored) {
+    //loop index
+    lastItemId++;
+    if (lastItemId > items.size() - 1)
+        lastItemId = 0;
+
     for (int i = 0; i < items.size(); i++) {
         if (!items[i].IsAlive()) {
-            items[i].Init(x, y, itemType, fixed, collectable, mirrored);
-            return i;
+            lastItemId = i;
+            break;
         }
     }
-    return -1;
+    items[lastItemId].Init(x, y, itemType, fixed, collectable, mirrored);
+
+    return lastItemId;
 }
 
 int Level::AddItemAnim(int x, int y, ItemAnim::ItemType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex) {
+    //loop index
+    lastAnimatedItemId++;
+    if (lastAnimatedItemId > itemsAnim.size() - 1)
+        lastAnimatedItemId = 0;
+
+    //Try find a free slot or use last one++
     for (int i = 0; i < itemsAnim.size(); i++) {
         if (!itemsAnim[i].IsAlive()) {
-            itemsAnim[i].Init(x, y, itemType, fixed, collectable, mirrored, msgIndex);
-            return i;
+            lastAnimatedItemId = i;
+            break;
         }
     }
-    return -1;
+
+    itemsAnim[lastAnimatedItemId].Init(x, y, itemType, fixed, collectable, mirrored, msgIndex);
+    return lastAnimatedItemId;
 }
 
 int Level::AddEnemy(int x, int y, Enemy::EnemyType enemyType) {
-
     //loop index
     lastEnemyId++;
     if (lastEnemyId > enemies.size() - 1)
@@ -377,12 +392,17 @@ int Level::GetDepth() const {
     return depth;
 }
 
-int Level::GetMessageToShow() const {
-    return msgToShow;
+int Level::GetMessageToShowFirst() const {
+    return msgToShowFirst;
 }
 
-void Level::ClearMessageToShow(){
-    msgToShow = -1;
+int Level::GetMessageToShowLast() const {
+    return msgToShowLast;
+}
+
+void Level::ClearMessageToShow() {
+    msgToShowFirst = -1;
+    msgToShowLast = -1;
 }
 
 void Level::ShiftStuff(int x, int y) {
@@ -464,10 +484,9 @@ void Level::CreateBossZone() {
         for (int xr = 0; xr < COLUMNS; xr++) {
             if (yr == 1) {
                 depthBossZoneEnd = depth + ((ROWS - yr) * TILE_HEIGHT);
-                lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::UnbreakableFloor; //
+                lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::UnbreakableFloor; //Floor
             } else if (yr == bossZoneHeight - 1) {
-                if (xr < 30 && xr > 36)
-                    lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::UnbreakableFloor; //
+                lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::UnbreakableCeiling; //Ceiling
             } else {
                 depthBossZoneBegin = depth + ((ROWS - yr) * TILE_HEIGHT);
 
@@ -482,9 +501,30 @@ void Level::CreateBossZone() {
     }
 
     //Enter zone
-    AddItem(COLUMNS * TILE_WIDTH / 2, (ROWS - bossZoneHeight) * TILE_HEIGHT, Item::ItemType::DockStation);
+    AddItemAnim((pg.x1 + pg.x2) / 2 * TILE_WIDTH, (ROWS - bossZoneHeight) * TILE_HEIGHT, ItemAnim::ItemType::DockStation, false, false, false, 19);
 
     printf("NEW BOSS ZONE done\r\n");
+}
+
+void Level::DestroyBossCeiling() {
+    bool destroyed = false;
+    for (int xr = 0; xr < COLUMNS; xr++) {
+        for (int yr = 0; yr < ROWS; yr++) {
+            if (lvlData[2 + (yr * COLUMNS) + xr] == TilesLoader::TileType::UnbreakableCeiling) {
+                lvlData[2 + (yr * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss1;
+                //--
+                AddParticle(Point(xr * TILE_WIDTH, (yr * TILE_HEIGHT)),
+                    Point(random(-10, 10) / 10.0, random(-10, 10) / 10.0),
+                    Point(0, 0),
+                    Particle::ParticleType::Explosion,
+                    600 + random(-200, 200));
+                //--
+                destroyed = true;
+            }
+        }
+    }
+    if (destroyed)
+        Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
 }
 
 void Level::Update(Camera & camera, Player & player, int ms) {
@@ -539,7 +579,8 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     if (player.onFloor && player.onBossZone && !bossActivated) {
         //Add boss
         bossActivated = true;
-        msgToShow = 20; //Boss disalogue messages
+        msgToShowFirst = 20; //Robot
+        msgToShowLast = 21; //Boss disalogue messages
         AddEnemy((player.pos.x / TILE_WIDTH) > (COLUMNS / 2) ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH, player.pos.y.getInteger() - 30, Enemy::EnemyType::Boss);
         printf("BOSS ACTIVATED!\r\n");
     }
@@ -625,7 +666,8 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         if (i.IsAlive() && Rect::Collide(player.GetHitBox(), i.GetHitBox())) {
             i.Activate();
             if (i.msgIndex != -1) {
-                msgToShow = i.msgIndex;
+                msgToShowFirst = i.msgIndex;
+                msgToShowLast = i.msgIndex;
             }
             if (i.IsCollectable() && player.life > 0) {
                 player.Heal(20);

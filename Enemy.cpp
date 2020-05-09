@@ -52,6 +52,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = (enemyType == EnemyType::PurpleSentinelVertical);
             eAI.shootAndFire = false;
             eAI.explodeOnDeathRange = 0;
+            eAI.releaseChipQualityOnDeath = 0;
             break;
         case EnemyType::Spider:
             eAI.life = 20;
@@ -69,6 +70,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = false;
             eAI.shootAndFire = true;
             eAI.explodeOnDeathRange = 0;
+            eAI.releaseChipQualityOnDeath = 0;
             break;
         case EnemyType::SpiderMecha:
             eAI.life = 100;
@@ -86,6 +88,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = true;
             eAI.shootAndFire = true;
             eAI.explodeOnDeathRange = 0;
+            eAI.releaseChipQualityOnDeath = 1;
             break;
         case EnemyType::Worm:
             eAI.life = 5;
@@ -103,6 +106,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = false;
             eAI.shootAndFire = false;
             eAI.explodeOnDeathRange = 0;
+            eAI.releaseChipQualityOnDeath = 0;
             break;
         case EnemyType::Boss:
             eAI.life = 100;
@@ -120,6 +124,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = false;
             eAI.shootAndFire = true;
             eAI.explodeOnDeathRange = 5;
+            eAI.releaseChipQualityOnDeath = 2;
             break;
     }
     return eAI;
@@ -350,8 +355,9 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
     //On DEATH Event
     if (life == 0 && lifePrev > 0) {
         auto eAI = GetAI();
+        
+        //Explosion
         if (eAI.explodeOnDeathRange > 0) {
-
             lvl.DestroyTile(pos, 0, 0, true);
             for (int x = -eAI.explodeOnDeathRange; x < eAI.explodeOnDeathRange; x++) {
                 for (int y = -eAI.explodeOnDeathRange; y < eAI.explodeOnDeathRange; y++) {
@@ -365,8 +371,11 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                         random(400, 1000));
                 }
             }
-
-
+        }
+        
+        //Release chip
+        if (eAI.releaseChipQualityOnDeath>0){
+            lvl.AddItemAnim(pos.x.getInteger(), pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, 30);
         }
     }
 

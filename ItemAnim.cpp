@@ -34,6 +34,9 @@ void ItemAnim::Init(int x, int y, ItemType itemType, bool fixed, bool collectabl
         case ItemType::ChipPurple:
             spr.play(steamDriller_Chip_Purple_Anim, SteamDriller_Chip_Purple_Anim::Animation::Idle);
             break;
+        case ItemType::DockStation:
+            spr.play(steamDriller_Dock_Anim, SteamDriller_Dock_Anim::Animation::Idle);
+            break;
     }
 
     sprIcon.play(steamDriller_Up_Anim, SteamDriller_Up_Anim::Animation::Idle);
