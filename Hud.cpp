@@ -81,17 +81,7 @@ void Hud::Update(Level & level, int ms) {
             }
             break;
         case PuzzleState::ShowMsg:
-            //Show message one char after the other
-            if (msgToShow != -1) {
-                msgLenght = strlen(Messages[msgToShow]);
-            }
-            if (msDelayChar < 0) {
-                charDisplayed++;
-                if (charDisplayed > msgLenght) {
-                    charDisplayed = msgLenght;
-                }
-                msDelayChar = 50;
-            }
+            //
             break;
         case PuzzleState::ShowVisio:
             //Show Visio
@@ -105,6 +95,15 @@ void Hud::Update(Level & level, int ms) {
     if (msgToShow == -1) {
         puzzleState = PuzzleState::None;
         charDisplayed = 0;
+    } else {
+        msgLenght = strlen(Messages[msgToShow]);
+        if (msDelayChar < 0) {
+            charDisplayed++;
+            if (charDisplayed > msgLenght) {
+                charDisplayed = msgLenght;
+            }
+            msDelayChar = 50;
+        }
     }
 
     #ifdef POKITTO
@@ -172,14 +171,11 @@ void Hud::Draw(const Player & player,
                 UI::mapColor(1, 16);
                 UI::mapColor(5, 16);
                 //
-                UI::setCursorBoundingBox(2, 12, 15, 12);
                 UI::drawBox(1, 11, 16, 13);
+                UI::setCursorBoundingBox(2, 12, 15, 12);
                 //text
-                char charMessages[charDisplayed + 1];
-                memcpy(charMessages, Messages[msgToShow], charDisplayed);
-                charMessages[charDisplayed] = 0;
                 UI::setCursor(0, 0);
-                UI::printText(charMessages);
+                UI::printText(Messages[msgToShow],charDisplayed);
                 if (strncmp("High:", Messages[msgToShow], 5) == 0) {
                     UI::printInteger(steamCookie.maxDepth);
                 }
@@ -229,11 +225,24 @@ void Hud::Draw(const Player & player,
             UI::mapColor(1, 16);
             UI::mapColor(5, 16);
             //
-            UI::setCursorBoundingBox(2, 12, 15, 12);
-            UI::drawBox(1, 11, 16, 13);
+            //UI::setCursorBoundingBox(2, 12, 15, 12);
 
-            PD::drawSprite(0, 40, SteamDriller_Portrait_Robot);
-            PD::drawSprite(80, 60, SteamDriller_Portrait_EvilAI);
+            PD::setColor(16); //Black
+            constexpr int BORDER = 3;
+            PD::fillRect(5 - BORDER, 15 - BORDER, 24 + 2 * BORDER, 24 + 2 * BORDER);
+            PD::drawSprite(5, 15, SteamDriller_Portrait_Robot);
+            UI::drawBox(6, 2, 17, 6);
+            UI::setCursorBoundingBox(7, 3, 16, 5);
+            UI::setCursor(0, 0);
+            UI::printText(Messages[msgToShow], charDisplayed);
+
+            PD::setColor(16); //Black
+            PD::fillRect(80 - BORDER, 57 - BORDER, 24 + 2 * BORDER, 24 + 2 * BORDER);
+            PD::drawSprite(80, 57, SteamDriller_Portrait_EvilAI);
+            UI::drawBox(0, 9, 11, 13);
+            UI::setCursorBoundingBox(1, 10, 10, 12);
+            UI::setCursor(0, 0);
+            UI::printText(Messages[msgToShow], charDisplayed);
 
             break;
     }

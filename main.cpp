@@ -84,7 +84,7 @@ int main() {
     PD::lineFillers[2] = Lights::ShadeFiller;
 
     PD::lineFillers[3] = UI::LineFiller;
-    UI::setTilesetImage(steamtasui); //UI::setTilesetImage(puits::UltimateUtopia::tileSet);
+    UI::setTilesetImage(steamtasui); 
 
     //---
     initGame();
