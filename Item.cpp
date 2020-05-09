@@ -6,8 +6,11 @@
 #include "assets/SteamDriller_Unactivated_Robot.h"
 #include "assets/SteamDriller_Bones.h"
 #include "assets/SteamDriller_Conveyor_Flat.h"        
-#include "assets/SteamDriller_FenceTileTop.h"     
-#include "assets/SteamDriller_DockStation.h"    
+#include "assets/SteamDriller_FenceTileTop.h"   
+
+#include "assets/TNT_detonator_pos_1.h"    
+#include "assets/TNT_detonator_pos_2.h"    
+#include "assets/TNT_detonator_pos_3.h"   
 
 using PD = Pokitto::Display;
 
@@ -48,8 +51,14 @@ void Item::Init(int x, int y, ItemType itemType, bool fixed, bool collectable, b
         case ItemType::Fance:
             sprite = SteamDriller_FenceTileTop;
             break;
-        case ItemType::DockStation:
-            sprite = SteamDriller_DockStation;
+        case ItemType::TNT1:
+            sprite = TNT_detonator_pos_1;
+            break;
+        case ItemType::TNT2:
+            sprite = TNT_detonator_pos_2;
+            break;
+        case ItemType::TNT3:
+            sprite = TNT_detonator_pos_3;
             break;
     }
 }
@@ -69,6 +78,7 @@ void Item::Update(int ms, Level & lvl, Player & player) {
 
         //Apply gravity
         speed.y += 0.1;
+        speed.x *= 0.9; //friction
 
         //Collision
         pos.x += speed.x;

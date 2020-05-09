@@ -353,7 +353,7 @@ int Level::AddItem(int x, int y, Item::ItemType itemType, bool fixed, bool colle
     return lastItemId;
 }
 
-int Level::AddItemAnim(int x, int y, ItemAnim::ItemType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex) {
+int Level::AddItemAnim(int x, int y, ItemAnim::ItemType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex, Point speed) {
     //loop index
     lastAnimatedItemId++;
     if (lastAnimatedItemId > itemsAnim.size() - 1)
@@ -368,6 +368,7 @@ int Level::AddItemAnim(int x, int y, ItemAnim::ItemType itemType, bool fixed, bo
     }
 
     itemsAnim[lastAnimatedItemId].Init(x, y, itemType, fixed, collectable, mirrored, msgIndex);
+    itemsAnim[lastAnimatedItemId].speed = speed;
     return lastAnimatedItemId;
 }
 
@@ -583,7 +584,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         msgToShowFirst = 20; //Robot
         msgToShowLast = 21; //Boss disalogue messages
         auto xBoss = (player.pos.x / TILE_WIDTH) > (COLUMNS / 2) ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH;
-        auto yBoss = player.pos.y.getInteger() - 30;
+        auto yBoss = player.pos.y.getInteger() - 1;
         AddEnemy(xBoss, yBoss, Enemy::EnemyType::Boss);
         camera.target.x = xBoss;
         camera.target.y = yBoss;

@@ -20,7 +20,7 @@ class ItemAnim: public Item {
             ChipRed,
             ChipBlack,
             ChipPurple,
-            DockStation
+            DockStation,
         };
     ItemType itemType;
 

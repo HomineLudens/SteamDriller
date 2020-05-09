@@ -3287,6 +3287,9 @@
 		},
 		"\\assets\\TNT_detonator_pos_2.h": {
 			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Dock_Anim.bin": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

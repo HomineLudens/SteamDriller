@@ -27,7 +27,9 @@ class Item: public Entity {
             RobotUnactivatedRow,
             Conveyor,
             Fance,
-            DockStation
+            TNT1,
+            TNT2,
+            TNT3
         };
 
     Point pos;
@@ -47,7 +49,7 @@ class Item: public Entity {
     bool IsCollectable();
     bool IsFixed();
     bool IsActivated();
-    
+
     void Kill();
     void Activate();
     void Deactivate();

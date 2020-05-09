@@ -114,7 +114,7 @@ class Level {
     std::array < Particle, 100 > particles;
     std::array < Enemy, 10 > enemies;
     std::array < Item, 30 > items;
-    std::array < ItemAnim, 10 > itemsAnim;
+    std::array < ItemAnim, 20 > itemsAnim;
 
     Level();
 
@@ -139,7 +139,7 @@ class Level {
             const Point & gravity, Particle::ParticleType particleType, int msLife = 500);
 
     int AddItem(int x, int y, Item::ItemType itemType, bool fixed = false, bool collectable = true, bool mirrored = false);
-    int AddItemAnim(int x, int y, ItemAnim::ItemType itemType, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1);
+    int AddItemAnim(int x, int y, ItemAnim::ItemType itemType, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1, Point speed = Point(0,0));
     int AddEnemy(int x, int y, Enemy::EnemyType enemyType);
     void ShiftStuff(int x, int y);
     void ShiftMapGenerator(int x);

@@ -72,24 +72,6 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.explodeOnDeathRange = 0;
             eAI.releaseChipQualityOnDeath = 0;
             break;
-        case EnemyType::SpiderMecha:
-            eAI.life = 100;
-            eAI.speedX = 0.2;
-            eAI.speedY = 0;
-            eAI.senseDistance = 100;
-            eAI.viewDistance = 80;
-            eAI.msWakeUp = 500;
-            eAI.msAttackDuration = 250;
-            eAI.msCoolDown = 100;
-            eAI.gravityAffected = true;
-            eAI.climber = false;
-            eAI.jumper = false;
-            eAI.shootHorizontal = true;
-            eAI.shootVertical = true;
-            eAI.shootAndFire = true;
-            eAI.explodeOnDeathRange = 0;
-            eAI.releaseChipQualityOnDeath = 1;
-            break;
         case EnemyType::Worm:
             eAI.life = 5;
             eAI.speedX = 0.25;
@@ -108,12 +90,30 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.explodeOnDeathRange = 0;
             eAI.releaseChipQualityOnDeath = 0;
             break;
+        case EnemyType::SpiderMecha:
+            eAI.life = 100;
+            eAI.speedX = 0.2;
+            eAI.speedY = 0;
+            eAI.senseDistance = 100;
+            eAI.viewDistance = 80;
+            eAI.msWakeUp = 500;
+            eAI.msAttackDuration = 250;
+            eAI.msCoolDown = 100;
+            eAI.gravityAffected = true;
+            eAI.climber = false;
+            eAI.jumper = false;
+            eAI.shootHorizontal = true;
+            eAI.shootVertical = true;
+            eAI.shootAndFire = true;
+            eAI.explodeOnDeathRange = 0;
+            eAI.releaseChipQualityOnDeath = 1;
+            break;
         case EnemyType::Boss:
             eAI.life = 100;
             eAI.speedX = 0.75;
             eAI.speedY = 0;
-            eAI.senseDistance = 50;
-            eAI.viewDistance = 80;
+            eAI.senseDistance = 90;
+            eAI.viewDistance = 100;
             eAI.msWakeUp = 100;
             eAI.msAttackDuration = 500;
             eAI.msCoolDown = 750;
@@ -374,12 +374,15 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
         }
 
         //Release chip
+        int msgChip = -1;
         if (eAI.releaseChipQualityOnDeath == 1) {
-            lvl.AddItemAnim(pos.x.getInteger(), pos.y.getInteger(), ItemAnim::ItemType::ChipPurple, false, false, false, 30);
+            msgChip = 30;
         }
         if (eAI.releaseChipQualityOnDeath == 2) {
-            lvl.AddItemAnim(pos.x.getInteger(), pos.y.getInteger(), ItemAnim::ItemType::ChipBlack, false, false, false, 31);
+            msgChip = 31;
         }
+        if (msgChip != -1)
+            lvl.AddItemAnim(pos.x.getInteger(), pos.y.getInteger(), ItemAnim::ItemType::ChipPurple, false, false, false, msgChip);
     }
 
     //
