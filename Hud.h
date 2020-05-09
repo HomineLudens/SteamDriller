@@ -17,6 +17,7 @@ class Hud {
     int msDelayChar = 0;
     int charDisplayed = 0;
     int msgToShow = 0;
+    int msDelayExit = 0;
 
     #ifdef POKITTO
     DigitalIn in0 = DigitalIn(EXT0);
@@ -40,7 +41,7 @@ class Hud {
     PuzzleState puzzleState;
 
     Hud();
-    void Update(const Level & level, int ms);
+    void Update(Level & level, int ms);
     void Draw(const Player & player,
         const Level & level);
 };

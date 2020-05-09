@@ -21,7 +21,7 @@ inline const char* Messages[] {
     "", //17
     "", //18
     "", //19
-    "", //20
+    "AI: Welcome to your dooom! Operation TERMINATE", //20
 
 };
 

@@ -384,6 +384,10 @@ int Level::GetMessageToShow() const {
     return msgToShow;
 }
 
+void Level::ClearMessageToShow(){
+    msgToShow = -1;
+}
+
 void Level::ShiftStuff(int x, int y) {
     //Shift level left
     if (x > 0) {
@@ -490,6 +494,8 @@ void Level::Update(Camera & camera, Player & player, int ms) {
 
     msAnim += ms;
     msDecimalTimer += ms;
+    //------------------------
+    ClearMessageToShow();
     //-------------------------
     if (msAnim > 150) {
         ///------------
@@ -537,6 +543,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     if (player.onFloor && player.onBossZone && !bossActivated) {
         //Add boss
         bossActivated = true;
+        msgToShow = 20; //Boss disalogue messages
         AddEnemy((player.pos.x / TILE_WIDTH) > (COLUMNS / 2) ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH, player.pos.y.getInteger() - 30, Enemy::EnemyType::Boss);
         printf("BOSS ACTIVATED!\r\n");
     }
@@ -623,7 +630,6 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     }
 
     //MANAGE ITEM COLLISION
-    msgToShow = -1;
     for (auto & i: itemsAnim) {
         if (i.IsAlive() && Rect::Collide(player.GetHitBox(), i.GetHitBox())) {
             i.Activate();

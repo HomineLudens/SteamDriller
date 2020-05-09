@@ -55,7 +55,6 @@ void Particle::Init(const Point & pos,
     }
 }
 
-
 Rect Particle::GetHitBox() {
     return Rect(pos.x, pos.y, 1, 1);
 }

@@ -3218,6 +3218,9 @@
 		},
 		"\\assets\\SteamDriller_Portrait_EvilAI.h": {
 			"sdcard": false
+		},
+		"\\SteamDrillerFixed.bin": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

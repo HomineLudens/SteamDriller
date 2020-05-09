@@ -79,6 +79,7 @@ class Level {
 
     bool bossZoneActivated = false;
     bool bossActivated = false;
+    
     int depthBossZoneTrigger;
     int depthBossZoneBegin;
     int depthBossZoneEnd;
@@ -99,6 +100,7 @@ class Level {
     
 
     public:
+    
     void CreateBossZone();
         constexpr static int COLUMNS = 64;
     constexpr static int ROWS = 64;
@@ -120,6 +122,7 @@ class Level {
     void SetTileId(const Point & pos, int id, int offX = 0, int offY = 0);
     int GetDepth() const;
     int GetMessageToShow() const;
+    void ClearMessageToShow();
 
     bool IsSolid(const Point & pos, int offX = 0, int offY = 0);
     bool IsShootable(const Point & pos, int offX = 0, int offY = 0);
@@ -141,4 +144,5 @@ class Level {
 
     void Update(Camera & camera, Player & player, int ms);
     void Draw(Camera & cam, Player & player);
+    
 };

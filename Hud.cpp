@@ -29,28 +29,41 @@ Hud::Hud() {
     bigCog.play(steamDriller_BigCog_Anim, SteamDriller_BigCog_Anim::Animation::Idle);
 }
 
-void Hud::Update(const Level & level, int ms) {
+void Hud::Update(Level & level, int ms) {
     msDelayChar -= ms;
+    msDelayExit += ms;
     //--------------
     msgToShow = level.GetMessageToShow();
     auto msgLenght = 0;
 
-    if (puzzleState != PuzzleState::None) {
+    if (puzzleState != PuzzleState::None && msDelayExit > 250) {
         UI::setCursor(0, 0);
-        if (PB::pressed(BTN_A) || PB::pressed(BTN_B) || PB::pressed(BTN_DOWN) || PB::pressed(BTN_LEFT) || PB::pressed(BTN_RIGHT))
+        if (PB::pressed(BTN_A) || PB::pressed(BTN_B) || PB::pressed(BTN_DOWN) || PB::pressed(BTN_LEFT) || PB::pressed(BTN_RIGHT)) {
             puzzleState = PuzzleState::None;
+            level.ClearMessageToShow();
+        }
     }
 
     switch (puzzleState) {
         case PuzzleState::None:
-            if (msgToShow != -1 && PB::pressed(BTN_UP)) {
-                if (strncmp("High:", Messages[msgToShow], 5) == 0)
-                    puzzleState = PuzzleState::ShowPex;
-                else if (strncmp(Messages[msgToShow], "Visio:", 5) == 0)
-                    puzzleState = PuzzleState::ShowVisio;
-                else
-                    puzzleState = PuzzleState::ShowMsg;
+            if (msgToShow != -1) {
+                if (PB::pressed(BTN_UP)) {
+                    if (strncmp("High:", Messages[msgToShow], 5) == 0) {
+                        puzzleState = PuzzleState::ShowPex;
+                    } else if (strncmp(Messages[msgToShow], "Visio:", 5) == 0) {
+                        puzzleState = PuzzleState::ShowVisio;
+                    } else {
+                        puzzleState = PuzzleState::ShowMsg;
+                    }
+                    msDelayExit = 0;
+                }
+
+                if (strncmp(Messages[msgToShow], "AI:", 3) == 0) {
+                    puzzleState = PuzzleState::BossDialogue;
+                    msDelayExit = 0;
+                }
             }
+
             break;
         case PuzzleState::ShowPex:
             {
@@ -85,6 +98,7 @@ void Hud::Update(const Level & level, int ms) {
             break;
 
         case PuzzleState::BossDialogue:
+            //---
             break;
     }
 
@@ -211,8 +225,15 @@ void Hud::Draw(const Player & player,
 
         case PuzzleState::BossDialogue:
 
+            UI::mapColor(0, 0);
+            UI::mapColor(1, 16);
+            UI::mapColor(5, 16);
+            //
+            UI::setCursorBoundingBox(2, 12, 15, 12);
+            UI::drawBox(1, 11, 16, 13);
+
             PD::drawSprite(0, 40, SteamDriller_Portrait_Robot);
-            PD::drawSprite(80, 60, SteamDriller_Portrait_Robot);
+            PD::drawSprite(80, 60, SteamDriller_Portrait_EvilAI);
 
             break;
     }
