@@ -66,8 +66,6 @@ class Level {
 
     int16_t lastParticleId;
     int16_t lastEnemyId;
-    
-    int msDecimalTimer = 0;
 
     Tilemap tilemap;
     Point pos;

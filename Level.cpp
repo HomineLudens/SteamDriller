@@ -317,11 +317,8 @@ int Level::AddParticle(const Point & pos,
         }
     }
 
-    //Convert to decimal seconds and limit
-    auto dsLife = msLife / 100;
-    if (dsLife > 254)
-        dsLife = 254;
-    particles[lastParticleId].Init(pos, speed, particleType, gravity, dsLife);
+    //Init particle
+    particles[lastParticleId].Init(pos, speed, particleType, gravity, msLife);
 
     return lastParticleId;
 }
@@ -493,7 +490,6 @@ void Level::CreateBossZone() {
 void Level::Update(Camera & camera, Player & player, int ms) {
 
     msAnim += ms;
-    msDecimalTimer += ms;
     //------------------------
     ClearMessageToShow();
     //-------------------------
@@ -549,12 +545,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     }
 
     //Update all stuff
-    if (msDecimalTimer > 100) {
-        msDecimalTimer -= 100;
-        updateAll(particles, 1, * this, player);
-    } else {
-        updateAll(particles, 0, * this, player);
-    }
+    updateAll(particles, ms, * this, player);
     updateAll(bullets, ms, * this, player);
     updateAll(enemies, ms, * this, player);
     updateAll(items, ms, * this, player);

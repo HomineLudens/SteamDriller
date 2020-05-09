@@ -9,13 +9,13 @@
 using PD = Pokitto::Display;
 
 Particle::Particle() {
-    dsLife = 0;
+    msLife = 0;
     particleType = ParticleType::Empty;
 }
 
 void Particle::Init(const Point & pos,
     const Point & speed, ParticleType particleType,
-        const Point & gravity, int dsLife) {
+        const Point & gravity, int msLife) {
     this->pos.x = pos.x;
     this->pos.y = pos.y;
     this->speed.x = speed.x;
@@ -23,7 +23,7 @@ void Particle::Init(const Point & pos,
     this->gravity.x = gravity.x;
     this->gravity.y = gravity.y;
     this->particleType = particleType;
-    this->dsLife = dsLife;
+    this->msLife = msLife;
 
     sprite = nullptr;
     sprParticle.play(steamDriller_Explosions_Anim, SteamDriller_Explosions_Anim::Animation::Idle);
@@ -59,25 +59,23 @@ Rect Particle::GetHitBox() {
     return Rect(pos.x, pos.y, 1, 1);
 }
 
-void Particle::Update(int ds,
+void Particle::Update(int ms,
     Level & lvl, Player & player) {
-    if (dsLife > 0) {
+    if (msLife > 0) {
         speed.x += gravity.x;
         speed.y += gravity.y;
         pos.x += speed.x;
         pos.y += speed.y;
-
-        if (dsLife != 254)
-            dsLife -= ds;
+        msLife-=ms;
     }
 }
 
 bool Particle::IsAlive() {
-    return dsLife > 0;
+    return msLife > 0;
 }
 
 void Particle::Kill() {
-    dsLife = 0;
+    msLife = 0;
 }
 
 void Particle::Draw(const Camera & cam) {
