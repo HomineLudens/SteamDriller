@@ -5,8 +5,8 @@
 
 #include "SteamCookie.h"
 #include "Level.h"
-#include "Camera.h"
 #include "Player.h"
+#include "Camera.h"
 #include "Hud.h"
 #include "Lights.h"
 #include "Messages.h"
@@ -141,8 +141,8 @@ int main() {
         //-------------------------------------------------
 
         //----UPDATE
+        camera.Update(player,  msElapsed);
         if (hud.puzzleState == Hud::PuzzleState::None) {
-            camera.Update(player, msElapsed);
             lights.Update(camera, player, level, msElapsed);
             player.Update(camera, level, msElapsed);
             level.Update(camera, player, msElapsed);

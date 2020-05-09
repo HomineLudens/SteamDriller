@@ -3245,6 +3245,12 @@
 		},
 		"\\sprites\\SteamDriller_Dock_Anim.h": {
 			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_Robot.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_EvilAI.png.crdownload": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

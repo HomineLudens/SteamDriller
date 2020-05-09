@@ -355,7 +355,7 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
     //On DEATH Event
     if (life == 0 && lifePrev > 0) {
         auto eAI = GetAI();
-        
+
         //Explosion
         if (eAI.explodeOnDeathRange > 0) {
             lvl.DestroyTile(pos, 0, 0, true);
@@ -372,10 +372,13 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                 }
             }
         }
-        
+
         //Release chip
-        if (eAI.releaseChipQualityOnDeath>0){
-            lvl.AddItemAnim(pos.x.getInteger(), pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, 30);
+        if (eAI.releaseChipQualityOnDeath == 1) {
+            lvl.AddItemAnim(pos.x.getInteger(), pos.y.getInteger(), ItemAnim::ItemType::ChipPurple, false, false, false, 30);
+        }
+        if (eAI.releaseChipQualityOnDeath == 2) {
+            lvl.AddItemAnim(pos.x.getInteger(), pos.y.getInteger(), ItemAnim::ItemType::ChipBlack, false, false, false, 31);
         }
     }
 

@@ -32,6 +32,10 @@ inline const char* Messages[] {
     "", //28"
     "", //29
     "My brain tissue is burn!", //30
-
+    "Doctor T build me!", //31
+    "", //32
+    "", //33
+    "", //34
+    "", //35
 };
 

@@ -57,14 +57,13 @@ void Hud::Update(Level & level, int ms) {
                         puzzleState = PuzzleState::ShowPex;
                     } else if (strncmp(Messages[msgToShowFirst], "Visio:", 5) == 0) {
                         puzzleState = PuzzleState::ShowVisio;
-                    } else if (strncmp(Messages[msgToShowFirst], "DestroyBossCeiling", 1) == 0) {
+                    } else if (strcmp(Messages[msgToShowFirst], "DestroyBossCeiling") == 0) {
                         level.DestroyBossCeiling();
                     } else {
                         puzzleState = PuzzleState::ShowMsg;
                     }
                     msDelayExit = 0;
                 }
-
 
                 if (strncmp(Messages[msgToShowFirst], ">", 1) == 0) {
                     puzzleState = PuzzleState::BossDialogue;
@@ -116,9 +115,12 @@ void Hud::Update(Level & level, int ms) {
                 charDisplayedLast = 0;
             }
             //------------------
-            charDisplayedLast++;
-            if (charDisplayedLast > charDisplayedLast) {
-                charDisplayedLast = charDisplayedLast;
+            if (msgToShowLast != -1) {
+                msgLenghtLast = strlen(Messages[msgToShowLast]);
+                charDisplayedLast++;
+                if (charDisplayedLast > msgLenghtLast) {
+                    charDisplayedLast = msgLenghtLast;
+                }
             }
 
             //----
@@ -248,17 +250,16 @@ void Hud::Draw(const Player & player,
             //UI::setCursorBoundingBox(2, 12, 15, 12);
 
             PD::setColor(16); //Black
-            constexpr int BORDER = 3;
-            PD::fillRect(5 - BORDER, 15 - BORDER, 24 + 2 * BORDER, 24 + 2 * BORDER);
-            PD::drawSprite(5, 15, SteamDriller_Portrait_Robot);
+            PD::fillRect(2, 12, 30, 30);
+            PD::drawSprite(2, 12, SteamDriller_Portrait_Robot);
             UI::drawBox(6, 2, 17, 6);
             UI::setCursorBoundingBox(7, 3, 16, 5);
             UI::setCursor(0, 0);
             UI::printText(Messages[msgToShowFirst], charDisplayedFirst);
 
             PD::setColor(16); //Black
-            PD::fillRect(80 - BORDER, 57 - BORDER, 24 + 2 * BORDER, 24 + 2 * BORDER);
-            PD::drawSprite(80, 57, SteamDriller_Portrait_EvilAI);
+            PD::fillRect(75, 54, 30, 30);
+            PD::drawSprite(75, 54   , SteamDriller_Portrait_EvilAI);
             UI::drawBox(0, 9, 11, 13);
             UI::setCursorBoundingBox(1, 10, 10, 12);
             UI::setCursor(0, 0);

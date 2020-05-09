@@ -667,7 +667,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
             i.Activate();
             if (i.msgIndex != -1) {
                 msgToShowFirst = i.msgIndex;
-                msgToShowLast = i.msgIndex;
+                msgToShowLast = -1;
             }
             if (i.IsCollectable() && player.life > 0) {
                 player.Heal(20);
