@@ -79,7 +79,6 @@ void Hud::Update(Level & level, int ms) {
                 solved = in0.read() != 0 && inPrec[0] == 0;
                 #endif
                 if (solved || skip) {
-                    steamCookie.msgRead++;
                     steamCookie.saveCookie();
                     puzzleState = PuzzleState::ShowMsg;
                 }

@@ -33,6 +33,7 @@ class Enemy: public Entity {
     void MoveTowardPlayer(const Point & playerPos, float speedX, float speedY);
 
     public: enum EnemyType {
+        None,
         Worm,
         PurpleSentinelHorizontal,
         PurpleSentinelVertical,

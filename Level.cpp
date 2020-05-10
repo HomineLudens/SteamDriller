@@ -23,7 +23,7 @@ void Level::Init(const Point & posStart) {
     //--- Initial stuff
     AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger(), Item::ItemType::Logo, true); //Logo
 
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 90; i++) {
         int xStar = random(0, COLUMNS * TILE_WIDTH);
         int yStar = random(-300, 0);
         AddParticle(Point(xStar, yStar), Point(0, 0), Point(0, 0), Particle::ParticleType::Star, 99999);
@@ -63,6 +63,7 @@ void Level::Init(const Point & posStart) {
     depth = 0;
     bossZoneActivated = false;
     bossActivated = false;
+    bossAlive = false;
     depthBossZoneTrigger = 100;
 
     //--Clear level tilemap
@@ -502,8 +503,7 @@ void Level::CreateBossZone() {
         }
     }
 
-    //Enter zone
-    //AddItemAnim((pg.x1 + pg.x2) / 2 * TILE_WIDTH, (ROWS - bossZoneHeight) * TILE_HEIGHT, ItemAnim::ItemType::TNTDetonatorCeiling, false, false, false);
+    //Add TNT lever
     auto xTNT = random(2, COLUMNS - 2);
     auto yTNT = (ROWS - bossZoneHeight);
     AddItemAnim(xTNT * TILE_WIDTH, yTNT * TILE_HEIGHT, ItemAnim::ItemType::TNTDetonatorCeiling, false, false, false);
@@ -614,7 +614,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     }
 
     //Prepare Boss Zone
-    if ((depth + player.pos.y) > depthBossZoneTrigger && !bossZoneActivated) {
+    if (!bossZoneActivated && (depth + player.pos.y) > depthBossZoneTrigger) {
         bossZoneActivated = true;
         CreateBossZone();
     }
@@ -622,6 +622,8 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     //End of boss Zone, make another
     if (bossZoneActivated && (depth + player.pos.y) > depthBossZoneEnd + 100) {
         bossZoneActivated = false;
+        bossActivated = false;
+        bossAlive = false;
         depthBossZoneTrigger = (depth + player.pos.y.getInteger()) + 1000;
         //printf("NEW ZONE need please\r\n");
     }
@@ -635,6 +637,14 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         bossAlive = true;
         msgToShowFirst = 20; //Robot
         msgToShowLast = 21; //Boss disalogue messages
+
+        //Remove previous Boss
+        for (auto & e: enemies) {
+            if (e.enemyType == Enemy::EnemyType::Boss)
+                e.enemyType == Enemy::EnemyType::None;
+        }
+
+
         auto xBoss = (player.pos.x / TILE_WIDTH) > (COLUMNS / 2) ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH;
         auto yBoss = player.pos.y.getInteger();
         AddEnemy(xBoss, yBoss, Enemy::EnemyType::Boss);
@@ -644,7 +654,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     }
 
     //
-    if (bossActivated) {
+    if (bossAlive) {
         for (auto & e: enemies) {
             if (e.enemyType == Enemy::EnemyType::Boss && !e.IsAlive()) {
                 bossAlive = false;

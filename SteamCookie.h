@@ -3,14 +3,9 @@
 #include "PokittoCookie.h"
 
 class SteamCookie: public Pokitto::Cookie {
+    public:
 
-    public: char initials[3] = {
-        'A',
-        'A',
-        'A'
-    };
-    int msgRead = 1;
+        uint8_t version = 1;
     int maxDepth = 0;
-    int track = 1;
-   
+
 };
