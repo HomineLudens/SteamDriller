@@ -61,7 +61,7 @@ void EndScene::DrawEndingA() {
     UI::setCursorBoundingBox(2, 12, 15, 13);
     //text
     UI::setCursor(0, 0);
-    UI::printText("Zooombda, finale A");
+    UI::printText("It's late, time to sleep..");
 
 }
 
