@@ -32,13 +32,24 @@ class Enemy: public Entity {
     void ChangeAnimation(AnimationType animation);
     void MoveTowardPlayer(const Point & playerPos, float speedX, float speedY);
 
-    public: enum EnemyType {
-        None,
-        Worm,
-        PurpleSentinelHorizontal,
-        PurpleSentinelVertical,
-        Spider,
-        SpiderMecha,
+    public:
+
+        enum class EnemyType {
+            None,
+            Worm,
+            PurpleSentinelHorizontal,
+            PurpleSentinelVertical,
+            Spider,
+            SpiderMecha,
+            Boss
+        };
+
+    enum class ReleaseOnDeathType {
+        Nothing,
+        Level1,
+        Level2,
+        Level3,
+        MechaSpider,
         Boss
     };
 
@@ -58,7 +69,7 @@ class Enemy: public Entity {
         bool shootVertical;
         bool shootAndFire;
         int16_t explodeOnDeathRange;
-        int16_t releaseTypeOnDeath;
+        ReleaseOnDeathType releaseTypeOnDeath;
     }
     EnemyAI;
 

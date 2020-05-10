@@ -52,7 +52,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = (enemyType == EnemyType::PurpleSentinelVertical);
             eAI.shootAndFire = false;
             eAI.explodeOnDeathRange = 0;
-            eAI.releaseTypeOnDeath = 0;
+            eAI.releaseTypeOnDeath = ReleaseOnDeathType::Nothing;
             break;
         case EnemyType::Spider:
             eAI.life = 20;
@@ -70,7 +70,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = false;
             eAI.shootAndFire = true;
             eAI.explodeOnDeathRange = 0;
-            eAI.releaseTypeOnDeath = 0;
+            eAI.releaseTypeOnDeath = ReleaseOnDeathType::Nothing;
             break;
         case EnemyType::Worm:
             eAI.life = 5;
@@ -88,7 +88,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = false;
             eAI.shootAndFire = false;
             eAI.explodeOnDeathRange = 0;
-            eAI.releaseTypeOnDeath = 0;
+            eAI.releaseTypeOnDeath = ReleaseOnDeathType::Nothing;
             break;
         case EnemyType::SpiderMecha:
             eAI.life = 100;
@@ -106,7 +106,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = true;
             eAI.shootAndFire = true;
             eAI.explodeOnDeathRange = 0;
-            eAI.releaseTypeOnDeath = 1;
+            eAI.releaseTypeOnDeath = ReleaseOnDeathType::MechaSpider;
             break;
         case EnemyType::Boss:
             eAI.life = 100;
@@ -124,7 +124,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = false;
             eAI.shootAndFire = true;
             eAI.explodeOnDeathRange = 5;
-            eAI.releaseTypeOnDeath = 2;
+            eAI.releaseTypeOnDeath = ReleaseOnDeathType::Boss;
             break;
     }
     return eAI;
@@ -374,14 +374,28 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
         }
 
         //Release chip
-        if (eAI.releaseTypeOnDeath == 1) {
-            auto msgChip = MessagesGetRandom(40,50);
-            lvl.AddItemAnim(pos.x.getInteger(), pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, msgChip);
-        }
-        if (eAI.releaseTypeOnDeath == 2) {
-            auto msgChip = MessagesGetRandom(50,60);
-            lvl.AddItemAnim(pos.x.getInteger() - 20, pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, msgChip);
-            lvl.AddItemAnim(pos.x.getInteger() + 20, pos.y.getInteger(), ItemAnim::ItemType::TNTDetonatorFloor, false, false, false);//And detonator
+        switch (eAI.releaseTypeOnDeath) {
+            case ReleaseOnDeathType::Nothing:
+                break;
+            case ReleaseOnDeathType::Level1:
+                break;
+            case ReleaseOnDeathType::Level2:
+                break;
+            case ReleaseOnDeathType::Level3:
+                break;
+            case ReleaseOnDeathType::MechaSpider:
+                {
+                    auto msgChip = MessagesGetRandom(40, 50);
+                    lvl.AddItemAnim(pos.x.getInteger(), pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, msgChip);
+                    break;
+                }
+            case ReleaseOnDeathType::Boss:
+                {
+                    auto msgChip = MessagesGetRandom(50, 60);
+                    lvl.AddItemAnim(pos.x.getInteger() - 20, pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, msgChip);
+                    lvl.AddItemAnim(pos.x.getInteger() + 20, pos.y.getInteger(), ItemAnim::ItemType::TNTDetonatorFloor, false, false, false); //And detonator
+                    break;
+                }
         }
 
     }
