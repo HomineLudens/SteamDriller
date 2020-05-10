@@ -73,6 +73,7 @@ class Level {
     Tilemap tilemap;
     Point pos;
     int depth = 0;
+    int16_t msgChipId = -1;
     int16_t msgToShowFirst = -1;
     int16_t msgToShowLast = -1;
     

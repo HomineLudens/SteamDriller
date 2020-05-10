@@ -402,6 +402,12 @@ int Level::GetMessageToShowLast() const {
 }
 
 void Level::ClearMessageToShow() {
+    for (auto & i: itemsAnim) {
+        if (i.msgIndex == msgToShowFirst) {
+            i.Kill(); //Kill all 
+        }
+    }
+
     msgToShowFirst = -1;
     msgToShowLast = -1;
 }
@@ -583,7 +589,8 @@ void Level::Update(Camera & camera, Player & player, int ms) {
 
     msAnim += ms;
     //------------------------
-    ClearMessageToShow();
+    msgToShowFirst = -1;
+    msgToShowLast = -1;
     //-------------------------
     if (msAnim > 150) {
         ///------------
