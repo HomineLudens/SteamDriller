@@ -3305,6 +3305,33 @@
 		},
 		"\\sprites\\SteamDriller_TNT_Detonator_Anim.h": {
 			"sdcard": false
+		},
+		"\\music\\drillsfinal.mp3": {
+			"sdcard": false
+		},
+		"\\music\\drillstheme3.mp3": {
+			"sdcard": false
+		},
+		"\\music\\drillsboss4.mp3": {
+			"sdcard": false
+		},
+		"\\music\\drillstheme3.raw": {
+			"sdcard": false
+		},
+		"\\music\\drillsboss4.raw": {
+			"sdcard": false
+		},
+		"\\music\\drillsfinal.raw": {
+			"sdcard": false
+		},
+		"\\music\\steamth.raw": {
+			"sdcard": true
+		},
+		"\\music\\steambo.raw": {
+			"sdcard": true
+		},
+		"\\music\\steamfi.raw": {
+			"sdcard": true
 		}
 	},
 	"BUILDFlags": {

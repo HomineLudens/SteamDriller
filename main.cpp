@@ -45,13 +45,13 @@ void setTrack(int t) {
     if (track != t) {
         switch (t) {
             case 1:
-                PS::playMusicStream("music/steamd1.raw", 0);
+                PS::playMusicStream("music/steamth.raw", 0); //Main Theme
                 break;
             case 2:
-                PS::playMusicStream("music/steamd2.raw", 0);
+                PS::playMusicStream("music/steambo.raw", 0); //Boss
                 break;
-            case 5:
-                PS::playMusicStream("music/steamd5.raw", 0);
+            case 3:
+                PS::playMusicStream("music/steamfi.raw", 0); //Final
                 break;
         }
     }
@@ -67,7 +67,7 @@ void initGame() {
     level.Init(startPoint);
     msTotal = 0;
 
-    setTrack(5);
+    setTrack(1);
 
     //games played
     steamCookie.games++;
@@ -122,10 +122,14 @@ int main() {
         //-------------------------------------------------
 
         //Music managment
-        if (level.IsBossAlive()) {
-            setTrack(2);
+        if (player.life > 0) {
+            if (level.IsBossAlive()) {
+                setTrack(2);
+            } else {
+                setTrack(1);
+            }
         } else {
-            setTrack(5);
+            setTrack(3);
         }
 
         if (hud.puzzleState == Hud::PuzzleState::None)
