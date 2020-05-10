@@ -17,5 +17,6 @@ __asm__(".global steamDriller_SmallCog_Anim\nsteamDriller_SmallCog_Anim:\n.incbi
 __asm__(".global steamDriller_Smoke_Anim\nsteamDriller_Smoke_Anim:\n.incbin \"sprites/SteamDriller_Smoke_Anim.bin\"");
 __asm__(".global steamDriller_Smoke_Wheels_Anim\nsteamDriller_Smoke_Wheels_Anim:\n.incbin \"sprites/SteamDriller_Smoke_Wheels_Anim.bin\"");
 __asm__(".global steamDriller_Spider_Anim\nsteamDriller_Spider_Anim:\n.incbin \"sprites/SteamDriller_Spider_Anim.bin\"");
+__asm__(".global steamDriller_TNT_Detonator_Anim\nsteamDriller_TNT_Detonator_Anim:\n.incbin \"sprites/SteamDriller_TNT_Detonator_Anim.bin\"");
 __asm__(".global steamDriller_Up_Anim\nsteamDriller_Up_Anim:\n.incbin \"sprites/SteamDriller_Up_Anim.bin\"");
 __asm__(".global steamDriller_Worm_Anim\nsteamDriller_Worm_Anim:\n.incbin \"sprites/SteamDriller_Worm_Anim.bin\"");

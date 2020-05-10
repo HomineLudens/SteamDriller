@@ -145,6 +145,7 @@ class Level {
     void ShiftMapGenerator(int x);
     
     void DestroyBossCeiling();
+    void DestroyBossFloor();
 
     void Update(Camera & camera, Player & player, int ms);
     void Draw(Camera & cam, Player & player);

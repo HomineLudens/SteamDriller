@@ -52,7 +52,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = (enemyType == EnemyType::PurpleSentinelVertical);
             eAI.shootAndFire = false;
             eAI.explodeOnDeathRange = 0;
-            eAI.releaseChipQualityOnDeath = 0;
+            eAI.releaseTypeOnDeath = 0;
             break;
         case EnemyType::Spider:
             eAI.life = 20;
@@ -70,7 +70,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = false;
             eAI.shootAndFire = true;
             eAI.explodeOnDeathRange = 0;
-            eAI.releaseChipQualityOnDeath = 0;
+            eAI.releaseTypeOnDeath = 0;
             break;
         case EnemyType::Worm:
             eAI.life = 5;
@@ -88,7 +88,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = false;
             eAI.shootAndFire = false;
             eAI.explodeOnDeathRange = 0;
-            eAI.releaseChipQualityOnDeath = 0;
+            eAI.releaseTypeOnDeath = 0;
             break;
         case EnemyType::SpiderMecha:
             eAI.life = 100;
@@ -106,7 +106,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = true;
             eAI.shootAndFire = true;
             eAI.explodeOnDeathRange = 0;
-            eAI.releaseChipQualityOnDeath = 1;
+            eAI.releaseTypeOnDeath = 1;
             break;
         case EnemyType::Boss:
             eAI.life = 100;
@@ -124,7 +124,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootVertical = false;
             eAI.shootAndFire = true;
             eAI.explodeOnDeathRange = 5;
-            eAI.releaseChipQualityOnDeath = 2;
+            eAI.releaseTypeOnDeath = 2;
             break;
     }
     return eAI;
@@ -358,10 +358,10 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
 
         //Explosion
         if (eAI.explodeOnDeathRange > 0) {
-            lvl.DestroyTile(pos, 0, 0, true);
+            lvl.DestroyTile(pos);
             for (int x = -eAI.explodeOnDeathRange; x < eAI.explodeOnDeathRange; x++) {
                 for (int y = -eAI.explodeOnDeathRange; y < eAI.explodeOnDeathRange; y++) {
-                    lvl.DestroyTile(pos, x, y, true);
+                    lvl.DestroyTile(pos, x, y);
 
                     //Randomize explosion
                     lvl.AddParticle(Point(pos.x + (x * lvl.TILE_WIDTH), pos.y + (y * lvl.TILE_HEIGHT)),
@@ -374,15 +374,14 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
         }
 
         //Release chip
-        int msgChip = -1;
-        if (eAI.releaseChipQualityOnDeath == 1) {
-            msgChip = 30;
+        if (eAI.releaseTypeOnDeath == 1) {
+            lvl.AddItemAnim(pos.x.getInteger(), pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, 30);
         }
-        if (eAI.releaseChipQualityOnDeath == 2) {
-            msgChip = 31;
+        if (eAI.releaseTypeOnDeath == 2) {
+            lvl.AddItemAnim(pos.x.getInteger() - 20, pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, 31);
+            lvl.AddItemAnim(pos.x.getInteger() + 20, pos.y.getInteger(), ItemAnim::ItemType::TNTDetonator, false, false, false, 19);
         }
-        if (msgChip != -1)
-            lvl.AddItemAnim(pos.x.getInteger(), pos.y.getInteger(), ItemAnim::ItemType::ChipPurple, false, false, false, msgChip);
+
     }
 
     //

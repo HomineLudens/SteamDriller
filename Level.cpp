@@ -147,7 +147,7 @@ void Level::RandomizeLine(int r) {
     if (random(100) > 80) {
         int ix = 0;
         ix = random(2, COLUMNS - 2);
-        AddItemAnim(ix * TILE_WIDTH, r * TILE_HEIGHT, (ItemAnim::ItemType) random(0, 4));
+        AddItemAnim(ix * TILE_WIDTH, r * TILE_HEIGHT, (ItemAnim::ItemType) random(1, 3)); //Resources
     }
 
     //Enemy
@@ -240,7 +240,8 @@ bool Level::IsShootable(const Point & pos, int offX, int offY) {
 }
 
 bool Level::IsDestructible(const Point & pos, int offX, int offY) {
-    return GetTileId(pos, offX, offY) != TilesLoader::TileType::Unbreakable;
+    auto id = GetTileId(pos, offX, offY);
+    return (id != TilesLoader::TileType::Unbreakable && id != TilesLoader::TileType::UnbreakableFloor && id != TilesLoader::TileType::UnbreakableCeiling);
 }
 
 void Level::DestroyTile(const Point & pos, int offX, int offY, bool force) {
@@ -502,9 +503,9 @@ void Level::CreateBossZone() {
     }
 
     //Enter zone
-    AddItemAnim((pg.x1 + pg.x2) / 2 * TILE_WIDTH, (ROWS - bossZoneHeight) * TILE_HEIGHT, ItemAnim::ItemType::DockStation, false, false, false, 19);
+    AddItemAnim((pg.x1 + pg.x2) / 2 * TILE_WIDTH, (ROWS - bossZoneHeight) * TILE_HEIGHT, ItemAnim::ItemType::TNTDetonator, false, false, false, 18);
 
-    printf("NEW BOSS ZONE done\r\n");
+    //printf("NEW BOSS ZONE done\r\n");
 }
 
 void Level::DestroyBossCeiling() {
@@ -526,6 +527,44 @@ void Level::DestroyBossCeiling() {
     }
     if (destroyed) {
         Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
+        //Remove also the detonator
+        for (auto & it: itemsAnim) {
+            if (it.IsAlive()) {
+                if (it.itemType == ItemAnim::ItemType::TNTDetonator) {
+                    it.Kill();
+                }
+            }
+        }
+    }
+}
+
+void Level::DestroyBossFloor() {
+    bool destroyed = false;
+    for (int xr = 0; xr < COLUMNS; xr++) {
+        for (int yr = 0; yr < ROWS; yr++) {
+            if (lvlData[2 + (yr * COLUMNS) + xr] == TilesLoader::TileType::UnbreakableFloor) {
+                lvlData[2 + (yr * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss1;
+                //--
+                AddParticle(Point(xr * TILE_WIDTH, (yr * TILE_HEIGHT)),
+                    Point(random(-10, 10) / 10.0, random(-10, 10) / 10.0),
+                    Point(0, 0),
+                    Particle::ParticleType::Explosion,
+                    600 + random(-200, 200));
+                //--
+                destroyed = true;
+            }
+        }
+    }
+    if (destroyed) {
+        Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
+        //Remove also the detonator
+        for (auto & it: itemsAnim) {
+            if (it.IsAlive()) {
+                if (it.itemType == ItemAnim::ItemType::TNTDetonator) {
+                    it.Kill();
+                }
+            }
+        }
     }
 }
 
@@ -572,7 +611,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         bossZoneActivated = false;
         bossActivated = false;
         depthBossZoneTrigger = (depth + player.pos.y.getInteger()) + 1000;
-        printf("NEW ZONE need please\r\n");
+        //printf("NEW ZONE need please\r\n");
     }
 
     //Mark player inside boss zone
@@ -588,7 +627,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         AddEnemy(xBoss, yBoss, Enemy::EnemyType::Boss);
         camera.target.x = xBoss;
         camera.target.y = yBoss;
-        printf("BOSS ACTIVATED!\r\n");
+        //printf("BOSS ACTIVATED!\r\n");
     }
 
     //Update all stuff
@@ -667,7 +706,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         }
     }
 
-    //MANAGE ITEM COLLISION
+    //MANAGE ANIM ITEM COLLISION
     for (auto & i: itemsAnim) {
         if (i.IsAlive() && Rect::Collide(player.GetHitBox(), i.GetHitBox())) {
             i.Activate();

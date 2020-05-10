@@ -76,8 +76,5 @@ class TilesLoader {
                 tilemap.setTile(TileType::BackgroundUndergroundBoss2, SteamDriller_BackgroundUndergroundBoss1);
                 break;
         }
-
-
-
     }
 };

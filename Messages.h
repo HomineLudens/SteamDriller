@@ -19,8 +19,8 @@ inline const char* Messages[] {
     "Super secret stuff here... no just joking :)", //15
     "", //16
     "", //17
-    "", //18
-    "DestroyBossCeiling", //19
+    "DestroyBossCeiling", //18
+    "DestroyBossFloor", //19
     "> Hazard level 10", //20
     "> Welcome to your dooom! Operation TERMINATE", //21
     "", //22

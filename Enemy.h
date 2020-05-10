@@ -57,7 +57,7 @@ class Enemy: public Entity {
         bool shootVertical;
         bool shootAndFire;
         int16_t explodeOnDeathRange;
-        int16_t releaseChipQualityOnDeath;
+        int16_t releaseTypeOnDeath;
     }
     EnemyAI;
 
