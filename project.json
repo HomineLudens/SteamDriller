@@ -3374,6 +3374,15 @@
 		},
 		"\\assets\\FrontBuildings.h": {
 			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_Ending2_Mockup.png.crdownload": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_Ending2_Mockup.png": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_Ending2_Mockup.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

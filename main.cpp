@@ -124,7 +124,7 @@ int main() {
         //-------------------------------------------------
 
         //Music managment
-        if (player.life > 0) {
+        if (player.life > 0 && hud.GetChoice() == 0) {
             if (level.IsBossAlive()) {
                 setTrack(2);
             } else {
@@ -168,6 +168,8 @@ int main() {
             hud.Draw(player, level);
             camera.Draw();
         } else {
+            
+            //End Scene
             endScene.DrawEndingA();
         }
     }

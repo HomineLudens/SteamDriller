@@ -9,6 +9,11 @@ class EndScene {
 
         Sprite sprPlayer;
         Sprite sprSmokeWheels;
+        
+        //Scene A
+        float backBuildingOffsetX;
+        float frontBuildingOffsetX;
+        float fenceOffsetX;
 
     public:
         EndScene();
