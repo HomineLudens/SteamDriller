@@ -59,7 +59,7 @@ class TilesLoader {
         tilemap.setTile(TileType::UnbreakableFloor, SteamDriller_UnbreakableFloor);
         tilemap.setTile(TileType::UnbreakableCeiling, SteamDriller_UnbreakableCeiling);
 
-        switch (anim%3) {
+        switch (anim % 3) {
             case 0:
                 tilemap.setTile(TileType::BackgroundUndergroundBoss1, SteamDriller_BackgroundUndergroundBoss1);
                 tilemap.setTile(TileType::BackgroundUndergroundBoss2, SteamDriller_BackgroundUndergroundBoss2);

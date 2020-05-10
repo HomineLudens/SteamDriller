@@ -7,6 +7,7 @@
 #include "assets/SteamDriller_Bones.h"
 #include "assets/SteamDriller_Conveyor_Flat.h"        
 #include "assets/SteamDriller_FenceTileTop.h"   
+#include "assets/SteamDriller_randomDecorForGrassyPlatform.h"   
 
 #include "assets/TNT_detonator_pos_1.h"    
 #include "assets/TNT_detonator_pos_2.h"    
@@ -47,6 +48,9 @@ void Item::Init(int x, int y, ItemType itemType, bool fixed, bool collectable, b
             break;
         case ItemType::Conveyor:
             sprite = SteamDriller_Conveyor_Flat;
+            break;
+        case ItemType::Grass:
+            sprite = SteamDriller_randomDecorForGrassyPlatform;
             break;
         case ItemType::Fance:
             sprite = SteamDriller_FenceTileTop;

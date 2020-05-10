@@ -43,7 +43,11 @@ void Level::Init(const Point & posStart) {
     AddItem(posStart.x.getInteger() + 180, posStart.y.getInteger(), Item::ItemType::RobotUnactivatedRow, true, false, true);
 
     for (int i = 0; i < 10; i++) {
-        AddItem(posStart.x.getInteger() - 80 - (i * TILE_WIDTH), posStart.y.getInteger() + 16, Item::ItemType::Fance, false, false);
+        AddItem(posStart.x.getInteger() - 100 - (i * TILE_WIDTH), posStart.y.getInteger() + 16, Item::ItemType::Fance, false, false);
+    }
+
+    for (int i = 0; i < 5; i++) {
+        AddItem(posStart.x.getInteger() - random(-200, 200), posStart.y.getInteger() + 16, Item::ItemType::Grass, false, false);
     }
 
     //Tips

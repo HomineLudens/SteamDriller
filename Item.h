@@ -26,6 +26,7 @@ class Item: public Entity {
             Bones,
             RobotUnactivatedRow,
             Conveyor,
+            Grass,
             Fance,
             TNT1,
             TNT2,
