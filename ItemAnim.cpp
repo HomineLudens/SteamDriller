@@ -37,7 +37,8 @@ void ItemAnim::Init(int x, int y, ItemType itemType, bool fixed, bool collectabl
         case ItemType::DockStation:
             spr.play(steamDriller_Dock_Anim, SteamDriller_Dock_Anim::Animation::Idle);
             break;
-        case ItemType::TNTDetonator:
+        case ItemType::TNTDetonatorCeiling:
+        case ItemType::TNTDetonatorFloor:
             spr.play(steamDriller_TNT_Detonator_Anim, SteamDriller_TNT_Detonator_Anim::Animation::Idle);
             break;
     }

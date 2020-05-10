@@ -21,7 +21,8 @@ class ItemAnim: public Item {
             ChipBlack,
             ChipPurple,
             DockStation,
-            TNTDetonator
+            TNTDetonatorCeiling,
+            TNTDetonatorFloor,
         };
     ItemType itemType;
 

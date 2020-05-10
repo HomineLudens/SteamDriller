@@ -48,10 +48,10 @@ void Level::Init(const Point & posStart) {
 
     AddItemAnim(posStart.x.getInteger() - 80, -40, ItemAnim::ItemType::Chip, false, false, false, 1);
     AddItemAnim(posStart.x.getInteger() - 50, posStart.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, random(11, 15));
-    AddItemAnim(posStart.x.getInteger() + 100, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 7);
-    AddItemAnim(posStart.x.getInteger() + 140, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 5);
-    AddItemAnim(posStart.x.getInteger() + 180, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 6);
-    AddItemAnim(posStart.x.getInteger() + 220, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 8);
+    // AddItemAnim(posStart.x.getInteger() + 100, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 7);
+    // AddItemAnim(posStart.x.getInteger() + 140, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 5);
+    // AddItemAnim(posStart.x.getInteger() + 180, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 6);
+    // AddItemAnim(posStart.x.getInteger() + 220, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 8);
 
     //
     // AddEnemy(posStart.x.getInteger()+30, 40, Enemy::EnemyType::PurpleSentinelHorizontal);
@@ -468,13 +468,13 @@ void Level::ShiftMapGenerator(int x) {
 }
 
 void Level::CreateBossZone() {
-    int bossZoneHeight = 12;
+    int bossZoneHeight = 10;
 
     //Some tiles before put boss background
     int i = 10;
     while (i > 0) {
         int xr = random(2, COLUMNS - 2);
-        int yr = random(bossZoneHeight, bossZoneHeight * 2);
+        int yr = random(bossZoneHeight, bossZoneHeight + 8);
         if (lvlData[2 + (yr * COLUMNS) + xr] == TilesLoader::TileType::BackgroundUnderground) {
             lvlData[2 + ((ROWS - yr) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss1;
             i--;
@@ -503,8 +503,17 @@ void Level::CreateBossZone() {
     }
 
     //Enter zone
-    AddItemAnim((pg.x1 + pg.x2) / 2 * TILE_WIDTH, (ROWS - bossZoneHeight) * TILE_HEIGHT, ItemAnim::ItemType::TNTDetonator, false, false, false, 18);
-
+    //AddItemAnim((pg.x1 + pg.x2) / 2 * TILE_WIDTH, (ROWS - bossZoneHeight) * TILE_HEIGHT, ItemAnim::ItemType::TNTDetonatorCeiling, false, false, false);
+    auto xTNT = random(2, COLUMNS - 2);
+    auto yTNT = (ROWS - bossZoneHeight);
+    AddItemAnim(xTNT * TILE_WIDTH, yTNT * TILE_HEIGHT, ItemAnim::ItemType::TNTDetonatorCeiling, false, false, false);
+    //Clear space around TNT
+    lvlData[2 + ((yTNT) * COLUMNS) + xTNT] = TilesLoader::TileType::BackgroundUnderground;
+    lvlData[2 + ((yTNT) * COLUMNS) + xTNT - 1] = TilesLoader::TileType::BackgroundUnderground;
+    lvlData[2 + ((yTNT) * COLUMNS) + xTNT + 1] = TilesLoader::TileType::BackgroundUnderground;
+    lvlData[2 + ((yTNT - 1) * COLUMNS) + xTNT] = TilesLoader::TileType::BackgroundUnderground;
+    lvlData[2 + ((yTNT - 1) * COLUMNS) + xTNT - 1] = TilesLoader::TileType::BackgroundUnderground;
+    lvlData[2 + ((yTNT - 1) * COLUMNS) + xTNT + 1] = TilesLoader::TileType::BackgroundUnderground;
     //printf("NEW BOSS ZONE done\r\n");
 }
 
@@ -530,7 +539,7 @@ void Level::DestroyBossCeiling() {
         //Remove also the detonator
         for (auto & it: itemsAnim) {
             if (it.IsAlive()) {
-                if (it.itemType == ItemAnim::ItemType::TNTDetonator) {
+                if (it.itemType == ItemAnim::ItemType::TNTDetonatorCeiling) {
                     it.Kill();
                 }
             }
@@ -560,12 +569,16 @@ void Level::DestroyBossFloor() {
         //Remove also the detonator
         for (auto & it: itemsAnim) {
             if (it.IsAlive()) {
-                if (it.itemType == ItemAnim::ItemType::TNTDetonator) {
+                if (it.itemType == ItemAnim::ItemType::TNTDetonatorFloor) {
                     it.Kill();
                 }
             }
         }
     }
+}
+
+bool Level::IsBossAlive() {
+    return bossAlive;
 }
 
 void Level::Update(Camera & camera, Player & player, int ms) {
@@ -609,7 +622,6 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     //End of boss Zone, make another
     if (bossZoneActivated && (depth + player.pos.y) > depthBossZoneEnd + 100) {
         bossZoneActivated = false;
-        bossActivated = false;
         depthBossZoneTrigger = (depth + player.pos.y.getInteger()) + 1000;
         //printf("NEW ZONE need please\r\n");
     }
@@ -620,14 +632,24 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     if (player.onFloor && player.onBossZone && !bossActivated) {
         //Add boss
         bossActivated = true;
+        bossAlive = true;
         msgToShowFirst = 20; //Robot
         msgToShowLast = 21; //Boss disalogue messages
         auto xBoss = (player.pos.x / TILE_WIDTH) > (COLUMNS / 2) ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH;
-        auto yBoss = player.pos.y.getInteger() - 1;
+        auto yBoss = player.pos.y.getInteger();
         AddEnemy(xBoss, yBoss, Enemy::EnemyType::Boss);
         camera.target.x = xBoss;
-        camera.target.y = yBoss;
+        camera.target.y = yBoss - 10;
         //printf("BOSS ACTIVATED!\r\n");
+    }
+
+    //
+    if (bossActivated) {
+        for (auto & e: enemies) {
+            if (e.enemyType == Enemy::EnemyType::Boss && !e.IsAlive()) {
+                bossAlive = false;
+            }
+        }
     }
 
     //Update all stuff
@@ -666,6 +688,18 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                             Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
                         }
                     }
+                    //Chek item collision
+                    for (auto & it: itemsAnim) {
+                        if (it.IsAlive() && Rect::Collide(it.GetHitBox(), b.GetHitBox())) {
+                            if (it.itemType == ItemAnim::ItemType::TNTDetonatorCeiling) {
+                                DestroyBossCeiling();
+                            }
+                            if (it.itemType == ItemAnim::ItemType::TNTDetonatorFloor) {
+                                DestroyBossFloor();
+                            }
+                        }
+                    }
+
                 } else {
                     //All other bullets are from enemy to player
                     if (Rect::Collide(player.GetHitBox(), b.GetHitBox())) {

@@ -57,10 +57,6 @@ void Hud::Update(Level & level, int ms) {
                         puzzleState = PuzzleState::ShowPex;
                     } else if (strncmp(Messages[msgToShowFirst], "Visio:", 5) == 0) {
                         puzzleState = PuzzleState::ShowVisio;
-                    } else if (strcmp(Messages[msgToShowFirst], "DestroyBossCeiling") == 0) {
-                        level.DestroyBossCeiling();
-                    } else if (strcmp(Messages[msgToShowFirst], "DestroyBossFloor") == 0) {
-                        level.DestroyBossFloor();
                     } else {
                         puzzleState = PuzzleState::ShowMsg;
                     }
@@ -252,10 +248,10 @@ void Hud::Draw(const Player & player,
             //UI::setCursorBoundingBox(2, 12, 15, 12);
 
             PD::setColor(16); //Black
-            PD::fillRect(2, 12, 30, 30);
-            PD::drawSprite(2, 12, SteamDriller_Portrait_Robot);
-            UI::drawBox(6, 2, 17, 6);
-            UI::setCursorBoundingBox(7, 3, 16, 5);
+            PD::fillRect(2, 0, 30, 30);
+            PD::drawSprite(2, 0, SteamDriller_Portrait_Robot);
+            UI::drawBox(6, 0, 17, 4);
+            UI::setCursorBoundingBox(7, 1, 16, 3);
             UI::setCursor(0, 0);
             UI::printText(Messages[msgToShowFirst], charDisplayedFirst);
 

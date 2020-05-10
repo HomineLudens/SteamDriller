@@ -118,7 +118,7 @@ int main() {
         //-------------------------------------------------
 
         //Music managment
-        if (player.onBossZone) {
+        if (level.IsBossAlive()) {
             setTrack(2);
         } else {
             setTrack(5);

@@ -379,7 +379,7 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
         }
         if (eAI.releaseTypeOnDeath == 2) {
             lvl.AddItemAnim(pos.x.getInteger() - 20, pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, 31);
-            lvl.AddItemAnim(pos.x.getInteger() + 20, pos.y.getInteger(), ItemAnim::ItemType::TNTDetonator, false, false, false, 19);
+            lvl.AddItemAnim(pos.x.getInteger() + 20, pos.y.getInteger(), ItemAnim::ItemType::TNTDetonatorFloor, false, false, false);
         }
 
     }

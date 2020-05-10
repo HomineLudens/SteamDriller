@@ -80,6 +80,7 @@ class Level {
 
     bool bossZoneActivated = false;
     bool bossActivated = false;
+    bool bossAlive = false;
     
     int depthBossZoneTrigger;
     int depthBossZoneBegin;
@@ -146,6 +147,7 @@ class Level {
     
     void DestroyBossCeiling();
     void DestroyBossFloor();
+    bool IsBossAlive();
 
     void Update(Camera & camera, Player & player, int ms);
     void Draw(Camera & cam, Player & player);
