@@ -211,9 +211,9 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
         if (fallHeight > FALL_DAMAGE_HEIGHT) {
             Damage(25); //Falling damage
             camera.Shake(4);
-            lvl.AddParticle(Point(pos.x, pos.y - 5), Point(0.3, -0.2), Point(0, 0), Particle::ParticleType::Explosion, 600);
-            lvl.AddParticle(Point(pos.x, pos.y - 5), Point(-0.3, -0.2), Point(0, 0), Particle::ParticleType::Explosion, 600);
-            lvl.AddParticle(Point(pos.x, pos.y), Point(0, -0.4), Point(0, 0), Particle::ParticleType::Explosion, 700);
+            lvl.AddParticle(Point(pos.x, pos.y - 5), Point(0.3, -0.2), Point(0, 0), Particle::ParticleType::Explosion, 400);
+            lvl.AddParticle(Point(pos.x, pos.y - 5), Point(-0.3, -0.2), Point(0, 0), Particle::ParticleType::Explosion, 400);
+            lvl.AddParticle(Point(pos.x, pos.y), Point(0, -0.4), Point(0, 0), Particle::ParticleType::Explosion, 600);
             //printf("FALL DAMAGE life=%i\r\n", life);
         }
         msOnFloor = 80;
