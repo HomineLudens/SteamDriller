@@ -10,6 +10,7 @@
 #include "Hud.h"
 #include "Lights.h"
 #include "Messages.h"
+#include "EndScene.h"
 
 using PC = Pokitto::Core;
 using PD = Pokitto::Display;
@@ -21,6 +22,7 @@ Camera camera;
 Player player;
 Level level;
 Lights lights;
+EndScene endScene;
 
 Hud hud;
 int msLast;
@@ -148,19 +150,26 @@ int main() {
         }
         //-------------------------------------------------
 
-        //----UPDATE
-        camera.Update(player, hud, msElapsed);
-        if (hud.puzzleState == Hud::PuzzleState::None) {
-            lights.Update(camera, player, level, msElapsed);
-            player.Update(camera, level, msElapsed);
-            level.Update(camera, player, msElapsed);
-        }
-        hud.Update(level, msElapsed);
 
-        //----DRAW 
-        level.Draw(camera, player);
-        hud.Draw(player, level);
-        camera.Draw();
+        if (hud.GetChoice() == 0 && !PB::upBtn()) {
+            //In GAME
+            //----UPDATE
+            camera.Update(player, hud, msElapsed);
+            lights.Update(camera, player, level, msElapsed);
+            if (hud.puzzleState == Hud::PuzzleState::None) {
+
+                //player.Update(camera, level, msElapsed);
+                level.Update(camera, player, msElapsed);
+            }
+            hud.Update(level, msElapsed);
+
+            //----DRAW 
+            level.Draw(camera, player);
+            hud.Draw(player, level);
+            camera.Draw();
+        } else {
+            endScene.DrawEndingA();
+        }
     }
 
     return 0;

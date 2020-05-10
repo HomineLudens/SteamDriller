@@ -61,7 +61,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
             }
             break;
         case State::Activating:
-            if (msState > 250) {
+            if (msState > 350) {
                 ChangeState(State::Idle);
             }
             break;

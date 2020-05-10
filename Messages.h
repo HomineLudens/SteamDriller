@@ -76,7 +76,7 @@ const char * Messages[] {
     "62", //62
     "63", //63
     "> This is the end.", //64
-    "> My only friend the end..", //65
+    "> Press A to destroy me, Press B to join me", //65
     "66", //66
     "67", //67
     "68", //68

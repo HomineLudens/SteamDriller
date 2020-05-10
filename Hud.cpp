@@ -29,6 +29,10 @@ Hud::Hud() {
     bigCog.play(steamDriller_BigCog_Anim, SteamDriller_BigCog_Anim::Animation::Idle);
 }
 
+int Hud::GetChoice(){
+    return choiceSelected;
+}
+
 void Hud::Update(Level & level, int ms) {
     msDelayChar -= ms;
     msDelayExit += ms;
@@ -38,8 +42,10 @@ void Hud::Update(Level & level, int ms) {
     int msgLenghtFirst = 0;
     int msgLenghtLast = 0;
 
-    if (puzzleState != PuzzleState::None && msDelayExit > 250) {
+
+    if (puzzleState != PuzzleState::None && puzzleState != PuzzleState::FinalChoice && msDelayExit > 250) {
         UI::setCursor(0, 0);
+        //Exit from puzzle
         if (PB::pressed(BTN_A) || PB::pressed(BTN_B) || PB::pressed(BTN_DOWN) || PB::pressed(BTN_LEFT) || PB::pressed(BTN_RIGHT)) {
             puzzleState = PuzzleState::None;
             level.ClearMessageToShow();
@@ -50,12 +56,13 @@ void Hud::Update(Level & level, int ms) {
         case PuzzleState::None:
             charDisplayedFirst = 0;
             charDisplayedLast = 0;
+            choiceSelected = 0;
 
             if (msgToShowFirst != -1) {
                 if (PB::pressed(BTN_UP)) {
                     if (strcmp("High Score:", Messages[msgToShowFirst]) == 0) {
                         puzzleState = PuzzleState::ShowHigh;
-                    } else if (strcmp("PEX:", Messages[msgToShowFirst]) == 0) {
+                    } else if (strncmp("PEX:", Messages[msgToShowFirst], 4) == 0) {
                         puzzleState = PuzzleState::ShowPex;
                     } else if (strncmp(Messages[msgToShowFirst], "Visio:", 5) == 0) {
                         puzzleState = PuzzleState::ShowVisio;
@@ -88,23 +95,30 @@ void Hud::Update(Level & level, int ms) {
                 }
             }
             break;
-        case PuzzleState::ShowMsg:
-            //
+        case PuzzleState::ShowMsg: //
             break;
         case PuzzleState::ShowVisio:
             //Show Visio
             break;
-
         case PuzzleState::BossDialogue:
             //---
+            break;
+        case PuzzleState::FinalChoice:
+            //---
+            if (PB::pressed(BTN_A)) {
+                choiceSelected = 1;
+            }
+            if (PB::pressed(BTN_B)) {
+                choiceSelected = 2;
+            }
             break;
     }
 
 
     //-------------------------------------
+    //Manage characther showing
     if (msgToShowFirst == -1) {
         puzzleState = PuzzleState::None;
-
     } else {
         msgLenghtFirst = strlen(Messages[msgToShowFirst]);
         if (msDelayChar < 0) {
@@ -123,7 +137,6 @@ void Hud::Update(Level & level, int ms) {
                     charDisplayedLast = msgLenghtLast;
                 }
             }
-
             //----
             msDelayChar = 50;
         }
@@ -251,8 +264,6 @@ void Hud::Draw(const Player & player,
             UI::mapColor(0, 0);
             UI::mapColor(1, 16);
             UI::mapColor(5, 16);
-            //
-            //UI::setCursorBoundingBox(2, 12, 15, 12);
 
             PD::setColor(16); //Black
             PD::fillRect(2, 0, 30, 30);
@@ -270,6 +281,17 @@ void Hud::Draw(const Player & player,
             UI::setCursor(0, 0);
             UI::printText(Messages[msgToShowLast], charDisplayedLast);
 
+            break;
+
+        case PuzzleState::FinalChoice:
+            UI::mapColor(0, 0);
+            UI::mapColor(1, 16);
+            UI::mapColor(5, 16);
+
+            //Make your choice
+            UI::setCursor(0, 0);
+            UI::printText(Messages[msgToShowFirst], charDisplayedFirst);
+            //---
             break;
     }
 }

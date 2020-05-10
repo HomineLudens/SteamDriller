@@ -3347,6 +3347,33 @@
 		},
 		"\\sprites/SteamDriller_Sign_Anim.bin": {
 			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Sign_Anim.png.crdownload": {
+			"sdcard": false
+		},
+		"\\EndScene.cpp": {
+			"sdcard": false
+		},
+		"\\EndScene.h": {
+			"sdcard": false
+		},
+		"\\assets\\FrontBuildings.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\FrontBuildings.png": {
+			"sdcard": false
+		},
+		"\\assets\\BackBuilding.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\BackBuilding.png": {
+			"sdcard": false
+		},
+		"\\assets\\BackBuilding.h": {
+			"sdcard": false
+		},
+		"\\assets\\FrontBuildings.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

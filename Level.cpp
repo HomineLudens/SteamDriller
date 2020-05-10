@@ -590,8 +590,11 @@ bool Level::IsBossAlive() {
     return bossAlive;
 }
 
+
 void Level::Update(Camera & camera, Player & player, int ms) {
 
+    player.Update(camera, * this, ms);
+    //
     msAnim += ms;
     //------------------------
     msgToShowFirst = -1;
@@ -673,7 +676,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                     msgToShowFirst = 60;
                     msgToShowLast = 61;
                 } else {
-                    //FINAL SCENE
+                    //FINAL SCENE TRIGGER
                     msgToShowFirst = 64;
                     msgToShowLast = 65;
                 }

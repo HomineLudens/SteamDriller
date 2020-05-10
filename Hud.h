@@ -15,11 +15,12 @@ class Hud {
     Sprite bigCog;
 
     int msDelayChar = 0;
-    int charDisplayedFirst = 0;
-    int charDisplayedLast = 0;
-    int msgToShowFirst = 0;
-    int msgToShowLast = 0;
+    int16_t charDisplayedFirst = 0;
+    int16_t charDisplayedLast = 0;
+    int8_t msgToShowFirst = 0;
+    int8_t msgToShowLast = 0;
     int msDelayExit = 0;
+    int8_t choiceSelected = 0;
 
     #ifdef POKITTO
     DigitalIn in0 = DigitalIn(EXT0);
@@ -39,12 +40,15 @@ class Hud {
             ShowPex,
             ShowMsg,
             ShowVisio,
-            BossDialogue
+            BossDialogue,
+            FinalChoice
         };
     PuzzleState puzzleState;
 
     Hud();
+    int GetChoice();
     void Update(Level & level, int ms);
     void Draw(const Player & player,
         const Level & level);
+
 };
