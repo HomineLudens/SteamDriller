@@ -26,10 +26,10 @@ const char * Messages[] {
     "TIPS 08: Even without moving some energy is lost", //17
     "TIPS 09: Collect gems and coal to give more power to the robot", //18
     "", //19
-    // AI boss messages
+    // Robot dialogues
     "> Sensor allert: Hazard level 10!", //20
-    "> Welcome to your dooom! Operation TERMINATE", //21
-    "", //22
+    "> 010111001100 - 01011010000", //21
+    "> Approaching danger zone", //22
     "", //23
     "", //24
     "", //25
@@ -37,12 +37,39 @@ const char * Messages[] {
     "", //27
     "", //28"
     "", //29
-    "My brain tissues are burning!", //30
-    "Doctor T build me!", //31
-    "", //32
+    // AI dialogues
+    "> Welcome to your dooom! Operation TERMINATE", //30
+    "> Self protection active. Destroy intruders!", //31
+    "> Activate safety protocol", //32
     "", //33
     "", //34
     "", //35
+    "", //36
+    "", //37
+    "", //38
+    "", //39
+    //Mecha spider chips
+    "40 - ", //40
+    "41 -", //41
+    "42", //42
+    "43", //43
+    "44", //44
+    "45", //45
+    "46", //46
+    "47", //47
+    "48", //48
+    "49", //49
+    //Boss chips
+    "50 My memories, I have dream of been a children..", //50
+    "51", //51
+    "52", //52
+    "53", //53
+    "54", //54
+    "55", //55
+    "56", //56
+    "57", //57
+    "58", //58
+    "59", //59
 };
 
 inline

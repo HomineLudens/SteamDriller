@@ -640,17 +640,16 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         //Add boss
         bossActivated = true;
         bossAlive = true;
-        msgToShowFirst = 20; //Robot
-        msgToShowLast = 21; //Boss disalogue messages
+        msgToShowFirst = random(20,23); //Robot disalogue messages
+        msgToShowLast = random(30,33); //Boss disalogue messages
 
-        //Remove previous Boss
+        //Remove any previous Boss
         for (auto & e: enemies) {
             if (e.enemyType == Enemy::EnemyType::Boss)
                 e.enemyType == Enemy::EnemyType::None;
         }
 
-
-        auto xBoss = (player.pos.x / TILE_WIDTH) > (COLUMNS / 2) ? 5 * TILE_WIDTH : (COLUMNS - 5) * TILE_WIDTH;
+        auto xBoss = (player.pos.x / TILE_WIDTH) > (COLUMNS / 2) ? 8 * TILE_WIDTH : (COLUMNS - 8) * TILE_WIDTH;
         auto yBoss = player.pos.y.getInteger();
         AddEnemy(xBoss, yBoss, Enemy::EnemyType::Boss);
         camera.target.x = xBoss;

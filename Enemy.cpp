@@ -375,11 +375,13 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
 
         //Release chip
         if (eAI.releaseTypeOnDeath == 1) {
-            lvl.AddItemAnim(pos.x.getInteger(), pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, 30);
+            auto msgChip = MessagesGetRandom(40,50);
+            lvl.AddItemAnim(pos.x.getInteger(), pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, msgChip);
         }
         if (eAI.releaseTypeOnDeath == 2) {
-            lvl.AddItemAnim(pos.x.getInteger() - 20, pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, 31);
-            lvl.AddItemAnim(pos.x.getInteger() + 20, pos.y.getInteger(), ItemAnim::ItemType::TNTDetonatorFloor, false, false, false);
+            auto msgChip = MessagesGetRandom(50,60);
+            lvl.AddItemAnim(pos.x.getInteger() - 20, pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, msgChip);
+            lvl.AddItemAnim(pos.x.getInteger() + 20, pos.y.getInteger(), ItemAnim::ItemType::TNTDetonatorFloor, false, false, false);//And detonator
         }
 
     }
