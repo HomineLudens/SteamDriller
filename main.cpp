@@ -132,10 +132,10 @@ int main() {
             setTrack(3);
         }
 
-        if (hud.puzzleState == Hud::PuzzleState::None)
-            PS::playMusicStream();
-        else
-            PS::pauseMusicStream();
+        // if (hud.puzzleState == Hud::PuzzleState::None)
+        //     PS::playMusicStream();
+        // else
+        //     PS::pauseMusicStream();
         //-------------------------------------------------
 
         //Save best score

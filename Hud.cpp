@@ -53,7 +53,9 @@ void Hud::Update(Level & level, int ms) {
 
             if (msgToShowFirst != -1) {
                 if (PB::pressed(BTN_UP)) {
-                    if (strncmp("High:", Messages[msgToShowFirst], 5) == 0) {
+                    if (strcmp("High Score:", Messages[msgToShowFirst]) == 0) {
+                        puzzleState = PuzzleState::ShowHigh;
+                    } else if (strcmp("PEX:", Messages[msgToShowFirst]) == 0) {
                         puzzleState = PuzzleState::ShowPex;
                     } else if (strncmp(Messages[msgToShowFirst], "Visio:", 5) == 0) {
                         puzzleState = PuzzleState::ShowVisio;
@@ -69,6 +71,8 @@ void Hud::Update(Level & level, int ms) {
                 }
             }
 
+            break;
+        case PuzzleState::ShowHigh:
             break;
         case PuzzleState::ShowPex:
             {
@@ -150,7 +154,7 @@ void Hud::Draw(const Player & player,
 
                 //----UI
                 UI::resetCursorBoundingBox();
-                UI::setOffset(0,0);
+                UI::setOffset(0, 0);
 
                 //HUD
                 PD::setColor(0);
@@ -186,18 +190,20 @@ void Hud::Draw(const Player & player,
             break;
 
         case PuzzleState::ShowMsg:
+        case PuzzleState::ShowHigh:
             {
                 UI::mapColor(0, 0);
                 UI::mapColor(1, 16);
                 UI::mapColor(5, 16);
                 //
-                UI::setOffset(0,-3);
+                UI::setOffset(0, -3);
                 UI::drawBox(1, 11, 16, 14);
                 UI::setCursorBoundingBox(2, 12, 15, 13);
                 //text
                 UI::setCursor(0, 0);
                 UI::printText(Messages[msgToShowFirst], charDisplayedFirst);
-                if (strncmp("High:", Messages[msgToShowFirst], 5) == 0) {
+                if (strcmp("High Score:", Messages[msgToShowFirst]) == 0) {
+                    UI::printText("\n");
                     UI::printInteger(steamCookie.maxDepth);
                 }
             }

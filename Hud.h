@@ -35,6 +35,7 @@ class Hud {
     public:
         public: enum class PuzzleState {
             None,
+            ShowHigh,
             ShowPex,
             ShowMsg,
             ShowVisio,

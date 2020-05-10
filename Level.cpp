@@ -49,6 +49,8 @@ void Level::Init(const Point & posStart) {
     //Tips
     auto tipMsg = MessagesGetRandom(10, 12);
     AddItemAnim(posStart.x.getInteger() - 30, posStart.y.getInteger(), ItemAnim::ItemType::ChipPurple, false, false, false, tipMsg);
+    //High score
+    AddItemAnim(posStart.x.getInteger() - 80, posStart.y.getInteger(), ItemAnim::ItemType::Chip, false, false, false, 1);
 
     //--------------------------------------------------------------------
     //Debug enemies
@@ -63,6 +65,7 @@ void Level::Init(const Point & posStart) {
     bossActivated = false;
     bossAlive = false;
     depthBossZoneTrigger = 100;
+    bossEncounterCount = 0;
 
     //--Clear level tilemap
     lvlData[0] = COLUMNS;
@@ -403,7 +406,7 @@ int Level::GetMessageToShowLast() const {
 
 void Level::ClearMessageToShow() {
     for (auto & i: itemsAnim) {
-        if (i.msgIndex == msgToShowFirst) {
+        if (i.msgIndex == msgToShowFirst && i.msgIndex != 1) {
             i.Kill(); //Kill all 
         }
     }
@@ -468,8 +471,6 @@ void Level::ShiftMapGenerator(int x) {
             pg.x2 = random(6, 10);
         }
     }
-
-    //printf("PG.X1=%i PG.X2=%i\r\n", pg.x1, pg.x2);
 }
 
 void Level::CreateBossZone() {
@@ -640,8 +641,8 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         //Add boss
         bossActivated = true;
         bossAlive = true;
-        msgToShowFirst = random(20,23); //Robot disalogue messages
-        msgToShowLast = random(30,33); //Boss disalogue messages
+        msgToShowFirst = random(20, 23); //Robot disalogue messages
+        msgToShowLast = random(30, 33); //Boss disalogue messages
 
         //Remove any previous Boss
         for (auto & e: enemies) {
@@ -652,16 +653,26 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         auto xBoss = (player.pos.x / TILE_WIDTH) > (COLUMNS / 2) ? 8 * TILE_WIDTH : (COLUMNS - 8) * TILE_WIDTH;
         auto yBoss = player.pos.y.getInteger();
         AddEnemy(xBoss, yBoss, Enemy::EnemyType::Boss);
+        bossEncounterCount++; //inc boss encounter
         camera.target.x = xBoss;
         camera.target.y = yBoss - 10;
         //printf("BOSS ACTIVATED!\r\n");
     }
 
-    //
+    //Trigger final game also
     if (bossAlive) {
         for (auto & e: enemies) {
             if (e.enemyType == Enemy::EnemyType::Boss && !e.IsAlive()) {
                 bossAlive = false;
+                //Boss killed
+                if (bossEncounterCount < MAX_BOSS_ENCOUNTER) {
+                    msgToShowFirst = 60;
+                    msgToShowLast = 61;
+                } else {
+                    //FINAL SCENE
+                    msgToShowFirst = 64;
+                    msgToShowLast = 65;
+                }
             }
         }
     }

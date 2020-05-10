@@ -6,8 +6,8 @@ extern SteamCookie steamCookie;
 inline
 const char * Messages[] {
     "EMPTY", //0
-    "High:", //1
-    "", //2
+    "High Score:", //1 //Show high score
+    "PEX", //2
     "", //3
     "", //4
     "Visio:00", //5
@@ -70,6 +70,17 @@ const char * Messages[] {
     "57", //57
     "58", //58
     "59", //59
+    //Boss fight complete
+    "> ...",  //60 Robot say nothing
+    "> You beat my extension, but the fight is not ended",  //61 AI 
+    "62", //62
+    "63", //63
+    "> This is the end.", //64
+    "> My only friend the end..", //65
+    "66", //66
+    "67", //67
+    "68", //68
+    "69", //69
 };
 
 inline
