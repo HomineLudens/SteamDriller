@@ -68,6 +68,10 @@ void initGame() {
     msTotal = 0;
 
     setTrack(5);
+
+    //games played
+    steamCookie.games++;
+    steamCookie.saveCookie();
 }
 
 int main() {
@@ -141,7 +145,7 @@ int main() {
         //-------------------------------------------------
 
         //----UPDATE
-        camera.Update(player, hud,  msElapsed);
+        camera.Update(player, hud, msElapsed);
         if (hud.puzzleState == Hud::PuzzleState::None) {
             lights.Update(camera, player, level, msElapsed);
             player.Update(camera, level, msElapsed);

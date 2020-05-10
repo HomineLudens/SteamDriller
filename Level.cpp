@@ -15,8 +15,8 @@ void Level::Init(const Point & posStart) {
     //Kill/deactivate all stuff
     killAll(enemies);
     killAll(itemsAnim);
-    killAll(bullets);
     killAll(items);
+    killAll(bullets);
     killAll(particles);
 
     //--------------------------------------------------------------------
@@ -46,17 +46,15 @@ void Level::Init(const Point & posStart) {
         AddItem(posStart.x.getInteger() - 80 - (i * TILE_WIDTH), posStart.y.getInteger() + 16, Item::ItemType::Fance, false, false);
     }
 
-    AddItemAnim(posStart.x.getInteger() - 80, -40, ItemAnim::ItemType::Chip, false, false, false, 1);
-    AddItemAnim(posStart.x.getInteger() - 50, posStart.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, random(11, 15));
-    // AddItemAnim(posStart.x.getInteger() + 100, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 7);
-    // AddItemAnim(posStart.x.getInteger() + 140, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 5);
-    // AddItemAnim(posStart.x.getInteger() + 180, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 6);
-    // AddItemAnim(posStart.x.getInteger() + 220, -40, ItemAnim::ItemType::ChipPurple, false, false, false, 8);
+    //Tips
+    auto tipMsg = MessagesGetRandom(10, 12);
+    AddItemAnim(posStart.x.getInteger() - 30, posStart.y.getInteger(), ItemAnim::ItemType::ChipPurple, false, false, false, tipMsg);
 
-    //
-    // AddEnemy(posStart.x.getInteger()+30, 40, Enemy::EnemyType::PurpleSentinelHorizontal);
+    //--------------------------------------------------------------------
+    //Debug enemies
+    //AddEnemy(posStart.x.getInteger()+30, 40, Enemy::EnemyType::PurpleSentinelHorizontal);
     //AddEnemy(posStart.x.getInteger() - 40, 20, Enemy::EnemyType::PurpleSentinelVertical);
-    // AddEnemy(posStart.x.getInteger()+50, 40, Enemy::EnemyType::Worm);
+    //AddEnemy(posStart.x.getInteger()+50, 40, Enemy::EnemyType::Worm);
     //AddEnemy(posStart.x.getInteger() - 80, 0, Enemy::EnemyType::SpiderMecha);
     //--------------------------------------------------------------------
 

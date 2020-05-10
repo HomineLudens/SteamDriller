@@ -150,6 +150,7 @@ void Hud::Draw(const Player & player,
 
                 //----UI
                 UI::resetCursorBoundingBox();
+                UI::setOffset(0,0);
 
                 //HUD
                 PD::setColor(0);
@@ -190,8 +191,9 @@ void Hud::Draw(const Player & player,
                 UI::mapColor(1, 16);
                 UI::mapColor(5, 16);
                 //
-                UI::drawBox(1, 11, 16, 13);
-                UI::setCursorBoundingBox(2, 12, 15, 12);
+                UI::setOffset(0,-3);
+                UI::drawBox(1, 11, 16, 14);
+                UI::setCursorBoundingBox(2, 12, 15, 13);
                 //text
                 UI::setCursor(0, 0);
                 UI::printText(Messages[msgToShowFirst], charDisplayedFirst);

@@ -14,6 +14,7 @@
 #include "Item.h"
 #include "ItemAnim.h"
 #include "SteamCookie.h"
+#include "Messages.h"
 
 
 class Level {
