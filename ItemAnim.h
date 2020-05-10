@@ -23,6 +23,7 @@ class ItemAnim: public Item {
             DockStation,
             TNTDetonatorCeiling,
             TNTDetonatorFloor,
+            Sign
         };
     ItemType itemType;
 

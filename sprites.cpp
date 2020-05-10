@@ -13,6 +13,7 @@ __asm__(".global steamDriller_Laser_Anim\nsteamDriller_Laser_Anim:\n.incbin \"sp
 __asm__(".global steamDriller_PurpleSentinels_Anim\nsteamDriller_PurpleSentinels_Anim:\n.incbin \"sprites/SteamDriller_PurpleSentinels_Anim.bin\"");
 __asm__(".global steamDriller_Robot_Anim\nsteamDriller_Robot_Anim:\n.incbin \"sprites/SteamDriller_Robot_Anim.bin\"");
 __asm__(".global steamDriller_Ruby_Anim\nsteamDriller_Ruby_Anim:\n.incbin \"sprites/SteamDriller_Ruby_Anim.bin\"");
+__asm__(".global steamDriller_Sign_Anim\nsteamDriller_Sign_Anim:\n.incbin \"sprites/SteamDriller_Sign_Anim.bin\"");
 __asm__(".global steamDriller_SmallCog_Anim\nsteamDriller_SmallCog_Anim:\n.incbin \"sprites/SteamDriller_SmallCog_Anim.bin\"");
 __asm__(".global steamDriller_Smoke_Anim\nsteamDriller_Smoke_Anim:\n.incbin \"sprites/SteamDriller_Smoke_Anim.bin\"");
 __asm__(".global steamDriller_Smoke_Wheels_Anim\nsteamDriller_Smoke_Wheels_Anim:\n.incbin \"sprites/SteamDriller_Smoke_Wheels_Anim.bin\"");

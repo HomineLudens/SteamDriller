@@ -50,7 +50,7 @@ void Level::Init(const Point & posStart) {
     auto tipMsg = MessagesGetRandom(10, 12);
     AddItemAnim(posStart.x.getInteger() - 30, posStart.y.getInteger(), ItemAnim::ItemType::ChipPurple, false, false, false, tipMsg);
     //High score
-    AddItemAnim(posStart.x.getInteger() - 80, posStart.y.getInteger(), ItemAnim::ItemType::Chip, false, false, false, 1);
+    AddItemAnim(posStart.x.getInteger() - 80, posStart.y.getInteger(), ItemAnim::ItemType::Sign, false, false, false, 1);
 
     //--------------------------------------------------------------------
     //Debug enemies

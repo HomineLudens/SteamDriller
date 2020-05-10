@@ -206,6 +206,13 @@ public:
 	};
 };
 
+class SteamDriller_Sign_Anim {
+public:
+    enum Animation : std::uint16_t {
+		Idle = 0
+	};
+};
+
 class SteamDriller_SmallCog_Anim {
 public:
     enum Animation : std::uint16_t {
@@ -277,6 +284,7 @@ extern const SteamDriller_Laser_Anim steamDriller_Laser_Anim;
 extern const SteamDriller_PurpleSentinels_Anim steamDriller_PurpleSentinels_Anim;
 extern const SteamDriller_Robot_Anim steamDriller_Robot_Anim;
 extern const SteamDriller_Ruby_Anim steamDriller_Ruby_Anim;
+extern const SteamDriller_Sign_Anim steamDriller_Sign_Anim;
 extern const SteamDriller_SmallCog_Anim steamDriller_SmallCog_Anim;
 extern const SteamDriller_Smoke_Anim steamDriller_Smoke_Anim;
 extern const SteamDriller_Smoke_Wheels_Anim steamDriller_Smoke_Wheels_Anim;

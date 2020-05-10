@@ -3332,6 +3332,21 @@
 		},
 		"\\music\\steamfi.raw": {
 			"sdcard": true
+		},
+		"\\sprites\\SteamDriller_Sign_Anim.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Sign_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Sign_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Sign_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Sign_Anim.bin": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

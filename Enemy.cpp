@@ -397,7 +397,6 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                     break;
                 }
         }
-
     }
 
     //
