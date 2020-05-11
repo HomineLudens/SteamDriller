@@ -11,7 +11,6 @@ class Player {
     private:
 
         int msState;
-    bool stateFirstCycle;
 
     public:
 
@@ -38,6 +37,8 @@ class Player {
         Death,
     };
     State state;
+    bool stateFirstCycle;
+
     Point pos;
 
     Point speed;
@@ -45,6 +46,7 @@ class Player {
 
     int8_t life;
     int8_t lifePrev;
+
     bool onFloor;
     int depthJumpBegin;
 

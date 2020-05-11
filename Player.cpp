@@ -39,6 +39,7 @@ void Player::ChangeState(State newState) {
 }
 
 void Player::Update(Camera & camera, Level & lvl, int ms) {
+    stateFirstCycle = false;
     //Add elapsed time
     msState += ms;
     msJump += ms;
@@ -275,7 +276,6 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
 
     //--------------------------------
     lifePrev = life;
-    stateFirstCycle = false;
     //--------------------------------
 }
 

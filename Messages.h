@@ -81,6 +81,17 @@ const char * Messages[] {
     "67", //67
     "68", //68
     "69", //69
+    //Council Messages
+    "# Wakeup dear friend, the council choose you to collect resources", //70
+    "# 55555", //71
+    "# 72", //72
+    "# 73", //73
+    "# 74", //74
+    "# 75", //75
+    "# 76", //76
+    "# 77", //77
+    "# 78", //78
+    "# 79", //79
 };
 
 inline

@@ -15,6 +15,7 @@
 
 #include "assets/SteamDriller_Portrait_Robot.h"
 #include "assets/SteamDriller_Portrait_EvilAI.h"
+#include "assets/SteamDriller_Portrait_Council.h"
 
 
 using PD = Pokitto::Display;
@@ -29,7 +30,7 @@ Hud::Hud() {
     bigCog.play(steamDriller_BigCog_Anim, SteamDriller_BigCog_Anim::Animation::Idle);
 }
 
-int Hud::GetChoice(){
+int Hud::GetFinalChoice() {
     return choiceSelected;
 }
 
@@ -72,6 +73,13 @@ void Hud::Update(Level & level, int ms) {
                     msDelayExit = 0;
                 }
 
+                //Council Messages
+                if (strncmp(Messages[msgToShowFirst], "#", 1) == 0) {
+                    puzzleState = PuzzleState::CouncilMessage;
+                    msDelayExit = 0;
+                }
+
+                //Bosses Dialogue
                 if (strncmp(Messages[msgToShowFirst], ">", 1) == 0) {
                     puzzleState = PuzzleState::BossDialogue;
                     msDelayExit = 0;
@@ -101,6 +109,9 @@ void Hud::Update(Level & level, int ms) {
             //Show Visio
             break;
         case PuzzleState::BossDialogue:
+            //---
+            break;
+        case PuzzleState::CouncilMessage:
             //---
             break;
         case PuzzleState::FinalChoice:
@@ -257,6 +268,23 @@ void Hud::Draw(const Player & player,
                 UI::setCursor(5, 3);
                 UI::printText(Messages[msgToShowFirst]);
             }
+            break;
+
+        case PuzzleState::CouncilMessage:
+
+            UI::setOffset(0, 3);
+            UI::mapColor(0, 0);
+            UI::mapColor(1, 16);
+            UI::mapColor(5, 16);
+
+            PD::setColor(16); //Black
+            PD::fillRect(2, 3, 30, 30);
+            PD::drawSprite(2, 3, SteamDriller_Portrait_Council);
+            UI::drawBox(6, 0, 17, 4);
+            UI::setCursorBoundingBox(7, 1, 16, 3);
+            UI::setCursor(0, 0);
+            UI::printText(Messages[msgToShowFirst], charDisplayedFirst);
+
             break;
 
         case PuzzleState::BossDialogue:

@@ -626,6 +626,16 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         camera.pos.y -= TILE_HEIGHT;
     }
 
+
+    //COUNCIL MANAGEMENT
+    if (player.state == Player::State::Activating && player.stateFirstCycle){
+        msgToShowFirst = random(70, 79); //Council disalogue messages
+        printf("C\r\n");
+    }
+
+    //------------------------------------------
+    // BOSS MANAGEMENT
+
     //Prepare Boss Zone
     if (!bossZoneActivated && (depth + player.pos.y) > depthBossZoneTrigger) {
         bossZoneActivated = true;

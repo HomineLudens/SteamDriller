@@ -40,13 +40,14 @@ class Hud {
             ShowPex,
             ShowMsg,
             ShowVisio,
+            CouncilMessage,
             BossDialogue,
             FinalChoice
         };
     PuzzleState puzzleState;
 
     Hud();
-    int GetChoice();
+    int GetFinalChoice();
     void Update(Level & level, int ms);
     void Draw(const Player & player,
         const Level & level);

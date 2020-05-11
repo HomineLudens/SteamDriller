@@ -3398,6 +3398,12 @@
 		},
 		"\\sfx\\sfx_poweron-vecchio1.wav": {
 			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_BadEnding_MOCKUP.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_Council.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

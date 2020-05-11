@@ -31,6 +31,15 @@ int track;
 
 SteamCookie steamCookie;
 
+enum class GameState {
+    Play,
+    Pause,
+    FinalA,
+    FinalB,
+};
+GameState gameState;
+
+
 #ifdef POKITTO
 extern "C" {
     void _pvHeapStart();
@@ -79,9 +88,6 @@ void initGame() {
 int main() {
     steamCookie.begin("STEAMDRI", steamCookie); //initialize cookie 
 
-    //srand(time(0)); //random init
-    //srand(steamCookie.initials[0] + steamCookie.initials[1] + steamCookie.initials[2]);
-
     //Start game
     PC::begin();
     PD::loadRGBPalette(SteamPalette256);
@@ -93,6 +99,7 @@ int main() {
     UI::setTilesetImage(steamtasui);
 
     //---
+    gameState = GameState::Play;
     initGame();
 
     while (PC::isRunning()) {
@@ -124,7 +131,7 @@ int main() {
         //-------------------------------------------------
 
         //Music managment
-        if (player.life > 0 && hud.GetChoice() == 0) {
+        if (player.life > 0 && hud.GetFinalChoice() == 0) {
             if (level.IsBossAlive()) {
                 setTrack(2);
             } else {
@@ -151,27 +158,40 @@ int main() {
         //-------------------------------------------------
 
 
-        if (hud.GetChoice() == 0 && !PB::upBtn()) {
-            //In GAME
-            //----UPDATE
-            camera.Update(player, hud, msElapsed);
-            lights.Update(camera, player, level, msElapsed);
-            if (hud.puzzleState == Hud::PuzzleState::None) {
+        int finalChoice = hud.GetFinalChoice();
 
-                //player.Update(camera, level, msElapsed);
-                level.Update(camera, player, msElapsed);
-            }
-            hud.Update(level, msElapsed);
-
-            //----DRAW 
-            level.Draw(camera, player);
-            hud.Draw(player, level);
-            camera.Draw();
-        } else {
-            
-            //End Scene
-            endScene.DrawEndingA();
+        if (PB::upBtn() && PB::cBtn()) {
+            finalChoice = 1;
         }
+        if (PB::downBtn() && PB::cBtn()) {
+            finalChoice = 2;
+        }
+
+        switch (finalChoice) {
+            case 0:
+                //In GAME
+                //----UPDATE
+                camera.Update(player, hud, msElapsed);
+                lights.Update(camera, player, level, msElapsed);
+                if (hud.puzzleState == Hud::PuzzleState::None) {
+                    level.Update(camera, player, msElapsed);
+                }
+                hud.Update(level, msElapsed);
+
+                //----DRAW 
+                level.Draw(camera, player);
+                hud.Draw(player, level);
+                camera.Draw();
+                break;
+            case 1:
+                endScene.DrawEndingA();
+                break;
+            case 2:
+                endScene.DrawEndingB();
+                break;
+        }
+
+
     }
 
     return 0;

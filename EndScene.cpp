@@ -15,16 +15,24 @@ EndScene::EndScene() {
 
 void EndScene::DrawEndingA() {
 
+    //Update scrolling
     backBuildingOffsetX -= 0.1;
     frontBuildingOffsetX -= 0.3;
     fenceOffsetX -= 1.2;
 
+    //Draw Stuff
     const uint8_t * spr;
+
+    //Reset
+    PD::setColor(16);
+    PD::fillRect(0,0,110,88);
+    UI::setOffset(0, 0);
 
     //stars
     PD::setColor(7);
     for (int i = 0; i < 10; i++) {
-        PD::fillRect(3+(i*i*3) % 110, 2+(i*i*19) % 43, 1, 1);    }
+        PD::fillRect(3 + (i * i * 3) % 110, 2 + (i * i * 19) % 43, 1, 1);
+    }
 
     //
     spr = BackBuilding;
@@ -42,11 +50,13 @@ void EndScene::DrawEndingA() {
         PD::drawSprite(x + ((int) fenceOffsetX % spr[0]), 36, spr);
     }
 
+    //Horizontal lines
     PD::setColor(1);
     PD::fillRect(0, 52, 110, 1);
     PD::fillRect(0, 55, 110, 1);
     PD::fillRect(0, 57, 110, 2);
 
+    //Robot
     sprPlayer.draw(40, 35, false, true, 0);
     sprSmokeWheels.draw(35, 54, false, true, 0);
 
@@ -56,9 +66,8 @@ void EndScene::DrawEndingA() {
     UI::mapColor(1, 16);
     UI::mapColor(5, 16);
     //
-    UI::setOffset(0, -3);
-    UI::drawBox(1, 11, 16, 14);
-    UI::setCursorBoundingBox(2, 12, 15, 13);
+    UI::drawBox(0, 10, 17, 13);
+    UI::setCursorBoundingBox(1, 11, 16, 12);
     //text
     UI::setCursor(0, 0);
     UI::printText("It's late, time to sleep..");
