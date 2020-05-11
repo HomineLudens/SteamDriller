@@ -59,6 +59,7 @@ void Hud::Update(Level & level, int ms) {
             charDisplayedFirst = 0;
             charDisplayedLast = 0;
             choiceSelected = 0;
+            msDelayExit = 0;
 
             if (msgToShowFirst != -1) {
                 if (PB::pressed(BTN_UP)) {
@@ -71,20 +72,23 @@ void Hud::Update(Level & level, int ms) {
                     } else {
                         puzzleState = PuzzleState::ShowMsg;
                     }
-                    msDelayExit = 0;
                 }
 
                 //Council Messages
                 if (strncmp(Messages[msgToShowFirst], "#", 1) == 0) {
                     puzzleState = PuzzleState::CouncilMessage;
-                    msDelayExit = 0;
                 }
 
                 //Bosses Dialogue
                 if (strncmp(Messages[msgToShowFirst], ">", 1) == 0) {
                     puzzleState = PuzzleState::BossDialogue;
-                    msDelayExit = 0;
                 }
+
+                //End game
+                if (level.IsGameEnd()) {
+                    puzzleState = PuzzleState::FinalChoice;
+                }
+
             }
 
             break;
@@ -290,6 +294,7 @@ void Hud::Draw(const Player & player,
             break;
 
         case PuzzleState::BossDialogue:
+        case PuzzleState::FinalChoice:
 
             UI::mapColor(0, 0);
             UI::mapColor(1, 16);
@@ -313,15 +318,6 @@ void Hud::Draw(const Player & player,
 
             break;
 
-        case PuzzleState::FinalChoice:
-            UI::mapColor(0, 0);
-            UI::mapColor(1, 16);
-            UI::mapColor(5, 16);
 
-            //Make your choice
-            UI::setCursor(0, 0);
-            UI::printText(Messages[msgToShowFirst], charDisplayedFirst);
-            //---
-            break;
     }
 }

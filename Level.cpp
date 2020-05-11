@@ -72,6 +72,7 @@ void Level::Init(const Point & posStart) {
     bossAlive = false;
     depthBossZoneTrigger = 100;
     bossEncounterCount = 0;
+    gameEnd = false;
 
     //--Clear level tilemap
     lvlData[0] = COLUMNS;
@@ -592,6 +593,10 @@ bool Level::IsBossAlive() {
     return bossAlive;
 }
 
+bool Level::IsGameEnd(){
+    return gameEnd;
+}
+
 
 void Level::Update(Camera & camera, Player & player, int ms) {
 
@@ -690,6 +695,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                     //FINAL SCENE TRIGGER
                     msgToShowFirst = 64;
                     msgToShowLast = 65;
+                    gameEnd = true;
                 }
             }
         }

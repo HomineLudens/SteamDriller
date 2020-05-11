@@ -84,6 +84,7 @@ class Level {
     bool bossActivated = false;
     bool bossAlive = false;
     int8_t bossEncounterCount = 0;
+    bool gameEnd = false;
     
     int depthBossZoneTrigger;
     int depthBossZoneBegin;
@@ -112,7 +113,7 @@ class Level {
     constexpr static int TILE_WIDTH = 8;
     constexpr static int TILE_HEIGHT = 8;
     constexpr static int SHIFT_VAL = 20; //tiles when shift start
-    constexpr static int MAX_BOSS_ENCOUNTER = 3; //after this game end
+    constexpr static int MAX_BOSS_ENCOUNTER = 2; //after this game end
     uint8_t lvlData[2 + (COLUMNS * ROWS)];
 
     std::array < Bullet, 15 > bullets;
@@ -152,6 +153,7 @@ class Level {
     void DestroyBossCeiling();
     void DestroyBossFloor();
     bool IsBossAlive();
+    bool IsGameEnd();
 
     void Update(Camera & camera, Player & player, int ms);
     void Draw(Camera & cam, Player & player);
