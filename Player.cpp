@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "assets/dot.h"
 #include <math.h>
+
+#include <LibAudio>
 #include "sfx/sfx_poweron.h"
 #include "sfx/sfx_fall.h"
 #include "sfx/sfx_steam.h"
@@ -9,6 +11,7 @@ using PD = Pokitto::Display;
 using PB = Pokitto::Buttons;
 using PC = Pokitto::Core;
 
+extern Audio::Sink < 4, PROJ_AUD_FREQ > audio;
 
 Player::Player(const Point & pos) {
     Init(pos);
@@ -58,7 +61,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
             if (PB::pressed(BTN_UP) || PB::pressed(BTN_DOWN) || PB::pressed(BTN_LEFT) || PB::pressed(BTN_RIGHT) || PB::pressed(BTN_A) || PB::pressed(BTN_B)) {
                 sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
                 ChangeState(State::Activating);
-                Pokitto::Sound::playSFX(sfx_poweron, sizeof(sfx_poweron));
+                Audio::play < 1 > (sfx_poweron);
             }
             break;
         case State::Activating:
@@ -160,7 +163,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
             if (PB::pressed(BTN_A)) {
                 speed.y -= 4.5;
                 msJump = 0;
-                Pokitto::Sound::playSFX(sfx_steam, sizeof(sfx_steam));
+                Audio::play < 1 > (sfx_steam);
             }
         } else {
             if (PB::aBtn() && msJump < 100) {
@@ -172,7 +175,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
                 msFloating = 250;
                 bullets--;
                 lvl.AddBullet(pos, Point(0, 1), Bullet::BulletType::SteamVertical, 1500); // add bullet
-                Pokitto::Sound::playSFX(sfx_steam, sizeof(sfx_steam));
+                Audio::play < 1 > (sfx_steam);
             }
         }
 
@@ -208,7 +211,11 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     pos.y += speed.y;
     onFloor = lvl.IsSolid(pos);
     if (onFloor) {
+
+
         auto fallHeight = (lvl.GetDepth() + pos.y.getInteger()) - depthJumpBegin;
+        if (fallHeight > (FALL_DAMAGE_HEIGHT / 5))
+            Audio::play < 1 > (sfx_fall);
         if (fallHeight > FALL_DAMAGE_HEIGHT) {
             Damage(25); //Falling damage
             camera.Shake(4);

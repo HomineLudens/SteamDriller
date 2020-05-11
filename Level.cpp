@@ -1,7 +1,10 @@
 #include "Level.h"
+
+#include <LibAudio>
 #include "sfx/sfx_pickup.h"
 #include "sfx/sfx_explosion.h"
 
+extern Audio::Sink < 4, PROJ_AUD_FREQ > audio;
 extern SteamCookie steamCookie;
 
 Level::Level() {
@@ -270,7 +273,7 @@ void Level::DestroyTile(const Point & pos, int offX, int offY, bool force) {
         if (tOver == TilesLoader::TileType::RockInside)
             SetTileId(pos, TilesLoader::TileType::RockEdgeBottom, offX, offY - 1);
         //--------
-        Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
+        Audio::play < 3 > (sfx_explosion);
     }
 }
 
@@ -544,7 +547,7 @@ void Level::DestroyBossCeiling() {
         }
     }
     if (destroyed) {
-        Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
+         Audio::play < 3 > (sfx_explosion);
         //Remove also the detonator
         for (auto & it: itemsAnim) {
             if (it.IsAlive()) {
@@ -574,7 +577,7 @@ void Level::DestroyBossFloor() {
         }
     }
     if (destroyed) {
-        Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
+         Audio::play < 3 > (sfx_explosion);
         //Remove also the detonator
         for (auto & it: itemsAnim) {
             if (it.IsAlive()) {
@@ -630,7 +633,6 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     //COUNCIL MANAGEMENT
     if (player.state == Player::State::Activating && player.stateFirstCycle){
         msgToShowFirst = random(70, 79); //Council disalogue messages
-        printf("C\r\n");
     }
 
     //------------------------------------------
@@ -727,7 +729,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                             AddParticle(b.pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
                             e.Damage(10);
                             b.Kill();
-                            Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
+                             Audio::play < 3 > (sfx_explosion);
                         }
                     }
                     //Chek item collision
@@ -749,7 +751,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                         player.Damage(20);
                         if (b.speed.x != 0 || b.speed.y != 0) {
                             b.Kill(); //Kill bullet only if it's moving (allow laser to burn in place)
-                            Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
+                             Audio::play < 3 > (sfx_explosion);
                         }
                     }
                 }
@@ -761,7 +763,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     for (auto & e: enemies) {
         if (e.IsAlive() && player.life > 0 && Rect::Collide(player.GetHitBox(), e.GetHitBox())) {
             AddParticle(e.pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
-            Pokitto::Sound::playSFX(sfx_explosion, sizeof(sfx_explosion));
+             Audio::play < 3 > (sfx_explosion);
             //---
             e.Damage(5);
             //---
@@ -777,7 +779,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         if (i.IsAlive() && Rect::Collide(player.GetHitBox(), i.GetHitBox())) {
             if (i.IsCollectable() && player.life > 0) {
                 i.Kill();
-                Pokitto::Sound::playSFX(sfx_pickup, sizeof(sfx_pickup));
+                Audio::play < 2 > (sfx_pickup);
             }
         }
     }
@@ -793,7 +795,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
             if (i.IsCollectable() && player.life > 0) {
                 player.Heal(20);
                 i.Kill();
-                Pokitto::Sound::playSFX(sfx_pickup, sizeof(sfx_pickup));
+                Audio::play < 2 > (sfx_pickup);
             }
         } else {
             i.Deactivate();

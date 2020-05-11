@@ -1,4 +1,5 @@
 #include <Pokitto.h>
+#include <LibAudio>
 #include <tasui>
 #include "palette/SteamPalette256.h"
 #include "assets/tiles/steamtasui.h" 
@@ -15,16 +16,17 @@
 using PC = Pokitto::Core;
 using PD = Pokitto::Display;
 using PB = Pokitto::Buttons;
-using PS = Pokitto::Sound;
 using UI = Pokitto::UI;
+
+Audio::Sink < 4, PROJ_AUD_FREQ > audio;
 
 Camera camera;
 Player player;
 Level level;
 Lights lights;
 EndScene endScene;
-
 Hud hud;
+
 int msLast;
 int msTotal;
 int track;
@@ -56,13 +58,13 @@ void setTrack(int t) {
     if (track != t) {
         switch (t) {
             case 1:
-                PS::playMusicStream("music/steamth.raw", 0); //Main Theme
+                Audio::play("music/steamth.raw");
                 break;
             case 2:
-                PS::playMusicStream("music/steambo.raw", 0); //Boss
+                Audio::play("music/steambo.raw");
                 break;
             case 3:
-                PS::playMusicStream("music/steamfi.raw", 0); //Final
+                Audio::play("music/steamth.raw");
                 break;
         }
     }

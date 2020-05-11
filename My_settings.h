@@ -18,13 +18,16 @@
 #endif
 
 //Sounds
-#define PROJ_HIGH_RAM HIGH_RAM_MUSIC
-#define PROJ_ENABLE_SOUND 1
-#define PROJ_ENABLE_SFX 1
-#define PROJ_ENABLE_SD_MUSIC
+#define PROJ_ENABLE_SOUND 1 
 #define PROJ_AUD_FREQ 8000
-#define PROJ_STREAM_LOOP 1
-#define PROJ_ENABLE_SYNTH 1
+
+// #define PROJ_HIGH_RAM HIGH_RAM_MUSIC
+// #define PROJ_ENABLE_SOUND 1
+// #define PROJ_ENABLE_SFX 1
+// #define PROJ_ENABLE_SD_MUSIC
+// #define PROJ_AUD_FREQ 8000
+// #define PROJ_STREAM_LOOP 1
+// #define PROJ_ENABLE_SYNTH 1
 
 //Fix point lib
 #define FIXED_POINTS_NO_RANDOM

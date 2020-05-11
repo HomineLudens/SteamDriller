@@ -1,10 +1,14 @@
 #include "Enemy.h"
 #include "Level.h"
 #include "Player.h"
+
+#include <LibAudio>
 #include "sfx/sfx_laser.h"
 
 using PD = Pokitto::Display;
 using PC = Pokitto::Core;
+
+extern Audio::Sink < 4, PROJ_AUD_FREQ > audio;
 
 Enemy::Enemy() {
     life = 0;
@@ -269,7 +273,7 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                                 Bullet::BulletType::LaserHorizontal, eAI.msAttackDuration);
                             i++;
                         }
-                        Pokitto::Sound::playSFX(sfx_laser, sizeof(sfx_laser));
+                        Audio::play < 2 > (sfx_laser);
                     }
 
                     if (enemyType == EnemyType::SpiderMecha || enemyType == EnemyType::Boss) {
@@ -280,7 +284,7 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
 
                         lvl.AddBullet(Point(pos.x, pos.y - (spr.getFrameHeight() / 2)), Point(dx, dy),
                             Bullet::BulletType::Plasma, eAI.msAttackDuration * 10);
-                        Pokitto::Sound::playSFX(sfx_laser, sizeof(sfx_laser));
+                        Audio::play < 2 > (sfx_laser);
                     }
 
                     //Boss shoot even vertical
@@ -292,7 +296,7 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                                 Bullet::BulletType::LaserVertical, eAI.msAttackDuration);
                             i--;
                         }
-                        Pokitto::Sound::playSFX(sfx_laser, sizeof(sfx_laser));
+                        Audio::play < 2 > (sfx_laser);
                     }
                 }
 
