@@ -50,24 +50,6 @@ void Lights::CalcLight(Camera & cam, Level & level) {
             Lights::lightMap[x][y] = dark;
         }
     }
-
-    // //
-    // for (auto & e: level.itemsAnim) {
-    //     if (e.IsAlive()) {
-    //         auto hb = e.GetHitBox();
-    //         int eX = (cam.ToScreenX(e.pos) - hb.w.getInteger() / 2) / 2;
-    //         int eY = (cam.ToScreenY(e.pos) - hb.h.getInteger() / 2) / 2;
-
-    //         if (eX > 2 && eX < 55 - 2 && eY > 2 && eY < 44 - 2) {
-
-    //             for (int x = -2; x < 4; x++) {
-    //                 for (int y = -2; y < 4; y++) {
-    //                     Lights::lightMap[eX + x][eY + y] = 0;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
 }
 
 void Lights::ShadeFiller(std::uint8_t * line, std::uint32_t y, bool skip) {

@@ -23,7 +23,7 @@ void EndScene::DrawEndingA() {
     //Draw Stuff
     const uint8_t * spr;
 
-    //Reset
+    //Clean background
     PD::setColor(16);
     PD::fillRect(0,0,110,88);
     UI::setOffset(0, 0);
@@ -70,7 +70,7 @@ void EndScene::DrawEndingA() {
     UI::setCursorBoundingBox(1, 11, 16, 12);
     //text
     UI::setCursor(0, 0);
-    UI::printText("It's late, time to sleep..");
+    UI::printText("Free, now I can run forever..");
 
 }
 

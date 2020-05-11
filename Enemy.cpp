@@ -277,7 +277,6 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
 
                     if (enemyType == EnemyType::SpiderMecha || enemyType == EnemyType::Boss) {
 
-
                         auto dx = (player.pos.x - pos.x) / distanceToPlayer;
                         auto dy = (player.pos.y - pos.y) / distanceToPlayer;
 
