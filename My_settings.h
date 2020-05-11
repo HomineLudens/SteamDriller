@@ -13,7 +13,7 @@
 //File
 // Optional. Default is PokittoDisk (PFFS).
 // #define PROJ_SDFS_STREAMING
-//#define PROJ_SDFS_STREAMING
+#define PROJ_SDFS_STREAMING
 #ifdef POK_SIM
 #define PROJ_FILE_STREAMING
 #endif
