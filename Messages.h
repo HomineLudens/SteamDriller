@@ -120,7 +120,6 @@ int MessagesGetRandom(int minRange, int maxRange) {
             iMsg = random(minRange, maxRange);
             if (!steamCookie.MsgMASK[iMsg]) {
                 steamCookie.MsgMASK.set(iMsg); //Mark as read
-                steamCookie.saveCookie();
                 found = true;
             }
             count++;

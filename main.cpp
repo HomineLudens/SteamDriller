@@ -18,7 +18,7 @@ using PD = Pokitto::Display;
 using PB = Pokitto::Buttons;
 using UI = Pokitto::UI;
 
-Audio::Sink < 5, PROJ_AUD_FREQ > audio;
+Audio::Sink < 4, PROJ_AUD_FREQ > audio;
 
 Camera camera;
 Player player;
@@ -76,12 +76,6 @@ void setTrack(int t) {
     track = t;
 }
 
-void lowVolume(uint32_t lastChannel) {
-    Audio::connect(lastChannel, nullptr, +[](uint8_t * buffer, void * ) {
-        for (int i = 0; i < 512; ++i)
-            buffer[i] >>= 8;
-    });
-}
 
 void initGame() {
     auto startPoint = Point((level.COLUMNS * level.TILE_WIDTH) / 2 - 100, 0);
@@ -97,6 +91,8 @@ void initGame() {
     //games played
     steamCookie.games++;
     steamCookie.saveCookie();
+    Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
+    printf("Saved\r\n");
 }
 
 int main() {
@@ -114,7 +110,6 @@ int main() {
 
     //---
     gameState = GameState::Play;
-    lowVolume(4);
     initGame();
 
     while (PC::isRunning()) {
@@ -168,6 +163,8 @@ int main() {
             if (depth > steamCookie.maxDepth) {
                 steamCookie.maxDepth = depth;
                 steamCookie.saveCookie();
+                Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
+                printf("Saved\r\n");
             }
         }
         //-------------------------------------------------

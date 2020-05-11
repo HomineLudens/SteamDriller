@@ -2,6 +2,7 @@
 #include <tasui>
 #include "Messages.h"
 #include "Pokitto.h"
+#include <LibAudio>
 #include "SteamCookie.h"
 #include "sprites.h"
 
@@ -99,6 +100,7 @@ void Hud::Update(Level & level, int ms) {
                 #endif
                 if (solved || skip) {
                     steamCookie.saveCookie();
+                    Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
                     puzzleState = PuzzleState::ShowMsg;
                 }
             }
