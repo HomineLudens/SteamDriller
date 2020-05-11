@@ -18,7 +18,7 @@ using PD = Pokitto::Display;
 using PB = Pokitto::Buttons;
 using UI = Pokitto::UI;
 
-Audio::Sink < 4, PROJ_AUD_FREQ > audio;
+Audio::Sink < 5, PROJ_AUD_FREQ > audio;
 
 Camera camera;
 Player player;
@@ -29,7 +29,7 @@ Hud hud;
 
 int msLast;
 int msTotal;
-int track;
+int track = 0;
 
 SteamCookie steamCookie;
 
@@ -59,16 +59,28 @@ void setTrack(int t) {
         switch (t) {
             case 1:
                 Audio::play("music/steamth.raw");
+                //printf("playing track 1\r\n");
                 break;
             case 2:
                 Audio::play("music/steambo.raw");
+                //printf("playing track 2\r\n");
                 break;
             case 3:
                 Audio::play("music/steamth.raw");
+                //printf("playing track 3\r\n");
+                break;
+            default:
                 break;
         }
     }
     track = t;
+}
+
+void lowVolume(uint32_t lastChannel) {
+    Audio::connect(lastChannel, nullptr, +[](uint8_t * buffer, void * ) {
+        for (int i = 0; i < 512; ++i)
+            buffer[i] >>= 8;
+    });
 }
 
 void initGame() {
@@ -102,6 +114,7 @@ int main() {
 
     //---
     gameState = GameState::Play;
+    lowVolume(4);
     initGame();
 
     while (PC::isRunning()) {

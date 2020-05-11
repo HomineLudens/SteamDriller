@@ -18,7 +18,7 @@
 #endif
 
 //Sounds
-#define PROJ_ENABLE_SOUND 1 
+#define PROJ_ENABLE_SOUND 0
 #define PROJ_AUD_FREQ 8000
 
 // #define PROJ_HIGH_RAM HIGH_RAM_MUSIC

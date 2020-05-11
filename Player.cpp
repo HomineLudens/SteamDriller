@@ -213,8 +213,9 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
 
 
         auto fallHeight = (lvl.GetDepth() + pos.y.getInteger()) - depthJumpBegin;
-        if (fallHeight > (FALL_DAMAGE_HEIGHT / 5))
+        if (fallHeight > (FALL_DAMAGE_HEIGHT / 5)){
             Audio::play < 1 > (sfx_fall);
+        }
         if (fallHeight > FALL_DAMAGE_HEIGHT) {
             Damage(25); //Falling damage
             camera.Shake(4);

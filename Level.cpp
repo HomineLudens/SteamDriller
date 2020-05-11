@@ -546,7 +546,7 @@ void Level::DestroyBossCeiling() {
         }
     }
     if (destroyed) {
-         Audio::play < 3 > (sfx_explosion);
+        Audio::play < 3 > (sfx_explosion);
         //Remove also the detonator
         for (auto & it: itemsAnim) {
             if (it.IsAlive()) {
@@ -576,7 +576,7 @@ void Level::DestroyBossFloor() {
         }
     }
     if (destroyed) {
-         Audio::play < 3 > (sfx_explosion);
+        Audio::play < 3 > (sfx_explosion);
         //Remove also the detonator
         for (auto & it: itemsAnim) {
             if (it.IsAlive()) {
@@ -630,7 +630,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
 
 
     //COUNCIL MANAGEMENT
-    if (player.state == Player::State::Activating && player.stateFirstCycle){
+    if (player.state == Player::State::Activating && player.stateFirstCycle) {
         msgToShowFirst = random(70, 79); //Council disalogue messages
     }
 
@@ -728,7 +728,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                             AddParticle(b.pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
                             e.Damage(10);
                             b.Kill();
-                             Audio::play < 3 > (sfx_explosion);
+                            Audio::play < 3 > (sfx_explosion);
                         }
                     }
                     //Chek item collision
@@ -750,7 +750,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                         player.Damage(20);
                         if (b.speed.x != 0 || b.speed.y != 0) {
                             b.Kill(); //Kill bullet only if it's moving (allow laser to burn in place)
-                             Audio::play < 3 > (sfx_explosion);
+                            Audio::play < 3 > (sfx_explosion);
                         }
                     }
                 }
@@ -762,7 +762,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     for (auto & e: enemies) {
         if (e.IsAlive() && player.life > 0 && Rect::Collide(player.GetHitBox(), e.GetHitBox())) {
             AddParticle(e.pos, Point(0, 0), Point(0, 0), Particle::ParticleType::Explosion, 600);
-             Audio::play < 3 > (sfx_explosion);
+            Audio::play < 3 > (sfx_explosion);
             //---
             e.Damage(5);
             //---
