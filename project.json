@@ -3383,6 +3383,21 @@
 		},
 		"\\mockups\\SteamDriller_Ending2_Mockup.h": {
 			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_Council.png": {
+			"sdcard": false
+		},
+		"\\mockups\\SteamDriller_BadEnding_MOCKUP.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Sign_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_TNT_Detonator_Anim.bin": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_poweron-vecchio1.wav": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {
