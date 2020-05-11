@@ -8,7 +8,6 @@
 using PD = Pokitto::Display;
 using PC = Pokitto::Core;
 
-extern Audio::Sink < 4, PROJ_AUD_FREQ > audio;
 
 Enemy::Enemy() {
     life = 0;

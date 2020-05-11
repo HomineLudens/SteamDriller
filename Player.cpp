@@ -11,7 +11,6 @@ using PD = Pokitto::Display;
 using PB = Pokitto::Buttons;
 using PC = Pokitto::Core;
 
-extern Audio::Sink < 4, PROJ_AUD_FREQ > audio;
 
 Player::Player(const Point & pos) {
     Init(pos);

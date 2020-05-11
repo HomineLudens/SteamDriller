@@ -4,7 +4,6 @@
 #include "sfx/sfx_pickup.h"
 #include "sfx/sfx_explosion.h"
 
-extern Audio::Sink < 4, PROJ_AUD_FREQ > audio;
 extern SteamCookie steamCookie;
 
 Level::Level() {
