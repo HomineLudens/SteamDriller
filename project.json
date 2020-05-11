@@ -3404,6 +3404,30 @@
 		},
 		"\\assets\\SteamDriller_Portrait_Council.h": {
 			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_EvilAI - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_Border.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_Border.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_EvilAI_No_Border.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_EvilAI_No_Border.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RobotSilouette.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RobotSilouette.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RobotSilouette.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

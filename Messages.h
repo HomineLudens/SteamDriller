@@ -106,7 +106,7 @@ int MessagesGetRandom(int minRange, int maxRange) {
 
         //Clean all if all marked
         if (allMarked) {
-            printf("All messages already read, resetting memoriy range.\r\n");
+            printf("All messages already read, resetting memory range.\r\n");
             for (int i = minRange; i < maxRange; i++) {
                 steamCookie.MsgMASK.reset(i);
             }

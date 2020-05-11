@@ -10,6 +10,8 @@ class EndScene {
         Sprite sprPlayer;
         Sprite sprSmokeWheels;
         
+        Sprite sprRobotOff;
+        
         //Scene A
         float backBuildingOffsetX;
         float frontBuildingOffsetX;

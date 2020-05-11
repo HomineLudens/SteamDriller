@@ -18,7 +18,7 @@ using PD = Pokitto::Display;
 using PB = Pokitto::Buttons;
 using UI = Pokitto::UI;
 
-Audio::Sink < 4, PROJ_AUD_FREQ > audio;
+Audio::Sink < 5, PROJ_AUD_FREQ > audio;
 
 Camera camera;
 Player player;

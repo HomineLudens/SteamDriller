@@ -5,12 +5,23 @@
 #include "assets/FrontBuildings.h"
 #include "assets/SteamDriller_FenceTileTop.h"
 
+#include "assets/SteamDriller_Portrait_EvilAI_No_Border.h"
+#include "assets/SteamDriller_Unactivated_Robot.h"
+#include "assets/SteamDriller_Conveyor_Flat.h"
+
+
+#include "assets/tiles/SteamDriller_TopPlatform.h" 
+#include "assets/tiles/SteamDriller_BackgroundUndergroundRoom.h" 
+
+
+
 using PD = Pokitto::Display;
 using UI = Pokitto::UI;
 
 EndScene::EndScene() {
     sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Lean);
     sprSmokeWheels.play(steamDriller_Smoke_Wheels_Anim, SteamDriller_Smoke_Wheels_Anim::Animation::Idle);
+    sprRobotOff.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Offline);
 }
 
 void EndScene::DrawEndingA() {
@@ -25,7 +36,7 @@ void EndScene::DrawEndingA() {
 
     //Clean background
     PD::setColor(16);
-    PD::fillRect(0,0,110,88);
+    PD::fillRect(0, 0, 110, 88);
     UI::setOffset(0, 0);
 
     //stars
@@ -76,5 +87,37 @@ void EndScene::DrawEndingA() {
 
 
 void EndScene::DrawEndingB() {
+
+    //Clean background
+    PD::setColor(16);
+    PD::fillRect(0, 0, 110, 88);
+    UI::setOffset(0, 0);
+
+    //--
+
+    //backgrodun
+    for (int x = 0; x < 15; x++) {
+        for (int y = 0; y < 7; y++) {
+            PD::drawSprite(x * 8, y * 8, SteamDriller_BackgroundUndergroundRoom);
+        }
+    }
+    for (int x = 0; x < 15; x++) {
+        PD::drawSprite(x * 8, 7 * 8, SteamDriller_TopPlatform);
+    }
+
+    PD::drawSprite(-40, 0, SteamDriller_Conveyor_Flat);
+    PD::drawSprite(60, 0, SteamDriller_Conveyor_Flat);
+
+    PD::drawSprite(40, 4, SteamDriller_Portrait_EvilAI_No_Border);
+
+    //Robots
+    for (int x = 0; x < 15; x++) {
+        sprRobotOff.draw(x*10,28);
+    }
+    
+    //Player
+    sprPlayer.draw(50,28);
+
+
 
 }
