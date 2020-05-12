@@ -33,13 +33,6 @@ int track = 0;
 
 SteamCookie steamCookie;
 
-enum class GameState {
-    Play,
-    Pause,
-    FinalA,
-    FinalB,
-};
-GameState gameState;
 
 
 #ifdef POKITTO
@@ -109,7 +102,6 @@ int main() {
     UI::setTilesetImage(steamtasui);
 
     //---
-    gameState = GameState::Play;
     initGame();
 
     while (PC::isRunning()) {
