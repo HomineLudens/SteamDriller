@@ -234,7 +234,7 @@ void Hud::Draw(const Player & player,
                 UI::printText(Messages[msgToShowFirst], charDisplayedFirst);
                 if (strcmp("High Score:", Messages[msgToShowFirst]) == 0) {
                     UI::printText("\n");
-                    UI::printInteger(steamCookie.maxDepth);
+                    UI::printInteger(steamCookie.maxDepth,8,'0');
                 }
             }
             break;

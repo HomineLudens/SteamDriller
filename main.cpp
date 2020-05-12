@@ -100,6 +100,7 @@ int main() {
 
     //Start game
     PC::begin();
+    pokInitSD();
     PD::loadRGBPalette(SteamPalette256);
     PD::setFont(fontTIC806x6);
 
