@@ -26,29 +26,29 @@ const char * Messages[] {
     "TIPS 07: Less energy reduce lights to see ambience", //16
     "TIPS 08: Even without moving some energy is lost", //17
     "TIPS 09: Collect gems and coal to give more power to the robot", //18
-    "", //19
+    "19", //19
     // Boss encounter: Robot dialogues
     ">Sensor allert: Hazard level 10!", //20
     ">010111001100 - 01011010000", //21
     ">Approaching danger zone", //22
-    "", //23
-    "", //24
-    "", //25
-    "", //26
-    "", //27
-    "", //28"
-    "", //29
+    "23", //23
+    "24", //24
+    "25", //25
+    "26", //26
+    "27", //27
+    "28", //28"
+    "29", //29
     // Boss encounter: AI dialogues
     ">Welcome to your dooom! Operation TERMINATE", //30
     ">Self protection active. Destroy intruders!", //31
     ">Activating safety protocol", //32
-    "", //33
-    "", //34
-    "", //35
-    "", //36
-    "", //37
-    "", //38
-    "", //39
+    "33", //33
+    "34", //34
+    "35", //35
+    "36", //36
+    "37", //37
+    "38", //38
+    "39", //39
     //Mecha spider chips
     "40 - ", //40
     "41 -", //41

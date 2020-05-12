@@ -209,7 +209,7 @@ void Level::RandomizeLine(int r) {
 
     //Move main well walls
     if (depth > 1000 && random(100) > 90) {
-        int count = random(1, 10);
+        int count = random(4, 16);
         int dir = random(100) > 50 ? TILE_WIDTH : -TILE_WIDTH;
         for (int r = 0; r < count; r++) {
             ShiftMapGenerator(dir);
