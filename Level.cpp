@@ -53,7 +53,7 @@ void Level::Init(const Point & posStart) {
     }
 
     //Tips
-    auto tipMsg = MessagesGetRandom(10, 12);
+    auto tipMsg = MessagesGetRandom(10, 19);
     AddItemAnim(posStart.x.getInteger() - 30, posStart.y.getInteger(), ItemAnim::ItemType::ChipPurple, false, false, false, tipMsg);
     //High score
     AddItemAnim(posStart.x.getInteger() - 80, posStart.y.getInteger(), ItemAnim::ItemType::Sign, false, false, false, 1);
@@ -417,7 +417,7 @@ void Level::ClearMessageToShow() {
             i.Kill(); //Kill all 
         }
     }
-
+    //----------------------
     msgToShowFirst = -1;
     msgToShowLast = -1;
 }
@@ -636,7 +636,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
 
     //COUNCIL MANAGEMENT
     if (player.state == Player::State::Activating && player.stateFirstCycle) {
-        msgToShowFirst = random(70, 79); //Council disalogue messages
+        msgToShowFirst = MessagesGetRandom(70, 79); //Council disalogue messages
     }
 
     //------------------------------------------
@@ -664,8 +664,8 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         //Add boss
         bossActivated = true;
         bossAlive = true;
-        msgToShowFirst = random(20, 23); //Robot disalogue messages
-        msgToShowLast = random(30, 33); //Boss disalogue messages
+        msgToShowFirst = MessagesGetRandom(20, 29); //Robot disalogue messages
+        msgToShowLast = MessagesGetRandom(30, 39); //Boss disalogue messages
 
         //Remove any previous Boss
         for (auto & e: enemies) {
@@ -689,8 +689,8 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                 bossAlive = false;
                 //Boss killed
                 if (bossEncounterCount < MAX_BOSS_ENCOUNTER) {
-                    msgToShowFirst = 60;
-                    msgToShowLast = 61;
+                    msgToShowFirst = MessagesGetRandom(20,29);
+                    msgToShowLast = MessagesGetRandom(30,39);
                 } else {
                     //FINAL SCENE TRIGGER
                     msgToShowFirst = 100;

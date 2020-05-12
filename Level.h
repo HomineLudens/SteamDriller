@@ -113,7 +113,7 @@ class Level {
     constexpr static int TILE_WIDTH = 8;
     constexpr static int TILE_HEIGHT = 8;
     constexpr static int SHIFT_VAL = 20; //tiles when shift start
-    constexpr static int MAX_BOSS_ENCOUNTER = 2; //after this game end
+    constexpr static int MAX_BOSS_ENCOUNTER = 3; //after this game end
     uint8_t lvlData[2 + (COLUMNS * ROWS)];
 
     std::array < Bullet, 15 > bullets;

@@ -3473,6 +3473,9 @@
 		},
 		"\\music\\drillsfinalboard.mp3": {
 			"sdcard": false
+		},
+		"\\music\\steamth0.raw": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {
