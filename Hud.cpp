@@ -45,7 +45,7 @@ void Hud::Update(Level & level, int ms) {
     int msgLenghtLast = 0;
 
 
-    if (puzzleState != PuzzleState::None && puzzleState != PuzzleState::FinalChoice && msDelayExit > 250) {
+    if (puzzleState != PuzzleState::None && puzzleState != PuzzleState::FinalChoice && msDelayExit > 500) {
         UI::setCursor(0, 0);
         //Exit from puzzle
         if (PB::pressed(BTN_A) || PB::pressed(BTN_B) || PB::pressed(BTN_DOWN) || PB::pressed(BTN_LEFT) || PB::pressed(BTN_RIGHT)) {

@@ -3428,6 +3428,51 @@
 		},
 		"\\assets\\SteamDriller_RobotSilouette.h": {
 			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RobotSilhouette.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_RobotSilhouette.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim - Copia.ase": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim_Mono.ase": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundBlue.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundBlue.h": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundGray.png": {
+			"sdcard": false
+		},
+		"\\assets\\tiles\\SteamDriller_BackgroundUndergroundGray.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_AI_Pipes.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_AI_Pipes.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_AI_Pipes.h": {
+			"sdcard": false
+		},
+		"\\SteamDriller.bin.2.h": {
+			"sdcard": false
+		},
+		"\\music\\drillsbossboard.mp3": {
+			"sdcard": false
+		},
+		"\\music\\drillsthemeboard.mp3": {
+			"sdcard": false
+		},
+		"\\music\\drillsfinalboard.mp3": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

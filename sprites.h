@@ -195,7 +195,8 @@ public:
 		Crouch = 39,
 		Dying = 44,
 		Death = 53,
-		Offline = 56
+		Offline = 56,
+		Evil = 65
 	};
 };
 

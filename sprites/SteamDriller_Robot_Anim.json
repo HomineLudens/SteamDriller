@@ -250,6 +250,24 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
     "sourceSize": { "w": 18, "h": 23 },
     "duration": 250
+   },
+   {
+    "filename": "SteamDriller_Robot_Anim 28.ase",
+    "frame": { "x": 504, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 350
+   },
+   {
+    "filename": "SteamDriller_Robot_Anim 29.ase",
+    "frame": { "x": 522, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 350
    }
  ],
  "meta": {
@@ -257,7 +275,7 @@
   "version": "1.1.6-dev",
   "image": "SteamDriller_Robot_Anim.png",
   "format": "RGBA8888",
-  "size": { "w": 504, "h": 23 },
+  "size": { "w": 540, "h": 23 },
   "scale": "1",
   "frameTags": [
    { "name": "Idle", "from": 0, "to": 0, "direction": "forward" },
@@ -268,7 +286,8 @@
    { "name": "Crouch", "from": 17, "to": 18, "direction": "forward" },
    { "name": "Dying", "from": 19, "to": 22, "direction": "forward" },
    { "name": "Death", "from": 23, "to": 23, "direction": "forward" },
-   { "name": "Offline", "from": 24, "to": 27, "direction": "forward" }
+   { "name": "Offline", "from": 24, "to": 27, "direction": "forward" },
+   { "name": "Evil", "from": 28, "to": 29, "direction": "forward" }
   ],
   "layers": [
    { "name": "Layer", "opacity": 255, "blendMode": "normal" }

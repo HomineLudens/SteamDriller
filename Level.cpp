@@ -693,8 +693,8 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                     msgToShowLast = 61;
                 } else {
                     //FINAL SCENE TRIGGER
-                    msgToShowFirst = 64;
-                    msgToShowLast = 65;
+                    msgToShowFirst = 100;
+                    msgToShowLast = 101;
                     gameEnd = true;
                 }
             }

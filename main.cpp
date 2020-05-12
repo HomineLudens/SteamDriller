@@ -50,7 +50,6 @@ extern "C" {
 void freeRam() {
     constexpr auto bytesUsed = reinterpret_cast < uintptr_t > (_pvHeapStart) - 0x10000000;
     printf("Total RAM: %d bytes used (%d%%) - %d bytes free\n", bytesUsed, bytesUsed * 100 / 0x8000, 0x8000 - bytesUsed);
-
 }
 #endif
 
@@ -152,11 +151,6 @@ int main() {
             setTrack(3);
         }
 
-        // if (hud.puzzleState == Hud::PuzzleState::None)
-        //     PS::playMusicStream();
-        // else
-        //     PS::pauseMusicStream();
-        //-------------------------------------------------
 
         //Save best score
         if (player.life < 1) {
@@ -195,16 +189,16 @@ int main() {
                 level.Draw(camera, player);
                 hud.Draw(player, level);
                 camera.Draw();
+                //--
+                endScene.Update(EndScene::SceneType::None, 0);
                 break;
             case 1:
-                endScene.DrawEndingA();
+                endScene.Update(EndScene::SceneType::GoodEnding, msElapsed);
                 break;
             case 2:
-                endScene.DrawEndingB();
+                endScene.Update(EndScene::SceneType::EvilEnding, msElapsed);
                 break;
         }
-
-
     }
 
     return 0;

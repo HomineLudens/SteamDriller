@@ -1,7 +1,8 @@
 #pragma once
 #include "PokittoCookie.h"
+#include <LibAudio>
 
-extern SteamCookie steamCookie; 
+extern SteamCookie steamCookie;
 
 inline
 const char * Messages[] {
@@ -26,10 +27,10 @@ const char * Messages[] {
     "TIPS 08: Even without moving some energy is lost", //17
     "TIPS 09: Collect gems and coal to give more power to the robot", //18
     "", //19
-    // Robot dialogues
-    "> Sensor allert: Hazard level 10!", //20
-    "> 010111001100 - 01011010000", //21
-    "> Approaching danger zone", //22
+    // Boss encounter: Robot dialogues
+    ">Sensor allert: Hazard level 10!", //20
+    ">010111001100 - 01011010000", //21
+    ">Approaching danger zone", //22
     "", //23
     "", //24
     "", //25
@@ -37,10 +38,10 @@ const char * Messages[] {
     "", //27
     "", //28"
     "", //29
-    // AI dialogues
-    "> Welcome to your dooom! Operation TERMINATE", //30
-    "> Self protection active. Destroy intruders!", //31
-    "> Activate safety protocol", //32
+    // Boss encounter: AI dialogues
+    ">Welcome to your dooom! Operation TERMINATE", //30
+    ">Self protection active. Destroy intruders!", //31
+    ">Activating safety protocol", //32
     "", //33
     "", //34
     "", //35
@@ -60,7 +61,7 @@ const char * Messages[] {
     "48", //48
     "49", //49
     //Boss chips
-    "50 My memories, I have dream of been a children..", //50
+    "50 My memories.. I have dream of been a children..", //50
     "51", //51
     "52", //52
     "53", //53
@@ -70,13 +71,12 @@ const char * Messages[] {
     "57", //57
     "58", //58
     "59", //59
-    //Boss fight complete
-    "> ...",  //60 Robot say nothing
-    "> You beat my extension, but the fight is not ended",  //61 AI 
+    "60", //60
+    "63", //61
     "62", //62
     "63", //63
-    "> This is the end.", //64
-    "> Press A to destroy me, Press B to join me", //65
+    "64", //64
+    "65", //65
     "66", //66
     "67", //67
     "68", //68
@@ -92,41 +92,68 @@ const char * Messages[] {
     "# 77", //77
     "# 78", //78
     "# 79", //79
+    "# 80", //80
+    "# 81", //81
+    "# 82", //82
+    "# 83", //83
+    "# 84", //84
+    "# 85", //85
+    "# 86", //86
+    "# 87", //87
+    "# 88", //88
+    "# 89", //89
+    "# 90", //90
+    "# 91", //91
+    "# 91", //92
+    "# 92", //93
+    "# 93", //94
+    "# 94", //95
+    "# 95", //96
+    "# 96", //97
+    "# 97", //98
+    "# 99", //99
+    //FINAL FIGHT BOSS SENTECE
+    "# This is the END!", //100  AI
+    "# Press A to destroy me, Press B to join me", //101  BOSS
+    "#102", //102
+    "#103", //103
 };
 
 inline
 int MessagesGetRandom(int minRange, int maxRange) {
 
-        //Chek at least one bit not marked
-        bool allMarked = true;
-        for (int i = minRange; i < maxRange; i++) {
-            if (!steamCookie.MsgMASK[i])
-                allMarked = false;
-        }
-
-        //Clean all if all marked
-        if (allMarked) {
-            printf("All messages already read, resetting memory range.\r\n");
-            for (int i = minRange; i < maxRange; i++) {
-                steamCookie.MsgMASK.reset(i);
-            }
-        }
-
-        //Search for a free message
-        int iMsg = 0;
-        int count = 0;
-        bool found = false;
-        while (!found && count<1000) { //found and safety chek
-            iMsg = random(minRange, maxRange);
-            if (!steamCookie.MsgMASK[iMsg]) {
-                steamCookie.MsgMASK.set(iMsg); //Mark as read
-                found = true;
-            }
-            count++;
-        }
-        return iMsg;
-
+    //Chek at least one bit not marked
+    bool allMarked = true;
+    for (int i = minRange; i < maxRange; i++) {
+        if (!steamCookie.MsgMASK[i])
+            allMarked = false;
     }
+
+    //Clean all if all marked
+    if (allMarked) {
+        printf("All messages already read, resetting memory range.\r\n");
+        for (int i = minRange; i < maxRange; i++) {
+            steamCookie.MsgMASK.reset(i);
+        }
+        steamCookie.saveCookie();
+        Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
+    }
+
+    //Search for a free message
+    int iMsg = 0;
+    int count = 0;
+    bool found = false;
+    while (!found && count < 1000) { //found and safety chek
+        iMsg = random(minRange, maxRange);
+        if (!steamCookie.MsgMASK[iMsg]) {
+            steamCookie.MsgMASK.set(iMsg); //Mark as read
+            found = true;
+        }
+        count++;
+    }
+    return iMsg;
+
+}
 
 
 // "How are you?",//11
