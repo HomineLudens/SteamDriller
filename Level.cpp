@@ -165,7 +165,7 @@ void Level::RandomizeLine(int r) {
         int ey = (r) * TILE_HEIGHT;
         auto pEnemy = Point(ex, ey);
         if (!IsSolid(pEnemy) && !IsSolid(pEnemy, 0, -1) && !IsSolid(pEnemy, 1, 0) && !IsSolid(pEnemy, 0, 1)) {
-            auto rnd = random(4);
+            auto rnd = random(5);
             switch (rnd) {
                 case 0:
                     AddEnemy(ex, ey, Enemy::EnemyType::PurpleSentinelHorizontal);
