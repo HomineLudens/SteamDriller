@@ -4,6 +4,29 @@
 
 extern SteamCookie steamCookie;
 
+
+constexpr static int MSG_TIPS_START = 10;
+constexpr static int MSG_TIPS_END = 19;
+
+constexpr static int MSG_BOSS_ROBOT_START = 20;
+constexpr static int MSG_BOSS_ROBOT_END = 29;
+constexpr static int MSG_BOSS_AI_START = 30;
+constexpr static int MSG_BOSS_AI_END = 39;
+
+constexpr static int MSG_CHIP_MECHA_START = 40;
+constexpr static int MSG_CHIP_MECHA_END = 49;
+constexpr static int MSG_CHIP_BOSS_START = 50;
+constexpr static int MSG_CHIP_BOSS_END = 69;
+
+constexpr static int MSG_CUNCIL_START = 70;
+constexpr static int MSG_CUNCIL_END = 89;
+
+constexpr static int MSG_END_FIGHT_ROBOT = 90;
+constexpr static int MSG_END_FIGHT_AI = 91;
+constexpr static int MSG_END_FIGHT_FINAL_ROBOT = 100;
+constexpr static int MSG_END_FIGHT_FINAL_AI = 101;
+
+
 inline
 const char * Messages[] {
     "EMPTY", //0
@@ -96,14 +119,15 @@ const char * Messages[] {
     "# Your well-being is important for us, please be carefull", //81
     "# And here is our next wonderful worker, ready to work", //82
     "# - fpermissive flag is evil... really.", //83
-    "# 48", //84
+    "# There's a plate on your body, it say: compiled with femto puchcard system 2.0", //84
     "# 85", //85
     "# 86", //86
     "# 87", //87
     "# 88", //88
     "# 89", //89
-    "# 90", //90
-    "# 91", //91
+    // END FIGHT MESSAGES
+    "> Threat level: normal", //90 ROBOT
+    "> You destroyed  my extension, but the fight is not over!", //91 AI
     "# 91", //92
     "# 92", //93
     "# 93", //94
@@ -113,12 +137,14 @@ const char * Messages[] {
     "# 97", //98
     "# 99", //99
     //FINAL FIGHT BOSS SENTENCE
-    "# This is the END!", //100  AI
-    "# Press A to destroy me, Press B to join me", //101  BOSS
+    "> This is the END!", //100  ROBOT
+    "> The chips you've collected will decice on the end of this story", //101  AI
     "#102", //102
     "#103", //103
 };
 
+
+//Min to max inclusive
 inline
 int MessagesGetRandom(int minRange, int maxRange) {
 
@@ -144,7 +170,7 @@ int MessagesGetRandom(int minRange, int maxRange) {
     int count = 0;
     bool found = false;
     while (!found && count < 1000) { //found and safety chek
-        iMsg = random(minRange, maxRange);
+        iMsg = random(minRange, maxRange + 1); // MIN and MAX INCLUSIVE!!
         if (!steamCookie.MsgMASK[iMsg]) {
             steamCookie.MsgMASK.set(iMsg); //Mark as read
             found = true;

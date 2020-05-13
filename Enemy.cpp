@@ -387,13 +387,13 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                 break;
             case ReleaseOnDeathType::MechaSpider:
                 {
-                    auto msgChip = MessagesGetRandom(40, 50);
+                    auto msgChip = MessagesGetRandom(MSG_CHIP_MECHA_START, MSG_CHIP_MECHA_END);
                     lvl.AddItemAnim(pos.x.getInteger(), pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, msgChip);
                     break;
                 }
             case ReleaseOnDeathType::Boss:
                 {
-                    auto msgChip = MessagesGetRandom(50, 60);
+                    auto msgChip = MessagesGetRandom(MSG_CHIP_BOSS_START, MSG_CHIP_BOSS_START);
                     lvl.AddItemAnim(pos.x.getInteger() - 20, pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, msgChip);
                     lvl.AddItemAnim(pos.x.getInteger() + 20, pos.y.getInteger(), ItemAnim::ItemType::TNTDetonatorFloor, false, false, false); //And detonator
                     break;

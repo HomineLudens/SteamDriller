@@ -53,7 +53,7 @@ void Level::Init(const Point & posStart) {
     }
 
     //Tips
-    auto tipMsg = MessagesGetRandom(10, 19);
+    auto tipMsg = MessagesGetRandom(MSG_TIPS_START, MSG_TIPS_END);
     AddItemAnim(posStart.x.getInteger() - 30, posStart.y.getInteger(), ItemAnim::ItemType::ChipPurple, false, false, false, tipMsg);
     //High score
     AddItemAnim(posStart.x.getInteger() - 80, posStart.y.getInteger(), ItemAnim::ItemType::Sign, false, false, false, 1);
@@ -636,7 +636,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
 
     //COUNCIL MANAGEMENT
     if (player.state == Player::State::Activating && player.stateFirstCycle) {
-        msgToShowFirst = MessagesGetRandom(70, 79); //Council disalogue messages
+        msgToShowFirst = MessagesGetRandom(MSG_CUNCIL_START, MSG_CUNCIL_END); //Council disalogue messages
     }
 
     //------------------------------------------
@@ -664,8 +664,8 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         //Add boss
         bossActivated = true;
         bossAlive = true;
-        msgToShowFirst = MessagesGetRandom(20, 29); //Robot disalogue messages
-        msgToShowLast = MessagesGetRandom(30, 39); //Boss disalogue messages
+        msgToShowFirst = MessagesGetRandom(MSG_BOSS_ROBOT_START, MSG_BOSS_ROBOT_END); //Robot disalogue messages
+        msgToShowLast = MessagesGetRandom(MSG_BOSS_AI_START, MSG_BOSS_AI_END); //Boss disalogue messages
 
         //Remove any previous Boss
         for (auto & e: enemies) {
@@ -689,12 +689,12 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                 bossAlive = false;
                 //Boss killed
                 if (bossEncounterCount < MAX_BOSS_ENCOUNTER) {
-                    msgToShowFirst = MessagesGetRandom(20,29);
-                    msgToShowLast = MessagesGetRandom(30,39);
+                    msgToShowFirst = MSG_END_FIGHT_ROBOT;
+                    msgToShowLast = MSG_END_FIGHT_AI;
                 } else {
                     //FINAL SCENE TRIGGER
-                    msgToShowFirst = 100;
-                    msgToShowLast = 101;
+                    msgToShowFirst = MSG_END_FIGHT_FINAL_ROBOT;
+                    msgToShowLast = MSG_END_FIGHT_FINAL_AI;
                     gameEnd = true;
                 }
             }

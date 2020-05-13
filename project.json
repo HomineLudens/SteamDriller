@@ -3476,6 +3476,12 @@
 		},
 		"\\music\\steamth0.raw": {
 			"sdcard": false
+		},
+		"\\PauseScene.h": {
+			"sdcard": false
+		},
+		"\\PauseScene.cpp": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

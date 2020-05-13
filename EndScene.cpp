@@ -14,7 +14,6 @@
 #include "assets/tiles/SteamDriller_TopPlatform.h" 
 #include "assets/tiles/SteamDriller_BackgroundUndergroundGray.h"
 
-
 using PD = Pokitto::Display;
 using PB = Pokitto::Buttons;
 using UI = Pokitto::UI;
