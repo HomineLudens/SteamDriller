@@ -39,7 +39,6 @@ class Hud {
             ShowHigh,
             ShowPex,
             ShowMsg,
-            ShowVisio,
             CouncilMessage,
             BossDialogue,
             FinalChoice

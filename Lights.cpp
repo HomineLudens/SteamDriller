@@ -3,7 +3,7 @@
 #include <MemOps>
 #include <algorithm>
 
-void Lights::Update(Camera & camera, Player & player, Level & level, int ms) {
+void Lights::Update(bool forceFull, Camera & camera, Player & player, Level & level, int ms) {
     msLight -= ms;
 
     // msLightBoost -= ms;
@@ -16,7 +16,7 @@ void Lights::Update(Camera & camera, Player & player, Level & level, int ms) {
         pos.y = camera.ToScreenY(player.pos) - 10;
         lightDir = player.facing == Player::Facing::Right ? 1 : -1;
 
-        if (!player.onBossZone && player.state != Player::State::Offline && player.state != Player::State::Activating) {
+        if (!forceFull && !player.onBossZone && player.state != Player::State::Offline && player.state != Player::State::Activating) {
             lightLevel = 36500 - ((100 - player.life) * 350) + (random(-8192, 8192) / 10);
         } else {
             lightLevel = 3650000;
@@ -26,10 +26,10 @@ void Lights::Update(Camera & camera, Player & player, Level & level, int ms) {
         //--
         msLight += 100;
     }
-    
+
     //Fixed light
-    for(int x=0;x<55;x++){
-        for(int y=0;y<5;y++){
+    for (int x = 0; x < 55; x++) {
+        for (int y = 0; y < 5; y++) {
             Lights::lightMap[x][y] = 0;
         }
     }

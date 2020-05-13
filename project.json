@@ -3482,6 +3482,66 @@
 		},
 		"\\PauseScene.cpp": {
 			"sdcard": false
+		},
+		"\\assets\\ChipRedPause.png": {
+			"sdcard": false
+		},
+		"\\assets\\ChipRedPause.h": {
+			"sdcard": false
+		},
+		"\\assets\\ChipRedPause - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\ChipRedPauseLocked.png": {
+			"sdcard": false
+		},
+		"\\assets\\ChipRedPauseLocked.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Pause_old.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Pause_old.h": {
+			"sdcard": false
+		},
+		"\\assets\\PauseMenu.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\PauseMenu.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_PauseMenu.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_PauseMenu.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Selector_Menu.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Selector_Menu.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Selector_Menu.h": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Selector_Menu - Copia.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Selector_Menu_Up.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Selector_Menu_Up.h": {
+			"sdcard": false
+		},
+		"\\assets\\Panel_for_the_Chips.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\Panel_for_the_Chips.png": {
+			"sdcard": false
+		},
+		"\\assets\\Panel_for_the_Chips.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

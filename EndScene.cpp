@@ -1,6 +1,8 @@
 #include "EndScene.h"
 #include <tasui>
 
+#include "Messages.h"
+
 #include "assets/BackBuilding.h"
 #include "assets/FrontBuildings.h"
 #include "assets/SteamDriller_FenceTileTop.h"
@@ -115,7 +117,7 @@ void EndScene::DrawEndingGood() {
     UI::setCursorBoundingBox(1, 11, 16, 12);
     //text
     UI::setCursor(0, 0);
-    UI::printText("So ,this is the End, and now I'm free, free forever, forever free to run wherever I want, wherever I feel to be.", charDisplayed);
+    UI::printText(Messages[MSG_GOOD_END], charDisplayed);
 
 }
 
@@ -172,7 +174,7 @@ void EndScene::DrawEndingEvil() {
     UI::setCursorBoundingBox(1, 11, 16, 12);
     //text
     UI::setCursor(0, 0);
-    UI::printText("Finaly togheter, to rule the world!", charDisplayed);
+    UI::printText(Messages[MSG_BAD_END], charDisplayed);
 
 
 }

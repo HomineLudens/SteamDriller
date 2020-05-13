@@ -171,13 +171,14 @@ int main() {
             finalChoice = 2;
         }
 
+        lights.Update(paused, camera, player, level, msElapsed);
         if (!paused) {
             switch (finalChoice) {
                 case 0:
                     //In GAME
                     //----UPDATE
                     camera.Update(player, hud, msElapsed);
-                    lights.Update(camera, player, level, msElapsed);
+
                     if (hud.puzzleState == Hud::PuzzleState::None) {
                         level.Update(camera, player, msElapsed);
                     }
@@ -197,9 +198,11 @@ int main() {
                     endScene.Update(EndScene::SceneType::EvilEnding, msElapsed);
                     break;
             }
+            //
+            pauseScene.Init();
         } else {
             //Paused
-            pauseScene.Update(msElapsed);
+            paused = pauseScene.Update(msElapsed);
         }
     }
 

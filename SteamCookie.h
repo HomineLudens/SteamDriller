@@ -12,4 +12,6 @@ class SteamCookie: public Pokitto::Cookie {
     std::bitset < 128 > MsgMASK; //Tips
 
 
+
+
 };

@@ -9,10 +9,10 @@
 #include "assets/SteamDriller_HUD.h"
 #include "assets/SteamDriller_PEX.h"
 
-#include "assets/puzzleVisio/Puz00.h"
-#include "assets/puzzleVisio/Puz01.h"
-#include "assets/puzzleVisio/Puz10.h"
-#include "assets/puzzleVisio/Puz11.h"
+// #include "assets/puzzleVisio/Puz00.h"
+// #include "assets/puzzleVisio/Puz01.h"
+// #include "assets/puzzleVisio/Puz10.h"
+// #include "assets/puzzleVisio/Puz11.h"
 
 #include "assets/SteamDriller_Portrait_Robot.h"
 #include "assets/SteamDriller_Portrait_EvilAI.h"
@@ -67,9 +67,7 @@ void Hud::Update(Level & level, int ms) {
                         puzzleState = PuzzleState::ShowHigh;
                     } else if (strncmp("PEX:", Messages[msgToShowFirst], 4) == 0) {
                         puzzleState = PuzzleState::ShowPex;
-                    } else if (strncmp(Messages[msgToShowFirst], "Visio:", 5) == 0) {
-                        puzzleState = PuzzleState::ShowVisio;
-                    } else {
+                    }else {
                         puzzleState = PuzzleState::ShowMsg;
                     }
                 }
@@ -111,9 +109,6 @@ void Hud::Update(Level & level, int ms) {
             break;
         case PuzzleState::ShowMsg: //
             break;
-        case PuzzleState::ShowVisio:
-            //Show Visio
-            break;
         case PuzzleState::BossDialogue:
             //---
             break;
@@ -122,11 +117,12 @@ void Hud::Update(Level & level, int ms) {
             break;
         case PuzzleState::FinalChoice:
             //---
-            if (PB::pressed(BTN_A)) {
-                choiceSelected = 1;
-            }
-            if (PB::pressed(BTN_B)) {
-                choiceSelected = 2;
+            if (PB::pressed(BTN_A) || PB::pressed(BTN_B)) {
+
+                if (MessagesGetPercRead() == 100)
+                    choiceSelected = 1;
+                else
+                    choiceSelected = 2;
             }
             break;
     }
@@ -234,47 +230,12 @@ void Hud::Draw(const Player & player,
                 UI::printText(Messages[msgToShowFirst], charDisplayedFirst);
                 if (strcmp("High Score:", Messages[msgToShowFirst]) == 0) {
                     UI::printText("\n");
-                    UI::printInteger(steamCookie.maxDepth,8,'0');
+                    UI::printInteger(steamCookie.maxDepth, 8, '0');
                 }
             }
             break;
 
-        case PuzzleState::ShowVisio:
-            {
-                const uint8_t * PuzXX;
-                UI::mapColor(0, 1);
-                UI::mapColor(1, 16);
-                UI::mapColor(5, 16);
-
-                UI::drawBox(4, 4, 13, 13);
-
-                if (strncmp(Messages[msgToShowFirst], "Visio:00", 8) == 0) {
-                    PuzXX = Puz00;
-                }
-                if (strncmp(Messages[msgToShowFirst], "Visio:01", 8) == 0) {
-                    PuzXX = Puz01;
-                }
-                if (strncmp(Messages[msgToShowFirst], "Visio:10", 8) == 0) {
-                    PuzXX = Puz10;
-                }
-                if (strncmp(Messages[msgToShowFirst], "Visio:11", 8) == 0) {
-                    PuzXX = Puz11;
-                }
-                int i = 0;
-                for (int x = 0; x < PuzXX[0]; x++) {
-                    for (int y = 0; y < PuzXX[1]; y++) {
-                        if (PuzXX[2 + i] != 0) {
-                            UI::setCursor(5 + x, 5 + y);
-                            UI::setDelta(5 + x, 5 + y, 1);
-                            UI::setTile(5 + x, 5 + y, 22);
-                        }
-                        i++;
-                    }
-                }
-                UI::setCursor(5, 3);
-                UI::printText(Messages[msgToShowFirst]);
-            }
-            break;
+       
 
         case PuzzleState::CouncilMessage:
 

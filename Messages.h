@@ -1,9 +1,9 @@
 #pragma once
 #include "PokittoCookie.h"
+#include "SteamCookie.h"
 #include <LibAudio>
 
 extern SteamCookie steamCookie;
-
 
 constexpr static int MSG_TIPS_START = 10;
 constexpr static int MSG_TIPS_END = 19;
@@ -26,6 +26,12 @@ constexpr static int MSG_END_FIGHT_AI = 91;
 constexpr static int MSG_END_FIGHT_FINAL_ROBOT = 100;
 constexpr static int MSG_END_FIGHT_FINAL_AI = 101;
 
+constexpr static int MSG_COLLECTABLE_MIN = 40;
+constexpr static int MSG_COLLECTABLE_MAX = 69;
+
+constexpr static int MSG_GOOD_END = 110;
+constexpr static int MSG_BAD_END = 111;
+
 
 inline
 const char * Messages[] {
@@ -34,10 +40,10 @@ const char * Messages[] {
     "PEX", //2
     "", //3
     "", //4
-    "Visio:00", //5
-    "Visio:01", //6
-    "Visio:10", //7
-    "Visio:11", //8
+    "", //5
+    "", //6
+    "", //7
+    "", //8
     "", //9
     // TIPS messages
     "TIPS 01: Falling from too high causes heavy damage to suspensions system", //10
@@ -120,7 +126,7 @@ const char * Messages[] {
     "# And here is our next wonderful worker, ready to work", //82
     "# - fpermissive flag is evil... really.", //83
     "# There's a plate on your body, it say: compiled with femto puchcard system 2.0", //84
-    "# 85", //85
+    "# Council msg 85", //85
     "# 86", //86
     "# 87", //87
     "# 88", //88
@@ -137,16 +143,32 @@ const char * Messages[] {
     "# 97", //98
     "# 99", //99
     //FINAL FIGHT BOSS SENTENCE
-    "> This is the END!", //100  ROBOT
-    "> The chips you've collected will decice on the end of this story", //101  AI
+    ">We finally reach an end...", //100  ROBOT
+    ">Your memory will define the end of this story..", //101  AI
     "#102", //102
     "#103", //103
+    "#104", //104
+    "#105", //105
+    "#106", //106
+    "#107", //107
+    "#108", //108
+    "#109", //109
+    //Good ending
+    "#Robot finally decice to merge his memory with the AI, the bad side of the council, and toghter...", //110
+    //Bad ending
+    "#Robot try ro fight the AI, only to be corrupted itself", //111
 };
 
 
 //Min to max inclusive
 inline
 int MessagesGetRandom(int minRange, int maxRange) {
+
+
+    bool resetIfFull = true;
+    if (minRange >= MSG_COLLECTABLE_MIN && maxRange <= MSG_COLLECTABLE_MAX)
+        resetIfFull = false;
+
 
     //Chek at least one bit not marked
     bool allMarked = true;
@@ -156,7 +178,7 @@ int MessagesGetRandom(int minRange, int maxRange) {
     }
 
     //Clean all if all marked
-    if (allMarked) {
+    if (resetIfFull && allMarked) {
         printf("All messages already read, resetting memory range.\r\n");
         for (int i = minRange; i < maxRange; i++) {
             steamCookie.MsgMASK.reset(i);
@@ -169,7 +191,7 @@ int MessagesGetRandom(int minRange, int maxRange) {
     int iMsg = 0;
     int count = 0;
     bool found = false;
-    while (!found && count < 1000) { //found and safety chek
+    while (!found && count < 1000) { //if not found, BREAK!!!
         iMsg = random(minRange, maxRange + 1); // MIN and MAX INCLUSIVE!!
         if (!steamCookie.MsgMASK[iMsg]) {
             steamCookie.MsgMASK.set(iMsg); //Mark as read
@@ -178,12 +200,15 @@ int MessagesGetRandom(int minRange, int maxRange) {
         count++;
     }
     return iMsg;
-
 }
 
-
-// "How are you?",//11
-//     "Nice day for fishing ain't it? Hu ha! ",//12
-//     ".. Memories, random memories of a dream..",//13
-//     ".. All system nominal..", //14
-//     "Super secret stuff here... no just joking :)", //15
+inline int MessagesGetPercRead() {
+    int totalCollectable = MSG_COLLECTABLE_MAX - MSG_COLLECTABLE_MIN;
+    int countRead = 0;
+    for (int i = MSG_COLLECTABLE_MIN; i <= MSG_COLLECTABLE_MAX; i++) {
+        if (steamCookie.MsgMASK[i])
+            countRead++;
+    }
+    
+    return (countRead*100)/totalCollectable;
+}
