@@ -11,6 +11,7 @@
 #include "Hud.h"
 #include "Lights.h"
 #include "Messages.h"
+#include "PauseScene.h"
 #include "EndScene.h"
 
 using PC = Pokitto::Core;
@@ -24,15 +25,16 @@ Camera camera;
 Player player;
 Level level;
 Lights lights;
-EndScene endScene;
 Hud hud;
+EndScene endScene;
+PauseScene pauseScene;
 
 int msLast;
 int msTotal;
 int track = 0;
+bool paused = false;
 
 SteamCookie steamCookie;
-
 
 
 #ifdef POKITTO
@@ -127,8 +129,10 @@ int main() {
             #ifdef POKITTO
             freeRam();
             #endif
+            paused = !paused;
         }
-        if (PB::cBtn()) {
+        //---->
+        if (PB::aBtn()) {
             player.life = 100;
         }
         //-------------------------------------------------
@@ -167,30 +171,35 @@ int main() {
             finalChoice = 2;
         }
 
-        switch (finalChoice) {
-            case 0:
-                //In GAME
-                //----UPDATE
-                camera.Update(player, hud, msElapsed);
-                lights.Update(camera, player, level, msElapsed);
-                if (hud.puzzleState == Hud::PuzzleState::None) {
-                    level.Update(camera, player, msElapsed);
-                }
-                hud.Update(level, msElapsed);
+        if (!paused) {
+            switch (finalChoice) {
+                case 0:
+                    //In GAME
+                    //----UPDATE
+                    camera.Update(player, hud, msElapsed);
+                    lights.Update(camera, player, level, msElapsed);
+                    if (hud.puzzleState == Hud::PuzzleState::None) {
+                        level.Update(camera, player, msElapsed);
+                    }
+                    hud.Update(level, msElapsed);
 
-                //----DRAW 
-                level.Draw(camera, player);
-                hud.Draw(player, level);
-                camera.Draw();
-                //--
-                endScene.Update(EndScene::SceneType::None, 0);
-                break;
-            case 1:
-                endScene.Update(EndScene::SceneType::GoodEnding, msElapsed);
-                break;
-            case 2:
-                endScene.Update(EndScene::SceneType::EvilEnding, msElapsed);
-                break;
+                    //----DRAW 
+                    level.Draw(camera, player);
+                    hud.Draw(player, level);
+                    camera.Draw();
+                    //--
+                    endScene.Update(EndScene::SceneType::None, 0);
+                    break;
+                case 1:
+                    endScene.Update(EndScene::SceneType::GoodEnding, msElapsed);
+                    break;
+                case 2:
+                    endScene.Update(EndScene::SceneType::EvilEnding, msElapsed);
+                    break;
+            }
+        } else {
+            //Paused
+            pauseScene.Update(msElapsed);
         }
     }
 
