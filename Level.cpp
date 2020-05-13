@@ -179,19 +179,27 @@ void Level::RandomizeLine(int r) {
                 case 3:
                     AddEnemy(ex, ey, Enemy::EnemyType::Worm);
                     break;
-                case 4:
-                    AddEnemy(ex, ey, Enemy::EnemyType::SpiderMecha);
+                    // case 4:
+                    //     AddEnemy(ex, ey, Enemy::EnemyType::SpiderMecha);
+                    //     break;
+                default:
                     break;
             }
         }
     }
 
     //Make a random room
-    if (depth > 300 && random(100) > 90) {
-        int roomWidth = random(6, 20);
-        int roomHeight = random(6, 10);
+    if (depth > 600 && random(100) > 95) {
+        int roomWidth = random(14, 20);
+        int roomHeight = random(5, 10);
 
-        int roomStartX = random(2, COLUMNS - 2 - roomWidth);
+        int roomStartX = 2;
+        if (random(100) > 50) {
+            roomStartX = random(2, pg.x1 - roomWidth - 4);
+        } else {
+            roomStartX = random(pg.x2, COLUMNS - roomWidth - 4);
+        }
+
         for (int yr = 0; yr < roomHeight; yr++) {
             for (int xr = roomStartX; xr < roomWidth; xr++) {
                 auto idTile = lvlData[2 + ((r - yr) * COLUMNS) + xr];
@@ -202,9 +210,21 @@ void Level::RandomizeLine(int r) {
         }
 
         auto xi = (roomStartX + (roomWidth / 2)) * TILE_WIDTH;
-        auto yi = (r - (roomHeight / 2)) * TILE_HEIGHT;
+        auto yi = (r - (roomHeight + 3)) * TILE_HEIGHT;
         AddItemAnim(xi, yi, ItemAnim::ItemType::Ruby);
+        AddEnemy(xi, yi, Enemy::EnemyType::SpiderMecha);
+        //printf("Spider mecha!\r\n");
         //printf("NEW ROOM\r\n");
+
+        //Sign tunnel towards the room
+        for (int xr = 0; xr < COLUMNS; xr++) {
+            if (random(100) > 80) {
+                auto yOff = roomHeight - 3 + random(-1, 2);
+                auto idTile = lvlData[2 + ((r - yOff) * COLUMNS) + xr];
+                if (idTile != TilesLoader::TileType::UnbreakableFloor && idTile != TilesLoader::TileType::UnbreakableCeiling)
+                    lvlData[2 + ((r - yOff) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss1; //
+            }
+        }
     }
 
     //Move main well walls
@@ -593,7 +613,7 @@ bool Level::IsBossAlive() {
     return bossAlive;
 }
 
-bool Level::IsGameEnd(){
+bool Level::IsGameEnd() {
     return gameEnd;
 }
 
@@ -689,8 +709,8 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                 bossAlive = false;
                 //Boss killed
                 if (bossEncounterCount < MAX_BOSS_ENCOUNTER) {
-                    msgToShowFirst = MessagesGetRandom(20,29);
-                    msgToShowLast = MessagesGetRandom(30,39);
+                    msgToShowFirst = MessagesGetRandom(20, 29);
+                    msgToShowLast = MessagesGetRandom(30, 39);
                 } else {
                     //FINAL SCENE TRIGGER
                     msgToShowFirst = 100;
