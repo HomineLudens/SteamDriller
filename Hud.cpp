@@ -25,7 +25,7 @@ using UI = Pokitto::UI;
 
 extern SteamCookie steamCookie;
 
-Hud::Hud() {
+void Hud::Init() {
     puzzleState = PuzzleState::None;
     smallCog.play(steamDriller_SmallCog_Anim, SteamDriller_SmallCog_Anim::Animation::Idle);
     bigCog.play(steamDriller_BigCog_Anim, SteamDriller_BigCog_Anim::Animation::Idle);

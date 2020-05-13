@@ -70,6 +70,7 @@ void setTrack(int t) {
 
 
 void initGame() {
+    hud.Init();
     auto startPoint = Point((level.COLUMNS * level.TILE_WIDTH) / 2 - 100, 0);
     player.Init(startPoint);
     camera.Init(Point(startPoint.x + 48, startPoint.y - 24));

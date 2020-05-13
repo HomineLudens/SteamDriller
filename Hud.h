@@ -46,7 +46,7 @@ class Hud {
         };
     PuzzleState puzzleState;
 
-    Hud();
+    void Init();
     int GetFinalChoice();
     void Update(Level & level, int ms);
     void Draw(const Player & player,
