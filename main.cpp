@@ -154,9 +154,11 @@ int main() {
             auto depth = player.pos.y.getInteger() + level.GetDepth();
             if (depth > steamCookie.maxDepth) {
                 steamCookie.maxDepth = depth;
+                //---
                 steamCookie.saveCookie();
                 Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
-                printf("Saved\r\n");
+                //---
+                printf("Saved best score\r\n");
             }
         }
         //-------------------------------------------------

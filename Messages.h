@@ -183,7 +183,6 @@ int MessagesGetRandom(int minRange, int maxRange) {
         for (int i = minRange; i < maxRange; i++) {
             steamCookie.MsgMASK.reset(i);
         }
-        steamCookie.saveCookie();
         Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
     }
 
@@ -199,6 +198,11 @@ int MessagesGetRandom(int minRange, int maxRange) {
         }
         count++;
     }
+
+    //---
+    steamCookie.saveCookie();
+    Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
+    //---
     return iMsg;
 }
 
@@ -209,6 +213,6 @@ inline int MessagesGetPercRead() {
         if (steamCookie.MsgMASK[i])
             countRead++;
     }
-    
-    return (countRead*100)/totalCollectable;
+
+    return (countRead * 100) / totalCollectable;
 }
