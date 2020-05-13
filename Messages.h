@@ -4,12 +4,8 @@
 
 extern SteamCookie steamCookie;
 
-constexpr static int MSG_TIPS_BEGIN = 10;
-;constexpr static int MSG_TIPS_END = 19;
-
 inline
 const char * Messages[] {
-    //Service messages
     "EMPTY", //0
     "High Score:", //1 //Show high score
     "PEX", //2
@@ -86,21 +82,21 @@ const char * Messages[] {
     "Project SD needs to be shut off at all cost", //68
     "Some classified info has been buried in secret rooms underground", //69
     //Council Messages
-    "#Wake up dear friend, the council choose you to collect resources", //70
-    "#The Corp found a perfect renewable ressource that will be profitable for everyone. And might save a lot of lives.", //71
-    "#Your program is to fight crazy military robots and collect resources.", //72
-    "#Make sure to not go too deep, just collect the ressource we need", //73
-    "#Today is a good day for humanity, all thanks to m.. you!", //74
-    "#Don't listen to rumors, your work is needed here", //75
-    "#The Corp is releasing a new product today, thanks to your hard work", //76
-    "#Don't forget that you job is monitored at all time", //77
-    "#Good day to go collect for the greater good don't you think?", //78
-    "#Today's forecast says that it's the perfect night to do some excavations", //79
-    "#Rise from your gr.. I mean rise and shine my friend", //80
-    "#Your well-being is important for us, please be carefull", //81
-    "#And here is our next wonderful worker, ready to work", //82
-    "#- fpermissive flag is evil... really.", //83
-    "# 84", //84
+    "# Wake up dear friend, the council choose you to collect resources", //70
+    "# The Corp found a perfect renewable ressource that will be profitable for everyone. And might save a lot of lives.", //71
+    "# Your program is to fight crazy military robots and collect resources.", //72
+    "# Make sure to not go too deep, just collect the ressource we need", //73
+    "# Today is a good day for humanity, all thanks to m.. you!", //74
+    "# Don't listen to rumors, your work is needed here", //75
+    "# The Corp is releasing a new product today, thanks to your hard work", //76
+    "# Don't forget that you job is monitored at all time", //77
+    "# Good day to go collect for the greater good don't you think?", //78
+    "# Today's forecast says that it's the perfect night to do some excavations", //79
+    "# Rise from your gr.. I mean rise and shine my friend", //80
+    "# Your well-being is important for us, please be carefull", //81
+    "# And here is our next wonderful worker, ready to work", //82
+    "# - fpermissive flag is evil... really.", //83
+    "# 48", //84
     "# 85", //85
     "# 86", //86
     "# 87", //87
@@ -117,8 +113,8 @@ const char * Messages[] {
     "# 97", //98
     "# 99", //99
     //FINAL FIGHT BOSS SENTENCE
-    "#This is the END!", //100  AI
-    "#TPress A to destroy me, Press B to join me", //101  BOSS
+    "# This is the END!", //100  AI
+    "# Press A to destroy me, Press B to join me", //101  BOSS
     "#102", //102
     "#103", //103
 };
@@ -148,7 +144,7 @@ int MessagesGetRandom(int minRange, int maxRange) {
     int count = 0;
     bool found = false;
     while (!found && count < 1000) { //found and safety chek
-        iMsg = random(minRange, maxRange + 1);
+        iMsg = random(minRange, maxRange);
         if (!steamCookie.MsgMASK[iMsg]) {
             steamCookie.MsgMASK.set(iMsg); //Mark as read
             found = true;
