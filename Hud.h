@@ -22,15 +22,7 @@ class Hud {
     int msDelayExit = 0;
     int8_t choiceSelected = 0;
     int msDelayLastBegin = 0;
-
-    #ifdef POKITTO
-    DigitalIn in0 = DigitalIn(EXT0);
-    DigitalIn in1 = DigitalIn(EXT1);
-    DigitalIn in2 = DigitalIn(EXT2);
-    DigitalIn in3 = DigitalIn(EXT3);
-    DigitalIn in4 = DigitalIn(EXT4);
-    DigitalIn in5 = DigitalIn(EXT5);
-    #endif
+   
 
     int inPrec[6];
 
@@ -38,7 +30,6 @@ class Hud {
         public: enum class PuzzleState {
             None,
             ShowHigh,
-            ShowPex,
             ShowMsg,
             CouncilMessage,
             BossDialogue,

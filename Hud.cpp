@@ -7,12 +7,6 @@
 #include "sprites.h"
 
 #include "assets/SteamDriller_HUD.h"
-#include "assets/SteamDriller_PEX.h"
-
-// #include "assets/puzzleVisio/Puz00.h"
-// #include "assets/puzzleVisio/Puz01.h"
-// #include "assets/puzzleVisio/Puz10.h"
-// #include "assets/puzzleVisio/Puz11.h"
 
 #include "assets/SteamDriller_Portrait_Robot.h"
 #include "assets/SteamDriller_Portrait_EvilAI.h"
@@ -38,7 +32,7 @@ int Hud::GetFinalChoice() {
 void Hud::Update(Level & level, int ms) {
     msDelayChar -= ms;
     msDelayExit += ms;
-    msDelayLastBegin +=ms;
+    msDelayLastBegin += ms;
     //--------------
     msgToShowFirst = level.GetMessageToShowFirst();
     msgToShowLast = level.GetMessageToShowLast();
@@ -65,10 +59,8 @@ void Hud::Update(Level & level, int ms) {
             if (msgToShowFirst != -1) {
                 if (PB::pressed(BTN_UP)) {
                     if (strcmp("High Score:", Messages[msgToShowFirst]) == 0) {
-                        puzzleState = PuzzleState::ShowHigh;
-                    } else if (strncmp("PEX:", Messages[msgToShowFirst], 4) == 0) {
-                        puzzleState = PuzzleState::ShowPex;
-                    }else {
+                        puzzleState = PuzzleState::ShowHigh;}
+                    else {
                         puzzleState = PuzzleState::ShowMsg;
                     }
                 }
@@ -93,23 +85,7 @@ void Hud::Update(Level & level, int ms) {
             break;
         case PuzzleState::ShowHigh:
             break;
-        case PuzzleState::ShowPex:
-            {
-                //TODO: resolve puzzle from PEX
-                bool skip = PB::upBtn() && PB::pressed(BTN_C);
-                bool solved = false;
-                #ifdef POKITTO
-                solved = in0.read() != 0 && inPrec[0] == 0;
-                #endif
-                if (solved || skip) {
-                    steamCookie.saveCookie();
-                    Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
-                    puzzleState = PuzzleState::ShowMsg;
-                     printf("Saved Pex\r\n");
-                }
-            }
-            break;
-        case PuzzleState::ShowMsg: //
+        case PuzzleState::ShowMsg:
             break;
         case PuzzleState::BossDialogue:
             //---
@@ -119,8 +95,8 @@ void Hud::Update(Level & level, int ms) {
             break;
         case PuzzleState::FinalChoice:
             //---
-            if (PB::pressed(BTN_A) || PB::pressed(BTN_B)) {
-                
+            if (msDelayExit > 2500 && (PB::pressed(BTN_A) || PB::pressed(BTN_B))) {
+
                 //Good Final if chips read are over 80%
                 if (MessagesGetPercRead() > 80)
                     choiceSelected = 1;
@@ -147,7 +123,7 @@ void Hud::Update(Level & level, int ms) {
                 msDelayLastBegin = 0;
             }
             //------------------
-            if (msgToShowLast != -1 && msDelayLastBegin>500) {
+            if (msgToShowLast != -1 && msDelayLastBegin > 500) {
                 msgLenghtLast = strlen(Messages[msgToShowLast]);
                 charDisplayedLast++;
                 if (charDisplayedLast > msgLenghtLast) {
@@ -159,15 +135,6 @@ void Hud::Update(Level & level, int ms) {
         }
     }
 
-    #ifdef POKITTO
-    //--Save state of inputs
-    inPrec[0] = in0.read();
-    inPrec[1] = in1.read();
-    inPrec[2] = in2.read();
-    inPrec[3] = in3.read();
-    inPrec[4] = in4.read();
-    inPrec[5] = in5.read();
-    #endif
 }
 
 void Hud::Draw(const Player & player,
@@ -214,11 +181,7 @@ void Hud::Draw(const Player & player,
                 PD::fillRect(14, 2, player.life * 21 / 100, 3); //@Vampirics 21 pixel? Why? Why not 20? Damn artists :P
             }
             break;
-
-        case PuzzleState::ShowPex:
-            PD::drawSprite(40, 35, SteamDriller_PEX);
-            break;
-
+            
         case PuzzleState::ShowMsg:
         case PuzzleState::ShowHigh:
             {
@@ -239,7 +202,7 @@ void Hud::Draw(const Player & player,
             }
             break;
 
-       
+
 
         case PuzzleState::CouncilMessage:
 
