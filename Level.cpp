@@ -75,7 +75,7 @@ void Level::Init(const Point & posStart) {
     bossZoneActivated = false;
     bossActivated = false;
     bossAlive = false;
-    depthBossZoneTrigger = 1000;
+    depthBossZoneTrigger = INITIAL_BOSS_TRIGGER;
     bossEncounterCount = 0;
     gameEnd = false;
 
@@ -661,7 +661,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         bossZoneActivated = false;
         bossActivated = false;
         bossAlive = false;
-        depthBossZoneTrigger = (depth + player.pos.y.getInteger()) + 1500;
+        depthBossZoneTrigger = (depth + player.pos.y.getInteger()) + REPEAT_BOSS_TRIGGER;
         //printf("NEW ZONE need please\r\n");
     }
 
