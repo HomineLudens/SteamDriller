@@ -52,7 +52,7 @@ const char * Messages[] {
     "TIPS 04: Some enemies can sense you even if not in their field of view", //13
     "TIPS 05: Touching ground recharge bullets", //14
     "TIPS 06: Keep pressing down to see below you", //15
-    "TIPS 07: Your energy is linked to you light system", //16
+    "TIPS 07: Your energy is linked to your light system", //16
     "TIPS 08: Even without moving some energy is lost", //17
     "TIPS 09: Collect gems and coal to give more power to the robot", //18
     "TIPS 10: Knowledge is power, never underestimate it", //19
@@ -80,8 +80,8 @@ const char * Messages[] {
     ">Your end is nigh", //39
     //Mecha spider chips
     "Robots have fragments of their previous life", //40
-    "Doctor T was against the use of humans brain", //41
-    "Rumors says that Doctor T built a special robot, leaving inside the special ability to collect and decode other memory fragments", //42
+    "Dr.T was against the use of humans brain", //41
+    "Rumors says that Dr.T built a special robot, leaving inside the special ability to collect and decode other memory fragments", //42
     "Rumors says the council use - fpermissive flag", //43
     "A skull is always a sign of misfortune", //44
     "The Council's goal is to purify the planet by all means", //45
@@ -95,7 +95,7 @@ const char * Messages[] {
     "The council is harvesting the population to collect more brain tissue and build more robots to collect", //52
     "The brain that runs the robots is made of metal and some fragments of cerebral human tissue", //53
     "Each year passing, the brain cells used are being mutated and loses humanity more and more.", //54
-    "Doctor T daughter has been used as the main brain controlling all the drones.", //55
+    "Dr.T daughter has been used as the main brain controlling all the drones.", //55
     "All this is just because the AI brain cells are trying to recollect their own conscious.", //56
     "Dr.T daughter has been used as the main brain controlling all the drones.", //57
     "The doctor strongly believed in the power of knowledge, maybe it's the key to win", //58
@@ -125,15 +125,15 @@ const char * Messages[] {
     "# Your well-being is important for us, please be carefull", //81
     "# And here is our next wonderful worker, ready to work", //82
     "# - fpermissive flag is evil... really.", //83
-    "# There's a plate on your body, it say: compiled with femto puchcard system 2.0", //84
-    "# Council msg 85", //85
+    "# There's a plate on your body, it say: compiled with femto punchcard system 2.0", //84
+    "# Please be carefull, there are rumors that a rogue human called Jonne may be lurking below", //85
     "# 86", //86
     "# 87", //87
     "# 88", //88
     "# 89", //89
     // END FIGHT MESSAGES
     "> Threat level: normal", //90 ROBOT
-    "> You destroyed  my extension, but the fight is not over!", //91 AI
+    "> You destroyed my extension, but the fight is not over!", //91 AI
     "# 91", //92
     "# 92", //93
     "# 93", //94
@@ -143,8 +143,8 @@ const char * Messages[] {
     "# 97", //98
     "# 99", //99
     //FINAL FIGHT BOSS SENTENCE
-    ">We finally reach an end...", //100  ROBOT
-    ">Your memory will define the end of this story..", //101  AI
+    ">End sequence initiated...processing data...", //100  ROBOT
+    ">Think carefully about your next move, destruction is still just destruction...", //101  AI
     "#102", //102
     "#103", //103
     "#104", //104
@@ -154,9 +154,9 @@ const char * Messages[] {
     "#108", //108
     "#109", //109
     //Good ending
-    "#Robot finally decice to merge his memory with the AI, the bad side of the council, and toghter...", //110
+    "After processing the data collected, you found the only way to save the city was to merge with the A.I and hope that your will is stronger. After a few days you activated again and noticed that the A.I. was now permanently disabled and you decided to go explore the world...", //110
     //Bad ending
-    "#Robot try ro fight the AI, only to be corrupted itself", //111
+    "With the data you gathered, you decided to try to fight the A.I. but destruction is something the A.I. got really good at and just touching it once started to corrupt your system. Toghether with the A.I. your were the final piece needed for The Council to take over the world.", //111
 };
 
 
