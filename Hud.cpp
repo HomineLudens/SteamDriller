@@ -94,7 +94,7 @@ void Hud::Update(Level & level, int ms) {
             break;
         case PuzzleState::FinalChoice:
             //---
-            if ((msDelayExit > 2500) && (charDisplayedLast == msgLenghtLast) && (PB::pressed(BTN_A) || PB::pressed(BTN_B))) {
+            if ((charDisplayedLast == msgLenghtLast) && (PB::pressed(BTN_A) || PB::pressed(BTN_B))) {
 
                 //Good Final if chips read are over 80%
                 if (MessagesGetPercRead() > 80)

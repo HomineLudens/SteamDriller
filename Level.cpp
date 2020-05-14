@@ -27,7 +27,7 @@ void Level::Init(const Point & posStart) {
 
     //--------------------------------------------------------------------
     //--- Initial stuff
-    AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger()-100, Item::ItemType::Credits, true); //Logo
+    AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger() - 100, Item::ItemType::Credits, true); //Logo
     AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger(), Item::ItemType::Logo, true); //Logo
 
     for (int i = 0; i < 90; i++) {
@@ -147,14 +147,17 @@ void Level::RandomizeLine(int r) {
 
     //Platform
     if (random(100) > 90) {
-        int bLen = random(2, 5);
-        int bx1 = random(pg.x1 + 1, pg.x2 - bLen - 1);
-        int xb = bx1;
-        lvlData[2 + (r * COLUMNS) + xb] = TilesLoader::TileType::TopRight;
-        for (xb = xb + 1; xb < bx1 + bLen; xb++) {
-            lvlData[2 + (r * COLUMNS) + xb] = TilesLoader::TileType::TopCenter;
+        auto maxPlatLen = pg.x2 - pg.x1 - 3;
+        if (maxPlatLen > 3) {
+            auto pLen = random(2, maxPlatLen);
+            auto pBegin = random(pg.x1 + 1, pg.x2 - pLen - 1);
+            auto xb = pBegin;
+            lvlData[2 + (r * COLUMNS) + xb] = TilesLoader::TileType::TopRight;
+            for (xb = xb + 1; xb < pBegin + pLen; xb++) {
+                lvlData[2 + (r * COLUMNS) + xb] = TilesLoader::TileType::TopCenter;
+            }
+            lvlData[2 + (r * COLUMNS) + xb] = TilesLoader::TileType::TopLeft;
         }
-        lvlData[2 + (r * COLUMNS) + xb] = TilesLoader::TileType::TopLeft;
     }
 
     //Item
@@ -816,7 +819,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
 
 void Level::Draw(Camera & cam, Player & player) {
 
-  
+
     tilemap.draw(cam.ToScreenX(pos), cam.ToScreenY(pos));
 
     //Draw all entities
