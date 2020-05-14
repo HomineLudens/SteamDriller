@@ -118,9 +118,6 @@ int main() {
 
         //-------------------------------------------------
         ///TEST DEBUG
-        if (PB::pressed(BTN_C) && player.life < 1) {
-            initGame();
-        }
         if (PB::pressed(BTN_C) && PB::downBtn()) {
             initGame();
         }
@@ -130,10 +127,16 @@ int main() {
             #endif
             paused = !paused;
         }
-        //---->
+
         if (PB::aBtn()) {
             player.life = 100;
         }
+        // if (PB::upBtn() && PB::cBtn()) {
+        //     finalChoice = 1;
+        // }
+        // if (PB::downBtn() && PB::cBtn()) {
+        //     finalChoice = 2;
+        // }
         //-------------------------------------------------
 
         //Music managment
@@ -161,18 +164,16 @@ int main() {
         }
         //-------------------------------------------------
 
-
-        int finalChoice = hud.GetFinalChoice();
-
-        if (PB::upBtn() && PB::cBtn()) {
-            finalChoice = 1;
-        }
-        if (PB::downBtn() && PB::cBtn()) {
-            finalChoice = 2;
-        }
-
         lights.Update(paused, camera, player, level, msElapsed);
+
         if (!paused) {
+            //IN GAME
+            int finalChoice = hud.GetFinalChoice();
+            //Restart
+            if (PB::pressed(BTN_C) && (player.life < 1 || finalChoice != 0)) {
+                initGame();
+            }
+            //
             switch (finalChoice) {
                 case 0:
                     //In GAME
@@ -201,7 +202,7 @@ int main() {
             //
             pauseScene.Init();
         } else {
-            //Paused
+            //IN PAUSE
             paused = pauseScene.Update(msElapsed);
         }
     }
