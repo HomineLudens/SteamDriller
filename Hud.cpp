@@ -118,8 +118,9 @@ void Hud::Update(Level & level, int ms) {
         case PuzzleState::FinalChoice:
             //---
             if (PB::pressed(BTN_A) || PB::pressed(BTN_B)) {
-
-                if (MessagesGetPercRead() > 75)
+                
+                //Good Final if chips read are over 80%
+                if (MessagesGetPercRead() > 80)
                     choiceSelected = 1;
                 else
                     choiceSelected = 2;
