@@ -3542,6 +3542,30 @@
 		},
 		"\\assets\\Panel_for_the_Chips.h": {
 			"sdcard": false
+		},
+		"\\assets\\pop": {
+			"sdcard": false
+		},
+		"\\assets\\pop\\SteamDriller.bin": {
+			"sdcard": false
+		},
+		"\\assets\\pop\\SteamDriller_POPBanner.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\pop\\SteamDriller_POPBanner.png": {
+			"sdcard": false
+		},
+		"\\assets\\pop\\SteamDriller_Icon_36x36.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\pop\\SteamDriller_Icon_36x36.png": {
+			"sdcard": false
+		},
+		"\\assets\\pop\\SteamDriller_Icon_24x24.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\pop\\SteamDriller_Icon_24x24.png": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {
