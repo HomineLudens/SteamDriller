@@ -164,7 +164,6 @@ const char * Messages[] {
 inline
 int MessagesGetRandom(int minRange, int maxRange) {
 
-
     bool resetIfFull = true;
     if (minRange >= MSG_COLLECTABLE_MIN && maxRange <= MSG_COLLECTABLE_MAX)
         resetIfFull = false;
@@ -202,6 +201,7 @@ int MessagesGetRandom(int minRange, int maxRange) {
     //---
     steamCookie.saveCookie();
     Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
+    printf("Saved message changes\r\n");
     //---
     return iMsg;
 }

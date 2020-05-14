@@ -21,6 +21,7 @@ class Hud {
     int8_t msgToShowLast = 0;
     int msDelayExit = 0;
     int8_t choiceSelected = 0;
+    int msDelayLastBegin = 0;
 
     #ifdef POKITTO
     DigitalIn in0 = DigitalIn(EXT0);

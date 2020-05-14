@@ -38,6 +38,7 @@ int Hud::GetFinalChoice() {
 void Hud::Update(Level & level, int ms) {
     msDelayChar -= ms;
     msDelayExit += ms;
+    msDelayLastBegin +=ms;
     //--------------
     msgToShowFirst = level.GetMessageToShowFirst();
     msgToShowLast = level.GetMessageToShowLast();
@@ -104,6 +105,7 @@ void Hud::Update(Level & level, int ms) {
                     steamCookie.saveCookie();
                     Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
                     puzzleState = PuzzleState::ShowMsg;
+                     printf("Saved Pex\r\n");
                 }
             }
             break;
@@ -142,9 +144,10 @@ void Hud::Update(Level & level, int ms) {
                 charDisplayedFirst = msgLenghtFirst;
             } else {
                 charDisplayedLast = 0;
+                msDelayLastBegin = 0;
             }
             //------------------
-            if (msgToShowLast != -1) {
+            if (msgToShowLast != -1 && msDelayLastBegin>500) {
                 msgLenghtLast = strlen(Messages[msgToShowLast]);
                 charDisplayedLast++;
                 if (charDisplayedLast > msgLenghtLast) {

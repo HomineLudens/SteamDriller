@@ -14,6 +14,9 @@ Level::Level() {
 
 void Level::Init(const Point & posStart) {
 
+    posCredits.x = posStart.x;
+    posCredits.y = posStart.y + 125;
+
     //Kill/deactivate all stuff
     killAll(enemies);
     killAll(itemsAnim);
@@ -593,7 +596,7 @@ bool Level::IsBossAlive() {
     return bossAlive;
 }
 
-bool Level::IsGameEnd(){
+bool Level::IsGameEnd() {
     return gameEnd;
 }
 
@@ -634,8 +637,8 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     }
 
 
-    //COUNCIL MANAGEMENT
-    if (player.state == Player::State::Activating && player.stateFirstCycle) {
+    //COUNCIL MESSAGES MANAGEMENT
+    if (player.state == Player::State::Activated && player.stateFirstCycle) {
         msgToShowFirst = MessagesGetRandom(MSG_CUNCIL_START, MSG_CUNCIL_END); //Council disalogue messages
     }
 
@@ -810,6 +813,23 @@ void Level::Update(Camera & camera, Player & player, int ms) {
 }
 
 void Level::Draw(Camera & cam, Player & player) {
+
+    if (player.state == Player::State::Offline ||
+        player.state == Player::State::Activating ||
+        player.state == Player::State::Activated) {
+        //Credits
+        PD::setColor(7);
+        PD::setCursor(cam.ToScreenX(posCredits) + 15, cam.ToScreenY(posCredits));
+        PD::print("@HomineLudens");
+        PD::setCursor(cam.ToScreenX(posCredits) + 22, cam.ToScreenY(posCredits) + 10);
+        PD::print("@Vampirics");
+        PD::setCursor(cam.ToScreenX(posCredits) + 30, cam.ToScreenY(posCredits) + 20);
+        PD::print("Rafael");
+        PD::setCursor(cam.ToScreenX(posCredits) + 28, cam.ToScreenY(posCredits) + 40);
+        PD::print("presets");
+    }
+
+
     tilemap.draw(cam.ToScreenX(pos), cam.ToScreenY(pos));
 
     //Draw all entities

@@ -16,7 +16,10 @@ void Lights::Update(bool forceFull, Camera & camera, Player & player, Level & le
         pos.y = camera.ToScreenY(player.pos) - 10;
         lightDir = player.facing == Player::Facing::Right ? 1 : -1;
 
-        if (!forceFull && !player.onBossZone && player.state != Player::State::Offline && player.state != Player::State::Activating) {
+        if (!forceFull && !player.onBossZone &&
+            player.state != Player::State::Offline &&
+            player.state != Player::State::Activating &&
+            player.state != Player::State::Activated ) {
             lightLevel = 36500 - ((100 - player.life) * 350) + (random(-8192, 8192) / 10);
         } else {
             lightLevel = 3650000;

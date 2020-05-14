@@ -65,6 +65,11 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
             break;
         case State::Activating:
             if (msState > 350) {
+                ChangeState(State::Activated);
+            }
+            break;
+        case State::Activated:
+            if (msState > 150) {
                 ChangeState(State::Idle);
             }
             break;
@@ -213,7 +218,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
 
 
         auto fallHeight = (lvl.GetDepth() + pos.y.getInteger()) - depthJumpBegin;
-        if (fallHeight > (FALL_DAMAGE_HEIGHT / 5)){
+        if (fallHeight > (FALL_DAMAGE_HEIGHT / 5)) {
             Audio::play < 1 > (sfx_fall);
         }
         if (fallHeight > FALL_DAMAGE_HEIGHT) {

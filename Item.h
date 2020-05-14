@@ -28,9 +28,6 @@ class Item: public Entity {
             Conveyor,
             Grass,
             Fance,
-            TNT1,
-            TNT2,
-            TNT3
         };
 
     Point pos;

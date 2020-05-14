@@ -55,15 +55,6 @@ void Item::Init(int x, int y, ItemType itemType, bool fixed, bool collectable, b
         case ItemType::Fance:
             sprite = SteamDriller_FenceTileTop;
             break;
-        case ItemType::TNT1:
-            sprite = TNT_detonator_pos_1;
-            break;
-        case ItemType::TNT2:
-            sprite = TNT_detonator_pos_2;
-            break;
-        case ItemType::TNT3:
-            sprite = TNT_detonator_pos_3;
-            break;
     }
 }
 

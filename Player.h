@@ -28,6 +28,7 @@ class Player {
     enum struct State {
         Offline,
         Activating,
+        Activated,
         Idle,
         Crouching,
         Crouch,

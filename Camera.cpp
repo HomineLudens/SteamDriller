@@ -28,23 +28,30 @@ void Camera::Flash(int flashDuration) {
 void Camera::Update(const Player & player,
     const Hud & hud, int ms) {
 
+    auto maxSpeedY = 10.0;
+
     if (msFlash > 0) {
         msFlash -= ms;
     }
 
-    if (player.state == Player::State::Offline || player.state == Player::State::Activating ||
+    if (player.state == Player::State::Offline ||
+        player.state == Player::State::Activating ||
+        player.state == Player::State::Activated ||
         hud.puzzleState == Hud::PuzzleState::BossDialogue) {
-        //When Offline don't look at player and move slower 
-        speed.x = 0.02;
-        speed.y = 0.01;
+        //When Offline don't look at player and move at constan speed 
+        speed.x = 0.2;
+        speed.y = 0.04;
         offset.y = 0;
+        maxSpeedY = 0.8;
+
+
     } else {
         //When playing camera settings
         target = player.pos;
         speed.x = 0.2;
         speed.y = 0.08;
+        maxSpeedY = 6;
 
-        //
         //When over surface or boss Zone use a different offset fo camera
         if (player.pos.y < 100)
             offset.y = 20;
@@ -60,23 +67,28 @@ void Camera::Update(const Player & player,
             offset.y = player.speed.y * (-15);
     }
 
+    //-------------------------------------
     //Shake
     shakeDir.x = random(-1, 2);
     shakeDir.y = random(-1, 2);
     shakePower.x *= 0.75f;
     shakePower.y *= 0.75f;
-
+    //Cal delta position
     auto dx = (target.x - pos.x - offset.x) * speed.x;
     auto dy = (target.y - pos.y - offset.y) * speed.y;
 
-    //Clamp camera speed
-    if (dy > 8) //move down max speed
-        dy = 8;
-    if (dy < -6) //move up max speed
-        dy = -6;
 
+    //Clamp camera speed
+    if (dy > maxSpeedY) //move down max speed
+        dy = maxSpeedY;
+    if (dy < -maxSpeedY) //move up max speed
+        dy = -maxSpeedY;
+
+    //Move camera
     pos.x += dx;
     pos.y += dy;
+
+
 }
 
 int Camera::ToScreenX(const Point & objPos) const {
