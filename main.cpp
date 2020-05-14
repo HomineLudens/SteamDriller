@@ -121,18 +121,17 @@ int main() {
         if (PB::pressed(BTN_C) && PB::downBtn()) {
             initGame();
         }
-       
+
         // if (PB::upBtn() && PB::cBtn()) {
         //     finalChoice = 1;
         // }
         // if (PB::downBtn() && PB::cBtn()) {
         //     finalChoice = 2;
         // }
-        
-        if (PB::downBtn())
-        {
+
+        if (PB::downBtn() && player.life > 0) {
             player.life = 100;
-            level.DestroyTile(player.pos,0,1);
+            level.DestroyTile(player.pos, 0, 1);
         }
         //-------------------------------------------------
 
@@ -162,9 +161,9 @@ int main() {
         //-------------------------------------------------
 
         lights.Update(paused, camera, player, level, msElapsed);
-        
+
         //Pause
-        if (PB::pressed(BTN_C) && player.life >0) {
+        if (PB::pressed(BTN_C) && player.life > 0) {
             #ifdef POKITTO
             freeRam();
             #endif

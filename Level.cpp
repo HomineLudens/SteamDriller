@@ -173,7 +173,7 @@ void Level::RandomizeLine(int r) {
         int ey = (r) * TILE_HEIGHT;
         auto pEnemy = Point(ex, ey);
         if (!IsSolid(pEnemy) && !IsSolid(pEnemy, 0, -1) && !IsSolid(pEnemy, 1, 0) && !IsSolid(pEnemy, 0, 1)) {
-            auto rnd = random(5);
+            auto rnd = random(4);
             switch (rnd) {
                 case 0:
                     AddEnemy(ex, ey, Enemy::EnemyType::PurpleSentinelHorizontal);
@@ -195,9 +195,9 @@ void Level::RandomizeLine(int r) {
     }
 
     //Make a random room
-    if (depth > 300 && random(100) > 90) {
-        int roomWidth = random(6, 20);
-        int roomHeight = random(6, 10);
+    if (depth > 1500 && random(100) > 95) {
+        int roomWidth = random(10, 30);
+        int roomHeight = random(8, 15);
 
         int roomStartX = random(2, COLUMNS - 2 - roomWidth);
         for (int yr = 0; yr < roomHeight; yr++) {
@@ -209,10 +209,39 @@ void Level::RandomizeLine(int r) {
             ReshapeRow(r - yr);
         }
 
+        //Add platform
+        int platforms = random(1, 3);
+        for (int p = 0; p < platforms; p++) {
+            //--
+            auto maxPlatLen = roomWidth / 3;
+            auto pLen = random(2, maxPlatLen);
+            auto xp = roomStartX + random(3, roomWidth - 3);
+            auto yp = r - random(3, roomHeight - 3);
+
+
+            lvlData[2 + (yp * COLUMNS) + xp] = TilesLoader::TileType::TopRight;
+            for (int x = 0; x < pLen; x++) {
+                lvlData[2 + (yp * COLUMNS) + xp + x] = TilesLoader::TileType::TopCenter;
+            }
+            lvlData[2 + (yp * COLUMNS) + xp + pLen] = TilesLoader::TileType::TopLeft;
+        }
+
+        //Add room enemy and gem
         auto xi = (roomStartX + (roomWidth / 2)) * TILE_WIDTH;
         auto yi = (r - (roomHeight / 2)) * TILE_HEIGHT;
         AddItemAnim(xi, yi, ItemAnim::ItemType::Ruby);
+        AddEnemy(xi, yi, Enemy::EnemyType::SpiderMecha);
         //printf("NEW ROOM\r\n");
+        
+         //Sign tunnel towards the room
+        for (int xr = 0; xr < COLUMNS; xr++) {
+            if (random(100) > 80) {
+                auto yOff = (roomHeight/2) + random(-1, 2);
+                auto idTile = lvlData[2 + ((r - yOff) * COLUMNS) + xr];
+                if (idTile != TilesLoader::TileType::UnbreakableFloor && idTile != TilesLoader::TileType::UnbreakableCeiling)
+                    lvlData[2 + ((r - yOff) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss1; //
+            }
+        }
     }
 
     //Move main well walls
