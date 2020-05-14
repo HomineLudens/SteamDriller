@@ -59,8 +59,8 @@ void Hud::Update(Level & level, int ms) {
             if (msgToShowFirst != -1) {
                 if (PB::pressed(BTN_UP)) {
                     if (strcmp("High Score:", Messages[msgToShowFirst]) == 0) {
-                        puzzleState = PuzzleState::ShowHigh;}
-                    else {
+                        puzzleState = PuzzleState::ShowHigh;
+                    } else {
                         puzzleState = PuzzleState::ShowMsg;
                     }
                 }
@@ -95,7 +95,7 @@ void Hud::Update(Level & level, int ms) {
             break;
         case PuzzleState::FinalChoice:
             //---
-            if (msDelayExit > 2500 && (PB::pressed(BTN_A) || PB::pressed(BTN_B))) {
+            if ((msDelayExit > 2500) && (charDisplayedLast == msgLenghtLast) && (PB::pressed(BTN_A) || PB::pressed(BTN_B))) {
 
                 //Good Final if chips read are over 80%
                 if (MessagesGetPercRead() > 80)
@@ -181,7 +181,7 @@ void Hud::Draw(const Player & player,
                 PD::fillRect(14, 2, player.life * 21 / 100, 3); //@Vampirics 21 pixel? Why? Why not 20? Damn artists :P
             }
             break;
-            
+
         case PuzzleState::ShowMsg:
         case PuzzleState::ShowHigh:
             {
