@@ -77,10 +77,10 @@ Enemy::EnemyAI Enemy::GetAI() {
             break;
         case EnemyType::Worm:
             eAI.life = 5;
-            eAI.speedX = 0.25;
+            eAI.speedX = 0.6;
             eAI.speedY = 0;
-            eAI.senseDistance = 100;
-            eAI.viewDistance = 5;
+            eAI.senseDistance = 50;
+            eAI.viewDistance = 70;
             eAI.msWakeUp = 100;
             eAI.msAttackDuration = 0;
             eAI.msCoolDown = 0;
@@ -89,8 +89,8 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.jumper = false;
             eAI.shootHorizontal = false;
             eAI.shootVertical = false;
-            eAI.shootAndFire = false;
-            eAI.explodeOnDeathRange = 0;
+            eAI.shootAndFire = true;
+            eAI.explodeOnDeathRange = 2;
             eAI.releaseTypeOnDeath = ReleaseOnDeathType::Nothing;
             break;
         case EnemyType::SpiderMecha:
@@ -108,7 +108,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootHorizontal = true;
             eAI.shootVertical = true;
             eAI.shootAndFire = true;
-            eAI.explodeOnDeathRange = 0;
+            eAI.explodeOnDeathRange = 2;
             eAI.releaseTypeOnDeath = ReleaseOnDeathType::MechaSpider;
             break;
         case EnemyType::Boss:
@@ -126,7 +126,7 @@ Enemy::EnemyAI Enemy::GetAI() {
             eAI.shootHorizontal = false;
             eAI.shootVertical = false;
             eAI.shootAndFire = true;
-            eAI.explodeOnDeathRange = 5;
+            eAI.explodeOnDeathRange = 6;
             eAI.releaseTypeOnDeath = ReleaseOnDeathType::Boss;
             break;
     }

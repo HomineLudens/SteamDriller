@@ -229,7 +229,7 @@ void Level::RandomizeLine(int r) {
 int Level::GetTileId(const Point & pos, int offX, int offY) {
     int xTile = (pos.x.getInteger() / TILE_WIDTH) + offX;
     int yTile = (pos.y.getInteger() / TILE_HEIGHT) + offY;
-    if (xTile > -1 && yTile > -1)
+    if (xTile > -1 && xTile < COLUMNS && yTile > -1 && yTile < ROWS)
         return lvlData[2 + (yTile * COLUMNS) + xTile];
     return 0;
 }

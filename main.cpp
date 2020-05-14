@@ -77,7 +77,7 @@ void initGame() {
     player.Init(startPoint);
     camera.Init(Point(startPoint.x + 48, startPoint.y - 24));
     camera.pos.y -= 150;
-    
+
     msTotal = 0;
 
     setTrack(1);
@@ -121,14 +121,7 @@ int main() {
         if (PB::pressed(BTN_C) && PB::downBtn()) {
             initGame();
         }
-        if (PB::pressed(BTN_C)) {
-            #ifdef POKITTO
-            freeRam();
-            #endif
-            paused = !paused;
-        }
-
-        if (PB::aBtn()) {
+        if (PB::aBtn() && player.life > 0) {
             player.life = 100;
         }
         // if (PB::upBtn() && PB::cBtn()) {
@@ -165,6 +158,14 @@ int main() {
         //-------------------------------------------------
 
         lights.Update(paused, camera, player, level, msElapsed);
+        
+        //Pause
+        if (PB::pressed(BTN_C)) {
+            #ifdef POKITTO
+            freeRam();
+            #endif
+            paused = !paused;
+        }
 
         if (!paused) {
             //IN GAME
@@ -173,7 +174,6 @@ int main() {
             if (PB::pressed(BTN_C) && (player.life < 1 || finalChoice != 0)) {
                 initGame();
             }
-            //
             switch (finalChoice) {
                 case 0:
                     //In GAME
