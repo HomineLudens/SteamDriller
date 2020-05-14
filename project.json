@@ -3575,6 +3575,24 @@
 		},
 		"\\assets\\pop\\SteamDriller_Icon_24x24.h": {
 			"sdcard": false
+		},
+		"\\assets\\CREDITS.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\CREDITS.png": {
+			"sdcard": false
+		},
+		"\\assets\\CREDITS_v2.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\CREDITS_v2.png": {
+			"sdcard": false
+		},
+		"\\assets\\CREDITS_v2.h": {
+			"sdcard": false
+		},
+		"\\assets\\CREDITS.h": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

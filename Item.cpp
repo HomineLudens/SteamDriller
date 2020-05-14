@@ -8,10 +8,7 @@
 #include "assets/SteamDriller_Conveyor_Flat.h"        
 #include "assets/SteamDriller_FenceTileTop.h"   
 #include "assets/SteamDriller_randomDecorForGrassyPlatform.h"   
-
-#include "assets/TNT_detonator_pos_1.h"    
-#include "assets/TNT_detonator_pos_2.h"    
-#include "assets/TNT_detonator_pos_3.h"   
+#include "assets/CREDITS.h"
 
 using PD = Pokitto::Display;
 
@@ -54,6 +51,9 @@ void Item::Init(int x, int y, ItemType itemType, bool fixed, bool collectable, b
             break;
         case ItemType::Fance:
             sprite = SteamDriller_FenceTileTop;
+            break;
+        case ItemType::Credits:
+            sprite = CREDITS;
             break;
     }
 }

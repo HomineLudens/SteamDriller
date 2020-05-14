@@ -79,7 +79,6 @@ void Hud::Update(Level & level, int ms) {
                 if (level.IsGameEnd()) {
                     puzzleState = PuzzleState::FinalChoice;
                 }
-
             }
 
             break;
@@ -134,7 +133,6 @@ void Hud::Update(Level & level, int ms) {
             msDelayChar = 50;
         }
     }
-
 }
 
 void Hud::Draw(const Player & player,
