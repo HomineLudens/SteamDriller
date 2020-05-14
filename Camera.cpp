@@ -14,6 +14,9 @@ void Camera::Init(const Point & pos) {
     this->pos.y = pos.y;
     this->target.x = pos.x;
     this->target.y = pos.y;
+    
+    offset.x = 0;
+    offset.y = 0;
 }
 
 void Camera::Shake(int shake) {
@@ -39,7 +42,7 @@ void Camera::Update(const Player & player,
         player.state == Player::State::Activated ||
         hud.puzzleState == Hud::PuzzleState::BossDialogue) {
         //When Offline don't look at player and move at constan speed 
-        speed.x = 0.2;
+        speed.x = 1;
         speed.y = 0.04;
         offset.y = 0;
         maxSpeedY = 0.8;
@@ -50,7 +53,7 @@ void Camera::Update(const Player & player,
         target = player.pos;
         speed.x = 0.2;
         speed.y = 0.08;
-        maxSpeedY = 6;
+        maxSpeedY = 6.5;
 
         //When over surface or boss Zone use a different offset fo camera
         if (player.pos.y < 100)
