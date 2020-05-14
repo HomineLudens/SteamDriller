@@ -135,8 +135,8 @@ void Level::RandomizeLine(int r) {
 
 
     //Change well walls position
-    if (random(100) > 90) {
-        int newX = pg.x1 + random(-1, 2);
+    if (random(100) > 50) {
+        int newX = pg.x1 + random(-2, 3);
         if (newX < pg.minX)
             newX = pg.minX;
         if (newX > pg.maxX)
@@ -167,8 +167,8 @@ void Level::RandomizeLine(int r) {
         AddItemAnim(ix * TILE_WIDTH, r * TILE_HEIGHT, (ItemAnim::ItemType) random(1, 3)); //Resources
     }
 
-    //Enemy
-    if (depth > 0 && random(100) > 90) {
+    //Basic Enemies
+    if (depth > 0 && random(100) > 85) {
         int ex = random(pg.x1 + 2, pg.x2 - 2) * TILE_WIDTH;
         int ey = (r) * TILE_HEIGHT;
         auto pEnemy = Point(ex, ey);
@@ -187,15 +187,17 @@ void Level::RandomizeLine(int r) {
                 case 3:
                     AddEnemy(ex, ey, Enemy::EnemyType::Worm);
                     break;
-                case 4:
-                    AddEnemy(ex, ey, Enemy::EnemyType::SpiderMecha);
+                // case 4:
+                //     AddEnemy(ex, ey, Enemy::EnemyType::SpiderMecha);
+                //     break;
+                default:
                     break;
             }
         }
     }
 
     //Make a random room
-    if (depth > 1500 && random(100) > 95) {
+    if (depth > 1500 && random(100) > 96) {
         int roomWidth = random(10, 30);
         int roomHeight = random(8, 15);
 
@@ -232,11 +234,11 @@ void Level::RandomizeLine(int r) {
         AddItemAnim(xi, yi, ItemAnim::ItemType::Ruby);
         AddEnemy(xi, yi, Enemy::EnemyType::SpiderMecha);
         //printf("NEW ROOM\r\n");
-        
-         //Sign tunnel towards the room
+
+        //Sign tunnel towards the room
         for (int xr = 0; xr < COLUMNS; xr++) {
             if (random(100) > 80) {
-                auto yOff = (roomHeight/2) + random(-1, 2);
+                auto yOff = (roomHeight / 2) + random(-1, 2);
                 auto idTile = lvlData[2 + ((r - yOff) * COLUMNS) + xr];
                 if (idTile != TilesLoader::TileType::UnbreakableFloor && idTile != TilesLoader::TileType::UnbreakableCeiling)
                     lvlData[2 + ((r - yOff) * COLUMNS) + xr] = TilesLoader::TileType::BackgroundUndergroundBoss1; //
@@ -245,8 +247,8 @@ void Level::RandomizeLine(int r) {
     }
 
     //Move main well walls
-    if (depth > 1000 && random(100) > 90) {
-        int count = random(4, 16);
+    if (depth > 2000 && random(100) > 96) {
+        int count = random(15, 30);
         int dir = random(100) > 50 ? TILE_WIDTH : -TILE_WIDTH;
         for (int r = 0; r < count; r++) {
             ShiftMapGenerator(dir);
