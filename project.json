@@ -3611,6 +3611,21 @@
 		},
 		"\\sprites/SteamDriller_Clown_Anim.bin": {
 			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_Clown.png.crdownload": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_Clown.png": {
+			"sdcard": false
+		},
+		"\\assets\\SteamDriller_Portrait_Clown.h": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_explosion-vecchio1.wav": {
+			"sdcard": false
+		},
+		"\\sfx\\sfx_pickup-vecchio1.wav": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

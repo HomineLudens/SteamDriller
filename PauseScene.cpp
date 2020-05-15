@@ -21,7 +21,6 @@ PauseScene::PauseScene() {
 
 }
 
-
 void PauseScene::PauseScene::Init() {
     selection = 0;
     showLogs = false;
@@ -98,8 +97,8 @@ bool PauseScene::UpdateLogs() {
         UI::mapColor(5, 16);
         //
         UI::setOffset(0, 0);
-        UI::drawBox(1, 1, 17, 12);
-        UI::setCursorBoundingBox(2, 2, 16, 11);
+        UI::drawBox(1, 1, 17, 13);
+        UI::setCursorBoundingBox(2, 2, 16, 12);
         //text
         UI::setCursor(0, 0);
         UI::printText(Messages[messageToShow]);

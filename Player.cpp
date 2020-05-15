@@ -3,8 +3,8 @@
 #include <math.h>
 
 #include <LibAudio>
-#include "sfx/sfx_poweron.h"
-#include "sfx/sfx_fall.h"
+//#include "sfx/sfx_poweron.h"
+//#include "sfx/sfx_fall.h"
 #include "sfx/sfx_steam.h"
 
 using PD = Pokitto::Display;
@@ -68,7 +68,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
                 else
                     sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
                 ChangeState(State::Activating);
-                Audio::play < 1 > (sfx_poweron);
+                //Audio::play < 1 > (sfx_poweron);
             }
             break;
         case State::Activating:
@@ -268,7 +268,7 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
 
         auto fallHeight = (lvl.GetDepth() + pos.y.getInteger()) - depthJumpBegin;
         if (fallHeight > (FALL_DAMAGE_HEIGHT / 5)) {
-            Audio::play < 1 > (sfx_fall);
+            //Audio::play < 1 > (sfx_fall);
         }
         if (fallHeight > FALL_DAMAGE_HEIGHT) {
             Damage(25); //Falling damage
