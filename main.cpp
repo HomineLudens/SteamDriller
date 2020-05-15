@@ -60,7 +60,7 @@ void setTrack(int t) {
                 //printf("playing track 2\r\n");
                 break;
             case 3:
-                Audio::play("music/steamth.raw");
+                Audio::play("music/steam.raw");
                 //printf("playing track 3\r\n");
                 break;
             default:
@@ -118,9 +118,9 @@ int main() {
 
         //-------------------------------------------------
         ///TEST DEBUG
-        if (PB::pressed(BTN_C) && PB::downBtn()) {
-            initGame();
-        }
+        // if (PB::pressed(BTN_C) && PB::downBtn()) {
+        //     initGame();
+        // }
 
         // if (PB::upBtn() && PB::cBtn()) {
         //     finalChoice = 1;
