@@ -4,6 +4,8 @@
 #include "palette/SteamPalette256.h"
 #include "assets/tiles/steamtasui.h" 
 
+bool clownMode;
+
 #include "SteamCookie.h"
 #include "Level.h"
 #include "Player.h"
@@ -73,7 +75,7 @@ void setTrack(int t) {
 void initGame() {
     hud.Init();
     auto startPoint = Point((level.COLUMNS * level.TILE_WIDTH) / 2 - 100, 0);
-    level.Init(startPoint);
+    level.Init(startPoint, player.IsClownMode());
     player.Init(startPoint);
     camera.Init(Point(startPoint.x + 48, startPoint.y - 24));
     camera.pos.y -= 150;

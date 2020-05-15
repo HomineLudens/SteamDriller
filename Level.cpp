@@ -8,12 +8,12 @@
 extern SteamCookie steamCookie;
 
 Level::Level() {
-    Init(Point(0, 0));
+    Init(Point(0, 0), false);
     tilemap.set(lvlData[0], lvlData[1], lvlData + 2);
     TilesLoader::SetTiles(tilemap, animFrame);
 }
 
-void Level::Init(const Point & posStart) {
+void Level::Init(const Point & posStart, bool clownMode) {
 
     posCredits.x = posStart.x;
     posCredits.y = posStart.y + 125;
@@ -61,6 +61,8 @@ void Level::Init(const Point & posStart) {
 
     //Tips
     auto tipMsg = MessagesGetRandom(MSG_TIPS_START, MSG_TIPS_END);
+    if (clownMode)
+        tipMsg = MSG_CLOWN_MODE_2;
     AddItemAnim(posStart.x.getInteger() - 30, posStart.y.getInteger(), ItemAnim::ItemType::ChipPurple, false, false, false, tipMsg);
 
 
@@ -713,6 +715,9 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     //COUNCIL MESSAGES MANAGEMENT
     if (player.state == Player::State::Activated && player.stateFirstCycle) {
         msgToShowFirst = MessagesGetRandom(MSG_CUNCIL_START, MSG_CUNCIL_END); //Council disalogue messages
+        if (player.IsClownMode()) {
+            msgToShowFirst = MSG_CLOWN_MODE_2;
+        }
     }
 
     //------------------------------------------
@@ -740,8 +745,13 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         //Add boss
         bossActivated = true;
         bossAlive = true;
-        msgToShowFirst = MessagesGetRandom(MSG_BOSS_ROBOT_START, MSG_BOSS_ROBOT_END); //Robot disalogue messages
-        msgToShowLast = MessagesGetRandom(MSG_BOSS_AI_START, MSG_BOSS_AI_END); //Boss disalogue messages
+        if (player.IsClownMode()) {
+            msgToShowFirst = MSG_CLOWN_MODE_1; //Robot disalogue messages
+            msgToShowLast = MSG_CLOWN_MODE_2; //Boss disalogue messages
+        } else {
+            msgToShowFirst = MessagesGetRandom(MSG_BOSS_ROBOT_START, MSG_BOSS_ROBOT_END); //Robot disalogue messages
+            msgToShowLast = MessagesGetRandom(MSG_BOSS_AI_START, MSG_BOSS_AI_END); //Boss disalogue messages
+        }
 
         //Remove any previous Boss
         for (auto & e: enemies) {

@@ -130,7 +130,7 @@ class Level {
 
     Level();
 
-    void Init(const Point & pos);
+    void Init(const Point & pos, bool clownMode);
     int GetTileId(const Point & pos, int offX = 0, int offY = 0);
     void SetTileId(const Point & pos, int id, int offX = 0, int offY = 0);
     int GetDepth() const;
