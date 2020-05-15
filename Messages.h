@@ -128,9 +128,9 @@ const char * Messages[] {
     "# There's a plate on your body, it say: compiled with femto punchcard system 2.0", //84
     "# Please be carefull, there are rumors that a rogue human called Jonne may be lurking below", //85
     "# May the great FManga, father of the compilers, be with you on your mission!", //86
-    "# 87", //87
-    "# 88", //88
-    "# 89", //89
+    "# We found the files for the Pokitto Magazine in our database... just AWESOME", //87
+    "# The Council is debating if PEX hats for the drones would work", //88
+    "# When i wake up in the morning, there's nothing better then an Espresso Shoot!", //89
     // END FIGHT MESSAGES
     "> Threat level: normal", //90 ROBOT
     "> You destroyed my extension, but the fight is not over!", //91 AI
