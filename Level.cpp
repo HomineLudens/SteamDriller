@@ -688,7 +688,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     }
 
     //End of boss Zone, make another
-    if (bossZoneActivated && (depth + player.pos.y) > depthBossZoneEnd + 100) {
+    if (bossZoneActivated && (depth + player.pos.y) > depthBossZoneEnd + 200) {
         bossZoneActivated = false;
         bossActivated = false;
         bossAlive = false;
