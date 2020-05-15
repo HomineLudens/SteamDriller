@@ -3593,6 +3593,24 @@
 		},
 		"\\assets\\CREDITS.h": {
 			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Clown_Anim.png.crdownload": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Clown_Anim.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Clown_Anim.h": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Robot_Anim - Copia.json": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Clown_Anim.json": {
+			"sdcard": false
+		},
+		"\\sprites/SteamDriller_Clown_Anim.bin": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

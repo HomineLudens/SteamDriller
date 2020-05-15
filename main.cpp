@@ -147,17 +147,29 @@ int main() {
         }
 
 
-        //Save best score
+        //-------------------------------------------------
+
+        //Save best depth
         if (player.life < 1) {
             auto depth = player.pos.y.getInteger() + level.GetDepth();
             if (depth > steamCookie.maxDepth) {
                 steamCookie.maxDepth = depth;
-                //---
                 steamCookie.saveCookie();
                 Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
-                printf("Saved best score\r\n");
+                printf("Saved best depth\r\n");
             }
         }
+
+        //Save best score
+        if (level.GetScore() > steamCookie.highScore) {
+            steamCookie.highScore = level.GetScore();
+            steamCookie.saveCookie();
+            Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
+            printf("Saved best score\r\n");
+        }
+
+
+
         //-------------------------------------------------
 
         lights.Update(paused, camera, player, level, msElapsed);

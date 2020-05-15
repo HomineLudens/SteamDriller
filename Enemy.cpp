@@ -380,6 +380,7 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
             }
         }
 
+        lvl.AddScore(25);
         //Release chip
         switch (eAI.releaseTypeOnDeath) {
             case ReleaseOnDeathType::Nothing:
@@ -394,6 +395,7 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                 {
                     auto msgChip = MessagesGetRandom(MSG_CHIP_MECHA_START, MSG_CHIP_MECHA_END);
                     lvl.AddItemAnim(pos.x.getInteger(), pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, msgChip);
+                    lvl.AddScore(250);
                     break;
                 }
             case ReleaseOnDeathType::Boss:
@@ -401,6 +403,7 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
                     auto msgChip = MessagesGetRandom(MSG_CHIP_BOSS_START, MSG_CHIP_BOSS_END);
                     lvl.AddItemAnim(pos.x.getInteger() - 20, pos.y.getInteger(), ItemAnim::ItemType::ChipRed, false, false, false, msgChip);
                     lvl.AddItemAnim(pos.x.getInteger() + 20, pos.y.getInteger(), ItemAnim::ItemType::TNTDetonatorFloor, false, false, false); //And detonator
+                    lvl.AddScore(500);
                     break;
                 }
         }

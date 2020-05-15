@@ -9,9 +9,7 @@ class SteamCookie: public Pokitto::Cookie {
         uint8_t version = 1;
     int games = 0;
     int maxDepth = 0;
-    std::bitset < 128 > MsgMASK; //Tips
-
-
-
+    int highScore = 0;
+    std::bitset < 128 > MsgMASK; //Messages
 
 };

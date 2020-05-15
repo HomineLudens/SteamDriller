@@ -4,6 +4,7 @@ __asm__(".global steamDriller_Chip_Anim\nsteamDriller_Chip_Anim:\n.incbin \"spri
 __asm__(".global steamDriller_Chip_Black_Anim\nsteamDriller_Chip_Black_Anim:\n.incbin \"sprites/SteamDriller_Chip_Black_Anim.bin\"");
 __asm__(".global steamDriller_Chip_Purple_Anim\nsteamDriller_Chip_Purple_Anim:\n.incbin \"sprites/SteamDriller_Chip_Purple_Anim.bin\"");
 __asm__(".global steamDriller_Chip_Red_Anim\nsteamDriller_Chip_Red_Anim:\n.incbin \"sprites/SteamDriller_Chip_Red_Anim.bin\"");
+__asm__(".global steamDriller_Clown_Anim\nsteamDriller_Clown_Anim:\n.incbin \"sprites/SteamDriller_Clown_Anim.bin\"");
 __asm__(".global steamDriller_Coal_Anim\nsteamDriller_Coal_Anim:\n.incbin \"sprites/SteamDriller_Coal_Anim.bin\"");
 __asm__(".global steamDriller_Crystal_Anim\nsteamDriller_Crystal_Anim:\n.incbin \"sprites/SteamDriller_Crystal_Anim.bin\"");
 __asm__(".global steamDriller_Dock_Anim\nsteamDriller_Dock_Anim:\n.incbin \"sprites/SteamDriller_Dock_Anim.bin\"");

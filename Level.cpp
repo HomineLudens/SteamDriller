@@ -21,14 +21,16 @@ void Level::Init(const Point & posStart) {
     //Kill/deactivate all stuff
     killAll(enemies);
     killAll(itemsAnim);
+    killAll(itemsAnimBack);
     killAll(items);
     killAll(bullets);
     killAll(particles);
 
     //--------------------------------------------------------------------
     //--- Initial stuff
-    AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger() - 100, Item::ItemType::Credits, true); //Logo
+    AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger() - 100, Item::ItemType::Credits, true); //Credits
     AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger(), Item::ItemType::Logo, true); //Logo
+    AddItemAnimBack(posStart.x.getInteger() - 80, posStart.y.getInteger(), ItemAnim::ItemType::Sign, false, false, false, 1); //High score computer
 
     for (int i = 0; i < 90; i++) {
         int xStar = random(0, COLUMNS * TILE_WIDTH);
@@ -60,8 +62,7 @@ void Level::Init(const Point & posStart) {
     //Tips
     auto tipMsg = MessagesGetRandom(MSG_TIPS_START, MSG_TIPS_END);
     AddItemAnim(posStart.x.getInteger() - 30, posStart.y.getInteger(), ItemAnim::ItemType::ChipPurple, false, false, false, tipMsg);
-    //High score
-    AddItemAnim(posStart.x.getInteger() - 80, posStart.y.getInteger(), ItemAnim::ItemType::Sign, false, false, false, 1);
+
 
     //--------------------------------------------------------------------
     //Debug enemies
@@ -72,6 +73,7 @@ void Level::Init(const Point & posStart) {
     //--------------------------------------------------------------------
 
     depth = 0;
+    score = 0;
     bossZoneActivated = false;
     bossActivated = false;
     bossAlive = false;
@@ -422,6 +424,25 @@ int Level::AddItemAnim(int x, int y, ItemAnim::ItemType itemType, bool fixed, bo
     return lastAnimatedItemId;
 }
 
+int Level::AddItemAnimBack(int x, int y, ItemAnim::ItemType itemType, bool fixed, bool collectable, bool mirrored, int16_t msgIndex, Point speed) {
+    //loop index
+    lastAnimatedItemIdBack++;
+    if (lastAnimatedItemIdBack > itemsAnimBack.size() - 1)
+        lastAnimatedItemIdBack = 0;
+
+    //Try find a free slot or use last one++
+    for (int i = 0; i < itemsAnimBack.size(); i++) {
+        if (!itemsAnimBack[i].IsAlive()) {
+            lastAnimatedItemIdBack = i;
+            break;
+        }
+    }
+
+    itemsAnimBack[lastAnimatedItemIdBack].Init(x, y, itemType, fixed, collectable, mirrored, msgIndex);
+    itemsAnimBack[lastAnimatedItemIdBack].speed = speed;
+    return lastAnimatedItemIdBack;
+}
+
 int Level::AddEnemy(int x, int y, Enemy::EnemyType enemyType) {
     //loop index
     lastEnemyId++;
@@ -453,6 +474,12 @@ int Level::GetMessageToShowLast() const {
 
 void Level::ClearMessageToShow() {
     for (auto & i: itemsAnim) {
+        if (i.msgIndex == msgToShowFirst && i.msgIndex != 1) {
+            i.Kill(); //Kill message
+            AddScore(100);
+        }
+    }
+    for (auto & i: itemsAnimBack) {
         if (i.msgIndex == msgToShowFirst && i.msgIndex != 1) {
             i.Kill(); //Kill all 
         }
@@ -497,6 +524,7 @@ void Level::ShiftStuff(int x, int y) {
     shiftAll(bullets, x, y);
     shiftAll(items, x, y);
     shiftAll(itemsAnim, x, y);
+    shiftAll(itemsAnimBack, x, y);
 }
 
 void Level::ShiftMapGenerator(int x) {
@@ -637,6 +665,14 @@ bool Level::IsGameEnd() {
     return gameEnd;
 }
 
+void Level::AddScore(int value) {
+    score += value;
+}
+
+int Level::GetScore() {
+    return score;
+}
+
 
 void Level::Update(Camera & camera, Player & player, int ms) {
 
@@ -747,6 +783,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     updateAll(enemies, ms, * this, player);
     updateAll(items, ms, * this, player);
     updateAll(itemsAnim, ms, * this, player);
+    updateAll(itemsAnimBack, ms, * this, player);
 
 
     //-------------------
@@ -775,6 +812,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                             e.Damage(10);
                             b.Kill();
                             Audio::play < 3 > (sfx_explosion);
+                            AddScore(10);
                         }
                     }
                     //Chek item collision
@@ -782,9 +820,11 @@ void Level::Update(Camera & camera, Player & player, int ms) {
                         if (it.IsAlive() && Rect::Collide(it.GetHitBox(), b.GetHitBox())) {
                             if (it.itemType == ItemAnim::ItemType::TNTDetonatorCeiling) {
                                 DestroyBossCeiling();
+                                AddScore(50);
                             }
                             if (it.itemType == ItemAnim::ItemType::TNTDetonatorFloor) {
                                 DestroyBossFloor();
+                                AddScore(50);
                             }
                         }
                     }
@@ -825,12 +865,32 @@ void Level::Update(Camera & camera, Player & player, int ms) {
             if (i.IsCollectable() && player.life > 0) {
                 i.Kill();
                 Audio::play < 2 > (sfx_pickup);
+                AddScore(10);
             }
         }
     }
 
     //MANAGE ANIM ITEM COLLISION
     for (auto & i: itemsAnim) {
+        if (i.IsAlive() && Rect::Collide(player.GetHitBox(), i.GetHitBox())) {
+            i.Activate();
+            if (i.msgIndex != -1) {
+                msgToShowFirst = i.msgIndex;
+                msgToShowLast = -1;
+            }
+            if (i.IsCollectable() && player.life > 0) {
+                player.Heal(20);
+                i.Kill();
+                Audio::play < 2 > (sfx_pickup);
+                AddScore(10);
+            }
+        } else {
+            i.Deactivate();
+        }
+    }
+
+    //MANAGE ANIM ITEM COLLISION SPECIAL BACK
+    for (auto & i: itemsAnimBack) {
         if (i.IsAlive() && Rect::Collide(player.GetHitBox(), i.GetHitBox())) {
             i.Activate();
             if (i.msgIndex != -1) {
@@ -851,11 +911,11 @@ void Level::Update(Camera & camera, Player & player, int ms) {
 
 void Level::Draw(Camera & cam, Player & player) {
 
-
     tilemap.draw(cam.ToScreenX(pos), cam.ToScreenY(pos));
 
     //Draw all entities
     drawAll(items, cam);
+    drawAll(itemsAnimBack, cam);
     drawAll(enemies, cam);
     drawAll(bullets, cam);
     player.Draw(cam);

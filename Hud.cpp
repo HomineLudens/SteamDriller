@@ -184,26 +184,41 @@ void Hud::Draw(const Player & player,
             break;
 
         case PuzzleState::ShowMsg:
-        case PuzzleState::ShowHigh:
-            {
-                UI::mapColor(0, 0);
-                UI::mapColor(1, 16);
-                UI::mapColor(5, 16);
-                //
-                UI::setOffset(0, -3);
-                UI::drawBox(1, 11, 16, 14);
-                UI::setCursorBoundingBox(2, 12, 15, 13);
-                //text
-                UI::setCursor(0, 0);
-                UI::printText(Messages[msgToShowFirst], charDisplayedFirst);
-                if (strcmp("High Score:", Messages[msgToShowFirst]) == 0) {
-                    UI::printText("\n");
-                    UI::printInteger(steamCookie.maxDepth, 8, '0');
-                }
-            }
+            UI::mapColor(0, 0);
+            UI::mapColor(1, 16);
+            UI::mapColor(5, 16);
+            //
+            UI::setOffset(0, -3);
+            UI::drawBox(1, 11, 16, 14);
+            UI::setCursorBoundingBox(2, 12, 15, 13);
+            //text
+            UI::setCursor(0, 0);
+            UI::printText(Messages[msgToShowFirst], charDisplayedFirst);
             break;
 
+        case PuzzleState::ShowHigh:
 
+            UI::mapColor(0, 0);
+            UI::mapColor(1, 16);
+            UI::mapColor(5, 16);
+            //
+            UI::setOffset(0, -3);
+
+            //Score
+            UI::drawBox(1, 1, 16, 4);
+            UI::setCursorBoundingBox(2, 2, 15, 3);
+            UI::setCursor(0, 0);
+            UI::printText("High Score\n", charDisplayedFirst);
+            UI::printInteger(steamCookie.highScore, 8, '0');
+
+            //Meters
+            UI::drawBox(1, 11, 16, 14);
+            UI::setCursorBoundingBox(2, 12, 15, 13);
+            UI::setCursor(0, 0);
+            UI::printText("Max Depth\n", charDisplayedFirst);
+            UI::printInteger(steamCookie.maxDepth, 8, '0');
+
+            break;
 
         case PuzzleState::CouncilMessage:
 
@@ -224,7 +239,7 @@ void Hud::Draw(const Player & player,
 
         case PuzzleState::BossDialogue:
         case PuzzleState::FinalChoice:
-        
+
             UI::setOffset(0, 2);
 
             UI::mapColor(0, 0);

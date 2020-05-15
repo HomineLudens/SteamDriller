@@ -69,15 +69,17 @@ class Level {
     uint8_t lastEnemyId;
     uint8_t lastItemId;
     uint8_t lastAnimatedItemId;
+    uint8_t lastAnimatedItemIdBack;
 
     Tilemap tilemap;
     Point pos;
     Point posCredits;
     int depth = 0;
+    int score = 0;
     int16_t msgChipId = -1;
     int16_t msgToShowFirst = -1;
     int16_t msgToShowLast = -1;
-    
+
     int msAnim = 0;
     int16_t animFrame = 0;
 
@@ -86,7 +88,7 @@ class Level {
     bool bossAlive = false;
     int8_t bossEncounterCount = 0;
     bool gameEnd = false;
-    
+
     int depthBossZoneTrigger;
     int depthBossZoneBegin;
     int depthBossZoneEnd;
@@ -104,12 +106,12 @@ class Level {
 
     void RandomizeLine(int row);
     void ReshapeRow(int row);
-    
+
 
     public:
-    
-    void CreateBossZone();
-        constexpr static int COLUMNS = 64;
+
+        void CreateBossZone();
+    constexpr static int COLUMNS = 64;
     constexpr static int ROWS = 64;
     constexpr static int TILE_WIDTH = 8;
     constexpr static int TILE_HEIGHT = 8;
@@ -124,6 +126,7 @@ class Level {
     std::array < Enemy, 10 > enemies;
     std::array < Item, 30 > items;
     std::array < ItemAnim, 20 > itemsAnim;
+    std::array < ItemAnim, 2 > itemsAnimBack;
 
     Level();
 
@@ -134,6 +137,8 @@ class Level {
     int GetMessageToShowFirst() const;
     int GetMessageToShowLast() const;
     void ClearMessageToShow();
+    void AddScore(int value);
+    int GetScore();
 
     bool IsSolid(const Point & pos, int offX = 0, int offY = 0);
     bool IsShootable(const Point & pos, int offX = 0, int offY = 0);
@@ -148,11 +153,12 @@ class Level {
             const Point & gravity, Particle::ParticleType particleType, int msLife = 500);
 
     int AddItem(int x, int y, Item::ItemType itemType, bool fixed = false, bool collectable = true, bool mirrored = false);
-    int AddItemAnim(int x, int y, ItemAnim::ItemType itemType, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1, Point speed = Point(0,0));
+    int AddItemAnim(int x, int y, ItemAnim::ItemType itemType, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1, Point speed = Point(0, 0));
+    int AddItemAnimBack(int x, int y, ItemAnim::ItemType itemType, bool fixed = false, bool collectable = true, bool mirrored = false, int16_t msgIndex = -1, Point speed = Point(0, 0));
     int AddEnemy(int x, int y, Enemy::EnemyType enemyType);
     void ShiftStuff(int x, int y);
     void ShiftMapGenerator(int x);
-    
+
     void DestroyBossCeiling();
     void DestroyBossFloor();
     bool IsBossAlive();
@@ -160,5 +166,5 @@ class Level {
 
     void Update(Camera & camera, Player & player, int ms);
     void Draw(Camera & cam, Player & player);
-    
+
 };

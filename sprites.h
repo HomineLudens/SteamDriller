@@ -131,6 +131,22 @@ public:
 	};
 };
 
+class SteamDriller_Clown_Anim {
+public:
+    enum Animation : std::uint16_t {
+		Idle = 0,
+		Scanning = 3,
+		Leaning = 18,
+		Lean = 25,
+		Crouching = 28,
+		Crouch = 39,
+		Dying = 44,
+		Death = 53,
+		Offline = 56,
+		Evil = 65
+	};
+};
+
 class SteamDriller_Coal_Anim {
 public:
     enum Animation : std::uint16_t {
@@ -276,6 +292,7 @@ extern const SteamDriller_Chip_Anim steamDriller_Chip_Anim;
 extern const SteamDriller_Chip_Black_Anim steamDriller_Chip_Black_Anim;
 extern const SteamDriller_Chip_Purple_Anim steamDriller_Chip_Purple_Anim;
 extern const SteamDriller_Chip_Red_Anim steamDriller_Chip_Red_Anim;
+extern const SteamDriller_Clown_Anim steamDriller_Clown_Anim;
 extern const SteamDriller_Coal_Anim steamDriller_Coal_Anim;
 extern const SteamDriller_Crystal_Anim steamDriller_Crystal_Anim;
 extern const SteamDriller_Dock_Anim steamDriller_Dock_Anim;
