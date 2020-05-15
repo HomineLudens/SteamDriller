@@ -133,7 +133,7 @@ const char * Messages[] {
     "# May the great FManga, father of the compilers, be with you on your mission!", //86
     "# We found the files for the Pokitto Magazine in our database... just AWESOME", //87
     "# The Council is debating if PEX hats for the drones would work", //88
-    "# When i wake UP in the morning AND feel DOWN, there's nothing better then an Espresso Shoot!", //89
+    "# When i wake UP in the morning AND feel DOWN, there's nothing better than an Espresso Shoot!", //89
     // END FIGHT MESSAGES
     "> Threat level: normal", //90 ROBOT
     "> You destroyed my extension, but the fight is not over!", //91 AI
