@@ -172,7 +172,8 @@ void Level::RandomizeLine(int r) {
         int ex = random(pg.x1 + 2, pg.x2 - 2) * TILE_WIDTH;
         int ey = (r) * TILE_HEIGHT;
         auto pEnemy = Point(ex, ey);
-        if (!IsSolid(pEnemy) && !IsSolid(pEnemy, 0, -1) && !IsSolid(pEnemy, 1, 0) && !IsSolid(pEnemy, 0, 1)) {
+        if (!IsSolid(pEnemy) && !IsSolid(pEnemy, 0, -1) &&
+            !IsSolid(pEnemy, 1, 0) && !IsSolid(pEnemy, -1, 0)) {
             auto rnd = random(4);
             switch (rnd) {
                 case 0:
@@ -187,9 +188,9 @@ void Level::RandomizeLine(int r) {
                 case 3:
                     AddEnemy(ex, ey, Enemy::EnemyType::Worm);
                     break;
-                // case 4:
-                //     AddEnemy(ex, ey, Enemy::EnemyType::SpiderMecha);
-                //     break;
+                    // case 4:
+                    //     AddEnemy(ex, ey, Enemy::EnemyType::SpiderMecha);
+                    //     break;
                 default:
                     break;
             }
@@ -713,7 +714,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         }
 
         auto xBoss = (player.pos.x / TILE_WIDTH) > (COLUMNS / 2) ? 8 * TILE_WIDTH : (COLUMNS - 8) * TILE_WIDTH;
-        auto yBoss = player.pos.y.getInteger();
+        auto yBoss = ((player.pos.y.getInteger() / TILE_WIDTH) * TILE_WIDTH) + TILE_WIDTH;
         AddEnemy(xBoss, yBoss, Enemy::EnemyType::Boss);
         bossEncounterCount++; //inc boss encounter
         camera.target.x = xBoss;

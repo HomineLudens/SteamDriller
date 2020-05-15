@@ -279,10 +279,10 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
 
                         auto dx = (player.pos.x - pos.x) / distanceToPlayer;
                         auto dy = (player.pos.y - pos.y) / distanceToPlayer;
-                        if(dx>2)dx=2;
-                        if(dx<-2)dx=-2;
-                        if(dy>2)dy=2;
-                        if(dy<-2)dy=-2;
+                        if (dx > 2) dx = 2;
+                        if (dx < -2) dx = -2;
+                        if (dy > 2) dy = 2;
+                        if (dy < -2) dy = -2;
 
                         lvl.AddBullet(Point(pos.x, pos.y - (spr.getFrameHeight() / 2)), Point(dx, dy),
                             Bullet::BulletType::Plasma, eAI.msAttackDuration * 10);
@@ -353,8 +353,9 @@ void Enemy::Update(int ms, Level & lvl, Player & player) {
             facing = Facing::Left;
 
         //On stucked inside walls kill
-        if (lvl.IsSolid(pos, 1, 0) && lvl.IsSolid(pos, -1, 0)) {
-            Kill(); //Suicide
+        if (lvl.IsSolid(pos) && lvl.IsSolid(pos, 1, 0) && lvl.IsSolid(pos, -1, 0)) {
+            if (enemyType != EnemyType::Boss) //this can't be killed for safety
+                Kill(); //Suicide
         }
     }
 
