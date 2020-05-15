@@ -224,22 +224,24 @@ void Hud::Draw(const Player & player,
 
         case PuzzleState::BossDialogue:
         case PuzzleState::FinalChoice:
+        
+            UI::setOffset(0, 2);
 
             UI::mapColor(0, 0);
             UI::mapColor(1, 16);
             UI::mapColor(5, 16);
 
             PD::setColor(16); //Black
-            PD::fillRect(2, 0, 30, 30);
-            PD::drawSprite(2, 0, SteamDriller_Portrait_Robot);
+            PD::fillRect(2, 2, 30, 30);
+            PD::drawSprite(2, 2, SteamDriller_Portrait_Robot);
             UI::drawBox(6, 0, 17, 4);
             UI::setCursorBoundingBox(7, 1, 16, 3);
             UI::setCursor(0, 0);
             UI::printText(Messages[msgToShowFirst], charDisplayedFirst);
 
             PD::setColor(16); //Black
-            PD::fillRect(75, 54, 30, 30);
-            PD::drawSprite(75, 54, SteamDriller_Portrait_EvilAI);
+            PD::fillRect(75, 56, 30, 30);
+            PD::drawSprite(75, 56, SteamDriller_Portrait_EvilAI);
             UI::drawBox(0, 9, 11, 13);
             UI::setCursorBoundingBox(1, 10, 10, 12);
             UI::setCursor(0, 0);

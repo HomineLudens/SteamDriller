@@ -718,7 +718,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
         AddEnemy(xBoss, yBoss, Enemy::EnemyType::Boss);
         bossEncounterCount++; //inc boss encounter
         camera.target.x = xBoss;
-        camera.target.y = yBoss - 10;
+        camera.target.y = yBoss - 15;
         //printf("BOSS ACTIVATED!\r\n");
     }
 
