@@ -1,0 +1,296 @@
+{ "frames": [
+   {
+    "filename": "SteamDriller_Clown_Anim 0.ase",
+    "frame": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 250
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 1.ase",
+    "frame": { "x": 18, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 250
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 2.ase",
+    "frame": { "x": 36, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 250
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 3.ase",
+    "frame": { "x": 54, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 250
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 4.ase",
+    "frame": { "x": 72, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 250
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 5.ase",
+    "frame": { "x": 90, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 250
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 6.ase",
+    "frame": { "x": 108, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 250
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 7.ase",
+    "frame": { "x": 126, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 250
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 8.ase",
+    "frame": { "x": 144, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 9.ase",
+    "frame": { "x": 162, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 10.ase",
+    "frame": { "x": 180, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 11.ase",
+    "frame": { "x": 198, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 250
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 12.ase",
+    "frame": { "x": 216, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 13.ase",
+    "frame": { "x": 234, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 14.ase",
+    "frame": { "x": 252, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 15.ase",
+    "frame": { "x": 270, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 16.ase",
+    "frame": { "x": 288, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 17.ase",
+    "frame": { "x": 306, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 18.ase",
+    "frame": { "x": 324, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 19.ase",
+    "frame": { "x": 342, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 20.ase",
+    "frame": { "x": 360, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 21.ase",
+    "frame": { "x": 378, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 22.ase",
+    "frame": { "x": 396, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 23.ase",
+    "frame": { "x": 414, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 100
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 24.ase",
+    "frame": { "x": 432, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 250
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 25.ase",
+    "frame": { "x": 450, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 250
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 26.ase",
+    "frame": { "x": 468, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 250
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 27.ase",
+    "frame": { "x": 486, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 250
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 28.ase",
+    "frame": { "x": 504, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 350
+   },
+   {
+    "filename": "SteamDriller_Clown_Anim 29.ase",
+    "frame": { "x": 522, "y": 0, "w": 18, "h": 23 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 23 },
+    "sourceSize": { "w": 18, "h": 23 },
+    "duration": 350
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.1.6-dev",
+  "image": "SteamDriller_Clown_Anim.png",
+  "format": "RGBA8888",
+  "size": { "w": 540, "h": 23 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "Idle", "from": 0, "to": 0, "direction": "forward" },
+   { "name": "Scanning", "from": 1, "to": 7, "direction": "forward" },
+   { "name": "Leaning", "from": 8, "to": 10, "direction": "forward" },
+   { "name": "Lean", "from": 11, "to": 11, "direction": "forward" },
+   { "name": "Crouching", "from": 12, "to": 16, "direction": "forward" },
+   { "name": "Crouch", "from": 17, "to": 18, "direction": "forward" },
+   { "name": "Dying", "from": 19, "to": 22, "direction": "forward" },
+   { "name": "Death", "from": 23, "to": 23, "direction": "forward" },
+   { "name": "Offline", "from": 24, "to": 27, "direction": "forward" },
+   { "name": "Evil", "from": 28, "to": 29, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+  ]
+ }
+}

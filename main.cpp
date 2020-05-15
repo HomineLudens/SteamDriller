@@ -106,6 +106,11 @@ int main() {
     //---
     initGame();
 
+    //Clown mode
+    if (PB::upBtn() && PB::downBtn()) {
+        player.SetClownMode(true);
+    }
+
     while (PC::isRunning()) {
 
         if (!PC::update()) continue;
@@ -129,10 +134,10 @@ int main() {
         //     finalChoice = 2;
         // }
 
-        if (PB::downBtn() && player.life > 0) {
-            player.life = 100;
-            level.DestroyTile(player.pos, 0, 1);
-        }
+        // if (PB::downBtn() && player.life > 0) {
+        //     player.life = 100;
+        //     level.DestroyTile(player.pos, 0, 1);
+        // }
         //-------------------------------------------------
 
         //Music managment
@@ -150,7 +155,7 @@ int main() {
         //-------------------------------------------------
 
         //Save best depth
-        if (player.life < 1) {
+        if (!player.IsClownMode() &&   player.life < 1) {
             auto depth = player.pos.y.getInteger() + level.GetDepth();
             if (depth > steamCookie.maxDepth) {
                 steamCookie.maxDepth = depth;
@@ -161,14 +166,12 @@ int main() {
         }
 
         //Save best score
-        if (level.GetScore() > steamCookie.highScore) {
+        if (!player.IsClownMode() && level.GetScore() > steamCookie.highScore) {
             steamCookie.highScore = level.GetScore();
             steamCookie.saveCookie();
             Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
             printf("Saved best score\r\n");
         }
-
-
 
         //-------------------------------------------------
 

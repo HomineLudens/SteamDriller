@@ -10,7 +10,8 @@ class Player {
 
     private:
 
-        int msState;
+        int msState = 0;
+    bool clown = false;
 
     public:
 
@@ -79,5 +80,8 @@ class Player {
     void Heal(int heal);
     void Damage(int damage, bool force = false);
     void Kill();
+    
+    bool IsClownMode();
+    void SetClownMode(bool clownMode);
 
 };

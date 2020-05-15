@@ -25,7 +25,12 @@ void Player::Init(const Point & pos) {
     life = 100;
     facing = Facing::Right;
     ChangeState(State::Offline);
-    sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Offline);
+
+    if (clown)
+        sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Offline);
+    else
+        sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Offline);
+
     sprSmokeWheels.play(steamDriller_Smoke_Wheels_Anim, SteamDriller_Smoke_Wheels_Anim::Animation::Idle);
     onBossZone = false;
 }
@@ -58,7 +63,10 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     switch (state) {
         case State::Offline:
             if (PB::pressed(BTN_UP) || PB::pressed(BTN_DOWN) || PB::pressed(BTN_LEFT) || PB::pressed(BTN_RIGHT) || PB::pressed(BTN_A) || PB::pressed(BTN_B)) {
-                sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
+                if (clown)
+                    sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Idle);
+                else
+                    sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
                 ChangeState(State::Activating);
                 Audio::play < 1 > (sfx_poweron);
             }
@@ -77,73 +85,114 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
             //Change idle animation randomly
             if (msState > msIdle) {
                 msIdle = msState + random(500, 1500);
-                if (random(100) > 50)
-                    sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
-                else
-                    sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Scanning);
+                if (random(100) > 50) {
+                    if (clown)
+                        sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Idle);
+                    else
+                        sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
+                } else {
+                    if (clown)
+                        sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Scanning);
+                    else
+                        sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Scanning);
+                }
+
             }
 
             //--- Goto leaning
             if (speedxABS > LEAN_SPEED) {
-                sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Leaning);
+                if (clown)
+                    sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Leaning);
+                else
+                    sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Leaning);
                 ChangeState(State::Leaning);
             }
             //--- Goto Crounch
             if (PB::downBtn()) {
-                sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Crouching);
+                if (clown)
+                    sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Crouching);
+                else
+                    sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Crouching);
                 ChangeState(State::Crouching);
             }
             break;
         case State::Crouching:
             //Full Crouch
             if (sprPlayer.frame == (sprPlayer.getAnimationFrameCount() - 1)) {
-                sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Crouch);
+                if (clown)
+                    sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Crouch);
+                else
+                    sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Crouch);
                 ChangeState(State::Crouch);
             }
             //Rising
             if (!PB::downBtn()) {
-                sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
+                if (clown)
+                    sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Idle);
+                else
+                    sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
                 ChangeState(State::Idle);
             }
             break;
         case State::Crouch:
             if (!PB::downBtn()) {
-                sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
+                if (clown)
+                    sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Idle);
+                else
+                    sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
                 ChangeState(State::Idle);
             }
             break;
         case State::Leaning:
             if (sprPlayer.frame == (sprPlayer.getAnimationFrameCount() - 1)) {
-                sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Lean);
+                if (clown)
+                    sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Lean);
+                else
+                    sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Lean);
                 ChangeState(State::Lean);
             }
             //--- Goto Idle
             if (speedxABS < LEAN_SPEED) {
-                sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
+                if (clown)
+                    sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Idle);
+                else
+                    sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
                 ChangeState(State::Idle);
             }
             //--- Goto Crounch
             if (PB::downBtn()) {
-                sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Crouching);
+                if (clown)
+                    sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Crouching);
+                else
+                    sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Crouching);
                 ChangeState(State::Crouching);
             }
             break;
         case State::Lean:
             //--- Goto Idle
             if (speedxABS < LEAN_SPEED) {
-                sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
+                if (clown)
+                    sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Idle);
+                else
+                    sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Idle);
                 ChangeState(State::Idle);
             }
             //--- Goto Crounch
             if (PB::downBtn()) {
-                sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Crouching);
+                if (clown)
+                    sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Crouching);
+                else
+                    sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Crouching);
                 ChangeState(State::Crouching);
             }
             break;
         case State::Dying:
             speed.x *= 0.7;
             if (sprPlayer.frame == sprPlayer.getAnimationFrameCount() - 1) {
-                sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Death);
+                if (clown)
+                    sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Death);
+                else
+                    sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Death);
                 ChangeState(State::Death);
             }
             break;
@@ -283,7 +332,10 @@ void Player::Update(Camera & camera, Level & lvl, int ms) {
     if (life < 1 && state != State::Dying && state != State::Death) {
         camera.Shake(2); //<----------Camera Shake
         ChangeState(State::Dying);
-        sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Dying);
+        if (clown)
+            sprPlayer.play(steamDriller_Clown_Anim, SteamDriller_Clown_Anim::Animation::Dying);
+        else
+            sprPlayer.play(steamDriller_Robot_Anim, SteamDriller_Robot_Anim::Animation::Dying);
     }
 
     //--------------------------------
@@ -295,6 +347,14 @@ void Player::Kill() {
     life = 0;
 };
 
+void Player::SetClownMode(bool clownMode) {
+    clown = clownMode;
+}
+
+bool Player::IsClownMode() {
+    return clown;
+};
+
 void Player::Heal(int heal) {
     life += heal;
     if (life > 100)
@@ -302,12 +362,14 @@ void Player::Heal(int heal) {
 };
 
 void Player::Damage(int damage, bool force) {
-    if (msInvulnerability < 1 || force) {
-        life -= damage;
-        if (life < 0)
-            life = 0;
-        if (!force)
-            msInvulnerability = 500;
+    if (!clown) {
+        if (msInvulnerability < 1 || force) {
+            life -= damage;
+            if (life < 0)
+                life = 0;
+            if (!force)
+                msInvulnerability = 500;
+        }
     }
 };
 

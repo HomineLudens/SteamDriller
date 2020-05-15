@@ -32,6 +32,9 @@ constexpr static int MSG_COLLECTABLE_MAX = 69;
 constexpr static int MSG_GOOD_END = 110;
 constexpr static int MSG_BAD_END = 111;
 
+constexpr static int MSG_CLOWN_MODE_1 = 105;
+constexpr static int MSG_CLOWN_MODE_2 = 106;
+
 
 inline
 const char * Messages[] {
@@ -148,8 +151,8 @@ const char * Messages[] {
     "#102", //102
     "#103", //103
     "#104", //104
-    "#105", //105
-    "#106", //106
+    "#Please don't laugh", //105 Clown mode 1
+    "#Hahahahahah", //106 Clown mode 2
     "#107", //107
     "#108", //108
     "#109", //109
