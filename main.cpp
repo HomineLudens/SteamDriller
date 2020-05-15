@@ -60,7 +60,7 @@ void setTrack(int t) {
                 //printf("playing track 2\r\n");
                 break;
             case 3:
-                Audio::play("music/steam.raw");
+                Audio::play("music/steamfi.raw");
                 //printf("playing track 3\r\n");
                 break;
             default:
