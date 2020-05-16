@@ -3,8 +3,8 @@
 #include <math.h>
 
 #include <LibAudio>
-#include "sfx/sfx_poweron.h"
-#include "sfx/sfx_fall.h"
+//#include "sfx/sfx_poweron.h"
+//#include "sfx/sfx_fall.h"
 #include "sfx/sfx_steam.h"
 
 using PD = Pokitto::Display;
