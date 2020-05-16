@@ -16,11 +16,8 @@ class ItemAnim: public Item {
             Ruby,
             Crystal,
             Coal,
-            Chip,
             ChipRed,
-            ChipBlack,
             ChipPurple,
-            DockStation,
             TNTDetonatorCeiling,
             TNTDetonatorFloor,
             Sign

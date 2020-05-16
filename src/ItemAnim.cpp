@@ -22,20 +22,11 @@ void ItemAnim::Init(int x, int y, ItemType itemType, bool fixed, bool collectabl
         case ItemType::Coal:
             spr.play(steamDriller_Coal_Anim, SteamDriller_Coal_Anim::Animation::Idle);
             break;
-        case ItemType::Chip:
-            spr.play(steamDriller_Chip_Anim, SteamDriller_Chip_Anim::Animation::Idle);
-            break;
         case ItemType::ChipRed:
             spr.play(steamDriller_Chip_Red_Anim, SteamDriller_Chip_Red_Anim::Animation::Idle);
             break;
-        case ItemType::ChipBlack:
-            spr.play(steamDriller_Chip_Black_Anim, SteamDriller_Chip_Black_Anim::Animation::Idle);
-            break;
         case ItemType::ChipPurple:
             spr.play(steamDriller_Chip_Purple_Anim, SteamDriller_Chip_Purple_Anim::Animation::Idle);
-            break;
-        case ItemType::DockStation:
-            spr.play(steamDriller_Dock_Anim, SteamDriller_Dock_Anim::Animation::Idle);
             break;
         case ItemType::TNTDetonatorCeiling:
         case ItemType::TNTDetonatorFloor:

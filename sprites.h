@@ -110,13 +110,6 @@ public:
 	};
 };
 
-class SteamDriller_Chip_Black_Anim {
-public:
-    enum Animation : std::uint16_t {
-		Idle = 0
-	};
-};
-
 class SteamDriller_Chip_Purple_Anim {
 public:
     enum Animation : std::uint16_t {
@@ -161,13 +154,6 @@ public:
 	};
 };
 
-class SteamDriller_Dock_Anim {
-public:
-    enum Animation : std::uint16_t {
-		Idle = 0
-	};
-};
-
 class SteamDriller_EliteMechaSpider {
 public:
     enum Animation : std::uint16_t {
@@ -178,13 +164,6 @@ public:
 };
 
 class SteamDriller_Explosions_Anim {
-public:
-    enum Animation : std::uint16_t {
-		Idle = 0
-	};
-};
-
-class SteamDriller_Laser_Anim {
 public:
     enum Animation : std::uint16_t {
 		Idle = 0
@@ -289,16 +268,13 @@ extern "C" {
 extern const SteamDriller_BigCog_Anim steamDriller_BigCog_Anim;
 extern const SteamDriller_Boss_Anim steamDriller_Boss_Anim;
 extern const SteamDriller_Chip_Anim steamDriller_Chip_Anim;
-extern const SteamDriller_Chip_Black_Anim steamDriller_Chip_Black_Anim;
 extern const SteamDriller_Chip_Purple_Anim steamDriller_Chip_Purple_Anim;
 extern const SteamDriller_Chip_Red_Anim steamDriller_Chip_Red_Anim;
 extern const SteamDriller_Clown_Anim steamDriller_Clown_Anim;
 extern const SteamDriller_Coal_Anim steamDriller_Coal_Anim;
 extern const SteamDriller_Crystal_Anim steamDriller_Crystal_Anim;
-extern const SteamDriller_Dock_Anim steamDriller_Dock_Anim;
 extern const SteamDriller_EliteMechaSpider steamDriller_EliteMechaSpider;
 extern const SteamDriller_Explosions_Anim steamDriller_Explosions_Anim;
-extern const SteamDriller_Laser_Anim steamDriller_Laser_Anim;
 extern const SteamDriller_PurpleSentinels_Anim steamDriller_PurpleSentinels_Anim;
 extern const SteamDriller_Robot_Anim steamDriller_Robot_Anim;
 extern const SteamDriller_Ruby_Anim steamDriller_Ruby_Anim;
