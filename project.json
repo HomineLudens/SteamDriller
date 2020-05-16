@@ -3626,6 +3626,15 @@
 		},
 		"\\sfx\\sfx_pickup-vecchio1.wav": {
 			"sdcard": false
+		},
+		"\\SteamDriller.bin.3.png": {
+			"sdcard": false
+		},
+		"\\SteamDriller.bin.4.png": {
+			"sdcard": false
+		},
+		"\\sprites\\SteamDriller_Clown_Anim.bin": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {
