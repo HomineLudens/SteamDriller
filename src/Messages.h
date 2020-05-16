@@ -34,6 +34,7 @@ constexpr static int MSG_BAD_END = 111;
 
 constexpr static int MSG_CLOWN_MODE_1 = 105;
 constexpr static int MSG_CLOWN_MODE_2 = 106;
+constexpr static int MSG_CLOWN_MODE_3 = 107;
 
 
 inline
@@ -151,9 +152,9 @@ const char * Messages[] {
     "#102", //102
     "#103", //103
     "#104", //104
-    "#Please don't laugh at me!", //105 Clown mode 1
-    "#Hahahahahah ha haaa haa ha", //106 Clown mode 2
-    "#107", //107
+    "> Please don't laugh at me!", //105 Clown mode 1
+    "> Hahahahahah ha haaa haa ha", //106 Clown mode 2
+    "# Hahaha hah ha haha ha", //103 Clown mode 3
     "#108", //108
     "#109", //109
     //Good ending

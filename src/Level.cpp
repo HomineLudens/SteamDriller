@@ -716,7 +716,7 @@ void Level::Update(Camera & camera, Player & player, int ms) {
     if (player.state == Player::State::Activated && player.stateFirstCycle) {
         msgToShowFirst = MessagesGetRandom(MSG_CUNCIL_START, MSG_CUNCIL_END); //Council disalogue messages
         if (player.IsClownMode()) {
-            msgToShowFirst = MSG_CLOWN_MODE_2;
+            msgToShowFirst = MSG_CLOWN_MODE_3;
         }
     }
 

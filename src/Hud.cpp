@@ -11,6 +11,7 @@
 #include "assets/SteamDriller_Portrait_Robot.h"
 #include "assets/SteamDriller_Portrait_EvilAI.h"
 #include "assets/SteamDriller_Portrait_Council.h"
+#include "assets/SteamDriller_Portrait_Clown.h"
 
 
 using PD = Pokitto::Display;
@@ -138,7 +139,7 @@ void Hud::Update(Level & level, int ms) {
 
 }
 
-void Hud::Draw(const Player & player,
+void Hud::Draw(Player & player,
     const Level & level) {
 
     switch (puzzleState) {
@@ -229,6 +230,7 @@ void Hud::Draw(const Player & player,
 
             PD::setColor(16); //Black
             PD::fillRect(2, 3, 30, 30);
+
             PD::drawSprite(2, 3, SteamDriller_Portrait_Council);
             UI::drawBox(6, 0, 17, 4);
             UI::setCursorBoundingBox(7, 1, 16, 3);
@@ -248,7 +250,10 @@ void Hud::Draw(const Player & player,
 
             PD::setColor(16); //Black
             PD::fillRect(2, 2, 30, 30);
-            PD::drawSprite(2, 2, SteamDriller_Portrait_Robot);
+            if (player.IsClownMode())
+                PD::drawSprite(2, 3, SteamDriller_Portrait_Clown);
+            else
+                PD::drawSprite(2, 2, SteamDriller_Portrait_Robot);
             UI::drawBox(6, 0, 17, 4);
             UI::setCursorBoundingBox(7, 1, 16, 3);
             UI::setCursor(0, 0);
