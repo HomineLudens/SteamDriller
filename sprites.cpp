@@ -1,6 +1,5 @@
 __asm__(".global steamDriller_BigCog_Anim\nsteamDriller_BigCog_Anim:\n.incbin \"sprites/SteamDriller_BigCog_Anim.bin\"");
 __asm__(".global steamDriller_Boss_Anim\nsteamDriller_Boss_Anim:\n.incbin \"sprites/SteamDriller_Boss_Anim.bin\"");
-__asm__(".global steamDriller_Chip_Anim\nsteamDriller_Chip_Anim:\n.incbin \"sprites/SteamDriller_Chip_Anim.bin\"");
 __asm__(".global steamDriller_Chip_Purple_Anim\nsteamDriller_Chip_Purple_Anim:\n.incbin \"sprites/SteamDriller_Chip_Purple_Anim.bin\"");
 __asm__(".global steamDriller_Chip_Red_Anim\nsteamDriller_Chip_Red_Anim:\n.incbin \"sprites/SteamDriller_Chip_Red_Anim.bin\"");
 __asm__(".global steamDriller_Clown_Anim\nsteamDriller_Clown_Anim:\n.incbin \"sprites/SteamDriller_Clown_Anim.bin\"");

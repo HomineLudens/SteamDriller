@@ -103,13 +103,6 @@ public:
 	};
 };
 
-class SteamDriller_Chip_Anim {
-public:
-    enum Animation : std::uint16_t {
-		Idle = 0
-	};
-};
-
 class SteamDriller_Chip_Purple_Anim {
 public:
     enum Animation : std::uint16_t {
@@ -267,7 +260,6 @@ public:
 extern "C" {
 extern const SteamDriller_BigCog_Anim steamDriller_BigCog_Anim;
 extern const SteamDriller_Boss_Anim steamDriller_Boss_Anim;
-extern const SteamDriller_Chip_Anim steamDriller_Chip_Anim;
 extern const SteamDriller_Chip_Purple_Anim steamDriller_Chip_Purple_Anim;
 extern const SteamDriller_Chip_Red_Anim steamDriller_Chip_Red_Anim;
 extern const SteamDriller_Clown_Anim steamDriller_Clown_Anim;
