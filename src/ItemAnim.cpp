@@ -1,7 +1,7 @@
-#include "ItemAnim.h"
-#include "Item.h"
+#include "src/ItemAnim.h"
+#include "src/Item.h"
 #include <Pokitto.h>
-#include "Level.h"
+#include "src/Level.h"
 
 using PD = Pokitto::Display;
 

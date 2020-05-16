@@ -6,15 +6,15 @@
 
 bool clownMode;
 
-#include "SteamCookie.h"
-#include "Level.h"
-#include "Player.h"
-#include "Camera.h"
-#include "Hud.h"
-#include "Lights.h"
-#include "Messages.h"
-#include "PauseScene.h"
-#include "EndScene.h"
+#include "src/SteamCookie.h"
+#include "src/Level.h"
+#include "src/Player.h"
+#include "src/Camera.h"
+#include "src/Hud.h"
+#include "src/Lights.h"
+#include "src/Messages.h"
+#include "src/PauseScene.h"
+#include "src/EndScene.h"
 
 using PC = Pokitto::Core;
 using PD = Pokitto::Display;

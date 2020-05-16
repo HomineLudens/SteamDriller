@@ -1,6 +1,6 @@
-#include "Hud.h"
+#include "src/Hud.h"
+#include "src/Messages.h"
 #include <tasui>
-#include "Messages.h"
 #include "Pokitto.h"
 #include <LibAudio>
 #include "SteamCookie.h"

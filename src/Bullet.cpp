@@ -1,4 +1,4 @@
-#include "Bullet.h"
+#include "src/Bullet.h"
 #include <Pokitto.h>
 #include "assets/bulletSteamVertical.h"
 #include "assets/bulletLaserHorizontal.h"

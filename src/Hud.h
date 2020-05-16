@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Player.h"
-#include "Level.h"
+#include "src/Player.h"
+#include "src/Level.h"
 
 class Hud {
     static constexpr int xStartGauge = 100;

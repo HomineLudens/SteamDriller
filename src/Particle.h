@@ -1,5 +1,5 @@
 #pragma once
-#include "Entity.h"
+#include "src/Entity.h"
 #include "sprites.h"
 
 using PD = Pokitto::Display;

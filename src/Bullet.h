@@ -1,5 +1,5 @@
 #pragma once
-#include "Entity.h"
+#include "src/Entity.h"
 
 class Bullet: public Entity {
 

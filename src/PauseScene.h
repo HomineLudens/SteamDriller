@@ -2,7 +2,6 @@
 
 #include "Pokitto.h"
 
-
 class PauseScene {
 
     private:

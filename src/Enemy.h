@@ -1,6 +1,5 @@
 #pragma once
-#include "Entity.h"
-//#include "Bullet.h"
+#include "src/Entity.h"
 #include <Pokitto.h>
 #include "sprites.h"
 

@@ -1,6 +1,6 @@
-#include "Enemy.h"
-#include "Level.h"
-#include "Player.h"
+#include "src/Enemy.h"
+#include "src/Level.h"
+#include "src/Player.h"
 
 #include <LibAudio>
 #include "sfx/sfx_laser.h"

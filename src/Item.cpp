@@ -1,7 +1,7 @@
-#include "Item.h"
+#include "src/Item.h"
 #include <Pokitto.h>
-#include "Level.h"
-#include "Messages.h"
+#include "src/Level.h"
+#include "src/Messages.h"
 #include "assets/SteamDriller_Logo.h"
 #include "assets/SteamDriller_Unactivated_Robot.h"
 #include "assets/SteamDriller_Bones.h"

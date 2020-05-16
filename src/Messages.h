@@ -1,6 +1,6 @@
 #pragma once
 #include "PokittoCookie.h"
-#include "SteamCookie.h"
+#include "src/SteamCookie.h"
 #include <LibAudio>
 
 extern SteamCookie steamCookie;

@@ -1,9 +1,9 @@
 #pragma once
 #include <Pokitto.h>
 #include "sprites.h"
-#include "Level.h"
-#include "Particle.h"
-#include "Rect.h"
+#include "src/Level.h"
+#include "src/Particle.h"
+#include "src/Rect.h"
 #include <array>
 
 class Player {

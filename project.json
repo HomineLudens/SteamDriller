@@ -3635,6 +3635,111 @@
 		},
 		"\\sprites\\SteamDriller_Clown_Anim.bin": {
 			"sdcard": false
+		},
+		"\\src": {
+			"sdcard": false
+		},
+		"\\src\\TilesLoader.h": {
+			"sdcard": false
+		},
+		"\\src\\Bullet.cpp": {
+			"sdcard": false
+		},
+		"\\src\\Bullet.h": {
+			"sdcard": false
+		},
+		"\\src\\Camera.cpp": {
+			"sdcard": false
+		},
+		"\\src\\Camera.h": {
+			"sdcard": false
+		},
+		"\\src\\EndScene.h": {
+			"sdcard": false
+		},
+		"\\src\\Enemy.cpp": {
+			"sdcard": false
+		},
+		"\\src\\Enemy.h": {
+			"sdcard": false
+		},
+		"\\src\\Hud.cpp": {
+			"sdcard": false
+		},
+		"\\src\\Hud.h": {
+			"sdcard": false
+		},
+		"\\src\\Item.cpp": {
+			"sdcard": false
+		},
+		"\\src\\ItemAnim.cpp": {
+			"sdcard": false
+		},
+		"\\src\\ItemAnim.h": {
+			"sdcard": false
+		},
+		"\\src\\Level.cpp": {
+			"sdcard": false
+		},
+		"\\src\\Lights.cpp": {
+			"sdcard": false
+		},
+		"\\src\\Lights.h": {
+			"sdcard": false
+		},
+		"\\src\\Messages.h": {
+			"sdcard": false
+		},
+		"\\src\\My_settings.h": {
+			"sdcard": false
+		},
+		"\\src\\Particle.cpp": {
+			"sdcard": false
+		},
+		"\\src\\Particle.h": {
+			"sdcard": false
+		},
+		"\\src\\PauseScene.h": {
+			"sdcard": false
+		},
+		"\\src\\Player.cpp": {
+			"sdcard": false
+		},
+		"\\src\\Player.h": {
+			"sdcard": false
+		},
+		"\\src\\Point.cpp": {
+			"sdcard": false
+		},
+		"\\src\\Rect.h": {
+			"sdcard": false
+		},
+		"\\src\\SteamCookie.h": {
+			"sdcard": false
+		},
+		"\\src\\EndScene.cpp": {
+			"sdcard": false
+		},
+		"\\src\\Entity.h": {
+			"sdcard": false
+		},
+		"\\src\\Item.h": {
+			"sdcard": false
+		},
+		"\\src\\Level.h": {
+			"sdcard": false
+		},
+		"\\src\\maps.h": {
+			"sdcard": false
+		},
+		"\\src\\PauseScene.cpp": {
+			"sdcard": false
+		},
+		"\\src\\Point.h": {
+			"sdcard": false
+		},
+		"\\src\\Rect.cpp": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {

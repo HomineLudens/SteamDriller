@@ -1,4 +1,4 @@
-#include "Point.h"
+#include "src/Point.h"
 #include <math.h>
 
 Point::Point() {

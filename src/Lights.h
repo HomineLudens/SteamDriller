@@ -1,9 +1,9 @@
 #pragma once
 #include <cstdlib>
 #include <MemOps>
-#include "Point.h"
-#include "Player.h"
-#include "Level.h"
+#include "src/Point.h"
+#include "src/Player.h"
+#include "src/Level.h"
 
 class Lights {
 

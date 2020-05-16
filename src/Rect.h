@@ -1,6 +1,6 @@
 #pragma once
 #include <Pokitto.h>
-#include "Point.h"
+#include "src/Point.h"
 #include "libs/FixedPoints/FixedPoints.h"
 #include "libs/FixedPoints/FixedPointsCommon.h"
 
