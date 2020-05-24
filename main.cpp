@@ -4,8 +4,6 @@
 #include "palette/SteamPalette256.h"
 #include "assets/tiles/steamtasui.h" 
 
-bool clownMode;
-
 #include "src/SteamCookie.h"
 #include "src/Level.h"
 #include "src/Player.h"
@@ -55,15 +53,12 @@ void setTrack(int t) {
         switch (t) {
             case 1:
                 Audio::play("music/steamth.raw");
-                //printf("playing track 1\r\n");
                 break;
             case 2:
                 Audio::play("music/steambo.raw");
-                //printf("playing track 2\r\n");
                 break;
             case 3:
                 Audio::play("music/steamfi.raw");
-                //printf("playing track 3\r\n");
                 break;
             default:
                 break;
@@ -87,7 +82,6 @@ void initGame() {
     //games played
     steamCookie.games++;
     steamCookie.saveCookie();
-    Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
     printf("Saved init\r\n");
 }
 
@@ -157,23 +151,25 @@ int main() {
         //-------------------------------------------------
 
         //Save best depth
-        if (!player.IsClownMode() &&   player.life < 1) {
+        if (!player.IsClownMode() && player.life < 1) {
+            //Save best depth
             auto depth = player.pos.y.getInteger() + level.GetDepth();
             if (depth > steamCookie.maxDepth) {
                 steamCookie.maxDepth = depth;
                 steamCookie.saveCookie();
-                Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
                 printf("Saved best depth\r\n");
+            }
+
+            //Save best score
+            auto score = level.GetScore();
+            if (score > steamCookie.highScore) {
+                steamCookie.highScore = score;
+                steamCookie.saveCookie();
+                printf("Saved best score\r\n");
             }
         }
 
-        //Save best score
-        if (!player.IsClownMode() && level.GetScore() > steamCookie.highScore) {
-            steamCookie.highScore = level.GetScore();
-            steamCookie.saveCookie();
-            Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
-            printf("Saved best score\r\n");
-        }
+
 
         //-------------------------------------------------
 

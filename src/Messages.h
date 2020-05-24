@@ -186,7 +186,6 @@ int MessagesGetRandom(int minRange, int maxRange) {
         for (int i = minRange; i < maxRange; i++) {
             steamCookie.MsgMASK.reset(i);
         }
-        Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
     }
 
     //Search for a free message
@@ -202,10 +201,6 @@ int MessagesGetRandom(int minRange, int maxRange) {
         count++;
     }
 
-    //---
-    steamCookie.saveCookie();
-    Audio::Sink < 5, PROJ_AUD_FREQ > ::reinstallIRQ();
-    printf("Saved message changes\r\n");
     //---
     return iMsg;
 }

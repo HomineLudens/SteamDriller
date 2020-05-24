@@ -3740,6 +3740,24 @@
 		},
 		"\\src\\Rect.cpp": {
 			"sdcard": false
+		},
+		"\\SteamDriller.bin.5.png": {
+			"sdcard": false
+		},
+		"\\SteamDriller.bin.6.png": {
+			"sdcard": false
+		},
+		"\\SteamDriller.bin.7.png": {
+			"sdcard": false
+		},
+		"\\SteamDriller.bin.8.png": {
+			"sdcard": false
+		},
+		"\\SteamDriller.bin.9.png": {
+			"sdcard": false
+		},
+		"\\SteamDriller.bin.10.png": {
+			"sdcard": false
 		}
 	},
 	"BUILDFlags": {
