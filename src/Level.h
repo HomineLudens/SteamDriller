@@ -107,7 +107,6 @@ class Level {
     void RandomizeLine(int row);
     void ReshapeRow(int row);
 
-
     public:
 
         void CreateBossZone();
@@ -122,9 +121,9 @@ class Level {
     uint8_t lvlData[2 + (COLUMNS * ROWS)];
 
     std::array < Bullet, 15 > bullets;
-    std::array < Particle, 100 > particles;
+    std::array < Particle, 50 > particles;
     std::array < Enemy, 10 > enemies;
-    std::array < Item, 30 > items;
+    std::array < Item, 25 > items;
     std::array < ItemAnim, 20 > itemsAnim;
     std::array < ItemAnim, 2 > itemsAnimBack;
 

@@ -168,9 +168,6 @@ int main() {
                 printf("Saved best score\r\n");
             }
         }
-
-
-
         //-------------------------------------------------
 
         lights.Update(paused, camera, player, level, msElapsed);

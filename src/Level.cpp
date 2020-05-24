@@ -26,12 +26,53 @@ void Level::Init(const Point & posStart, bool clownMode) {
     killAll(bullets);
     killAll(particles);
 
+    //Init proc generator
+    pg.minX = (posStart.x.getInteger() / TILE_WIDTH) - 20;
+    pg.maxX = (posStart.x.getInteger() / TILE_WIDTH) + 20;
+    pg.x1 = (posStart.x.getInteger() / TILE_WIDTH) + 1;
+    pg.x2 = (posStart.x.getInteger() / TILE_WIDTH) + 9;
+    pg.minLen = 8;
+    pg.maxLen = 18;
+
+    depth = 0;
+    score = 0;
+    bossZoneActivated = false;
+    bossActivated = false;
+    bossAlive = false;
+    depthBossZoneTrigger = INITIAL_BOSS_TRIGGER;
+    bossEncounterCount = 0;
+    gameEnd = false;
+
+    //--Clear level tilemap
+    lvlData[0] = COLUMNS;
+    lvlData[1] = ROWS;
+    for (int c = 0; c < COLUMNS; c++) {
+        for (int r = 0; r < ROWS; r++) {
+            lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::None;
+        }
+    }
+
+    //-------
+    int r = 0;
+    int c = 0;
+
+    //start floor
+    r = 2;
+    for (c = 0; c <= pg.x1; c++)
+        lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::TopCenter;
+    lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::TopLeft;
+
+    lvlData[2 + (r * COLUMNS) + pg.x2] = TilesLoader::TileType::TopRight;
+    for (c = pg.x2 + 1; c < COLUMNS; c++)
+        lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::TopCenter;
+
+    //Move one ROWS after the other
+    for (r++; r < ROWS; r++) {
+        RandomizeLine(r);
+    }
+
     //--------------------------------------------------------------------
     //--- Initial stuff
-    AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger() - 100, Item::ItemType::Credits, true); //Credits
-    AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger(), Item::ItemType::Logo, true); //Logo
-    AddItemAnimBack(posStart.x.getInteger() - 80, posStart.y.getInteger(), ItemAnim::ItemType::Sign, false, false, false, 1); //High score computer
-
     for (int i = 0; i < 90; i++) {
         int xStar = random(0, COLUMNS * TILE_WIDTH);
         int yStar = random(-300, 0);
@@ -74,50 +115,14 @@ void Level::Init(const Point & posStart, bool clownMode) {
     //AddEnemy(posStart.x.getInteger() - 80, 0, Enemy::EnemyType::SpiderMecha);
     //--------------------------------------------------------------------
 
-    depth = 0;
-    score = 0;
-    bossZoneActivated = false;
-    bossActivated = false;
-    bossAlive = false;
-    depthBossZoneTrigger = INITIAL_BOSS_TRIGGER;
-    bossEncounterCount = 0;
-    gameEnd = false;
 
-    //--Clear level tilemap
-    lvlData[0] = COLUMNS;
-    lvlData[1] = ROWS;
-    for (int c = 0; c < COLUMNS; c++) {
-        for (int r = 0; r < ROWS; r++) {
-            lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::None;
-        }
-    }
 
-    //Init proc generator
-    pg.minX = (posStart.x.getInteger() / TILE_WIDTH) - 20;
-    pg.maxX = (posStart.x.getInteger() / TILE_WIDTH) + 20;
-    pg.x1 = (posStart.x.getInteger() / TILE_WIDTH) + 1;
-    pg.x2 = (posStart.x.getInteger() / TILE_WIDTH) + 9;
-    pg.minLen = 8;
-    pg.maxLen = 18;
 
-    //-------
-    int r = 0;
-    int c = 0;
 
-    //start floor
-    r = 2;
-    for (c = 0; c <= pg.x1; c++)
-        lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::TopCenter;
-    lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::TopLeft;
-
-    lvlData[2 + (r * COLUMNS) + pg.x2] = TilesLoader::TileType::TopRight;
-    for (c = pg.x2 + 1; c < COLUMNS; c++)
-        lvlData[2 + (r * COLUMNS) + c] = TilesLoader::TileType::TopCenter;
-
-    //Move one ROWS after the other
-    for (r++; r < ROWS; r++) {
-        RandomizeLine(r);
-    }
+    //Add some items later, to ensure they are not killed during proc gen
+    AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger() - 100, Item::ItemType::Credits, true); //Credits
+    AddItem(posStart.x.getInteger() + 40, posStart.y.getInteger(), Item::ItemType::Logo, true); //Logo
+    AddItemAnimBack(posStart.x.getInteger() - 80, posStart.y.getInteger(), ItemAnim::ItemType::Sign, false, false, false, 1); //High score computer
 }
 
 void Level::RandomizeLine(int r) {

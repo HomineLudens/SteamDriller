@@ -106,6 +106,6 @@ int Camera::ToScreenY(const Point & objPos) const {
 void Camera::Draw() {
     if (msFlash > 0) {
         PD::setColor(7);
-        PD::fillRect(0, 0, 110, 88);
+        PD::fillRect(0, 0, 110*RES_MUL, 88*RES_MUL);
     }
 }
